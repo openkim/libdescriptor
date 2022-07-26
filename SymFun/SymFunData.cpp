@@ -72,7 +72,6 @@ void SymmetryFunctionParams::add_descriptor(char const *name,
     if (strcmp(name, "g4") == 0) { name_.push_back(4); };
     if (strcmp(name, "g5") == 0) { name_.push_back(5); };
 
-//  std::vector<double> params(values, values + row * col);
     Array2D<double> params(row, col, values);
     params_.push_back(std::move(params));
 
@@ -90,26 +89,6 @@ void SymmetryFunctionParams::add_descriptor(char const *name,
 int SymmetryFunctionParams::get_num_descriptors() {
     return std::accumulate(num_param_sets_.begin(), num_param_sets_.end(), 0);
 }
-
-
-//SymmetryFunctionParams::SymmetryFunctionParams(const SymmetryFunctionParams &sym_fun_param1) {
-//
-//  species_ = sym_fun_param1.species_;
-//  name_ = sym_fun_param1.name_;
-//  starting_index_ = sym_fun_param1.starting_index_;
-//  rcut_2D_ = sym_fun_param1.rcut_2D_;
-//  params_ = sym_fun_param1.params_;
-//  num_param_sets_ = sym_fun_param1.num_param_sets_;
-//  num_params_ = sym_fun_param1.num_params_;
-//  has_three_body_ = sym_fun_param1.has_three_body_;
-//}
-
-//SymmetryFunctionParams::SymmetryFunctionParams(int zero, const SymmetryFunctionParams &sym_fun_param1) {
-//    // Zero initilatization for enzyme
-//    if (zero == 0){
-//
-//    }
-//}
 
 #undef LOG_ERROR
 #undef MAXLINE

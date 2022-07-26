@@ -15,11 +15,11 @@ find_package(pybind11 REQUIRED)
 include_directories(./)
 include_directories(SymFun)
 file(GLOB SYMFUNFILES SymFun/*)
-include_directories(CM)
-file(GLOB CMFILES CM/*)
+#include_directories(CM)
+#file(GLOB CMFILES CM/*)
 #--------------
 
-pybind11_add_module(descriptors ${SYMFUNFILES} ${CMFILES} descriptors.cpp)
+pybind11_add_module(descriptors ${SYMFUNFILES} ${CMFILES} descriptors.cpp descriptors.hpp)
 add_library(descriptor SHARED ${SYMFUNFILES} ${CMFILES})
 add_library(descriptor_static STATIC ${SYMFUNFILES} ${CMFILES})
 
