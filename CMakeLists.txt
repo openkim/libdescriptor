@@ -19,7 +19,7 @@ file(GLOB SYMFUNFILES SymFun/*)
 #file(GLOB CMFILES CM/*)
 #--------------
 
-pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp)
+pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp python_bindings.cpp)
 add_library(descriptor SHARED ${SYMFUNFILES} descriptors.cpp descriptors.hpp)
 add_library(descriptor_static STATIC descriptors.cpp descriptors.hpp)
 
