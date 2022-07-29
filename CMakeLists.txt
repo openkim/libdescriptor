@@ -19,9 +19,9 @@ file(GLOB SYMFUNFILES SymFun/*)
 #file(GLOB CMFILES CM/*)
 #--------------
 
-pybind11_add_module(descriptors ${SYMFUNFILES} ${CMFILES} descriptors.cpp descriptors.hpp)
-add_library(descriptor SHARED ${SYMFUNFILES} ${CMFILES})
-add_library(descriptor_static STATIC ${SYMFUNFILES} ${CMFILES})
+pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp)
+add_library(descriptor SHARED ${SYMFUNFILES} descriptors.cpp descriptors.hpp)
+add_library(descriptor_static STATIC descriptors.cpp descriptors.hpp)
 
 target_compile_options(descriptors PRIVATE "SHELL: -Xclang -load -Xclang /opt/enzyme/enzyme/build/Enzyme/ClangEnzyme-12.so")
 target_compile_options(descriptor PRIVATE "SHELL: -Xclang -load -Xclang /opt/enzyme/enzyme/build/Enzyme/ClangEnzyme-12.so")

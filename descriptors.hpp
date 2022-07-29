@@ -1,5 +1,5 @@
 // Generic header for inclusion and library design
-#include "SymFun.hpp"
+#include "SymFun/SymFun.hpp"
 #include <map>
 #include <string>
 
