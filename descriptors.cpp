@@ -4,23 +4,24 @@
 #include <vector>
 
 Descriptor::Descriptor() {
-    descriptor_map.insert(std::make_pair("SymFun",reinterpret_cast<void *>(new SymmetryFunctionParams)));
+    descriptor_map.insert(std::make_pair("SymmetryFunction",reinterpret_cast<void *>(new SymmetryFunctionParams)));
 }
 
 Descriptor::Descriptor(std::string& descriptor_name) {
     descriptor_kind = descriptor_name;
-    descriptor_map.insert(std::make_pair("SymFun",reinterpret_cast<void *>(new SymmetryFunctionParams)));
+    descriptor_map.insert(std::make_pair("SymmetryFunction",reinterpret_cast<void *>(new SymmetryFunctionParams)));
 }
 
 Descriptor::Descriptor(std::string& descriptor_name, std::string& descriptor_params) {
     descriptor_kind = descriptor_name;
     descriptor_param_file = descriptor_params;
-    descriptor_map.insert(std::make_pair("SymFun",reinterpret_cast<void *>(new SymmetryFunctionParams)));
+    descriptor_map.insert(std::make_pair("SymmetryFunction",reinterpret_cast<void *>(new SymmetryFunctionParams)));
     initDescriptor();
 }
 
 void Descriptor::initDescriptor() {
-    if (descriptor_kind == "SymFun"){
+
+    if (descriptor_kind == "SymmetryFunction"){
         std::fstream file_ptr(descriptor_param_file);
         std::string placeholder_string;
         int n_species;
@@ -117,7 +118,7 @@ void Descriptor::initDescriptor() {
             std::getline(file_ptr, placeholder_string);
         }
 
-        auto sf = reinterpret_cast<SymmetryFunctionParams *> (descriptor_map["SymFun"]);
+        auto sf = reinterpret_cast<SymmetryFunctionParams *> (descriptor_map["SymmetryFunction"]);
 
         sf->set_cutoff(cutoff_function.c_str(), n_species, cutoff_matrix);
 

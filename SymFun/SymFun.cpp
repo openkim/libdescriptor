@@ -98,16 +98,13 @@ void symmetry_function_atomic(int const i,
     // prepare data
     VectorOfSizeDIM *coordinates = (VectorOfSizeDIM *) coords;
     int const iSpecies = particleSpeciesCodes[i];
-
     // Setup loop over neighbors of current particle
     for (int jj = 0; jj < numnei; ++jj) {
         // adjust index of particle neighbor
         int const j = neighlist[jj];
         int const jSpecies = particleSpeciesCodes[j];
-
         // cutoff between ij
         double rcutij = SymParam->rcut_2D_(iSpecies, jSpecies);
-
         // Compute rij
         double rij[DIM];
         for (int dim = 0; dim < DIM; ++dim) {
@@ -147,7 +144,6 @@ void symmetry_function_atomic(int const i,
                 ++idx;
             }
         }
-
         // three-body descriptors
         if (SymParam->has_three_body_ == 0) { continue; }
 
