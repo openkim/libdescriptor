@@ -13,14 +13,17 @@ find_package(pybind11 REQUIRED)
 
 #----module dir
 include_directories(./)
-include_directories(SymFun)
-file(GLOB SYMFUNFILES SymFun/*)
+include_directories(SymmetryFunction)
+file(GLOB SYMFUNFILES SymmetryFunction/*)
+include_directories(Bispectrum)
+file(GLOB BISFILES Bispectrum/*)
+
 #include_directories(CM)
 #file(GLOB CMFILES CM/*)
 #--------------
 
 pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp python_bindings.cpp)
-add_library(descriptor SHARED ${SYMFUNFILES} descriptors.cpp descriptors.hpp)
+add_library(descriptor SHARED ${SYMFUNFILES} ${BISFILES} descriptors.cpp descriptors.hpp)
 add_library(descriptor_static STATIC descriptors.cpp descriptors.hpp)
 
 target_compile_options(descriptors PRIVATE "SHELL: -Xclang -load -Xclang /opt/enzyme/enzyme/build/Enzyme/ClangEnzyme-12.so")

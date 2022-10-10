@@ -1,4 +1,4 @@
-#include "SymFun.hpp"
+#include "SymmetryFunction.hpp"
 #include <vector>
 #include <cmath>
 
@@ -16,10 +16,60 @@ int enzyme_dup;
 int enzyme_out;
 int enzyme_const;
 
+inline void SymmetryFunctions::set_species(std::vector<std::string> &species) {
+    species_.resize(species.size());
+    std::copy(species.begin(), species.end(), species_.begin());
+};
+
+inline void SymmetryFunctions::get_species(std::vector<std::string> &species) {
+    species.resize(species_.size());
+    std::copy(species_.begin(), species_.end(), species.begin());
+};
+
+inline int SymmetryFunctions::get_num_species() { return species_.size(); }
+
+void SymmetryFunctions::set_cutoff(char const *name,
+                                   std::size_t const Nspecies,
+                                   double const *rcut_2D) {
+    (void) name;   // to avoid unused warning
+    rcut_2D_.resize(Nspecies, Nspecies, rcut_2D);
+}
+
+inline double SymmetryFunctions::get_cutoff(int const iCode, int const jCode) {
+    return rcut_2D_(iCode, jCode);
+};
+
+void SymmetryFunctions::add_descriptor(char const *name,
+                                       double const *values,
+                                       int const row,
+                                       int const col) {
+    if (strcmp(name, "g1") == 0) { name_.push_back(1); };
+    if (strcmp(name, "g2") == 0) { name_.push_back(2); };
+    if (strcmp(name, "g3") == 0) { name_.push_back(3); };
+    if (strcmp(name, "g4") == 0) { name_.push_back(4); };
+    if (strcmp(name, "g5") == 0) { name_.push_back(5); };
+
+    Array2D<double> params(row, col, values);
+    params_.push_back(std::move(params));
+
+    auto sum = std::accumulate(num_param_sets_.begin(), num_param_sets_.end(), 0);
+    starting_index_.push_back(sum);
+
+    num_param_sets_.push_back(row);
+    num_params_.push_back(col);
+
+    if (strcmp(name, "g4") == 0 || strcmp(name, "g5") == 0) {
+        has_three_body_ = true;
+    }
+}
+
 inline double cut_cos(double const r, double const rcut) {
     return (r < rcut) ? 0.5 * (std::cos(MY_PI * r / rcut) + 1.0) : 0.0;
 }
 
+int SymmetryFunctions::get_num_descriptors() {
+    return std::accumulate(num_param_sets_.begin(), num_param_sets_.end(), 0);
+}
 
 void sym_g5(double const zeta, double const lambda, double const eta, double const *r,
             double const *rcut, double &phi) {
@@ -35,7 +85,7 @@ void sym_g5(double const zeta, double const lambda, double const eta, double con
         double const riksq = rik * rik;
         double const rjksq = rjk * rjk;
 
-        // i is the apex atom
+        // index is the apex atom
         double const cos_ijk = (rijsq + riksq - rjksq) / (2 * rij * rik);
         double const base = 1.0 + lambda * cos_ijk;
 
@@ -62,7 +112,7 @@ void sym_g4(double const zeta, double const lambda, double const eta, double con
         double const riksq = rik * rik;
         double const rjksq = rjk * rjk;
 
-        // i is the apex atom
+        // index is the apex atom
         double const cos_ijk = (rijsq + riksq - rjksq) / (2 * rij * rik);
         double const base = 1 + lambda * cos_ijk;
 
@@ -87,82 +137,80 @@ void sym_g1(double const r, double const rcut, double &phi) {
     phi = cut_cos(r, rcut);
 }
 
-
-void symmetry_function_atomic(int const i,
-                              double const *coords,
-                              int const *particleSpeciesCodes,
-                              int const *neighlist,
-                              int const numnei,
-                              double *const desc,
-                              SymmetryFunctionParams *SymParam) {
+void SymmetryFunctions::compute(int const index,
+                                int const n_atoms,
+                                int *const species,
+                                int *const neigh_list,
+                                int const number_of_neigh,
+                                double *const coords,
+                                double *const desc) {
     // prepare data
-    VectorOfSizeDIM *coordinates = (VectorOfSizeDIM *) coords;
-    int const iSpecies = particleSpeciesCodes[i];
+    auto *coordinates = (VectorOfSizeDIM *) coords;
+    int const iSpecies = species[index];
     // Setup loop over neighbors of current particle
-    for (int jj = 0; jj < numnei; ++jj) {
+    for (int jj = 0; jj < number_of_neigh; ++jj) {
         // adjust index of particle neighbor
-        int const j = neighlist[jj];
-        int const jSpecies = particleSpeciesCodes[j];
+        int const j = neigh_list[jj];
+        int const jSpecies = species[j];
         // cutoff between ij
-        double rcutij = SymParam->rcut_2D_(iSpecies, jSpecies);
+        double rcutij = rcut_2D_(iSpecies, jSpecies);
         // Compute rij
         double rij[DIM];
         for (int dim = 0; dim < DIM; ++dim) {
-            rij[dim] = coordinates[j][dim] - coordinates[i][dim];
+            rij[dim] = coordinates[j][dim] - coordinates[index][dim];
         }
 
         double const rijsq = rij[0] * rij[0] + rij[1] * rij[1] + rij[2] * rij[2];
         double const rijmag = std::sqrt(rijsq);
 
-        // if particles i and j not interact
+        // if particles index and j not interact
         if (rijmag > rcutij) { continue; }
 
         // Loop over descriptors
         // two-body descriptors
-        for (std::size_t p = 0; p < SymParam->name_.size(); ++p) {
-            if (SymParam->name_[p] != 1 && SymParam->name_[p] != 2 && SymParam->name_[p] != 3) {
+        for (std::size_t p = 0; p < name_.size(); ++p) {
+            if (name_[p] != 1 && name_[p] != 2 && name_[p] != 3) {
                 continue;
             }
 
-            int idx = SymParam->starting_index_[p];
+            int idx = starting_index_[p];
             // Loop over same descriptor but different parameter set
-            for (int q = 0; q < SymParam->num_param_sets_[p]; ++q) {
+            for (int q = 0; q < num_param_sets_[p]; ++q) {
                 double gc = 0.0;
 
-                if (SymParam->name_[p] == 1) {
+                if (name_[p] == 1) {
                     sym_g1(rijmag, rcutij, gc);
-                } else if (SymParam->name_[p] == 2) {
-                    double eta = SymParam->params_[p](q, 0);
-                    auto Rs = SymParam->params_[p](q, 1);
+                } else if (name_[p] == 2) {
+                    double eta = params_[p](q, 0);
+                    auto Rs = params_[p](q, 1);
                     sym_g2(eta, Rs, rijmag, rcutij, gc);
-                } else if (SymParam->name_[p] == 3) {
-                    double kappa = SymParam->params_[p](q, 0);
+                } else if (name_[p] == 3) {
+                    double kappa = params_[p](q, 0);
                     sym_g3(kappa, rijmag, rcutij, gc);
                 }
-
                 desc[idx] += gc;
                 ++idx;
             }
         }
         // three-body descriptors
-        if (SymParam->has_three_body_ == 0) { continue; }
+        if (has_three_body_ == 0) { continue; }
 
         // Loop over kk
-        for (int kk = jj + 1; kk < numnei; ++kk) {
+        for (int kk = jj + 1; kk < number_of_neigh; ++kk) {
             // Adjust index of particle neighbor
-            int const k = neighlist[kk];
-            int const kSpecies = particleSpeciesCodes[k];
+            int const k = neigh_list[kk];
+            int const kSpecies = species[k];
 
             // cutoff between ik and jk
-            double const rcutik = SymParam->rcut_2D_[iSpecies][kSpecies];
-            double const rcutjk = SymParam->rcut_2D_[jSpecies][kSpecies];
+            double const rcutik = rcut_2D_[iSpecies][kSpecies];
+            double const rcutjk = rcut_2D_[jSpecies][kSpecies];
 
             // Compute rik, rjk and their squares
             double rik[DIM];
             double rjk[DIM];
 
             for (int dim = 0; dim < DIM; ++dim) {
-                rik[dim] = coordinates[k][dim] - coordinates[i][dim];
+                rik[dim] = coordinates[k][dim] - coordinates[index][dim];
                 rjk[dim] = coordinates[k][dim] - coordinates[j][dim];
             }
 
@@ -179,24 +227,24 @@ void symmetry_function_atomic(int const i,
 
             // Loop over descriptors
             // three-body descriptors
-            for (size_t p = 0; p < SymParam->name_.size(); ++p) {
-                if (SymParam->name_[p] != 4 && SymParam->name_[p] != 5) { continue; }
-                int idx = SymParam->starting_index_[p];
+            for (size_t p = 0; p < name_.size(); ++p) {
+                if (name_[p] != 4 && name_[p] != 5) { continue; }
+                int idx = starting_index_[p];
 
                 // Loop over same descriptor but different parameter set
-                for (int q = 0; q < SymParam->num_param_sets_[p]; ++q) {
+                for (int q = 0; q < num_param_sets_[p]; ++q) {
                     double gc = 0.0;
 
-                    if (SymParam->name_[p] == 4) {
-                        double zeta = SymParam->params_[p](q, 0);
-                        double lambda = SymParam->params_[p](q, 1);
-                        double eta = SymParam->params_[p](q, 2);
+                    if (name_[p] == 4) {
+                        double zeta = params_[p](q, 0);
+                        double lambda = params_[p](q, 1);
+                        double eta = params_[p](q, 2);
 
                         sym_g4(zeta, lambda, eta, rvec, rcutvec, gc);
-                    } else if (SymParam->name_[p] == 5) {
-                        double zeta = SymParam->params_[p](q, 0);
-                        double lambda = SymParam->params_[p](q, 1);
-                        double eta = SymParam->params_[p](q, 2);
+                    } else if (name_[p] == 5) {
+                        double zeta = params_[p](q, 0);
+                        double lambda = params_[p](q, 1);
+                        double eta = params_[p](q, 2);
 
                         sym_g5(zeta, lambda, eta, rvec, rcutvec, gc);
                     }
@@ -209,21 +257,6 @@ void symmetry_function_atomic(int const i,
     }
 }
 
-void grad_symmetry_function_atomic(int const i,
-                                   double const *coords,
-                                   double const *d_coords,
-                                   int const *particleSpeciesCodes,
-                                   int const *neighlist,
-                                   int const numnei,
-                                   double *const desc,
-                                   double const *d_grad_loss_zeta,
-                                   SymmetryFunctionParams *SymParam) {
-    __enzyme_autodiff(symmetry_function_atomic,
-                      enzyme_const, i,
-                      enzyme_dup, coords, d_coords,
-                      enzyme_const, particleSpeciesCodes,
-                      enzyme_const, neighlist,
-                      enzyme_const, numnei,
-                      enzyme_dup, desc, d_grad_loss_zeta,
-                      enzyme_const, SymParam);
-}
+SymmetryFunctions::SymmetryFunctions(std::string &file_name) {
+
+};

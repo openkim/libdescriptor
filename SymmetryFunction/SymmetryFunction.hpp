@@ -1,7 +1,8 @@
-#ifndef KLIFF_DESCRIPTOR_HPP_
-#define KLIFF_DESCRIPTOR_HPP_
+#ifndef SYMMETRY_FUNCTION_HPP_
+#define SYMMETRY_FUNCTION_HPP_
 
 #include "helper.hpp"
+#include "descriptors.hpp"
 
 #include <numeric>
 
@@ -18,18 +19,33 @@
 
 typedef double VectorOfSizeDIM[DIM];
 
+using namespace Descriptor;
 
-class SymmetryFunctionParams {
+class SymmetryFunctions : public DescriptorKind {
 public:
-    SymmetryFunctionParams();
+    SymmetryFunctions(std::string &);
+    SymmetryFunctions()=default;
 
-    ~SymmetryFunctionParams();
+    void compute(int index,
+                 int n_atoms,
+                 int *species,
+                 int *neigh_list,
+                 int number_of_neigh,
+                 double *coords,
+                 double *zeta) override;
+
+    void set_length() override {length = 51;};
+
+private:
+
+    bool has_three_body_;
 
     inline void set_species(std::vector<std::string> &species);
 
     inline void get_species(std::vector<std::string> &species);
 
     inline int get_num_species();
+
     int width;
 
     void set_cutoff(char const *name,
@@ -52,21 +68,9 @@ public:
     std::vector<Array2D<double> > params_;
     std::vector<int> num_param_sets_;
     std::vector<int> num_params_;
-    bool has_three_body_;
 };
 
-#undef DIM
-
 inline double cut_cos(double r, double rcut);
-
-
-void symmetry_function_atomic(int i,
-                              double const *coords,
-                              int const *particleSpeciesCodes,
-                              int const *neighlist,
-                              int numnei,
-                              double * desc,
-                              SymmetryFunctionParams *SymParam);
 
 void sym_g1(double r, double rcut, double &phi);
 
@@ -93,30 +97,4 @@ void sym_g5(double zeta,
             double const *rcut,
             double &phi);
 
-void __enzyme_autodiff(void (*)(
-        int const,
-        double const *,
-        int const *,
-        int const *,
-        int const,
-        double *const,
-        SymmetryFunctionParams *),
-                       int, int,
-                       int, double const *, double const *,
-                       int, int const *,
-                       int, int const *,
-                       int, int,
-                       int, double *, double const *,
-                       int, SymmetryFunctionParams *);
-
-void grad_symmetry_function_atomic(int  i,
-                                   double const *coords,
-                                   double const *d_coords,
-                                   int const *particleSpeciesCodes,
-                                   int const *neighlist,
-                                   int  numnei,
-                                   double * desc,
-                                   double const *d_grad_loss_zeta,
-                                   SymmetryFunctionParams *SymParam);
-
-#endif  // KLIFF_DESCRIPTOR_HPP_
+#endif  // SYMMETRY_FUNCTION_HPP_
