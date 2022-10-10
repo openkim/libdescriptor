@@ -45,6 +45,7 @@ public:
     int width;
 
     DescriptorKind() = default;
+
     static DescriptorKind *initDescriptor(AvailableDescriptor);
 
     static DescriptorKind *initDescriptor(std::string &/* Filename */,

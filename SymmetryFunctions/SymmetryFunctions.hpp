@@ -2,7 +2,7 @@
 #define SYMMETRY_FUNCTION_HPP_
 
 #include "helper.hpp"
-#include "descriptors.hpp"
+#include "Descriptors.hpp"
 
 #include <numeric>
 
@@ -25,8 +25,9 @@ class SymmetryFunctions : public DescriptorKind {
 public:
     // In KLIFF a utility will create in memory file for initiaization?
     // TODO create apropriate constructor
-    explicit SymmetryFunctions(std::string & filename);
-    SymmetryFunctions()=default;
+    explicit SymmetryFunctions(std::string &filename);
+
+    SymmetryFunctions() = default;
 
     void compute(int index,
                  int n_atoms,
@@ -60,6 +61,7 @@ private:
                         int col);
 
     int get_num_descriptors();
+
     double bhor2ang = 0.529177;
     std::vector<std::string> species_;
     std::vector<int> name_;
@@ -74,9 +76,13 @@ inline double cut_cos(double r, double rcut);
 
 // Symmetry Functions
 void sym_g1(double r, double rcut, double &phi);
+
 void sym_g2(double eta, double Rs, double r, double rcut, double &phi);
+
 void sym_g3(double kappa, double r, double rcut, double &phi);
+
 void sym_g4(double zeta, double lambda, double eta, double const *r, double const *rcut, double &phi);
+
 void sym_g5(double zeta, double lambda, double eta, double const *r, double const *rcut, double &phi);
 
 #endif  // SYMMETRY_FUNCTION_HPP_

@@ -2,7 +2,7 @@
 #define BISPECTRUM_HPP_
 
 #include "helper.hpp"
-#include "descriptors.hpp"
+#include "Descriptors.hpp"
 
 using namespace Descriptor;
 

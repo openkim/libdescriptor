@@ -13,8 +13,8 @@ find_package(pybind11 REQUIRED)
 
 #----module dir
 include_directories(./)
-include_directories(SymmetryFunction)
-file(GLOB SYMFUNFILES SymmetryFunction/*)
+include_directories(SymmetryFunctions)
+file(GLOB SYMFUNFILES SymmetryFunctions/*)
 include_directories(Bispectrum)
 file(GLOB BISFILES Bispectrum/*)
 
@@ -24,7 +24,7 @@ file(GLOB BISFILES Bispectrum/*)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fuse-ld=lld -flto")
 
 #pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp python_bindings.cpp)
-add_library(descriptor SHARED ${SYMFUNFILES} descriptors.cpp helper.cpp)
+add_library(descriptor SHARED ${SYMFUNFILES} Descriptors.cpp helper.cpp)
 #add_library(descriptor_static STATIC descriptors.cpp descriptors.hpp)
 
 target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
