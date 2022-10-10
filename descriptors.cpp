@@ -73,7 +73,7 @@ void Descriptor::compute(int const n_atoms /* contributing */,
         desc_kind->compute(i, n_atoms, species, neighbor_ptr, number_of_neighbors[i],
                            coordinates, desc_ptr);
         neighbor_ptr += number_of_neighbors[i];
-        desc_ptr += desc_kind->length;
+        desc_ptr += desc_kind->width;
     }
 }
 
@@ -101,20 +101,20 @@ void Descriptor::rev_diff(int n_atoms /* contributing */,
                               enzyme_dup, desc_kind, d_desc_kind);
             return;
         }
-        case KindBispectrum:{
-            auto d_desc_kind = new Bispectrum();
-            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
-
-            __enzyme_autodiff(compute, /* fn to be differentiated */
-                              enzyme_const, n_atoms, /* Do not diff. against integer params */
-                              enzyme_const, species,
-                              enzyme_const, neighbor_list,
-                              enzyme_const, number_of_neighbors,
-                              enzyme_dup, coordinates, d_coordinates,
-                              enzyme_dup, desc, d_desc,
-                              enzyme_dup, desc_kind, d_desc_kind);
-            return;
-        }
+//        case KindBispectrum:{
+//            auto d_desc_kind = new Bispectrum();
+//            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
+//
+//            __enzyme_autodiff(compute, /* fn to be differentiated */
+//                              enzyme_const, n_atoms, /* Do not diff. against integer params */
+//                              enzyme_const, species,
+//                              enzyme_const, neighbor_list,
+//                              enzyme_const, number_of_neighbors,
+//                              enzyme_dup, coordinates, d_coordinates,
+//                              enzyme_dup, desc, d_desc,
+//                              enzyme_dup, desc_kind, d_desc_kind);
+//            return;
+//        }
         default:
             std::cerr << "Descriptor kind not supported\n";
             throw std::invalid_argument("Descriptor kind not supported");

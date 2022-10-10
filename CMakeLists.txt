@@ -21,11 +21,11 @@ file(GLOB BISFILES Bispectrum/*)
 #include_directories(CM)
 #file(GLOB CMFILES CM/*)
 #--------------
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fuse-ld=lld -flto")
 
-pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp python_bindings.cpp)
-add_library(descriptor SHARED ${SYMFUNFILES} ${BISFILES} descriptors.cpp descriptors.hpp)
-add_library(descriptor_static STATIC descriptors.cpp descriptors.hpp)
+#pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp python_bindings.cpp)
+add_library(descriptor SHARED ${SYMFUNFILES} descriptors.cpp helper.cpp)
+#add_library(descriptor_static STATIC descriptors.cpp descriptors.hpp)
 
-target_compile_options(descriptors PRIVATE "SHELL: -Xclang -load -Xclang /opt/enzyme/enzyme/build/Enzyme/ClangEnzyme-12.so")
-target_compile_options(descriptor PRIVATE "SHELL: -Xclang -load -Xclang /opt/enzyme/enzyme/build/Enzyme/ClangEnzyme-12.so")
-target_compile_options(descriptor_static PRIVATE "SHELL: -Xclang -load -Xclang /opt/enzyme/enzyme/build/Enzyme/ClangEnzyme-12.so")
+target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
+target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=/opt/enzyme/enzyme/build/Enzyme/LLDEnzyme-12.so")

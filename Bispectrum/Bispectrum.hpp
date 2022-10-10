@@ -42,8 +42,6 @@ public:
 
     void set_cutoff(char *name, std::size_t Nspecies, double const *rcuts_in);
 
-    void set_length() override {length = 51;}
-
     void set_weight(int Nspecies, double const *weight_in);
 
 //  void set_radius(int const Nspecies, double const * radius_in);

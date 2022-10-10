@@ -12,10 +12,6 @@
 #endif
 #define MY_PI 3.1415926535897932
 
-int enzyme_dup;
-int enzyme_out;
-int enzyme_const;
-
 inline void SymmetryFunctions::set_species(std::vector<std::string> &species) {
     species_.resize(species.size());
     std::copy(species.begin(), species.end(), species_.begin());

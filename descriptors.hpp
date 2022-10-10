@@ -42,7 +42,7 @@ class Descriptor::DescriptorKind {
 public:
     AvailableDescriptor descriptor_kind;
     std::string descriptor_param_file;
-    int length;
+    int width;
 
     DescriptorKind() = default;
     static DescriptorKind *initDescriptor(AvailableDescriptor);
@@ -57,14 +57,8 @@ public:
                          int  /* number of neighbors */,
                          double * /* coordinates */,
                          double * /* zeta */) = 0;
-    virtual void set_length() = 0;
 
     ~DescriptorKind();
-
-private:
-    std::map<std::string, void *> descriptor_data_map;
-    std::map<std::string, void *> descriptor_grad_map;
-    double bhor2ang = 0.529177;
 };
 
 

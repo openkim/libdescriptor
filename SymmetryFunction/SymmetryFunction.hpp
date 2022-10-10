@@ -23,7 +23,9 @@ using namespace Descriptor;
 
 class SymmetryFunctions : public DescriptorKind {
 public:
-    SymmetryFunctions(std::string &);
+    // In KLIFF a utility will create in memory file for initiaization?
+    // TODO create apropriate constructor
+    explicit SymmetryFunctions(std::string & filename);
     SymmetryFunctions()=default;
 
     void compute(int index,
@@ -34,7 +36,7 @@ public:
                  double *coords,
                  double *zeta) override;
 
-    void set_length() override {length = 51;};
+    int width;
 
 private:
 
@@ -45,8 +47,6 @@ private:
     inline void get_species(std::vector<std::string> &species);
 
     inline int get_num_species();
-
-    int width;
 
     void set_cutoff(char const *name,
                     std::size_t Nspecies,
@@ -60,7 +60,7 @@ private:
                         int col);
 
     int get_num_descriptors();
-
+    double bhor2ang = 0.529177;
     std::vector<std::string> species_;
     std::vector<int> name_;
     std::vector<int> starting_index_;
@@ -72,29 +72,11 @@ private:
 
 inline double cut_cos(double r, double rcut);
 
+// Symmetry Functions
 void sym_g1(double r, double rcut, double &phi);
-
-void sym_g2(double eta,
-            double Rs,
-            double r,
-            double rcut,
-            double &phi);
-
+void sym_g2(double eta, double Rs, double r, double rcut, double &phi);
 void sym_g3(double kappa, double r, double rcut, double &phi);
-
-
-void sym_g4(double zeta,
-            double lambda,
-            double eta,
-            double const *r,
-            double const *rcut,
-            double &phi);
-
-void sym_g5(double zeta,
-            double lambda,
-            double eta,
-            double const *r,
-            double const *rcut,
-            double &phi);
+void sym_g4(double zeta, double lambda, double eta, double const *r, double const *rcut, double &phi);
+void sym_g5(double zeta, double lambda, double eta, double const *r, double const *rcut, double &phi);
 
 #endif  // SYMMETRY_FUNCTION_HPP_
