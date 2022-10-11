@@ -19,7 +19,10 @@ namespace Descriptor {
 //                  double * /* coordinates */, double * /* d_coordinates */, double * /* zeta */,
 //                  double * /* dE_dzeta */, DescriptorKind * /* DescriptorKind to diff */);
 
-    void rev_diff(int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int * /* number_of_neigh_list */,
+    void gradient(int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int * /* number_of_neigh_list */,
+                  double * /* coordinates */, double * /* d_coordinates */, double * /* zeta */,
+                  double * /* dE_dzeta */, DescriptorKind * /* DescriptorKind to diff */);
+    void gradient_single_atom(int, int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int /* number_of_neigh_list */,
                   double * /* coordinates */, double * /* d_coordinates */, double * /* zeta */,
                   double * /* dE_dzeta */, DescriptorKind * /* DescriptorKind to diff */);
 // TODO
@@ -28,6 +31,10 @@ namespace Descriptor {
 //                  double * /* dzeta_dr */, DescriptorKind * /* DescriptorKind to diff */);
 
     void compute(int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int * /* number_of_neigh_list */,
+                 double * /* coordinates */, double * /* zeta */,
+                 DescriptorKind * /* DescriptorKind to diff */);
+
+    void compute_single_atom(int,  int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int /* number_of_neigh_list */,
                  double * /* coordinates */, double * /* zeta */,
                  DescriptorKind * /* DescriptorKind to diff */);
 }

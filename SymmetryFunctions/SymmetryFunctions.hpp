@@ -26,8 +26,8 @@ public:
     // In KLIFF a utility will create in memory file for initiaization?
     // TODO create apropriate constructor
     explicit SymmetryFunctions(std::string &filename);
-
-    SymmetryFunctions() = default;
+    void initFromFile(std::string &filename);
+    SymmetryFunctions(){};
 
     void compute(int index,
                  int n_atoms,
@@ -36,8 +36,6 @@ public:
                  int number_of_neigh,
                  double *coords,
                  double *zeta) override;
-
-    int width;
 
 private:
 

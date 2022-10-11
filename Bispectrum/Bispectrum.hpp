@@ -14,7 +14,7 @@ struct BISPECTRUM_LOOPINDICES {
 
 class Bispectrum : public DescriptorKind {
 public:
-    Bispectrum(std::string &);
+    Bispectrum(std::string &filename){};
     Bispectrum() = default;
     Bispectrum(double rfac0_in,
                int twojmax_in,
