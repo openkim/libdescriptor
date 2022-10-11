@@ -161,10 +161,10 @@ void Descriptor::gradient_single_atom(int index,
             *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
 
                         d_desc_kind->width = desc_kind->width;
-            std::cout << desc_kind->descriptor_param_file <<"\n";
+//            std::cout << desc_kind->descriptor_param_file <<"\n";
             d_desc_kind->initFromFile(desc_kind->descriptor_param_file);
 
-            std::cout << "Here\n";
+//            std::cout << "Here\n";
 
             __enzyme_autodiff_one_atom(compute_single_atom, /* fn to be differentiated */
                                        enzyme_const,index,

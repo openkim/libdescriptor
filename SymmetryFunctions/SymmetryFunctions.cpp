@@ -373,20 +373,20 @@ SymmetryFunctions::SymmetryFunctions(std::string &file_name) {
 }
 
 void SymmetryFunctions::initFromFile(std::string &file_name) {
-    std::cout << file_name;
-    std::cout << file_name <<"\n";
-    std::fstream file_ptr(file_name);
+//    std::cout << file_name;
+//    std::cout << file_name <<"\n";
+    std::fstream file_ptr("/home/amit/Projects/COLABFIT/colabfit-kim-model/colabfit-portable-models/TorchMLModel2_Desc/descriptor.dat");
     std::string placeholder_string;
     int n_species;
 
     // Ignore comments
     do {
         std::getline(file_ptr, placeholder_string);
-        std::cout << placeholder_string << "\n";
+//        std::cout << placeholder_string << "\n";
     } while (placeholder_string[0] == '#');
-    std::cout << "here::" << placeholder_string <<"\n";
+//    std::cout << "here::" << placeholder_string <<"\n";
     n_species = std::stoi(placeholder_string);
-    std::cout << n_species <<"\n";
+//    std::cout << n_species <<"\n";
     // blank line
     std::getline(file_ptr, placeholder_string);
     // Ignore comments
