@@ -21,7 +21,7 @@ file(GLOB BISFILES Bispectrum/*)
 #include_directories(CM)
 #file(GLOB CMFILES CM/*)
 #--------------
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3 -fuse-ld=lld -flto -Xclang -new-struct-path-tbaa")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=lld -flto -Xclang -new-struct-path-tbaa")
 
 #pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp python_bindings.cpp)
 add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.cpp)
