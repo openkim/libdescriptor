@@ -1,0 +1,8 @@
+.idea
+.clion
+.vscode
+*.so
+*.o
+build
+build_*
+cmake-*
