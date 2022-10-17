@@ -1,7 +1,9 @@
-#include "SymFun.hpp"
+#include <iostream>
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
+#include <fstream>
 #include <vector>
+#include "Descriptors.hpp"
 
 namespace py = pybind11;
 
@@ -127,3 +129,5 @@ PYBIND11_MODULE(descriptors, m) {
             "Return derivative"
     );
 }
+
+
