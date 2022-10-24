@@ -1,6 +1,6 @@
 #include "Descriptors.hpp"
 #include "SymmetryFunctions/SymmetryFunctions.hpp"
-//#include "Bispectrum/Bispectrum.hpp"
+#include "Bispectrum/Bispectrum.hpp"
 #include <vector>
 #include <string>
 #include <stdexcept>
@@ -55,7 +55,10 @@ DescriptorKind *DescriptorKind::initDescriptor(std::string &descriptor_file_name
         sf->descriptor_param_file = descriptor_file_name;
         return sf;
     } else if (descriptor_kind == KindBispectrum) {
-//        return new Bispectrum(descriptor_file_name);
+        auto bs = new Bispectrum(descriptor_file_name);
+        bs->descriptor_kind = descriptor_kind;
+        bs->descriptor_param_file = descriptor_file_name;
+        return bs;
     } else {
         throw std::invalid_argument("Descriptor kind not implemented yet");
     }
@@ -65,7 +68,7 @@ DescriptorKind *DescriptorKind::initDescriptor(AvailableDescriptor descriptor_ki
     if (descriptor_kind == KindSymmetryFunctions) {
         return new SymmetryFunctions();
     } else if (descriptor_kind == KindBispectrum) {
-//        return new Bispectrum();
+        return new Bispectrum();
     } else {
         throw std::invalid_argument("Descriptor kind not implemented yet");
     }
@@ -116,20 +119,20 @@ void Descriptor::gradient(int n_atoms /* contributing */,
                               enzyme_dup, desc_kind, d_desc_kind);
             return;
         }
-//        case KindBispectrum:{
-//            auto d_desc_kind = new Bispectrum();
-//            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
-//
-//            __enzyme_autodiff(compute, /* fn to be differentiated */
-//                              enzyme_const, n_atoms, /* Do not diff. against integer params */
-//                              enzyme_const, species,
-//                              enzyme_const, neighbor_list,
-//                              enzyme_const, number_of_neighbors,
-//                              enzyme_dup, coordinates, d_coordinates,
-//                              enzyme_dup, desc, d_desc,
-//                              enzyme_dup, desc_kind, d_desc_kind);
-//            return;
-//        }
+        case KindBispectrum:{
+            auto d_desc_kind = new Bispectrum();
+            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
+
+            __enzyme_autodiff(compute, /* fn to be differentiated */
+                              enzyme_const, n_atoms, /* Do not diff. against integer params */
+                              enzyme_const, species,
+                              enzyme_const, neighbor_list,
+                              enzyme_const, number_of_neighbors,
+                              enzyme_dup, coordinates, d_coordinates,
+                              enzyme_dup, desc, d_desc,
+                              enzyme_dup, desc_kind, d_desc_kind);
+            return;
+        }
         default:
             std::cerr << "Descriptor kind not supported\n";
             throw std::invalid_argument("Descriptor kind not supported");
@@ -176,20 +179,22 @@ void Descriptor::gradient_single_atom(int index,
                               enzyme_dup, desc_kind, d_desc_kind);
             return;
         }
-//        case KindBispectrum:{
-//            auto d_desc_kind = new Bispectrum();
-//            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
-//
-//            __enzyme_autodiff(compute, /* fn to be differentiated */
-//                              enzyme_const, n_atoms, /* Do not diff. against integer params */
-//                              enzyme_const, species,
-//                              enzyme_const, neighbor_list,
-//                              enzyme_const, number_of_neighbors,
-//                              enzyme_dup, coordinates, d_coordinates,
-//                              enzyme_dup, desc, d_desc,
-//                              enzyme_dup, desc_kind, d_desc_kind);
-//            return;
-//        }
+        case KindBispectrum:{
+            auto d_desc_kind = new Bispectrum();
+            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
+            d_desc_kind->clone_empty(desc_kind);
+
+            __enzyme_autodiff_one_atom(compute_single_atom, /* fn to be differentiated */
+                              enzyme_const, index,
+                              enzyme_const, n_atoms, /* Do not diff. against integer params */
+                              enzyme_const, species,
+                              enzyme_const, neighbor_list,
+                              enzyme_const, number_of_neighbors,
+                              enzyme_dup, coordinates, d_coordinates,
+                              enzyme_dup, desc, d_desc,
+                              enzyme_dup, desc_kind, d_desc_kind);
+            return;
+        }
         default:
             std::cerr << "Descriptor kind not supported\n";
             throw std::invalid_argument("Descriptor kind not supported");

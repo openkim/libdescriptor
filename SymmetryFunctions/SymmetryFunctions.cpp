@@ -262,7 +262,6 @@ SymmetryFunctions::SymmetryFunctions(std::string &file_name) {
 void SymmetryFunctions::initFromFile(std::string &file_name) {
     std::fstream file_ptr(file_name);
     std::string placeholder_string;
-    int n_species;
 
     // Ignore comments
     do {

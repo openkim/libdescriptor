@@ -25,8 +25,8 @@ class SymmetryFunctions : public DescriptorKind {
 public:
     // In KLIFF a utility will create in memory file for initiaization?
     // TODO create apropriate constructor
-    explicit SymmetryFunctions(std::string &filename);
-    void initFromFile(std::string &filename);
+    explicit SymmetryFunctions(std::string &file_name);
+    void initFromFile(std::string &file_name);
     SymmetryFunctions(){};
 
     void compute(int index,
@@ -39,6 +39,7 @@ public:
     void clone_empty(DescriptorKind * descriptorKind);
 
 private:
+    int n_species;
 
     bool has_three_body_;
 

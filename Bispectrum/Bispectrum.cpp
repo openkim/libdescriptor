@@ -3,6 +3,7 @@
 #include <cmath>
 #include <complex>
 #include <limits>
+#include <fstream>
 //#include <numeric>
 
 #ifdef MY_PI
@@ -197,12 +198,12 @@ void Bispectrum::grow_rij(int const newnmax) {
 
     if (!use_shared_arrays) {
         // 2D
-        rij.resize(nmax, 3);
+        rij.resize(nmax * 3, 0.0);
 
         // 1D
         inside.resize(nmax, 0);
-        wj.resize(nmax, static_cast<double>(0));
-        rcutij.resize(nmax, static_cast<double>(0));
+        wj.resize(nmax, 0.0);
+        rcutij.resize(nmax, 0.0);
     }
 }
 
@@ -246,14 +247,14 @@ void Bispectrum::compute(int const index,
                 = rvec[0] * rvec[0] + rvec[1] * rvec[1] + rvec[2] * rvec[2];
         double const rmag = std::sqrt(rsq);
 
-        if (rmag < rcuts(iSpecies, jSpecies) && rmag > 1e-10) {
-            rij(ninside, 0) = rvec[0];
-            rij(ninside, 1) = rvec[1];
-            rij(ninside, 2) = rvec[2];
+        if (rmag < rcuts[iSpecies * n_species + jSpecies] && rmag > 1e-10) {
+            rij[ninside * 3 + 0] = rvec[0];
+            rij[ninside * 3 + 1] = rvec[1];
+            rij[ninside * 3 + 2] = rvec[2];
 
             inside[ninside] = j;
             wj[ninside] = wjelem[jSpecies];
-            rcutij[ninside] = rcuts(iSpecies, jSpecies);
+            rcutij[ninside] = rcuts[iSpecies * n_species  + jSpecies];
 
             ninside++;
         }
@@ -270,11 +271,14 @@ void Bispectrum::compute(int const index,
     }
 }
 
-void Bispectrum::set_cutoff(char *name,
+void Bispectrum::set_cutoff(const char *name,
                             std::size_t const Nspecies,
                             double const *rcuts_in) {
     // store number of species and cutoff values
-    rcuts.resize(Nspecies, Nspecies, rcuts_in);
+
+    for (int i = 0; i < Nspecies * Nspecies; i++) {
+        rcuts.push_back(*(rcuts_in + i));
+    }
 }
 
 void Bispectrum::set_weight(int const Nspecies, double const *weight_in) {
@@ -292,9 +296,9 @@ void Bispectrum::compute_ui(int const jnum) {
     double theta0;
 
     for (int j = 0; j < jnum; ++j) {
-        x = rij(j, 0);
-        y = rij(j, 1);
-        z = rij(j, 2);
+        x = rij[j * 3 + 0];
+        y = rij[j * 3 + 1];
+        z = rij[j * 3 + 2];
 
         rsq = x * x + y * y + z * z;
         r = std::sqrt(rsq);
@@ -480,8 +484,7 @@ void Bispectrum::compute_uarray(double const x,
             uarray_i(j, 0, mb) = 0.0;
 
             for (int ma = 0; ma < j; ++ma) {
-                rootpq = rootpqarray(j - ma, j - mb);
-
+                rootpq = rootpqarray[(j - ma) * twojmax + (j - mb)];
                 uarray_r(j, ma, mb) += rootpq
                                        * (a_r * uarray_r(j - 1, ma, mb)
                                           + a_i * uarray_i(j - 1, ma, mb));
@@ -489,8 +492,7 @@ void Bispectrum::compute_uarray(double const x,
                                        * (a_r * uarray_i(j - 1, ma, mb)
                                           - a_i * uarray_r(j - 1, ma, mb));
 
-                rootpq = rootpqarray(ma + 1, j - mb);
-
+                rootpq = rootpqarray[(ma + 1) * twojmax + (j - mb)];
                 uarray_r(j, ma + 1, mb)
                         = -rootpq
                           * (b_r * uarray_r(j - 1, ma, mb) + b_i * uarray_i(j - 1, ma, mb));
@@ -571,7 +573,7 @@ void Bispectrum::create_twojmax_arrays() {
     int const jdim = twojmax + 1;
 
     cgarray.resize(jdim, jdim, jdim, jdim, jdim);
-    rootpqarray.resize(jdim + 1, jdim + 1);
+    rootpqarray.resize((jdim + 1) * (jdim + 1));
     barray.resize(jdim, jdim, jdim);
     dbarray.resize(jdim, jdim, jdim, 3);
     duarray_r.resize(jdim, jdim, jdim, 3);
@@ -825,7 +827,7 @@ void Bispectrum::init_clebsch_gordan() {
 void Bispectrum::init_rootpqarray() {
     for (int p = 1; p <= twojmax; p++) {
         for (int q = 1; q <= twojmax; q++) {
-            rootpqarray(p, q) = std::sqrt(static_cast<double>(p) / q);
+            rootpqarray[p * twojmax + q] = std::sqrt(static_cast<double>(p) / q);
         }
     }
 }
@@ -941,6 +943,137 @@ int Bispectrum::compute_ncoeff() {
     }
 }
 
+Bispectrum::Bispectrum(std::string &file_name) {
+    initFromFile(file_name);
+}
+
+void Bispectrum::initFromFile(std::string &file_name) {
+    std::fstream file_ptr(file_name);
+    std::string placeholder_string;
+
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+    n_species = std::stoi(placeholder_string);
+    // blank line
+    std::getline(file_ptr, placeholder_string);
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+
+    auto cutoff_matrix = new double[n_species * n_species];
+    for (int i = 0; i < n_species; i++) {
+        for (int j = 0; j < n_species; j++) {
+            auto pos = placeholder_string.find(' ');
+            *(cutoff_matrix + n_species * i + j) = std::stod(placeholder_string.substr(0, pos));
+            if (pos != std::string::npos) placeholder_string.erase(0, pos + 1);
+        }
+        std::getline(file_ptr, placeholder_string);
+    }
+
+    // blank line
+    std::getline(file_ptr, placeholder_string);
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+    std::string cutoff_function = placeholder_string;
+
+    // blank line
+    std::getline(file_ptr, placeholder_string);
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+    width = std::stoi(placeholder_string);
+
+    // blank line
+    std::getline(file_ptr, placeholder_string);
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+    int jmax = stoi(placeholder_string);
+
+    // blank line
+    std::getline(file_ptr, placeholder_string);
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+    rfac0 = std::stod(placeholder_string);
+
+    // blank line
+    std::getline(file_ptr, placeholder_string);
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+    diagonalstyle = std::stoi(placeholder_string);
+
+    // blank line
+    std::getline(file_ptr, placeholder_string);
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+    rmin0 = std::stoi(placeholder_string);
+
+    // blank line
+    std::getline(file_ptr, placeholder_string);
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+    switch_flag = std::stoi(placeholder_string);
+
+    // blank line
+    std::getline(file_ptr, placeholder_string);
+    // Ignore comments
+    do {
+        std::getline(file_ptr, placeholder_string);
+    } while (placeholder_string[0] == '#');
+    bzero_flag = std::stoi(placeholder_string);
+
+    auto weights = new double[n_species];
+    for (int i = 0; i < n_species; i++){
+        *(weights + i) = 1.0;
+    }
+
+    set_weight(n_species, weights);
+    set_cutoff(cutoff_function.c_str(), n_species, cutoff_matrix);
+
+    use_shared_arrays = 0;
+    nmax = 0;
+    twojmax = 2 * jmax;
+    wself = 1.0;
+
+    ncoeff = compute_ncoeff();
+
+    create_twojmax_arrays();
+
+    if (bzero_flag) {
+        double const www = wself * wself * wself;
+        for (int j = 1; j <= twojmax + 1; ++j) { bzero[j] = www * j; }
+    }
+
+    // 1D
+    bvec.resize(ncoeff, static_cast<double>(0));
+
+    // 2D
+    dbvec.resize(ncoeff, 3);
+
+    build_indexlist();
+
+    init();
+
+    delete[] cutoff_matrix;
+    delete[] weights;
+}
+
+void Bispectrum::clone_empty(DescriptorKind *ds) {}
 
 #undef MY_PI
 #undef DIM

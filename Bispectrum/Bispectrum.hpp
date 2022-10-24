@@ -3,6 +3,7 @@
 
 #include "helper.hpp"
 #include "Descriptors.hpp"
+#include <vector>
 
 using namespace Descriptor;
 
@@ -14,7 +15,9 @@ struct BISPECTRUM_LOOPINDICES {
 
 class Bispectrum : public DescriptorKind {
 public:
-    Bispectrum(std::string &filename){};
+    Bispectrum(std::string &file_name);
+    void initFromFile(std::string &file_name);
+
     Bispectrum() = default;
     Bispectrum(double rfac0_in,
                int twojmax_in,
@@ -40,7 +43,7 @@ public:
                  double *coords,
                  double *desc) override;
 
-    void set_cutoff(char *name, std::size_t Nspecies, double const *rcuts_in);
+    void set_cutoff(const char *name, std::size_t Nspecies, double const *rcuts_in);
 
     void set_weight(int Nspecies, double const *weight_in);
 
@@ -65,7 +68,9 @@ public:
 
     void grow_rij(int newnmax);
 
-    void clone_empty (DescriptorKind * tmp) {};
+    void clone_empty (DescriptorKind * ds);
+
+    void set_species(int n_species_){n_species = n_species_;}
 
 private:
     inline double factorial(int n);
@@ -88,11 +93,7 @@ private:
 
     void add_uarraytot(double r, double wj_in, double rcut_in);
 
-    void compute_uarray(double x,
-                        double y,
-                        double z,
-                        double z0,
-                        double r);
+    void compute_uarray(double x, double y, double z, double z0, double r);
 
     inline double deltacg(int j1, int j2, int j);
 
@@ -101,8 +102,8 @@ private:
 public:
     int ncoeff;
     std::vector<double> bvec;
-    Array2D<double> dbvec;
-    Array2D<double> rij;
+    std::vector<double> dbvec;
+    std::vector<double> rij;
     std::vector<int> inside;
     std::vector<double> wj;
     std::vector<double> rcutij;
@@ -124,14 +125,15 @@ public:
     Array3D<double> uarray_i;
 
 private:
-    Array2D<double> rcuts;
+    int n_species;
+    std::vector<double> rcuts;
     std::vector<double> wjelem;
     double rmin0;
     double rfac0;
     std::vector<BISPECTRUM_LOOPINDICES> idxj;
     int idxj_max;
     Array5D<double> cgarray;
-    Array2D<double> rootpqarray;
+    std::vector<double> rootpqarray;
     Array3D<double> barray;
     Array4D<double> duarray_r;
     Array4D<double> duarray_i;
