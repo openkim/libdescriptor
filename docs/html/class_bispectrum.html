@@ -1,0 +1,985 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>KIM Descriptor Library: Bispectrum Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/ipcamit/colabfit-descriptor-library" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">KIM Descriptor Library
+   </div>
+   <div id="projectbrief">A fully automatic-differentiated high-performance descriptor library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('class_bispectrum.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="class_bispectrum-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">Bispectrum Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_bispectrum_8hpp_source.html">Bispectrum.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Bispectrum:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_bispectrum__inherit__graph.svg" width="187" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a569c58d081fc7e290cb2909d2a97faae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a569c58d081fc7e290cb2909d2a97faae">Bispectrum</a> (std::string &amp;file_name)</td></tr>
+<tr class="separator:a569c58d081fc7e290cb2909d2a97faae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c74c863fa29b24f5f4be85ee645a8b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a9c74c863fa29b24f5f4be85ee645a8b4">initFromFile</a> (std::string &amp;file_name)</td></tr>
+<tr class="separator:a9c74c863fa29b24f5f4be85ee645a8b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26c4fa2112512d7f4d8e234a970ed98f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a26c4fa2112512d7f4d8e234a970ed98f">Bispectrum</a> ()=default</td></tr>
+<tr class="separator:a26c4fa2112512d7f4d8e234a970ed98f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27589d599ee6d7f80527b0f103996ab2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a27589d599ee6d7f80527b0f103996ab2">Bispectrum</a> (double rfac0_in, int twojmax_in, int diagonalstyle_in, int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in)</td></tr>
+<tr class="separator:a27589d599ee6d7f80527b0f103996ab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfad3c7b242f2464c4455a399d785abb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#acfad3c7b242f2464c4455a399d785abb">~Bispectrum</a> ()</td></tr>
+<tr class="separator:acfad3c7b242f2464c4455a399d785abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ef3c01ea2e7acf5e0dbc051142471d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a9ef3c01ea2e7acf5e0dbc051142471d7">build_indexlist</a> ()</td></tr>
+<tr class="separator:a9ef3c01ea2e7acf5e0dbc051142471d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa4058c6f4de3529da3e475608b057e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#afa4058c6f4de3529da3e475608b057e6">init</a> ()</td></tr>
+<tr class="separator:afa4058c6f4de3529da3e475608b057e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840c5cc6fc7b126133e91a25ab1e4250"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a840c5cc6fc7b126133e91a25ab1e4250">memory_usage</a> ()</td></tr>
+<tr class="separator:a840c5cc6fc7b126133e91a25ab1e4250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf323822cd685488211bfe21e90bf985"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#adf323822cd685488211bfe21e90bf985">compute</a> (int index, int n_atoms, int *species, int *neigh_list, int number_of_neigh, double *coords, double *desc) override</td></tr>
+<tr class="separator:adf323822cd685488211bfe21e90bf985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d133cf619338e4f309e4a34353f08d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a2d133cf619338e4f309e4a34353f08d1">set_cutoff</a> (const char *name, std::size_t Nspecies, double const *rcuts_in)</td></tr>
+<tr class="separator:a2d133cf619338e4f309e4a34353f08d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf857096f976de996e9999fb0e73bbc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#aaf857096f976de996e9999fb0e73bbc0">set_weight</a> (int Nspecies, double const *weight_in)</td></tr>
+<tr class="separator:aaf857096f976de996e9999fb0e73bbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a166155145a31e6d9f1f760ec3901a3ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a166155145a31e6d9f1f760ec3901a3ed">compute_ui</a> (int jnum)</td></tr>
+<tr class="separator:a166155145a31e6d9f1f760ec3901a3ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74d1e88d8b03c7b495f3cecd27011a2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a74d1e88d8b03c7b495f3cecd27011a2c">compute_zi</a> ()</td></tr>
+<tr class="separator:a74d1e88d8b03c7b495f3cecd27011a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a376fb766a59a57ad54d4838272190d83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a376fb766a59a57ad54d4838272190d83">compute_bi</a> ()</td></tr>
+<tr class="separator:a376fb766a59a57ad54d4838272190d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b216fedca5742a24a14a60c1e1d6b5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a4b216fedca5742a24a14a60c1e1d6b5b">copy_bi2bvec</a> ()</td></tr>
+<tr class="separator:a4b216fedca5742a24a14a60c1e1d6b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf33c191391298232ca1420767ea218f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#acf33c191391298232ca1420767ea218f">compute_sfac</a> (double r, double rcut_in)</td></tr>
+<tr class="separator:acf33c191391298232ca1420767ea218f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19d4bba4f3ce018abdadf98f2d2f3ac7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a19d4bba4f3ce018abdadf98f2d2f3ac7">compute_dsfac</a> (double r, double rcut_in)</td></tr>
+<tr class="separator:a19d4bba4f3ce018abdadf98f2d2f3ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0edf108ac0a069bfb96fb2d3ccad3eef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a0edf108ac0a069bfb96fb2d3ccad3eef">grow_rij</a> (int newnmax)</td></tr>
+<tr class="separator:a0edf108ac0a069bfb96fb2d3ccad3eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a698615df2068139460b91cfb10fbeb35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a698615df2068139460b91cfb10fbeb35">clone_empty</a> (<a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *ds)</td></tr>
+<tr class="separator:a698615df2068139460b91cfb10fbeb35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87828af11bc33892ee39708853683705"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a87828af11bc33892ee39708853683705">set_species</a> (int n_species_)</td></tr>
+<tr class="separator:a87828af11bc33892ee39708853683705"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_descriptor_1_1_descriptor_kind"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_descriptor_1_1_descriptor_kind')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td></tr>
+<tr class="memitem:ab8724562546a63951f935a43402199e8 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#ab8724562546a63951f935a43402199e8">DescriptorKind</a> ()=default</td></tr>
+<tr class="separator:ab8724562546a63951f935a43402199e8 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65e8012e117f042ea0f41a833df48c2c inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a65e8012e117f042ea0f41a833df48c2c">~DescriptorKind</a> ()</td></tr>
+<tr class="separator:a65e8012e117f042ea0f41a833df48c2c inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1c04121318a58f7128a7990d5edfd213"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a1c04121318a58f7128a7990d5edfd213">ncoeff</a></td></tr>
+<tr class="separator:a1c04121318a58f7128a7990d5edfd213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a345ebc04953cd9582932f00eaeb45fe3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a345ebc04953cd9582932f00eaeb45fe3">bvec</a></td></tr>
+<tr class="separator:a345ebc04953cd9582932f00eaeb45fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5757b74f8d7bc05c04140978adee7eb3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a5757b74f8d7bc05c04140978adee7eb3">dbvec</a></td></tr>
+<tr class="separator:a5757b74f8d7bc05c04140978adee7eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90f3d21d3d47770aee4fb718fa6bc05e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a90f3d21d3d47770aee4fb718fa6bc05e">rij</a></td></tr>
+<tr class="separator:a90f3d21d3d47770aee4fb718fa6bc05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f3f61709a1a6b0df382ae7e2db2e89c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a5f3f61709a1a6b0df382ae7e2db2e89c">inside</a></td></tr>
+<tr class="separator:a5f3f61709a1a6b0df382ae7e2db2e89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f35624d72ce44814eba1ebe864b880"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a32f35624d72ce44814eba1ebe864b880">wj</a></td></tr>
+<tr class="separator:a32f35624d72ce44814eba1ebe864b880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a740e530407d803be0d2d4ebde55c3ee4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a740e530407d803be0d2d4ebde55c3ee4">rcutij</a></td></tr>
+<tr class="separator:a740e530407d803be0d2d4ebde55c3ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2648c603d5f8aebd068a97f893a8e4cc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a2648c603d5f8aebd068a97f893a8e4cc">nmax</a></td></tr>
+<tr class="separator:a2648c603d5f8aebd068a97f893a8e4cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc8e84ebe190b9f46d02ff6333a57e2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a0dc8e84ebe190b9f46d02ff6333a57e2">twojmax</a></td></tr>
+<tr class="separator:a0dc8e84ebe190b9f46d02ff6333a57e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d3543c724fa680e58c9be2c59db2fd4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a9d3543c724fa680e58c9be2c59db2fd4">diagonalstyle</a></td></tr>
+<tr class="separator:a9d3543c724fa680e58c9be2c59db2fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a503c38a910c27d1734cd61e85f617c20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_array3_d.html">Array3D</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a503c38a910c27d1734cd61e85f617c20">uarraytot_r</a></td></tr>
+<tr class="separator:a503c38a910c27d1734cd61e85f617c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4668345ede66136c8ede7023e267efe0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_array3_d.html">Array3D</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a4668345ede66136c8ede7023e267efe0">uarraytot_i</a></td></tr>
+<tr class="separator:a4668345ede66136c8ede7023e267efe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b8ccf02fa4dca797a4da9592fa865f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_array5_d.html">Array5D</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a6b8ccf02fa4dca797a4da9592fa865f4">zarray_r</a></td></tr>
+<tr class="separator:a6b8ccf02fa4dca797a4da9592fa865f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f89fb1790346eb2723009d591b14069"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_array5_d.html">Array5D</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a3f89fb1790346eb2723009d591b14069">zarray_i</a></td></tr>
+<tr class="separator:a3f89fb1790346eb2723009d591b14069"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cf31d8dfe1a758e174f7c19be285d92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_array3_d.html">Array3D</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a9cf31d8dfe1a758e174f7c19be285d92">uarray_r</a></td></tr>
+<tr class="separator:a9cf31d8dfe1a758e174f7c19be285d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b8679b6d1357651e814ba956c195d60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_array3_d.html">Array3D</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bispectrum.html#a7b8679b6d1357651e814ba956c195d60">uarray_i</a></td></tr>
+<tr class="separator:a7b8679b6d1357651e814ba956c195d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_class_descriptor_1_1_descriptor_kind"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_descriptor_1_1_descriptor_kind')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td></tr>
+<tr class="memitem:afa467126385a5c9fe79c8683f2b1e8e4 inherit pub_attribs_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#afa467126385a5c9fe79c8683f2b1e8e4">descriptor_kind</a></td></tr>
+<tr class="separator:afa467126385a5c9fe79c8683f2b1e8e4 inherit pub_attribs_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd741576569904305d0b2c7f28331ed inherit pub_attribs_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#adbd741576569904305d0b2c7f28331ed">descriptor_param_file</a></td></tr>
+<tr class="separator:adbd741576569904305d0b2c7f28331ed inherit pub_attribs_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00f9d9e1a5b9f92383d241cdd6906b8a inherit pub_attribs_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a00f9d9e1a5b9f92383d241cdd6906b8a">width</a></td></tr>
+<tr class="separator:a00f9d9e1a5b9f92383d241cdd6906b8a inherit pub_attribs_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_class_descriptor_1_1_descriptor_kind"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_descriptor_1_1_descriptor_kind')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td></tr>
+<tr class="memitem:a7f01a8754e402de8ef5b7f74e669d084 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a7f01a8754e402de8ef5b7f74e669d084">initDescriptor</a> (<a class="el" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a>)</td></tr>
+<tr class="separator:a7f01a8754e402de8ef5b7f74e669d084 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11a153d53732d0dda499183b31ad3150 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a11a153d53732d0dda499183b31ad3150">initDescriptor</a> (std::string &amp;, <a class="el" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a>)</td></tr>
+<tr class="separator:a11a153d53732d0dda499183b31ad3150 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a569c58d081fc7e290cb2909d2a97faae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a569c58d081fc7e290cb2909d2a97faae">&#9670;&nbsp;</a></span>Bispectrum() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bispectrum::Bispectrum </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>file_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26c4fa2112512d7f4d8e234a970ed98f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26c4fa2112512d7f4d8e234a970ed98f">&#9670;&nbsp;</a></span>Bispectrum() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bispectrum::Bispectrum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27589d599ee6d7f80527b0f103996ab2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27589d599ee6d7f80527b0f103996ab2">&#9670;&nbsp;</a></span>Bispectrum() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bispectrum::Bispectrum </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rfac0_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>twojmax_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>diagonalstyle_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>use_shared_arrays_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rmin0_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>switch_flag_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bzero_flag_in</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acfad3c7b242f2464c4455a399d785abb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfad3c7b242f2464c4455a399d785abb">&#9670;&nbsp;</a></span>~Bispectrum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bispectrum::~Bispectrum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9ef3c01ea2e7acf5e0dbc051142471d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ef3c01ea2e7acf5e0dbc051142471d7">&#9670;&nbsp;</a></span>build_indexlist()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::build_indexlist </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a698615df2068139460b91cfb10fbeb35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a698615df2068139460b91cfb10fbeb35">&#9670;&nbsp;</a></span>clone_empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::clone_empty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td>
+          <td class="paramname"><em>ds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf323822cd685488211bfe21e90bf985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf323822cd685488211bfe21e90bf985">&#9670;&nbsp;</a></span>compute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::compute </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_atoms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>neigh_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>number_of_neigh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>coords</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>desc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_descriptor_1_1_descriptor_kind.html#a66290031336873901373fca47c591bfc">Descriptor::DescriptorKind</a>.</p>
+
+</div>
+</div>
+<a id="a376fb766a59a57ad54d4838272190d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a376fb766a59a57ad54d4838272190d83">&#9670;&nbsp;</a></span>compute_bi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::compute_bi </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19d4bba4f3ce018abdadf98f2d2f3ac7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19d4bba4f3ce018abdadf98f2d2f3ac7">&#9670;&nbsp;</a></span>compute_dsfac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Bispectrum::compute_dsfac </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rcut_in</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf33c191391298232ca1420767ea218f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf33c191391298232ca1420767ea218f">&#9670;&nbsp;</a></span>compute_sfac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Bispectrum::compute_sfac </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rcut_in</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a166155145a31e6d9f1f760ec3901a3ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a166155145a31e6d9f1f760ec3901a3ed">&#9670;&nbsp;</a></span>compute_ui()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::compute_ui </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>jnum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a74d1e88d8b03c7b495f3cecd27011a2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74d1e88d8b03c7b495f3cecd27011a2c">&#9670;&nbsp;</a></span>compute_zi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::compute_zi </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b216fedca5742a24a14a60c1e1d6b5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b216fedca5742a24a14a60c1e1d6b5b">&#9670;&nbsp;</a></span>copy_bi2bvec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::copy_bi2bvec </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0edf108ac0a069bfb96fb2d3ccad3eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0edf108ac0a069bfb96fb2d3ccad3eef">&#9670;&nbsp;</a></span>grow_rij()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::grow_rij </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>newnmax</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa4058c6f4de3529da3e475608b057e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa4058c6f4de3529da3e475608b057e6">&#9670;&nbsp;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9c74c863fa29b24f5f4be85ee645a8b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c74c863fa29b24f5f4be85ee645a8b4">&#9670;&nbsp;</a></span>initFromFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::initFromFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>file_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a840c5cc6fc7b126133e91a25ab1e4250"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840c5cc6fc7b126133e91a25ab1e4250">&#9670;&nbsp;</a></span>memory_usage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Bispectrum::memory_usage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2d133cf619338e4f309e4a34353f08d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d133cf619338e4f309e4a34353f08d1">&#9670;&nbsp;</a></span>set_cutoff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::set_cutoff </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>Nspecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const *&#160;</td>
+          <td class="paramname"><em>rcuts_in</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a87828af11bc33892ee39708853683705"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87828af11bc33892ee39708853683705">&#9670;&nbsp;</a></span>set_species()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::set_species </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_species_</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaf857096f976de996e9999fb0e73bbc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf857096f976de996e9999fb0e73bbc0">&#9670;&nbsp;</a></span>set_weight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bispectrum::set_weight </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Nspecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const *&#160;</td>
+          <td class="paramname"><em>weight_in</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a345ebc04953cd9582932f00eaeb45fe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a345ebc04953cd9582932f00eaeb45fe3">&#9670;&nbsp;</a></span>bvec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; Bispectrum::bvec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5757b74f8d7bc05c04140978adee7eb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5757b74f8d7bc05c04140978adee7eb3">&#9670;&nbsp;</a></span>dbvec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; Bispectrum::dbvec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d3543c724fa680e58c9be2c59db2fd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d3543c724fa680e58c9be2c59db2fd4">&#9670;&nbsp;</a></span>diagonalstyle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Bispectrum::diagonalstyle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5f3f61709a1a6b0df382ae7e2db2e89c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f3f61709a1a6b0df382ae7e2db2e89c">&#9670;&nbsp;</a></span>inside</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;int&gt; Bispectrum::inside</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c04121318a58f7128a7990d5edfd213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c04121318a58f7128a7990d5edfd213">&#9670;&nbsp;</a></span>ncoeff</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Bispectrum::ncoeff</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2648c603d5f8aebd068a97f893a8e4cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2648c603d5f8aebd068a97f893a8e4cc">&#9670;&nbsp;</a></span>nmax</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Bispectrum::nmax</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a740e530407d803be0d2d4ebde55c3ee4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a740e530407d803be0d2d4ebde55c3ee4">&#9670;&nbsp;</a></span>rcutij</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; Bispectrum::rcutij</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a90f3d21d3d47770aee4fb718fa6bc05e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90f3d21d3d47770aee4fb718fa6bc05e">&#9670;&nbsp;</a></span>rij</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; Bispectrum::rij</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0dc8e84ebe190b9f46d02ff6333a57e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dc8e84ebe190b9f46d02ff6333a57e2">&#9670;&nbsp;</a></span>twojmax</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Bispectrum::twojmax</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b8679b6d1357651e814ba956c195d60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b8679b6d1357651e814ba956c195d60">&#9670;&nbsp;</a></span>uarray_i</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array3_d.html">Array3D</a>&lt;double&gt; Bispectrum::uarray_i</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cf31d8dfe1a758e174f7c19be285d92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cf31d8dfe1a758e174f7c19be285d92">&#9670;&nbsp;</a></span>uarray_r</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array3_d.html">Array3D</a>&lt;double&gt; Bispectrum::uarray_r</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4668345ede66136c8ede7023e267efe0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4668345ede66136c8ede7023e267efe0">&#9670;&nbsp;</a></span>uarraytot_i</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array3_d.html">Array3D</a>&lt;double&gt; Bispectrum::uarraytot_i</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a503c38a910c27d1734cd61e85f617c20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a503c38a910c27d1734cd61e85f617c20">&#9670;&nbsp;</a></span>uarraytot_r</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array3_d.html">Array3D</a>&lt;double&gt; Bispectrum::uarraytot_r</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32f35624d72ce44814eba1ebe864b880"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32f35624d72ce44814eba1ebe864b880">&#9670;&nbsp;</a></span>wj</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; Bispectrum::wj</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f89fb1790346eb2723009d591b14069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f89fb1790346eb2723009d591b14069">&#9670;&nbsp;</a></span>zarray_i</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array5_d.html">Array5D</a>&lt;double&gt; Bispectrum::zarray_i</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b8ccf02fa4dca797a4da9592fa865f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b8ccf02fa4dca797a4da9592fa865f4">&#9670;&nbsp;</a></span>zarray_r</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array5_d.html">Array5D</a>&lt;double&gt; Bispectrum::zarray_r</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/home/amit/Projects/COLABFIT/colabfit-kim-model/colabfit-descriptor-library/Bispectrum/<a class="el" href="_bispectrum_8hpp_source.html">Bispectrum.hpp</a></li>
+<li>/home/amit/Projects/COLABFIT/colabfit-kim-model/colabfit-descriptor-library/Bispectrum/<a class="el" href="_bispectrum_8cpp.html">Bispectrum.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_bispectrum.html">Bispectrum</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

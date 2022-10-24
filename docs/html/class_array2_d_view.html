@@ -1,0 +1,770 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>KIM Descriptor Library: Array2DView&lt; DataType &gt; Class Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/ipcamit/colabfit-descriptor-library" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">KIM Descriptor Library
+   </div>
+   <div id="projectbrief">A fully automatic-differentiated high-performance descriptor library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('class_array2_d_view.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_array2_d_view-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">Array2DView&lt; DataType &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="helper_8hpp_source.html">helper.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view_1_1j__operator.html">j_operator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">To provide 2-dimensional array access semantics, operator[] has to return a reference to a 1D vector, which has to have its own operator[] which returns a reference to the element.  <a href="class_array2_d_view_1_1j__operator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a3a413454640f4d5fdd7cf6ec14f0f4a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a3a413454640f4d5fdd7cf6ec14f0f4a1">Array2DView</a> (std::size_t const extentZero, std::size_t const extentOne, DataType *array)</td></tr>
+<tr class="memdesc:a3a413454640f4d5fdd7cf6ec14f0f4a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_array2_d_view.html">Array2DView</a> object.  <a href="class_array2_d_view.html#a3a413454640f4d5fdd7cf6ec14f0f4a1">More...</a><br /></td></tr>
+<tr class="separator:a3a413454640f4d5fdd7cf6ec14f0f4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a085bd9021a21abcc17b8959f7243f066"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a085bd9021a21abcc17b8959f7243f066">Array2DView</a> (std::size_t const extentZero, std::size_t const extentOne, DataType const *array)</td></tr>
+<tr class="separator:a085bd9021a21abcc17b8959f7243f066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34fcae99cbe5b980357e2392f1e05f32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a34fcae99cbe5b980357e2392f1e05f32">Array2DView</a> (<a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt; const &amp;other)</td></tr>
+<tr class="memdesc:a34fcae99cbe5b980357e2392f1e05f32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_array2_d_view.html">Array2DView</a> object Copy constructor. Constructs the container with the copy of the contents of other.  <a href="class_array2_d_view.html#a34fcae99cbe5b980357e2392f1e05f32">More...</a><br /></td></tr>
+<tr class="separator:a34fcae99cbe5b980357e2392f1e05f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e683ef288a26530802dca77701da8c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a9e683ef288a26530802dca77701da8c6">~Array2DView</a> ()</td></tr>
+<tr class="memdesc:a9e683ef288a26530802dca77701da8c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_array2_d.html" title="A 2-dimensional STL like container that encapsulates dynamic size arrays with a 2-dimensional shape i...">Array2D</a> object.  <a href="class_array2_d_view.html#a9e683ef288a26530802dca77701da8c6">More...</a><br /></td></tr>
+<tr class="separator:a9e683ef288a26530802dca77701da8c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93fe68f1f57b018ba74934eb3b2c2f2c"><td class="memItemLeft" align="right" valign="top">const DataType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a93fe68f1f57b018ba74934eb3b2c2f2c">data</a> () const noexcept</td></tr>
+<tr class="memdesc:a93fe68f1f57b018ba74934eb3b2c2f2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to the underlying array serving as element storage.  <a href="class_array2_d_view.html#a93fe68f1f57b018ba74934eb3b2c2f2c">More...</a><br /></td></tr>
+<tr class="separator:a93fe68f1f57b018ba74934eb3b2c2f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9467f9e2cd8565e291e702a66fab45e"><td class="memItemLeft" align="right" valign="top">DataType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#aa9467f9e2cd8565e291e702a66fab45e">data</a> () noexcept</td></tr>
+<tr class="separator:aa9467f9e2cd8565e291e702a66fab45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ebf282ba47f438ead812baea159f598"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_array1_d_view.html">Array1DView</a>&lt; DataType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a1ebf282ba47f438ead812baea159f598">data_1D</a> (int i)</td></tr>
+<tr class="separator:a1ebf282ba47f438ead812baea159f598"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a728f6042f40ff849b0ba3f10ddf1fef6"><td class="memItemLeft" align="right" valign="top">const DataType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a728f6042f40ff849b0ba3f10ddf1fef6">operator()</a> (int i, int j) const</td></tr>
+<tr class="memdesc:a728f6042f40ff849b0ba3f10ddf1fef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the element at specified location <b></b>(i, j). No bounds checking is performed.  <a href="class_array2_d_view.html#a728f6042f40ff849b0ba3f10ddf1fef6">More...</a><br /></td></tr>
+<tr class="separator:a728f6042f40ff849b0ba3f10ddf1fef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35f008c571275e1b667464b9b9f4ba77"><td class="memItemLeft" align="right" valign="top">DataType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a35f008c571275e1b667464b9b9f4ba77">operator()</a> (int i, int j)</td></tr>
+<tr class="separator:a35f008c571275e1b667464b9b9f4ba77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eb7bbfe8af6db5f11da7b93daf71af9"><td class="memItemLeft" align="right" valign="top">const DataType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a6eb7bbfe8af6db5f11da7b93daf71af9">at</a> (int i, int j) const</td></tr>
+<tr class="memdesc:a6eb7bbfe8af6db5f11da7b93daf71af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the element at specified location <b></b>(i, j) , with bounds checking.  <a href="class_array2_d_view.html#a6eb7bbfe8af6db5f11da7b93daf71af9">More...</a><br /></td></tr>
+<tr class="separator:a6eb7bbfe8af6db5f11da7b93daf71af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d8069d3e5f88c5eaefd65a385a4dd6"><td class="memItemLeft" align="right" valign="top">DataType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a97d8069d3e5f88c5eaefd65a385a4dd6">at</a> (int i, int j)</td></tr>
+<tr class="separator:a97d8069d3e5f88c5eaefd65a385a4dd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5e43fda220c0ecdf732d677e393caea"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_array2_d_view_1_1j__operator.html">j_operator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#af5e43fda220c0ecdf732d677e393caea">operator[]</a> (int i) const</td></tr>
+<tr class="memdesc:af5e43fda220c0ecdf732d677e393caea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide array-like access and returns the element at specified location <b></b>[i][j]. No bounds checking is performed.  <a href="class_array2_d_view.html#af5e43fda220c0ecdf732d677e393caea">More...</a><br /></td></tr>
+<tr class="separator:af5e43fda220c0ecdf732d677e393caea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a5586d82cc6573ef6ada96327a5d7dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_array2_d_view_1_1j__operator.html">j_operator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a2a5586d82cc6573ef6ada96327a5d7dc">operator[]</a> (int i)</td></tr>
+<tr class="separator:a2a5586d82cc6573ef6ada96327a5d7dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2e71fd3eb38f7fcf118bce63fcb7cb4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a2e71fd3eb38f7fcf118bce63fcb7cb4f">_range_check</a> (int _n, std::size_t tsize) const</td></tr>
+<tr class="memdesc:a2e71fd3eb38f7fcf118bce63fcb7cb4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the index range based on input size.  <a href="class_array2_d_view.html#a2e71fd3eb38f7fcf118bce63fcb7cb4f">More...</a><br /></td></tr>
+<tr class="separator:a2e71fd3eb38f7fcf118bce63fcb7cb4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a8f2e891369f696c00eddfdffe0836d88"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a8f2e891369f696c00eddfdffe0836d88">_extentZero</a></td></tr>
+<tr class="separator:a8f2e891369f696c00eddfdffe0836d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abce0e364aa1395ab275b81ba289dc5a5"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#abce0e364aa1395ab275b81ba289dc5a5">_extentOne</a></td></tr>
+<tr class="separator:abce0e364aa1395ab275b81ba289dc5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a815e1319e0cc4c42c8f9e859d199ab2a"><td class="memItemLeft" align="right" valign="top">DataType *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array2_d_view.html#a815e1319e0cc4c42c8f9e859d199ab2a">m</a></td></tr>
+<tr class="separator:a815e1319e0cc4c42c8f9e859d199ab2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3a413454640f4d5fdd7cf6ec14f0f4a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a413454640f4d5fdd7cf6ec14f0f4a1">&#9670;&nbsp;</a></span>Array2DView() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::<a class="el" href="class_array2_d_view.html">Array2DView</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t const&#160;</td>
+          <td class="paramname"><em>extentZero</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t const&#160;</td>
+          <td class="paramname"><em>extentOne</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DataType *&#160;</td>
+          <td class="paramname"><em>array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="class_array2_d_view.html">Array2DView</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">extentZero</td><td>The extent of the container in the 1st mode </td></tr>
+    <tr><td class="paramname">extentOne</td><td>The extent of the container in the 2nd mode </td></tr>
+    <tr><td class="paramname">array</td><td>The array of data to set the pointer of the container to it. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a085bd9021a21abcc17b8959f7243f066"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a085bd9021a21abcc17b8959f7243f066">&#9670;&nbsp;</a></span>Array2DView() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::<a class="el" href="class_array2_d_view.html">Array2DView</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t const&#160;</td>
+          <td class="paramname"><em>extentZero</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t const&#160;</td>
+          <td class="paramname"><em>extentOne</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DataType const *&#160;</td>
+          <td class="paramname"><em>array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34fcae99cbe5b980357e2392f1e05f32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34fcae99cbe5b980357e2392f1e05f32">&#9670;&nbsp;</a></span>Array2DView() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::<a class="el" href="class_array2_d_view.html">Array2DView</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="class_array2_d_view.html">Array2DView</a> object Copy constructor. Constructs the container with the copy of the contents of other. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Another container to be used as source to initialize the elements of the container with </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9e683ef288a26530802dca77701da8c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e683ef288a26530802dca77701da8c6">&#9670;&nbsp;</a></span>~Array2DView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::~<a class="el" href="class_array2_d_view.html">Array2DView</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroy the <a class="el" href="class_array2_d.html" title="A 2-dimensional STL like container that encapsulates dynamic size arrays with a 2-dimensional shape i...">Array2D</a> object. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2e71fd3eb38f7fcf118bce63fcb7cb4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e71fd3eb38f7fcf118bce63fcb7cb4f">&#9670;&nbsp;</a></span>_range_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::_range_check </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>_n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>tsize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check the index range based on input size. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_n</td><td>Index </td></tr>
+    <tr><td class="paramname">tsize</td><td>Input size </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a97d8069d3e5f88c5eaefd65a385a4dd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97d8069d3e5f88c5eaefd65a385a4dd6">&#9670;&nbsp;</a></span>at() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DataType &amp; <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6eb7bbfe8af6db5f11da7b93daf71af9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eb7bbfe8af6db5f11da7b93daf71af9">&#9670;&nbsp;</a></span>at() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DataType <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the element at specified location <b></b>(i, j) , with bounds checking. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Position of the element in the 1st mode </td></tr>
+    <tr><td class="paramname">j</td><td>Position of the element in the 2nd mode</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>const DataType The requested element. </dd></dl>
+
+</div>
+</div>
+<a id="a93fe68f1f57b018ba74934eb3b2c2f2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93fe68f1f57b018ba74934eb3b2c2f2c">&#9670;&nbsp;</a></span>data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DataType * <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::data</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns pointer to the underlying array serving as element storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>DataType* </dd></dl>
+
+</div>
+</div>
+<a id="aa9467f9e2cd8565e291e702a66fab45e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9467f9e2cd8565e291e702a66fab45e">&#9670;&nbsp;</a></span>data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType  = double&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DataType* <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ebf282ba47f438ead812baea159f598"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ebf282ba47f438ead812baea159f598">&#9670;&nbsp;</a></span>data_1D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array1_d_view.html">Array1DView</a>&lt; DataType &gt; <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::data_1D </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35f008c571275e1b667464b9b9f4ba77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f008c571275e1b667464b9b9f4ba77">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DataType &amp; <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a728f6042f40ff849b0ba3f10ddf1fef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a728f6042f40ff849b0ba3f10ddf1fef6">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DataType <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the element at specified location <b></b>(i, j). No bounds checking is performed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Position of the element in the 1st mode </td></tr>
+    <tr><td class="paramname">j</td><td>Position of the element in the 2nd mode</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>const DataType The requested element. </dd></dl>
+
+</div>
+</div>
+<a id="a2a5586d82cc6573ef6ada96327a5d7dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a5586d82cc6573ef6ada96327a5d7dc">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::<a class="el" href="class_array2_d_view_1_1j__operator.html">j_operator</a> <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af5e43fda220c0ecdf732d677e393caea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5e43fda220c0ecdf732d677e393caea">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::<a class="el" href="class_array2_d_view_1_1j__operator.html">j_operator</a> <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Provide array-like access and returns the element at specified location <b></b>[i][j]. No bounds checking is performed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Position of the element in the 1st mode </td></tr>
+    <tr><td class="paramname">j</td><td>Position of the element in the 2nd mode</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>const DataType The requested element.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>To provide multidimensional array access semantics, we are using multiple overloads for<div class="fragment"><div class="line"><span class="keyword">operator</span>[] </div>
+</div><!-- fragment --> . For speed one should avoid this complexity, uses<div class="fragment"><div class="line">operator() </div>
+</div><!-- fragment --> as<div class="fragment"><div class="line">(i, j) </div>
+</div><!-- fragment --> directly. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="abce0e364aa1395ab275b81ba289dc5a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abce0e364aa1395ab275b81ba289dc5a5">&#9670;&nbsp;</a></span>_extentOne</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType  = double&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::_extentOne</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The extent of the container in the 2nd mode </p>
+
+</div>
+</div>
+<a id="a8f2e891369f696c00eddfdffe0836d88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f2e891369f696c00eddfdffe0836d88">&#9670;&nbsp;</a></span>_extentZero</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType  = double&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::_extentZero</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The extent of the container in the 1st mode </p>
+
+</div>
+</div>
+<a id="a815e1319e0cc4c42c8f9e859d199ab2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a815e1319e0cc4c42c8f9e859d199ab2a">&#9670;&nbsp;</a></span>m</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class DataType  = double&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DataType* const <a class="el" href="class_array2_d_view.html">Array2DView</a>&lt; DataType &gt;::m</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Data pointer </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/home/amit/Projects/COLABFIT/colabfit-kim-model/colabfit-descriptor-library/<a class="el" href="helper_8hpp_source.html">helper.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_array2_d_view.html">Array2DView</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

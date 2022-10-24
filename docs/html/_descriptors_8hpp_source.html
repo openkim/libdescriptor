@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>KIM Descriptor Library: /home/amit/Projects/COLABFIT/colabfit-kim-model/colabfit-descriptor-library/Descriptors.hpp Source File</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/ipcamit/colabfit-descriptor-library" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">KIM Descriptor Library
+   </div>
+   <div id="projectbrief">A fully automatic-differentiated high-performance descriptor library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_descriptors_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">/home/amit/Projects/COLABFIT/colabfit-kim-model/colabfit-descriptor-library/Descriptors.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_descriptors_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Generic header for inclusion and library design</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#ifndef __DESCRIPTOR_HPP_</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define __DESCRIPTOR_HPP_</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespace_descriptor.html">   11</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_descriptor.html">Descriptor</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">   12</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a> {</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9aaa67445641339be62ca146a53940172ca">   13</a></span>&#160;        <a class="code" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9aaa67445641339be62ca146a53940172ca">KindSymmetryFunctions</a>, <a class="code" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9aa2bfc2a2e685077fc6d3c5159e13beeb2">KindBispectrum</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    };</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">class </span>DescriptorKind;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// TODO</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//    void fwd_diff(int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int * /* number_of_neigh_list */,</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//                  double * /* coordinates */, double * /* d_coordinates */, double * /* zeta */,</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//                  double * /* dE_dzeta */, DescriptorKind * /* DescriptorKind to diff */);</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_descriptor.html#a2527fe7b5abde9a6e693d31d2f104da7">gradient</a>(<span class="keywordtype">int</span> <span class="comment">/* n_atoms */</span>, <span class="keywordtype">int</span> * <span class="comment">/* Z */</span>, <span class="keywordtype">int</span> * <span class="comment">/* neighbor list */</span>, <span class="keywordtype">int</span> * <span class="comment">/* number_of_neigh_list */</span>,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                  <span class="keywordtype">double</span> * <span class="comment">/* coordinates */</span>, <span class="keywordtype">double</span> * <span class="comment">/* d_coordinates */</span>, <span class="keywordtype">double</span> * <span class="comment">/* zeta */</span>,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                  <span class="keywordtype">double</span> * <span class="comment">/* dE_dzeta */</span>, DescriptorKind * <span class="comment">/* DescriptorKind to diff */</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_descriptor.html#a3a7acc80efda4b2dd93b3d2378abe7cf">gradient_single_atom</a>(<span class="keywordtype">int</span>, <span class="keywordtype">int</span> <span class="comment">/* n_atoms */</span>, <span class="keywordtype">int</span> * <span class="comment">/* Z */</span>, <span class="keywordtype">int</span> * <span class="comment">/* neighbor list */</span>, <span class="keywordtype">int</span> <span class="comment">/* number_of_neigh_list */</span>,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                  <span class="keywordtype">double</span> * <span class="comment">/* coordinates */</span>, <span class="keywordtype">double</span> * <span class="comment">/* d_coordinates */</span>, <span class="keywordtype">double</span> * <span class="comment">/* zeta */</span>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                  <span class="keywordtype">double</span> * <span class="comment">/* dE_dzeta */</span>, DescriptorKind * <span class="comment">/* DescriptorKind to diff */</span>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// TODO</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//    void jacobian(int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int * /* number_of_neigh_list */,</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//                  double * /* coordinates */, double * /* d_coordinates */, double * /* zeta */,</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//                  double * /* dzeta_dr */, DescriptorKind * /* DescriptorKind to diff */);</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_descriptor.html#aa67673d61a5ee4612a648d7a78a70c03">compute</a>(<span class="keywordtype">int</span> <span class="comment">/* n_atoms */</span>, <span class="keywordtype">int</span> * <span class="comment">/* Z */</span>, <span class="keywordtype">int</span> * <span class="comment">/* neighbor list */</span>, <span class="keywordtype">int</span> * <span class="comment">/* number_of_neigh_list */</span>,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                 <span class="keywordtype">double</span> * <span class="comment">/* coordinates */</span>, <span class="keywordtype">double</span> * <span class="comment">/* zeta */</span>,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                 DescriptorKind * <span class="comment">/* DescriptorKind to diff */</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_descriptor.html#a8b0d81ba23e21391a021dd196ae7fb1b">compute_single_atom</a>(<span class="keywordtype">int</span>,  <span class="keywordtype">int</span> <span class="comment">/* n_atoms */</span>, <span class="keywordtype">int</span> * <span class="comment">/* Z */</span>, <span class="keywordtype">int</span> * <span class="comment">/* neighbor list */</span>, <span class="keywordtype">int</span> <span class="comment">/* number_of_neigh_list */</span>,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                 <span class="keywordtype">double</span> * <span class="comment">/* coordinates */</span>, <span class="keywordtype">double</span> * <span class="comment">/* zeta */</span>,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                 DescriptorKind * <span class="comment">/* DescriptorKind to diff */</span>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_descriptor_1_1_descriptor_kind.html">   43</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// Base class for all descriptors</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// This will be the parent class for all descriptors. To ensure compatibility with</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// Enzyme, class members and datastructures will be kept simple. Structures like lists</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">// of lists are excruciatingly slow to compile through using enzyme. Enzyme plays well with</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// more C-like code</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_descriptor_1_1_descriptor_kind.html#afa467126385a5c9fe79c8683f2b1e8e4">   50</a></span>&#160;    <a class="code" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a> <a class="code" href="class_descriptor_1_1_descriptor_kind.html#afa467126385a5c9fe79c8683f2b1e8e4">descriptor_kind</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_descriptor_1_1_descriptor_kind.html#adbd741576569904305d0b2c7f28331ed">   51</a></span>&#160;    std::string <a class="code" href="class_descriptor_1_1_descriptor_kind.html#adbd741576569904305d0b2c7f28331ed">descriptor_param_file</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_descriptor_1_1_descriptor_kind.html#a00f9d9e1a5b9f92383d241cdd6906b8a">   52</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_descriptor_1_1_descriptor_kind.html#a00f9d9e1a5b9f92383d241cdd6906b8a">width</a>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_descriptor_1_1_descriptor_kind.html#ab8724562546a63951f935a43402199e8">DescriptorKind</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *<a class="code" href="class_descriptor_1_1_descriptor_kind.html#a7f01a8754e402de8ef5b7f74e669d084">initDescriptor</a>(<a class="code" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *<a class="code" href="class_descriptor_1_1_descriptor_kind.html#a7f01a8754e402de8ef5b7f74e669d084">initDescriptor</a>(std::string &amp;<span class="comment">/* Filename */</span>,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                          <a class="code" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a> <span class="comment">/* Descriptor kind */</span>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_descriptor_1_1_descriptor_kind.html#a66290031336873901373fca47c591bfc">compute</a>(<span class="keywordtype">int</span> <span class="comment">/* index */</span>,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                         <span class="keywordtype">int</span> <span class="comment">/* n_atoms */</span>,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                         <span class="keywordtype">int</span> * <span class="comment">/* Z */</span>,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                         <span class="keywordtype">int</span> * <span class="comment">/* neighbor lists */</span>,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                         <span class="keywordtype">int</span>  <span class="comment">/* number of neighbors */</span>,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                         <span class="keywordtype">double</span> * <span class="comment">/* coordinates */</span>,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                         <span class="keywordtype">double</span> * <span class="comment">/* zeta */</span>) = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// virtual void clone_empty(DescriptorKind * descriptorKind){};</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// TODO: Cant make it virtual, enzyme segfaults. But every class must have</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// empty constructor to differentiate against</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="class_descriptor_1_1_descriptor_kind.html#a65e8012e117f042ea0f41a833df48c2c">~DescriptorKind</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif // __DESCRIPTOR_HPP_</span></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="anamespace_descriptor_html_a8b0d81ba23e21391a021dd196ae7fb1b"><div class="ttname"><a href="namespace_descriptor.html#a8b0d81ba23e21391a021dd196ae7fb1b">Descriptor::compute_single_atom</a></div><div class="ttdeci">void compute_single_atom(int, int, int *, int *, int, double *, double *, DescriptorKind *)</div><div class="ttdef"><b>Definition:</b> Descriptors.cpp:142</div></div>
+<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html_a66290031336873901373fca47c591bfc"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html#a66290031336873901373fca47c591bfc">Descriptor::DescriptorKind::compute</a></div><div class="ttdeci">virtual void compute(int, int, int *, int *, int, double *, double *)=0</div></div>
+<div class="ttc" id="anamespace_descriptor_html_a2527fe7b5abde9a6e693d31d2f104da7"><div class="ttname"><a href="namespace_descriptor.html#a2527fe7b5abde9a6e693d31d2f104da7">Descriptor::gradient</a></div><div class="ttdeci">void gradient(int, int *, int *, int *, double *, double *, double *, double *, DescriptorKind *)</div><div class="ttdef"><b>Definition:</b> Descriptors.cpp:97</div></div>
+<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html_ab8724562546a63951f935a43402199e8"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html#ab8724562546a63951f935a43402199e8">Descriptor::DescriptorKind::DescriptorKind</a></div><div class="ttdeci">DescriptorKind()=default</div></div>
+<div class="ttc" id="anamespace_descriptor_html_a2415ec0ae21efc317acf3d49abe6ed9aaa67445641339be62ca146a53940172ca"><div class="ttname"><a href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9aaa67445641339be62ca146a53940172ca">Descriptor::KindSymmetryFunctions</a></div><div class="ttdeci">@ KindSymmetryFunctions</div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:13</div></div>
+<div class="ttc" id="anamespace_descriptor_html_a2415ec0ae21efc317acf3d49abe6ed9aa2bfc2a2e685077fc6d3c5159e13beeb2"><div class="ttname"><a href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9aa2bfc2a2e685077fc6d3c5159e13beeb2">Descriptor::KindBispectrum</a></div><div class="ttdeci">@ KindBispectrum</div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:13</div></div>
+<div class="ttc" id="anamespace_descriptor_html_a3a7acc80efda4b2dd93b3d2378abe7cf"><div class="ttname"><a href="namespace_descriptor.html#a3a7acc80efda4b2dd93b3d2378abe7cf">Descriptor::gradient_single_atom</a></div><div class="ttdeci">void gradient_single_atom(int, int, int *, int *, int, double *, double *, double *, double *, DescriptorKind *)</div><div class="ttdef"><b>Definition:</b> Descriptors.cpp:155</div></div>
+<div class="ttc" id="anamespace_descriptor_html_a2415ec0ae21efc317acf3d49abe6ed9a"><div class="ttname"><a href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">Descriptor::AvailableDescriptor</a></div><div class="ttdeci">AvailableDescriptor</div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:12</div></div>
+<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:43</div></div>
+<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html_a65e8012e117f042ea0f41a833df48c2c"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html#a65e8012e117f042ea0f41a833df48c2c">Descriptor::DescriptorKind::~DescriptorKind</a></div><div class="ttdeci">~DescriptorKind()</div></div>
+<div class="ttc" id="anamespace_descriptor_html_aa67673d61a5ee4612a648d7a78a70c03"><div class="ttname"><a href="namespace_descriptor.html#aa67673d61a5ee4612a648d7a78a70c03">Descriptor::compute</a></div><div class="ttdeci">void compute(int, int *, int *, int *, double *, double *, DescriptorKind *)</div><div class="ttdef"><b>Definition:</b> Descriptors.cpp:80</div></div>
+<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html_a00f9d9e1a5b9f92383d241cdd6906b8a"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html#a00f9d9e1a5b9f92383d241cdd6906b8a">Descriptor::DescriptorKind::width</a></div><div class="ttdeci">int width</div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:52</div></div>
+<div class="ttc" id="anamespace_descriptor_html"><div class="ttname"><a href="namespace_descriptor.html">Descriptor</a></div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:11</div></div>
+<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html_a7f01a8754e402de8ef5b7f74e669d084"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html#a7f01a8754e402de8ef5b7f74e669d084">Descriptor::DescriptorKind::initDescriptor</a></div><div class="ttdeci">static DescriptorKind * initDescriptor(AvailableDescriptor)</div><div class="ttdef"><b>Definition:</b> Descriptors.cpp:67</div></div>
+<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html_afa467126385a5c9fe79c8683f2b1e8e4"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html#afa467126385a5c9fe79c8683f2b1e8e4">Descriptor::DescriptorKind::descriptor_kind</a></div><div class="ttdeci">AvailableDescriptor descriptor_kind</div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:50</div></div>
+<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html_adbd741576569904305d0b2c7f28331ed"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html#adbd741576569904305d0b2c7f28331ed">Descriptor::DescriptorKind::descriptor_param_file</a></div><div class="ttdeci">std::string descriptor_param_file</div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:51</div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="_descriptors_8hpp.html">Descriptors.hpp</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>
