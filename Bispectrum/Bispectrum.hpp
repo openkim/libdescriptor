@@ -102,8 +102,8 @@ private:
 public:
     int ncoeff;
     std::vector<double> bvec;
-    std::vector<double> dbvec;
-    std::vector<double> rij;
+    Array2D<double> dbvec;
+    Array2D<double> rij;
     std::vector<int> inside;
     std::vector<double> wj;
     std::vector<double> rcutij;
@@ -126,7 +126,7 @@ public:
 
 private:
     int n_species;
-    std::vector<double> rcuts;
+    Array2D<double> rcuts;
     std::vector<double> wjelem;
     double rmin0;
     double rfac0;

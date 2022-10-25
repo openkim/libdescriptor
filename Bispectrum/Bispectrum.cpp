@@ -30,7 +30,7 @@ Bispectrum::Bispectrum(double const rfac0_in,
                        double const rmin0_in,
                        int const switch_flag_in,
                        int const bzero_flag_in) :
-        nmax(0),
+        nmax(15),// TODO Fixed nmax, modify it after enzyme bugfix
         twojmax(twojmax_in),
         diagonalstyle(diagonalstyle_in),
         rmin0(rmin0_in),
@@ -57,6 +57,8 @@ Bispectrum::Bispectrum(double const rfac0_in,
     build_indexlist();
 
     init();
+
+    grow_rij(nmax);
 }
 
 Bispectrum::~Bispectrum() {}
@@ -191,16 +193,32 @@ double Bispectrum::memory_usage() {
     return bytes;
 }
 
-void Bispectrum::grow_rij(int const newnmax) {
-    if (newnmax > nmax) {
-        nmax = newnmax;
+//void Bispectrum::grow_rij(int const newnmax) {
+//    if (newnmax > nmax) {
+//        nmax = newnmax;
+//
+//        if (!use_shared_arrays) {
+//                rij.resize(nmax * 3, 0.0);
+//                inside.resize(nmax, 0);
+//                wj.resize(nmax, 0.0);
+//                rcutij.resize(nmax, 0.0);
+//        }
+//    }
+//}
 
-        if (!use_shared_arrays) {
-                rij.resize(nmax * 3, 0.0);
-                inside.resize(nmax, 0);
-                wj.resize(nmax, 0.0);
-                rcutij.resize(nmax, 0.0);
-        }
+void Bispectrum::grow_rij(int const newnmax) {
+    if (newnmax <= nmax) { return; }
+
+    nmax = newnmax;
+
+    if (!use_shared_arrays) {
+        // 2D
+        rij.resize(nmax, 3);
+
+        // 1D
+        inside.resize(nmax, 0);
+        wj.resize(nmax, static_cast<double>(0));
+        rcutij.resize(nmax, static_cast<double>(0));
     }
 }
 
@@ -217,6 +235,7 @@ void Bispectrum::compute(int const index,
     int const *const ilist = neigh_list;
     int const iSpecies = species[index];
 
+    // grow_rij removed for enzyme
     // insure rij, inside, wj, and rcutij are of size jnum
 
     // rij[, 3] = displacements between atom I and those neighbors
@@ -243,14 +262,19 @@ void Bispectrum::compute(int const index,
                 = rvec[0] * rvec[0] + rvec[1] * rvec[1] + rvec[2] * rvec[2];
         double const rmag = std::sqrt(rsq);
 
-        if (rmag < rcuts[iSpecies * n_species + jSpecies] && rmag > 1e-10) {
-            rij[ninside * 3 + 0] = rvec[0];
-            rij[ninside * 3 + 1] = rvec[1];
-            rij[ninside * 3 + 2] = rvec[2];
+        // if (rmag < rcuts[iSpecies * n_species + jSpecies] && rmag > 1e-10) {
+        if (rmag < rcuts(iSpecies, jSpecies) && rmag > 1e-10) {
+            // rij[ninside * 3 + 0] = rvec[0];
+            // rij[ninside * 3 + 1] = rvec[1];
+            // rij[ninside * 3 + 2] = rvec[2];
+            rij(ninside, 0) = rvec[0];
+            rij(ninside, 1) = rvec[1];
+            rij(ninside, 2) = rvec[2];
 
             inside[ninside] = j;
             wj[ninside] = wjelem[jSpecies];
-            rcutij[ninside] = rcuts[iSpecies * n_species  + jSpecies];
+            // rcutij[ninside] = rcuts[iSpecies * n_species  + jSpecies];
+             rcutij[ninside] = rcuts(iSpecies, jSpecies);
 
             ninside++;
         }
@@ -292,9 +316,13 @@ void Bispectrum::compute_ui(int const jnum) {
     double theta0;
 
     for (int j = 0; j < jnum; ++j) {
-        x = rij[j * 3 + 0];
-        y = rij[j * 3 + 1];
-        z = rij[j * 3 + 2];
+        // x = rij[j * 3 + 0];
+        // y = rij[j * 3 + 1];
+        // z = rij[j * 3 + 2];
+
+        x = rij(j, 0);
+        y = rij(j, 1);
+        z = rij(j, 2);
 
         rsq = x * x + y * y + z * z;
         r = std::sqrt(rsq);
