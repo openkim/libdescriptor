@@ -192,18 +192,15 @@ double Bispectrum::memory_usage() {
 }
 
 void Bispectrum::grow_rij(int const newnmax) {
-    if (newnmax <= nmax) { return; }
+    if (newnmax > nmax) {
+        nmax = newnmax;
 
-    nmax = newnmax;
-
-    if (!use_shared_arrays) {
-        // 2D
-        rij.resize(nmax * 3, 0.0);
-
-        // 1D
-        inside.resize(nmax, 0);
-        wj.resize(nmax, 0.0);
-        rcutij.resize(nmax, 0.0);
+        if (!use_shared_arrays) {
+                rij.resize(nmax * 3, 0.0);
+                inside.resize(nmax, 0);
+                wj.resize(nmax, 0.0);
+                rcutij.resize(nmax, 0.0);
+        }
     }
 }
 
@@ -221,7 +218,6 @@ void Bispectrum::compute(int const index,
     int const iSpecies = species[index];
 
     // insure rij, inside, wj, and rcutij are of size jnum
-    grow_rij(number_of_neigh);
 
     // rij[, 3] = displacements between atom I and those neighbors
     // inside = indices of neighbors of I within cutoff
@@ -1046,7 +1042,12 @@ void Bispectrum::initFromFile(std::string &file_name) {
     set_cutoff(cutoff_function.c_str(), n_species, cutoff_matrix);
 
     use_shared_arrays = 0;
-    nmax = 0;
+    nmax = 25; // This value is maximum number of neighbors possible,
+    // Ideally it should be determined at runtime, but enzyme has issues with it
+    // so fixing the upperbound. Would be made an hyper-parameter soon, till
+    // Enzyme people fixes it. TODO
+    grow_rij(nmax);
+
     twojmax = 2 * jmax;
     wself = 1.0;
 
