@@ -376,18 +376,18 @@ void SymmetryFunctions::initFromFile(std::string &file_name) {
 
 void SymmetryFunctions::clone_empty(DescriptorKind *descriptorKind) {
     auto d_sf = dynamic_cast<SymmetryFunctions *>(descriptorKind);
-    this->name_ = d_sf->name_;
-    this->params_ = d_sf->params_;
-    this->rcut_2D_ = d_sf->rcut_2D_;
-    this->has_three_body_ = d_sf->has_three_body_;
-    this->width = d_sf->width;
-    this->num_param_sets_ = d_sf->num_param_sets_;
-    this->num_params_ = d_sf->num_params_;
+    name_ = d_sf->name_;
+    params_ = d_sf->params_;
+    rcut_2D_ = d_sf->rcut_2D_;
+    has_three_body_ = d_sf->has_three_body_;
+    width = d_sf->width;
+    num_param_sets_ = d_sf->num_param_sets_;
+    num_params_ = d_sf->num_params_;
     // set params to zero, to differentiate against
-    for (int i = 0; i < this->name_.size();i++){
-        for(int j = 0; j < this->num_param_sets_[i]; j++){
-            for(int k = 0; k < this->num_params_[i]; k++){
-                this->params_[i](j,k) = 0.0;
+    for (int i = 0; i < name_.size();i++){
+        for(int j = 0; j < num_param_sets_[i]; j++){
+            for(int k = 0; k < num_params_[i]; k++){
+                params_[i](j,k) = 0.0;
             }
         }
     }

@@ -68,7 +68,7 @@ public:
 
     void grow_rij(int newnmax);
 
-    void clone_empty (DescriptorKind * ds);
+    void clone_empty (DescriptorKind * descriptorKind);
 
     void set_species(int n_species_){n_species = n_species_;}
 

@@ -1102,7 +1102,51 @@ void Bispectrum::initFromFile(std::string &file_name) {
     delete[] weights;
 }
 
-void Bispectrum::clone_empty(DescriptorKind *ds) {}
+void Bispectrum::clone_empty(DescriptorKind *descriptorKind) {
+    auto d_bs = dynamic_cast<Bispectrum *>(descriptorKind);
+    nmax = d_bs->nmax;
+    twojmax = d_bs->twojmax;
+    switch_flag = d_bs->switch_flag;
+    bzero_flag = d_bs->bzero_flag;
+    diagonalstyle = d_bs->diagonalstyle;
+    width = d_bs->width;
+    wself = d_bs->wself;
+    use_shared_arrays = d_bs->use_shared_arrays;
+    n_species = d_bs->n_species;
+
+    // To be diffed against
+    rmin0 = 0.0;
+    rfac0 = 0.0;
+    grow_rij(nmax);
+
+    auto weights = new double [n_species];
+    auto cutoff_matrix = new double [n_species * n_species];
+    for(int i = 0; i < n_species; i++){
+        weights[i] = 0;
+        for(int j = 0; j < n_species; j++){
+            cutoff_matrix[i * n_species + j] = 0.0;
+        }
+    }
+
+    //TODO initialize from d_bs
+    std::string cutoff_function = "cos";
+
+    set_weight(n_species, weights);
+    set_cutoff(cutoff_function.c_str(), n_species, cutoff_matrix);
+    ncoeff = compute_ncoeff();
+    create_twojmax_arrays();
+    if (bzero_flag) {
+        double const www = wself * wself * wself;
+        for (int j = 1; j <= twojmax + 1; ++j) { bzero[j] = www * j; }
+    }
+    bvec.resize(ncoeff, static_cast<double>(0));
+    dbvec.resize(ncoeff, 3);
+    build_indexlist();
+    init();
+
+    delete[] cutoff_matrix;
+    delete[] weights;
+}
 
 #undef MY_PI
 #undef DIM
