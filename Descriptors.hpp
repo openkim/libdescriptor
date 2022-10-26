@@ -19,24 +19,24 @@ namespace Descriptor {
 //                  double * /* coordinates */, double * /* d_coordinates */, double * /* zeta */,
 //                  double * /* dE_dzeta */, DescriptorKind * /* DescriptorKind to diff */);
 
-    void gradient(int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int * /* number_of_neigh_list */,
-                  double * /* coordinates */, double * /* d_coordinates */, double * /* zeta */,
-                  double * /* dE_dzeta */, DescriptorKind * /* DescriptorKind to diff */);
-    void gradient_single_atom(int, int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int /* number_of_neigh_list */,
-                  double * /* coordinates */, double * /* d_coordinates */, double * /* zeta */,
-                  double * /* dE_dzeta */, DescriptorKind * /* DescriptorKind to diff */);
+    void gradient(int n_atoms, int *  species, int *  neighbor_list, int *  number_of_neighs,
+                  double *  coordinates, double *  d_coordinates, double *  zeta,
+                  double *  dE_dzeta, DescriptorKind *  descriptor_to_diff);
+    void gradient_single_atom(int index, int  n_atoms, int *  species, int *  neighbor_list, int  number_of_neighs,
+                  double *  coordinates, double *  d_coordinates, double *  zeta,
+                  double *  dE_dzeta, DescriptorKind *  descriptor_to_diff);
 // TODO
-//    void jacobian(int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int * /* number_of_neigh_list */,
-//                  double * /* coordinates */, double * /* d_coordinates */, double * /* zeta */,
-//                  double * /* dzeta_dr */, DescriptorKind * /* DescriptorKind to diff */);
+//    void jacobian(int  n_atoms, int *  species, int *  neighbor_list, int *  number_of_neighs,
+//                  double *  coordinates, double *  d_coordinates, double *  zeta,
+//                  double *  dzeta_dr, DescriptorKind *  descriptor_to_diff);
 
-    void compute(int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int * /* number_of_neigh_list */,
-                 double * /* coordinates */, double * /* zeta */,
-                 DescriptorKind * /* DescriptorKind to diff */);
+    void compute(int  n_atoms, int *  species, int *  neighbor_list, int *  number_of_neighs,
+                 double *  coordinates, double *  zeta,
+                 DescriptorKind *  descriptor_kind);
 
-    void compute_single_atom(int,  int /* n_atoms */, int * /* Z */, int * /* neighbor list */, int /* number_of_neigh_list */,
-                 double * /* coordinates */, double * /* zeta */,
-                 DescriptorKind * /* DescriptorKind to diff */);
+    void compute_single_atom(int index,  int n_atoms, int * species, int * number_of_neighs, int number_of_neigh_list,
+                 double * coordinates, double * zeta,
+                 DescriptorKind * descriptor_kind);
 }
 
 
@@ -55,16 +55,16 @@ public:
 
     static DescriptorKind *initDescriptor(AvailableDescriptor);
 
-    static DescriptorKind *initDescriptor(std::string &/* Filename */,
-                                          AvailableDescriptor /* Descriptor kind */);
+    static DescriptorKind *initDescriptor(std::string & file_name,
+                                          AvailableDescriptor availableDescriptorKind);
 
-    virtual void compute(int /* index */,
-                         int /* n_atoms */,
-                         int * /* Z */,
-                         int * /* neighbor lists */,
-                         int  /* number of neighbors */,
-                         double * /* coordinates */,
-                         double * /* zeta */) = 0;
+    virtual void compute(int index,
+                         int n_atoms,
+                         int * species,
+                         int * neighbor_lists,
+                         int  number_of_neighbors,
+                         double * coordinates,
+                         double * desc) = 0;
 
     // virtual void clone_empty(DescriptorKind * descriptorKind){};
     // TODO: Cant make it virtual, enzyme segfaults. But every class must have

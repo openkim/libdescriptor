@@ -153,7 +153,7 @@ void Descriptor::compute_single_atom(int index,
 
 
 void Descriptor::gradient_single_atom(int index,
-        int n_atoms /* contributing */,
+                            int n_atoms /* contributing */,
                           int *species,
                           int *neighbor_list,
                           int number_of_neighbors,
@@ -181,6 +181,7 @@ void Descriptor::gradient_single_atom(int index,
         }
         case KindBispectrum:{
             auto d_desc_kind = new Bispectrum();
+
             *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
             d_desc_kind->clone_empty(desc_kind);
 

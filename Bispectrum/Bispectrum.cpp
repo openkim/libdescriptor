@@ -207,18 +207,17 @@ double Bispectrum::memory_usage() {
 //}
 
 void Bispectrum::grow_rij(int const newnmax) {
-    if (newnmax <= nmax) { return; }
+    if (newnmax > nmax) {
+        nmax = newnmax;
+        if (!use_shared_arrays) {
+            // 2D
+            rij.resize(nmax, 3);
 
-    nmax = newnmax;
-
-    if (!use_shared_arrays) {
-        // 2D
-        rij.resize(nmax, 3);
-
-        // 1D
-        inside.resize(nmax, 0);
-        wj.resize(nmax, static_cast<double>(0));
-        rcutij.resize(nmax, static_cast<double>(0));
+            // 1D
+            inside.resize(nmax, 0);
+            wj.resize(nmax, static_cast<double>(0));
+            rcutij.resize(nmax, static_cast<double>(0));
+        }
     }
 }
 
@@ -274,12 +273,11 @@ void Bispectrum::compute(int const index,
             inside[ninside] = j;
             wj[ninside] = wjelem[jSpecies];
             // rcutij[ninside] = rcuts[iSpecies * n_species  + jSpecies];
-             rcutij[ninside] = rcuts(iSpecies, jSpecies);
+            rcutij[ninside] = rcuts(iSpecies, jSpecies);
 
             ninside++;
         }
     }
-
     // compute Ui, Zi, and Bi for atom I
     compute_ui(ninside);
     compute_zi();
@@ -287,7 +285,8 @@ void Bispectrum::compute(int const index,
     copy_bi2bvec();
 
     for (int icoeff = 0; icoeff < ncoeff; icoeff++) {
-        desc[index * ncoeff + icoeff] = bvec[icoeff];
+        // Modified as the descriptor location shall not be a concern of compute function
+        desc[icoeff] = bvec[icoeff];
     }
 }
 
@@ -1070,11 +1069,13 @@ void Bispectrum::initFromFile(std::string &file_name) {
     set_cutoff(cutoff_function.c_str(), n_species, cutoff_matrix);
 
     use_shared_arrays = 0;
-    nmax = 25; // This value is maximum number of neighbors possible,
+    // This value is maximum number of neighbors possible,
     // Ideally it should be determined at runtime, but enzyme has issues with it
     // so fixing the upperbound. Would be made an hyper-parameter soon, till
     // Enzyme people fixes it. TODO
-    grow_rij(nmax);
+    nmax = 0;
+    int max_nmax = 25;
+    grow_rij(max_nmax);
 
     twojmax = 2 * jmax;
     wself = 1.0;
@@ -1104,7 +1105,6 @@ void Bispectrum::initFromFile(std::string &file_name) {
 
 void Bispectrum::clone_empty(DescriptorKind *descriptorKind) {
     auto d_bs = dynamic_cast<Bispectrum *>(descriptorKind);
-    nmax = d_bs->nmax;
     twojmax = d_bs->twojmax;
     switch_flag = d_bs->switch_flag;
     bzero_flag = d_bs->bzero_flag;
@@ -1117,7 +1117,9 @@ void Bispectrum::clone_empty(DescriptorKind *descriptorKind) {
     // To be diffed against
     rmin0 = 0.0;
     rfac0 = 0.0;
-    grow_rij(nmax);
+    nmax = 0;
+    int max_nmax = 25;
+    grow_rij(max_nmax);
 
     auto weights = new double [n_species];
     auto cutoff_matrix = new double [n_species * n_species];
