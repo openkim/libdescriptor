@@ -7,18 +7,111 @@
 
 using namespace Descriptor;
 
+/*! \class BISPECTRUM_LOOPINDICES
+ * \brief The structure for the Bispectrum loop indices
+ *
+ */
 struct BISPECTRUM_LOOPINDICES {
     int j1;
     int j2;
     int j;
 };
 
+/*!
+ * \brief
+ * This implementation is based on the method outlined
+ * in Bartok[1], using formulae from VMK[2].
+ *
+ * For the Clebsch-Gordan coefficients, we convert the VMK half-integral
+ * labels \f$ a, b, c, \alpha, \beta, \gamma \f$ to array offsets \f$ j_1, j_2, j, m_1, m_2, m \f$
+ * using the following relations:
+ *
+ * $$ j_1 = 2*a $$
+ * $$ j_2 = 2*b $$
+ * $$ j =  2*c $$
+ * $$ m_1 = \alpha+a $$ $$  2*\alpha = 2*m_1 - j_1 $$
+ * $$ m_2 = \beta+b  $$ $$  2*\beta = 2*m2 - j_2  $$
+ * $$ m =  \gamma+c  $$ $$  2*\gamma = 2*m - j   $$
+ *
+ * in this way:
+ *
+ * $$ -a \le \alpha \le a $$
+ * $$ -b \le \beta \le b  $$
+ * $$ -c \le \gamma \le c $$
+ *
+ * becomes:
+ *
+ *$$ 0 \le m_1 \le j_1 $$
+ *$$ 0 \le m_2 \le j_2 $$
+ *$$ 0 \le m \le j   $$
+ *
+ * and the requirement that
+ * a+b+c be integral implies that
+ * j1+j2+j must be even.
+ * The requirement that:
+ *
+ * gamma = alpha+beta
+ *
+ * becomes:
+ *
+ * 2*m - j = 2*m1 - j1 + 2*m2 - j2
+ *
+ * Similarly, for the Wigner U-functions U(J,m,m') we
+ * convert the half-integral labels J,m,m' to
+ * array offsets j,ma,mb:
+ *
+ * j = 2*J
+ * ma = J+m
+ * mb = J+m'
+ *
+ * so that:
+ *
+ * 0 <= j <= 2*Jmax
+ * 0 <= ma, mb <= j.
+ *
+ * For the bispectrum components B(J1,J2,J) we convert to:
+ *
+ * j1 = 2*J1
+ * j2 = 2*J2
+ * j = 2*J
+ *
+ * and the requirement:
+ *
+ * |J1-J2| <= J <= J1+J2, for j1+j2+j integral
+ *
+ * becomes:
+ *
+ * |j1-j2| <= j <= j1+j2, for j1+j2+j even integer
+ *
+ * or
+ *
+ * j = |j1-j2|, |j1-j2|+2,...,j1+j2-2,j1+j2
+ *
+ * [1] Albert Bartok-Partay, "Gaussian Approximation..."
+ * Doctoral Thesis, Cambrindge University, (2009)
+ * [2] D. A. Varshalovich, A. N. Moskalev, and V. K. Khersonskii,
+ * "Quantum Theory of Angular Momentum," World Scientific (1988)
+ *
+ */
 class Bispectrum : public DescriptorKind {
 public:
     Bispectrum(std::string &file_name);
+
     void initFromFile(std::string &file_name);
 
     Bispectrum() = default;
+
+    /*!
+   * \brief Construct a new Bispectrum object
+   *
+   * \param rfac0_in
+   * \param twojmax_in
+   * \param diagonalstyle_in
+   * \param use_shared_arrays_in
+   * \param rmin0_in
+   * \param switch_flag_in
+   * \param bzero_flag_in
+   */
     Bispectrum(double rfac0_in,
                int twojmax_in,
                int diagonalstyle_in,
@@ -35,6 +128,20 @@ public:
 
     double memory_usage();
 
+    /*!
+      * \brief Computes bispectrum for a set of atoms
+      *
+      * For example eq(5) of ``Gaussian Approximation Potentials: The Accuracy of
+      * Quantum Mechanics, without the Electrons``, by Gabor Csany
+      *
+      * \param index
+      * \param n_atoms
+      * \param species
+      * \param neigh_list
+      * \param number_of_neigh
+      * \param coords
+      * \param desc
+      */
     void compute(int index,
                  int n_atoms,
                  int *species,
@@ -68,9 +175,9 @@ public:
 
     void grow_rij(int newnmax);
 
-    void clone_empty (DescriptorKind * descriptorKind);
+    void clone_empty(DescriptorKind *descriptorKind);
 
-    void set_species(int n_species_){n_species = n_species_;}
+    void set_species(int n_species_) { n_species = n_species_; }
 
 private:
     inline double factorial(int n);

@@ -257,7 +257,7 @@ void SymmetryFunctions::compute(int const index,
 
 SymmetryFunctions::SymmetryFunctions(std::string &file_name) {
     initFromFile(file_name);
-    }
+}
 
 void SymmetryFunctions::initFromFile(std::string &file_name) {
     std::fstream file_ptr(file_name);
@@ -384,10 +384,10 @@ void SymmetryFunctions::clone_empty(DescriptorKind *descriptorKind) {
     num_param_sets_ = d_sf->num_param_sets_;
     num_params_ = d_sf->num_params_;
     // set params to zero, to differentiate against
-    for (int i = 0; i < name_.size();i++){
-        for(int j = 0; j < num_param_sets_[i]; j++){
-            for(int k = 0; k < num_params_[i]; k++){
-                params_[i](j,k) = 0.0;
+    for (int i = 0; i < name_.size(); i++) {
+        for (int j = 0; j < num_param_sets_[i]; j++) {
+            for (int k = 0; k < num_params_[i]; k++) {
+                params_[i](j, k) = 0.0;
             }
         }
     }

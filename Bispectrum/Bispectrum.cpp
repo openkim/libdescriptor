@@ -1,3 +1,16 @@
+/*!
+ * \file bispectrum.cpp
+ * \author Mingjian Wen
+ * \author Yaser Afshar
+ * \brief The current implementation is based on the SNAP potential
+ *        implemented in <a href="http://lammps.sandia.gov/">LAMMPS</a>
+ *        by Aidan Thompson, Christian Trott.
+ * \version 0.1.3
+ * \date 08-21-2019
+ *
+ * @copyright CDDL-1.0
+ */
+
 #include "Bispectrum.hpp"
 
 #include <cmath>
@@ -192,19 +205,6 @@ double Bispectrum::memory_usage() {
     bytes += jdim * jdim * jdim * jdim * jdim * sizeof(std::complex<double>);
     return bytes;
 }
-
-//void Bispectrum::grow_rij(int const newnmax) {
-//    if (newnmax > nmax) {
-//        nmax = newnmax;
-//
-//        if (!use_shared_arrays) {
-//                rij.resize(nmax * 3, 0.0);
-//                inside.resize(nmax, 0);
-//                wj.resize(nmax, 0.0);
-//                rcutij.resize(nmax, 0.0);
-//        }
-//    }
-//}
 
 void Bispectrum::grow_rij(int const newnmax) {
     if (newnmax > nmax) {
@@ -1061,7 +1061,7 @@ void Bispectrum::initFromFile(std::string &file_name) {
     bzero_flag = std::stoi(placeholder_string);
 
     auto weights = new double[n_species];
-    for (int i = 0; i < n_species; i++){
+    for (int i = 0; i < n_species; i++) {
         *(weights + i) = 1.0;
     }
 
@@ -1121,11 +1121,11 @@ void Bispectrum::clone_empty(DescriptorKind *descriptorKind) {
     int max_nmax = 25;
     grow_rij(max_nmax);
 
-    auto weights = new double [n_species];
-    auto cutoff_matrix = new double [n_species * n_species];
-    for(int i = 0; i < n_species; i++){
+    auto weights = new double[n_species];
+    auto cutoff_matrix = new double[n_species * n_species];
+    for (int i = 0; i < n_species; i++) {
         weights[i] = 0;
-        for(int j = 0; j < n_species; j++){
+        for (int j = 0; j < n_species; j++) {
             cutoff_matrix[i * n_species + j] = 0.0;
         }
     }
