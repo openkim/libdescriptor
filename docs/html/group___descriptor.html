@@ -1,0 +1,986 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>KIM Descriptor Library: Descriptor</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/ipcamit/colabfit-descriptor-library" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">KIM Descriptor Library
+   </div>
+   <div id="projectbrief">A fully automatic-differentiated high-performance descriptor library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___descriptor.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#enumval-members">Enumerator</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Descriptor</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace containing all required classes and methods for generating descriptors, as well as their derivatives.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_descriptor"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_descriptor.html">Descriptor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga2415ec0ae21efc317acf3d49abe6ed9a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#ga2415ec0ae21efc317acf3d49abe6ed9a">Descriptor::AvailableDescriptor</a> { <a class="el" href="group___descriptor.html#gga2415ec0ae21efc317acf3d49abe6ed9aaa67445641339be62ca146a53940172ca">Descriptor::KindSymmetryFunctions</a>
+, <a class="el" href="group___descriptor.html#gga2415ec0ae21efc317acf3d49abe6ed9aa2bfc2a2e685077fc6d3c5159e13beeb2">Descriptor::KindBispectrum</a>
+ }</td></tr>
+<tr class="memdesc:ga2415ec0ae21efc317acf3d49abe6ed9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumerator lists all the kind of descriptors that are available at run time.  <a href="group___descriptor.html#ga2415ec0ae21efc317acf3d49abe6ed9a">More...</a><br /></td></tr>
+<tr class="separator:ga2415ec0ae21efc317acf3d49abe6ed9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga135b6448c8634d7d631e4c0a64030c08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#ga135b6448c8634d7d631e4c0a64030c08">Descriptor::fwd_diff</a> (int n_atoms, int *species, int *neighbor_list, int *number_of_neighs, double *coordinates, double *desc, <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *descriptor_kind)</td></tr>
+<tr class="separator:ga135b6448c8634d7d631e4c0a64030c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf0a5f358b7d3ed35ed4460cc0e69897f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#gaf0a5f358b7d3ed35ed4460cc0e69897f">Descriptor::gradient</a> (int n_atoms, int *species, int *neighbor_list, int *number_of_neighs, double *coordinates, double *d_coordinates, double *desc, double *dE_dzeta, <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *descriptor_to_diff)</td></tr>
+<tr class="separator:gaf0a5f358b7d3ed35ed4460cc0e69897f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad20335f677649e7b0645abd1fc13cc50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#gad20335f677649e7b0645abd1fc13cc50">Descriptor::gradient_single_atom</a> (int index, int n_atoms, int *species, int *neighbor_list, int number_of_neighs, double *coordinates, double *d_coordinates, double *desc, double *dE_dzeta, <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *descriptor_to_diff)</td></tr>
+<tr class="separator:gad20335f677649e7b0645abd1fc13cc50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad326e18be5123c6ade46df34e3faf1d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#gad326e18be5123c6ade46df34e3faf1d9">Descriptor::jacobian</a> (int n_atoms, int *species, int *neighbor_list, int *number_of_neighs, double *coordinates, double *d_coordinates, double *desc, double *dzeta_dr, <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *descriptor_to_diff)</td></tr>
+<tr class="separator:gad326e18be5123c6ade46df34e3faf1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga77cdc3e3c0e1a0919c21848747e28acd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#ga77cdc3e3c0e1a0919c21848747e28acd">Descriptor::compute</a> (int n_atoms, int *species, int *neighbor_list, int *number_of_neighs, double *coordinates, double *desc, <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *descriptor_kind)</td></tr>
+<tr class="separator:ga77cdc3e3c0e1a0919c21848747e28acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga69404a6d081a268893546171c58fde5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#ga69404a6d081a268893546171c58fde5f">Descriptor::compute_single_atom</a> (int index, int n_atoms, int *species, int *number_of_neighs, int number_of_neigh_list, double *coordinates, double *desc, <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *descriptor_kind)</td></tr>
+<tr class="separator:ga69404a6d081a268893546171c58fde5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab8724562546a63951f935a43402199e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#gab8724562546a63951f935a43402199e8">Descriptor::DescriptorKind::DescriptorKind</a> ()=default</td></tr>
+<tr class="separator:gab8724562546a63951f935a43402199e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaec4683819520a8207a9b2730dd913821"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#gaec4683819520a8207a9b2730dd913821">Descriptor::DescriptorKind::initDescriptor</a> (<a class="el" href="group___descriptor.html#ga2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a> availableDescriptorKind)</td></tr>
+<tr class="memdesc:gaec4683819520a8207a9b2730dd913821"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize an empty descriptor of a kind.  <a href="group___descriptor.html#gaec4683819520a8207a9b2730dd913821">More...</a><br /></td></tr>
+<tr class="separator:gaec4683819520a8207a9b2730dd913821"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0b6a21c270cebdf33b5f82e3acba3b8c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#ga0b6a21c270cebdf33b5f82e3acba3b8c">Descriptor::DescriptorKind::initDescriptor</a> (std::string &amp;file_name, <a class="el" href="group___descriptor.html#ga2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a> availableDescriptorKind)</td></tr>
+<tr class="separator:ga0b6a21c270cebdf33b5f82e3acba3b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3573ccdd4199210eb2f1f77268ad6594"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#ga3573ccdd4199210eb2f1f77268ad6594">Descriptor::DescriptorKind::compute</a> (int index, int n_atoms, int *species, int *neighbor_lists, int number_of_neighbors, double *coordinates, double *desc)=0</td></tr>
+<tr class="separator:ga3573ccdd4199210eb2f1f77268ad6594"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga65e8012e117f042ea0f41a833df48c2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#ga65e8012e117f042ea0f41a833df48c2c">Descriptor::DescriptorKind::~DescriptorKind</a> ()</td></tr>
+<tr class="separator:ga65e8012e117f042ea0f41a833df48c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gafa467126385a5c9fe79c8683f2b1e8e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___descriptor.html#ga2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#gafa467126385a5c9fe79c8683f2b1e8e4">Descriptor::DescriptorKind::descriptor_kind</a></td></tr>
+<tr class="memdesc:gafa467126385a5c9fe79c8683f2b1e8e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kind of instantiated descriptor, will be used in creating clone for AD.  <a href="group___descriptor.html#gafa467126385a5c9fe79c8683f2b1e8e4">More...</a><br /></td></tr>
+<tr class="separator:gafa467126385a5c9fe79c8683f2b1e8e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadbd741576569904305d0b2c7f28331ed"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#gadbd741576569904305d0b2c7f28331ed">Descriptor::DescriptorKind::descriptor_param_file</a></td></tr>
+<tr class="memdesc:gadbd741576569904305d0b2c7f28331ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Full path to descriptor parameter file.  <a href="group___descriptor.html#gadbd741576569904305d0b2c7f28331ed">More...</a><br /></td></tr>
+<tr class="separator:gadbd741576569904305d0b2c7f28331ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga00f9d9e1a5b9f92383d241cdd6906b8a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___descriptor.html#ga00f9d9e1a5b9f92383d241cdd6906b8a">Descriptor::DescriptorKind::width</a></td></tr>
+<tr class="memdesc:ga00f9d9e1a5b9f92383d241cdd6906b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dimension of the descriptor.  <a href="group___descriptor.html#ga00f9d9e1a5b9f92383d241cdd6906b8a">More...</a><br /></td></tr>
+<tr class="separator:ga00f9d9e1a5b9f92383d241cdd6906b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p >Namespace containing all required classes and methods for generating descriptors, as well as their derivatives. </p>
+<p >The namespace <a class="el" href="namespace_descriptor.html">Descriptor</a> contains wrappers to all of the implemented descriptors. The wrapper functions are used, instead of more direct inheritance, as Enzyme as of now (v0.0.41) cannot accept pointer to class member function. This design might get more streamlined, as more mature version of Enzyme is released. </p>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ga2415ec0ae21efc317acf3d49abe6ed9a" name="ga2415ec0ae21efc317acf3d49abe6ed9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2415ec0ae21efc317acf3d49abe6ed9a">&#9670;&#160;</a></span>AvailableDescriptor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group___descriptor.html#ga2415ec0ae21efc317acf3d49abe6ed9a">Descriptor::AvailableDescriptor</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This enumerator lists all the kind of descriptors that are available at run time. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga2415ec0ae21efc317acf3d49abe6ed9aaa67445641339be62ca146a53940172ca" name="gga2415ec0ae21efc317acf3d49abe6ed9aaa67445641339be62ca146a53940172ca"></a>KindSymmetryFunctions&#160;</td><td class="fielddoc"><p >For selecting Behler Symmetry Functions (<a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a>) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga2415ec0ae21efc317acf3d49abe6ed9aa2bfc2a2e685077fc6d3c5159e13beeb2" name="gga2415ec0ae21efc317acf3d49abe6ed9aa2bfc2a2e685077fc6d3c5159e13beeb2"></a>KindBispectrum&#160;</td><td class="fielddoc"><p >For selecting <a class="el" href="class_bispectrum.html">Bispectrum</a> descriptor. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga3573ccdd4199210eb2f1f77268ad6594" name="ga3573ccdd4199210eb2f1f77268ad6594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3573ccdd4199210eb2f1f77268ad6594">&#9670;&#160;</a></span>compute() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Descriptor::DescriptorKind::compute </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_atoms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>neighbor_lists</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>number_of_neighbors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>desc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p ><a class="el" href="group___descriptor.html#ga3573ccdd4199210eb2f1f77268ad6594">compute()</a> method contains the logic for calculating the descriptor for a single molecular environment. Expected inputs include superset of all required parameters. In case some other information is needed in future, we can try and expand it. For making it compatible with Enzyme few recommendations are, i) make it more C-like, ii) avoid calling functions which dynamically allocate memory, and iii) avoid initializing any class members inside the <a class="el" href="group___descriptor.html#ga3573ccdd4199210eb2f1f77268ad6594">compute()</a> function. A more "functional" programming principle is recommended. It is advisable to avoid too much of memory allocation-deallocation, and rather use the constructor to allocate maximum required memory and use it accordingly.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>index of atom for which descriptor is to be computed. (i) </td></tr>
+    <tr><td class="paramname">n_atoms</td><td>total number of contributing atoms (This parameter is usually not used, as neighbor list contain enough information) </td></tr>
+    <tr><td class="paramname">species</td><td>pointer to integer array containing species code for all atoms, note that this is usually numbered 0...n_species - 1, and have no relation with atomic number. So if atomic numbers are needed, you need to accordingly assign them inside <a class="el" href="group___descriptor.html#ga3573ccdd4199210eb2f1f77268ad6594">compute()</a> function. </td></tr>
+    <tr><td class="paramname">neighbor_lists</td><td>pointer to integer array containing indices of all the neighbor atoms </td></tr>
+    <tr><td class="paramname">number_of_neighbors</td><td>integer containing length of neighbor list </td></tr>
+    <tr><td class="paramname">coordinates</td><td>array containing all of the required coordinates, usually it is much simple to just pass entire coordinate list. Then during differentiation you can avoid additional step of manually adding individual derivatives. </td></tr>
+    <tr><td class="paramname">desc</td><td>pointer pointing to location where descriptor will be saved. It should have at least <a class="el" href="group___descriptor.html#ga00f9d9e1a5b9f92383d241cdd6906b8a" title="Dimension of the descriptor.">width</a> size memory available, else you will run into segfaults. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="class_bispectrum.html#adf323822cd685488211bfe21e90bf985">Bispectrum</a>, and <a class="el" href="class_symmetry_functions.html#a3d26111e543d8410ca8d11d978408ca1">SymmetryFunctions</a>.</p>
+
+</div>
+</div>
+<a id="ga77cdc3e3c0e1a0919c21848747e28acd" name="ga77cdc3e3c0e1a0919c21848747e28acd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga77cdc3e3c0e1a0919c21848747e28acd">&#9670;&#160;</a></span>compute() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Descriptor::compute </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_atoms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>neighbor_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>number_of_neighs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>desc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td>
+          <td class="paramname"><em>descriptor_kind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Computes the descriptor for all contributing atoms, and stores them in pointer desc </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n_atoms</td><td></td></tr>
+    <tr><td class="paramname">species</td><td></td></tr>
+    <tr><td class="paramname">neighbor_list</td><td></td></tr>
+    <tr><td class="paramname">number_of_neighs</td><td></td></tr>
+    <tr><td class="paramname">coordinates</td><td></td></tr>
+    <tr><td class="paramname">desc</td><td></td></tr>
+    <tr><td class="paramname">descriptor_kind</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga69404a6d081a268893546171c58fde5f" name="ga69404a6d081a268893546171c58fde5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga69404a6d081a268893546171c58fde5f">&#9670;&#160;</a></span>compute_single_atom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Descriptor::compute_single_atom </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_atoms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>number_of_neighs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>number_of_neigh_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>desc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td>
+          <td class="paramname"><em>descriptor_kind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Computes the descriptors for single atom (at position</p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index)</td><td>and stores its descriptor in</td></tr>
+    <tr><td class="paramname">desc</td><td></td></tr>
+    <tr><td class="paramname">index</td><td></td></tr>
+    <tr><td class="paramname">n_atoms</td><td></td></tr>
+    <tr><td class="paramname">species</td><td></td></tr>
+    <tr><td class="paramname">number_of_neighs</td><td></td></tr>
+    <tr><td class="paramname">number_of_neigh_list</td><td></td></tr>
+    <tr><td class="paramname">coordinates</td><td></td></tr>
+    <tr><td class="paramname">desc</td><td></td></tr>
+    <tr><td class="paramname">descriptor_kind</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gab8724562546a63951f935a43402199e8" name="gab8724562546a63951f935a43402199e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab8724562546a63951f935a43402199e8">&#9670;&#160;</a></span>DescriptorKind()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Descriptor::DescriptorKind::DescriptorKind </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga135b6448c8634d7d631e4c0a64030c08" name="ga135b6448c8634d7d631e4c0a64030c08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga135b6448c8634d7d631e4c0a64030c08">&#9670;&#160;</a></span>fwd_diff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Descriptor::fwd_diff </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_atoms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>neighbor_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>number_of_neighs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>desc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td>
+          <td class="paramname"><em>descriptor_kind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p ><b> "TO BE IMPLEMENTED"</b> This method will use Forward differentiation method (Jacobian-vector product) for computing derivatives. It is useful when descriptor are large. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n_atoms</td><td>number of total contributing atoms </td></tr>
+    <tr><td class="paramname">species</td><td>species code of <em>all</em> atoms </td></tr>
+    <tr><td class="paramname">neighbor_list</td><td>list of neighbor lists </td></tr>
+    <tr><td class="paramname">number_of_neighs</td><td>list of number of neighbors </td></tr>
+    <tr><td class="paramname">coordinates</td><td>array containing coordinated of all atoms </td></tr>
+    <tr><td class="paramname">desc</td><td>pointer for storing computed descriptor </td></tr>
+    <tr><td class="paramname">descriptor_kind</td><td>Initialized descriptor kind class </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaf0a5f358b7d3ed35ed4460cc0e69897f" name="gaf0a5f358b7d3ed35ed4460cc0e69897f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf0a5f358b7d3ed35ed4460cc0e69897f">&#9670;&#160;</a></span>gradient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Descriptor::gradient </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_atoms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>neighbor_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>number_of_neighs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>d_coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>desc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>dE_dzeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td>
+          <td class="paramname"><em>descriptor_to_diff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p ><b> "TO BE IMPLEMENTED"</b> This method will compute gradient for all contributing atoms using reverse diff (vector-Jacobian product) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n_atoms</td><td></td></tr>
+    <tr><td class="paramname">species</td><td></td></tr>
+    <tr><td class="paramname">neighbor_list</td><td></td></tr>
+    <tr><td class="paramname">number_of_neighs</td><td></td></tr>
+    <tr><td class="paramname">coordinates</td><td></td></tr>
+    <tr><td class="paramname">d_coordinates</td><td></td></tr>
+    <tr><td class="paramname">desc</td><td></td></tr>
+    <tr><td class="paramname">dE_dzeta</td><td></td></tr>
+    <tr><td class="paramname">descriptor_to_diff</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gad20335f677649e7b0645abd1fc13cc50" name="gad20335f677649e7b0645abd1fc13cc50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad20335f677649e7b0645abd1fc13cc50">&#9670;&#160;</a></span>gradient_single_atom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Descriptor::gradient_single_atom </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_atoms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>neighbor_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>number_of_neighs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>d_coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>desc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>dE_dzeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td>
+          <td class="paramname"><em>descriptor_to_diff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This method computes the gradient of single atoms. It is somewhat inefficient as it needs to create Enzyme virtual object for every atom. In future it will be used for more selective problems, and <a class="el" href="group___descriptor.html#gaf0a5f358b7d3ed35ed4460cc0e69897f">gradient()</a> would be the main workhorse. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td></td></tr>
+    <tr><td class="paramname">n_atoms</td><td></td></tr>
+    <tr><td class="paramname">species</td><td></td></tr>
+    <tr><td class="paramname">neighbor_list</td><td></td></tr>
+    <tr><td class="paramname">number_of_neighs</td><td></td></tr>
+    <tr><td class="paramname">coordinates</td><td></td></tr>
+    <tr><td class="paramname">d_coordinates</td><td></td></tr>
+    <tr><td class="paramname">desc</td><td></td></tr>
+    <tr><td class="paramname">dE_dzeta</td><td></td></tr>
+    <tr><td class="paramname">descriptor_to_diff</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaec4683819520a8207a9b2730dd913821" name="gaec4683819520a8207a9b2730dd913821"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaec4683819520a8207a9b2730dd913821">&#9670;&#160;</a></span>initDescriptor() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> * DescriptorKind::initDescriptor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___descriptor.html#ga2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a>&#160;</td>
+          <td class="paramname"><em>availableDescriptorKind</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialize an empty descriptor of a kind. </p>
+<p >Used in creating virtual objects for AD. </p>
+
+</div>
+</div>
+<a id="ga0b6a21c270cebdf33b5f82e3acba3b8c" name="ga0b6a21c270cebdf33b5f82e3acba3b8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0b6a21c270cebdf33b5f82e3acba3b8c">&#9670;&#160;</a></span>initDescriptor() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> * DescriptorKind::initDescriptor </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>file_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___descriptor.html#ga2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a>&#160;</td>
+          <td class="paramname"><em>availableDescriptorKind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >This function will initialize a required descriptor kind class from hyperparameter file generated by KIM-API. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_name</td><td>Fully qualified path of ascii file containing information required by the class. Usually it is left for the class to figure out how to use it. In current context, all classes have a constructor, which takes in the file name, and reads the file for instantiation. </td></tr>
+    <tr><td class="paramname">availableDescriptorKind</td><td>Instantiate required class of kind availableDescriptorKind and read parameters form file file_name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to instantiated class. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_symmetry_functions.html#a4d29bd7828d488e621cf3a565e1fd5d6">SymmetryFunctions::initFromFile()</a> <a class="el" href="class_bispectrum.html#a9c74c863fa29b24f5f4be85ee645a8b4">Bispectrum::initFromFile()</a> </dd></dl>
+
+</div>
+</div>
+<a id="gad326e18be5123c6ade46df34e3faf1d9" name="gad326e18be5123c6ade46df34e3faf1d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad326e18be5123c6ade46df34e3faf1d9">&#9670;&#160;</a></span>jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Descriptor::jacobian </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_atoms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>neighbor_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>number_of_neighs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>d_coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>desc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>dzeta_dr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td>
+          <td class="paramname"><em>descriptor_to_diff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p ><b> "TO BE IMPLEMENTED"</b> Compute full Jacobian using reverse diff. Might be useful in some cases </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n_atoms</td><td></td></tr>
+    <tr><td class="paramname">species</td><td></td></tr>
+    <tr><td class="paramname">neighbor_list</td><td></td></tr>
+    <tr><td class="paramname">number_of_neighs</td><td></td></tr>
+    <tr><td class="paramname">coordinates</td><td></td></tr>
+    <tr><td class="paramname">d_coordinates</td><td></td></tr>
+    <tr><td class="paramname">desc</td><td></td></tr>
+    <tr><td class="paramname">dzeta_dr</td><td></td></tr>
+    <tr><td class="paramname">descriptor_to_diff</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga65e8012e117f042ea0f41a833df48c2c" name="ga65e8012e117f042ea0f41a833df48c2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga65e8012e117f042ea0f41a833df48c2c">&#9670;&#160;</a></span>~DescriptorKind()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DescriptorKind::~DescriptorKind </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="gafa467126385a5c9fe79c8683f2b1e8e4" name="gafa467126385a5c9fe79c8683f2b1e8e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa467126385a5c9fe79c8683f2b1e8e4">&#9670;&#160;</a></span>descriptor_kind</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___descriptor.html#ga2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a> Descriptor::DescriptorKind::descriptor_kind</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kind of instantiated descriptor, will be used in creating clone for AD. </p>
+
+</div>
+</div>
+<a id="gadbd741576569904305d0b2c7f28331ed" name="gadbd741576569904305d0b2c7f28331ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadbd741576569904305d0b2c7f28331ed">&#9670;&#160;</a></span>descriptor_param_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Descriptor::DescriptorKind::descriptor_param_file</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Full path to descriptor parameter file. </p>
+
+</div>
+</div>
+<a id="ga00f9d9e1a5b9f92383d241cdd6906b8a" name="ga00f9d9e1a5b9f92383d241cdd6906b8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga00f9d9e1a5b9f92383d241cdd6906b8a">&#9670;&#160;</a></span>width</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Descriptor::DescriptorKind::width</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dimension of the descriptor. </p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>
