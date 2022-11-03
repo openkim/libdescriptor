@@ -20,16 +20,32 @@ else (DOXYGEN_FOUND)
   message("Doxygen need to be installed to generate the doxygen documentation")
 endif (DOXYGEN_FOUND)
 
-#find_package(EnvModules REQUIRED)
-#env_module(load python39)
-#
-##----Pybind11
-#find_package(PythonInterp REQUIRED)
-#include_directories(${PYTHON_INCLUDE_DIRS})
-#find_package(pybind11 REQUIRED)
-##------------
+#----------------
+# Find enzyme at location ENZYME_LIB
+if(NOT DEFINED ENZYME_LIB)
+    message(FATAL_ERROR "ENZYME_LIB variable not defined, please define location containing Enzyme files.")
+else()
+    message("Searching for ENZYME at ${ENZYME_LIB}")
+    if(EXISTS "${ENZYME_LIB}/LLDEnzyme-12.so")
+        message("Found LLDEnzyme plugin.")
+    else()
+        message(FATAL_ERROR "LLDEnzyme plugin not found, please check your Enzyme installation.")
+    endif()
+    if(EXISTS "${ENZYME_LIB}/ClangEnzyme-12.so")
+        message("Found ClangEnzyme plugin.")
+    else()
+        message(WARNING "ClangEnzyme plugin not found, it is NOT needed for libdescriptor, but usually indicates improper installation of Enzyme.")
+    endif()
+    if(EXISTS "${ENZYME_LIB}/LLVMEnzyme-12.so")
+        message("Found LLVMEnzyme plugin.")
+    else()
+        message(WARNING "LLVMEnzyme plugin not found, it is NOT needed for libdescriptor, but usually indicates improper installation of Enzyme.")
+    endif()
+endif()
 
-#----module dir
+
+#----module dir --------------------
+# Define all source files here
 include_directories(./)
 include_directories(SymmetryFunctions)
 file(GLOB SYMFUNFILES SymmetryFunctions/*)
@@ -37,11 +53,13 @@ include_directories(Bispectrum)
 file(GLOB BISFILES Bispectrum/*)
 
 #--------------
+# Compile files, but use lld for linking. lld is patched with enzyme to generate AD code
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=lld -flto -Xclang -new-struct-path-tbaa")
 
 #pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp python_bindings.cpp)
 add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.cpp)
 #add_library(descriptor_static STATIC descriptors.cpp descriptors.hpp)
 
+# pass linking to lld, with enzyme plugin
 target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
-target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=/opt/enzyme/enzyme/build/Enzyme/LLDEnzyme-12.so")
+target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=${ENZYME_LIB}/LLDEnzyme-12.so")
