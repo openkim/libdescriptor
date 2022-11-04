@@ -53,8 +53,14 @@ include_directories(Bispectrum)
 file(GLOB BISFILES Bispectrum/*)
 
 #--------------
+
+# Set LLD, just in case... sometimes default LLD the name of LLD file is lld-12
+if (NOT DEFINED LLD)
+    set(LLD "lld")
+endif()
+
 # Compile files, but use lld for linking. lld is patched with enzyme to generate AD code
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=lld -flto -Xclang -new-struct-path-tbaa")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struct-path-tbaa")
 
 #pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp python_bindings.cpp)
 add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.cpp)
@@ -63,3 +69,9 @@ add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.
 # pass linking to lld, with enzyme plugin
 target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
 target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=${ENZYME_LIB}/LLDEnzyme-12.so")
+
+set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp")
+
+install(TARGETS descriptor
+        LIBRARY DESTINATION lib
+        PUBLIC_HEADER DESTINATION include)
