@@ -1,5 +1,5 @@
 Libdescriptor
-======================================
+==============
 
 Libdescriptor is a high performance descriptor library for providing access to fully differentiable descriptor functions.
 While `libdescriptor` is a general purpose descriptor library, it's API compatible with KIM models and associated projects.
@@ -7,6 +7,8 @@ This will also provide uniform access to various selected descriptors for KLIFF 
 For gradient calculations, Libdescriptor relies on [Enzyme AD](https://github.com/EnzymeAD/Enzyme), which provides it with capability to trivially generate near analytical performance gradient functions.
 Use of Enzyme AD enables Libdescriptor to not only provide gradients against coordinates, but against hyperparameters as well, thus opening way for better optimized descriptors.
 This should enable rapid development, extension and deployment of various descriptors.
+
+<img src="libdescriptor.svg" width="800">
 
 ## Compiling 
 At present, it needs functioning Enzyme compiler environment, in future it will be provided as binary package or a conda environment.
@@ -82,3 +84,9 @@ all fields of class properly.
 > When in doubt, make your code more "C" like for higher success rate.
 
 TODO: More documentation for extending.
+
+## Docker Image
+The repository now contains a Dockerfile, which can be used to install the descriptor library in an isolated environment.
+It is based on Kim Developer Platform Docker image, so that you have infrastructure to use it out-of-the-box. However, 
+it is  independent of KIM, and can be used for your personal projects. In doing so, you can edit the dockerfile and base
+it on your own project image as per need.
