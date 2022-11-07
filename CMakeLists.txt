@@ -93,3 +93,5 @@ find_package(pybind11 REQUIRED)
 
 pybind11_add_module(libdescriptor python_bindings.cpp)
 target_link_libraries(libdescriptor PUBLIC descriptor)
+
+#TODO add install location
