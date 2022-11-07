@@ -77,12 +77,17 @@ install(TARGETS descriptor
         PUBLIC_HEADER DESTINATION include)
 
 # ---------------- Python module -------------------------
-#find_package(EnvModules)
-#env_module(load python39)
+# Workaroud from my laptop
+if (${MODULEYES} STREQUAL yes)
+    find_package(EnvModules)
+    env_module(load python39)
+endif()
+
 # Python Interp
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibs REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
+
 # PYBIND11
 find_package(pybind11 REQUIRED)
 

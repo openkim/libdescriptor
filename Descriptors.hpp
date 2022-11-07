@@ -195,7 +195,8 @@ public:
     // virtual void clone_empty(DescriptorKind * descriptorKind){};
     // TODO: Cant make it virtual, enzyme segfaults. But every class must have
     // empty constructor to differentiate against
-    ~DescriptorKind();
+    // ~DescriptorKind();
+    virtual ~DescriptorKind();
     /*!
      */
 };
