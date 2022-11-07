@@ -2,8 +2,10 @@ var _descriptors_8hpp =
 [
     [ "Descriptor::DescriptorKind", "class_descriptor_1_1_descriptor_kind.html", "class_descriptor_1_1_descriptor_kind" ],
     [ "AvailableDescriptor", "_descriptors_8hpp.html#a2415ec0ae21efc317acf3d49abe6ed9a", [
-      [ "KindSymmetryFunctions", "_descriptors_8hpp.html#a2415ec0ae21efc317acf3d49abe6ed9aaa67445641339be62ca146a53940172ca", null ],
-      [ "KindBispectrum", "_descriptors_8hpp.html#a2415ec0ae21efc317acf3d49abe6ed9aa2bfc2a2e685077fc6d3c5159e13beeb2", null ]
+      [ "KindSymmetryFunctions", "_descriptors_8hpp.html#a2415ec0ae21efc317acf3d49abe6ed9aa6068a14ad3cde39eac9c7e4ae3b5653e", null ],
+      [ "KindBispectrum", "_descriptors_8hpp.html#a2415ec0ae21efc317acf3d49abe6ed9aa6cdd34e334c4a4b14e628f7a34fddbae", null ],
+      [ "KindSymmetryFunctions", "_descriptors_8hpp.html#a2415ec0ae21efc317acf3d49abe6ed9aa6068a14ad3cde39eac9c7e4ae3b5653e", null ],
+      [ "KindBispectrum", "_descriptors_8hpp.html#a2415ec0ae21efc317acf3d49abe6ed9aa6cdd34e334c4a4b14e628f7a34fddbae", null ]
     ] ],
     [ "compute", "_descriptors_8hpp.html#a77cdc3e3c0e1a0919c21848747e28acd", null ],
     [ "compute_single_atom", "_descriptors_8hpp.html#a69404a6d081a268893546171c58fde5f", null ],

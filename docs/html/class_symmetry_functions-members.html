@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Doxygen Awesome" />
 <meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
 <!-- END twitter metadata -->
-<title>KIM Descriptor Library: Member List</title>
+<title>Libdescriptor: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -64,7 +64,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">KIM Descriptor Library
+   <div id="projectname">Libdescriptor
    </div>
    <div id="projectbrief">A fully automatic-differentiated high-performance descriptor library.</div>
   </td>
@@ -135,18 +135,29 @@ $(document).ready(function(){initNavTree('class_symmetry_functions.html',''); in
 
 <p>This is the complete list of members for <a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_symmetry_functions.html#ab3c94123591e4f56b56ab7517c1a0d5e">clone_empty</a>(DescriptorKind *descriptorKind)</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_symmetry_functions.html#a3d26111e543d8410ca8d11d978408ca1">compute</a>(int index, int n_atoms, int *species, int *neigh_list, int number_of_neigh, double *coords, double *zeta) override</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#afa467126385a5c9fe79c8683f2b1e8e4">descriptor_kind</a></td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#adbd741576569904305d0b2c7f28331ed">descriptor_param_file</a></td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_symmetry_functions.html#aaa24d083e14f4907758455e9b0dbbcc2">add_descriptor</a>(char const *name, double const *values, int row, int col)</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_symmetry_functions.html#ab3c94123591e4f56b56ab7517c1a0d5e">clone_empty</a>(DescriptorKind *descriptorKind)</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_symmetry_functions.html#a3d26111e543d8410ca8d11d978408ca1">compute</a>(int index, int n_atoms, int *species, int *neigh_list, int number_of_neigh, double *coords, double *zeta) override</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#afa467126385a5c9fe79c8683f2b1e8e4">descriptor_kind</a></td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#adbd741576569904305d0b2c7f28331ed">descriptor_param_file</a></td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#ab8724562546a63951f935a43402199e8">DescriptorKind</a>()=default</td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#ab8724562546a63951f935a43402199e8">DescriptorKind</a>()=default</td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_symmetry_functions.html#a4819fe75db4cc46a707d1992fb666445">get_cutoff</a>(int iCode, int jCode)</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_symmetry_functions.html#aa9c4fa5da6ee72760ada60a2b66cca6f">get_num_descriptors</a>()</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_symmetry_functions.html#a509366cc3f43bd17cbfd8cf5248aee33">get_num_species</a>()</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_symmetry_functions.html#a7e4bf55f2ff6ed7e1def9a1bec4aa933">get_species</a>(std::vector&lt; std::string &gt; &amp;species)</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#aec4683819520a8207a9b2730dd913821">initDescriptor</a>(AvailableDescriptor availableDescriptorKind)</td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a0b6a21c270cebdf33b5f82e3acba3b8c">initDescriptor</a>(std::string &amp;file_name, AvailableDescriptor availableDescriptorKind)</td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a1e0acd8ed07e73f601d0449872b4bbc3">initDescriptor</a>(AvailableDescriptor availableDescriptorKind)</td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a522dce3a111f783a43de7ff171033415">initDescriptor</a>(std::string &amp;file_name, AvailableDescriptor availableDescriptorKind)</td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_symmetry_functions.html#a4d29bd7828d488e621cf3a565e1fd5d6">initFromFile</a>(std::string &amp;file_name)</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_symmetry_functions.html#a9181047c5489bd230d4eaf988ca365b2">set_cutoff</a>(char const *name, std::size_t Nspecies, double const *rcut_2D)</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_symmetry_functions.html#a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e">set_species</a>(std::vector&lt; std::string &gt; &amp;species)</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_symmetry_functions.html#afee3e290ebbc1f84086016eeecfdb06f">SymmetryFunctions</a>(std::string &amp;file_name)</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_symmetry_functions.html#aa3706a6bd3d1b82b3440eaa513d6f67d">SymmetryFunctions</a>()</td><td class="entry"><a class="el" href="class_symmetry_functions.html">SymmetryFunctions</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a00f9d9e1a5b9f92383d241cdd6906b8a">width</a></td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a65e8012e117f042ea0f41a833df48c2c">~DescriptorKind</a>()</td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a65e8012e117f042ea0f41a833df48c2c">~DescriptorKind</a>()</td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#ade10fb0e58ae4087e6308b60dd44a694">~DescriptorKind</a>()</td><td class="entry"><a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

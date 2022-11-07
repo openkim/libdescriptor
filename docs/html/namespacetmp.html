@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Doxygen Awesome" />
 <meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
 <!-- END twitter metadata -->
-<title>KIM Descriptor Library: tmp Namespace Reference</title>
+<title>Libdescriptor: tmp Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -64,7 +64,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">KIM Descriptor Library
+   <div id="projectname">Libdescriptor
    </div>
    <div id="projectbrief">A fully automatic-differentiated high-performance descriptor library.</div>
   </td>
@@ -143,7 +143,7 @@ Variables</h2></td></tr>
 <tr class="separator:addb163ea4164fe65a85798a8133ea22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac692d5cab51e1ba8147cd3839288d734"><td class="memItemLeft" align="right" valign="top">dictionary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmp.html#ac692d5cab51e1ba8147cd3839288d734">hyper_params</a> = {'jmax': 4, 'weight':{&quot;Si&quot;: 1.0, &quot;C&quot;:1.0}}</td></tr>
 <tr class="separator:ac692d5cab51e1ba8147cd3839288d734"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fe545c6c083f134b3b08a9f44330eb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmp.html#a9fe545c6c083f134b3b08a9f44330eb0">descriptor</a> = <a class="el" href="class_bispectrum.html">Bispectrum</a>(<a class="el" href="namespacetmp.html#addb163ea4164fe65a85798a8133ea22a">cut_dists</a>, <a class="el" href="namespacetmp.html#a67a5274881ae2f059362044d031828af">cut_name</a>, <a class="el" href="namespacetmp.html#ac692d5cab51e1ba8147cd3839288d734">hyper_params</a>)</td></tr>
+<tr class="memitem:a9fe545c6c083f134b3b08a9f44330eb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmp.html#a9fe545c6c083f134b3b08a9f44330eb0">descriptor</a> = <a class="el" href="class_bispectrum.html">Bispectrum</a>(cut_dists, cut_name, hyper_params)</td></tr>
 <tr class="separator:a9fe545c6c083f134b3b08a9f44330eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1eaf18b4b24c9e53a5379768cef7466"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmp.html#af1eaf18b4b24c9e53a5379768cef7466">data</a> = Dataset(&quot;test_00000.xyz&quot;)</td></tr>
 <tr class="separator:af1eaf18b4b24c9e53a5379768cef7466"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,7 +165,7 @@ Variables</h2></td></tr>
 <tr class="separator:ae90c32917099488c4ce733325309ac91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6358f26619b3629234c34d00372347a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmp.html#ad6358f26619b3629234c34d00372347a">fit_forces</a></td></tr>
 <tr class="separator:ad6358f26619b3629234c34d00372347a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e7e3ad8081743999e5fe253e64b8c2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmp.html#a4e7e3ad8081743999e5fe253e64b8c2b">d_coord</a> = np.tensordot(<a class="el" href="namespacetmp.html#ab8e4f681c0ce8f11233fe07aba1367f0">x</a>, <a class="el" href="namespacetmp.html#af9f5a4a3427cebd46b19647ca701ee27">d_desc</a>, <a class="el" href="namespacetmp.html#ab87dc8244b55c14b258d4a939b88927f">axes</a>=([0,1],[0,1]))</td></tr>
+<tr class="memitem:a4e7e3ad8081743999e5fe253e64b8c2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmp.html#a4e7e3ad8081743999e5fe253e64b8c2b">d_coord</a> = np.tensordot(x, d_desc, axes=([0,1],[0,1]))</td></tr>
 <tr class="separator:a4e7e3ad8081743999e5fe253e64b8c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -232,7 +232,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">tmp.d_coord = np.tensordot(<a class="el" href="namespacetmp.html#ab8e4f681c0ce8f11233fe07aba1367f0">x</a>, <a class="el" href="namespacetmp.html#af9f5a4a3427cebd46b19647ca701ee27">d_desc</a>, <a class="el" href="namespacetmp.html#ab87dc8244b55c14b258d4a939b88927f">axes</a>=([0,1],[0,1]))</td>
+          <td class="memname">tmp.d_coord = np.tensordot(x, d_desc, axes=([0,1],[0,1]))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -288,7 +288,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">tmp.descriptor = <a class="el" href="class_bispectrum.html">Bispectrum</a>(<a class="el" href="namespacetmp.html#addb163ea4164fe65a85798a8133ea22a">cut_dists</a>, <a class="el" href="namespacetmp.html#a67a5274881ae2f059362044d031828af">cut_name</a>, <a class="el" href="namespacetmp.html#ac692d5cab51e1ba8147cd3839288d734">hyper_params</a>)</td>
+          <td class="memname">tmp.descriptor = <a class="el" href="class_bispectrum.html">Bispectrum</a>(cut_dists, cut_name, hyper_params)</td>
         </tr>
       </table>
 </div><div class="memdoc">

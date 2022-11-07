@@ -1,5 +1,6 @@
 <map id="Descriptor::DescriptorKind" name="Descriptor::DescriptorKind">
-<area shape="rect" id="node1" title="Base class for all descriptors." alt="" coords="29,5,205,31"/>
+<area shape="rect" id="node1" title="Base class for all descriptors." alt="" coords="92,5,268,31"/>
 <area shape="rect" id="node2" href="$class_bispectrum.html" title="This implementation is based on the method outlined in Bartok[1], using formulae from VMK[2]." alt="" coords="5,79,93,104"/>
-<area shape="rect" id="node3" href="$class_symmetry_functions.html" title=" " alt="" coords="117,79,256,104"/>
+<area shape="rect" id="node3" href="$class_py_descriptor_kind.html" title=" " alt="" coords="118,79,242,104"/>
+<area shape="rect" id="node4" href="$class_symmetry_functions.html" title=" " alt="" coords="267,79,405,104"/>
 </map>

@@ -24,8 +24,20 @@
 */
 var NAVTREE =
 [
-  [ "KIM Descriptor Library", "index.html", [
-    [ "Libdescriptor (KIM Descriptor Library)", "index.html", "index" ],
+  [ "Libdescriptor", "index.html", [
+    [ "Compiling", "index.html#autotoc_md5", null ],
+    [ "Python bindings", "index.html#autotoc_md6", null ],
+    [ "Descriptors supported (or planned)", "index.html#autotoc_md7", null ],
+    [ "Extending Libdescriptor", "index.html#autotoc_md8", null ],
+    [ "Docker Image", "index.html#autotoc_md9", null ],
+    [ "Brief Introduction to Enzyme AD", "md__home_amit__projects__c_o_l_a_b_f_i_t_colabfit_kim_model_colabfit_descriptor_library_docs__enzyme.html", [
+      [ "Fundamentals of Automatic Differentiation (AD)", "md__home_amit__projects__c_o_l_a_b_f_i_t_colabfit_kim_model_colabfit_descriptor_library_docs__enzyme.html#autotoc_md0", null ],
+      [ "Automatic differentiation", "md__home_amit__projects__c_o_l_a_b_f_i_t_colabfit_kim_model_colabfit_descriptor_library_docs__enzyme.html#autotoc_md1", null ],
+      [ "Enzyme simple examples", "md__home_amit__projects__c_o_l_a_b_f_i_t_colabfit_kim_model_colabfit_descriptor_library_docs__enzyme.html#autotoc_md2", [
+        [ "Enzyme Components", "md__home_amit__projects__c_o_l_a_b_f_i_t_colabfit_kim_model_colabfit_descriptor_library_docs__enzyme.html#autotoc_md3", null ]
+      ] ],
+      [ "More Examples", "md__home_amit__projects__c_o_l_a_b_f_i_t_colabfit_kim_model_colabfit_descriptor_library_docs__enzyme.html#autotoc_md4", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -62,8 +74,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_bispectrum_8cpp.html",
-"class_array4_d_1_1j__operator_1_1k__operator_1_1l__operator.html#a96bfb8d7e4f430a96bb33da5a0b535e3",
-"functions_n.html"
+"class_array4_d_1_1j__operator_1_1k__operator_1_1l__operator.html",
+"functions_func_c.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

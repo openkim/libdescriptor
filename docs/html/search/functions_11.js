@@ -10,5 +10,5 @@ var searchData=
   ['_7earray4dview_7',['~Array4DView',['../class_array4_d_view.html#a2ef9f5e20d12596e557a3f39a29f5156',1,'Array4DView']]],
   ['_7earray5d_8',['~Array5D',['../class_array5_d.html#a7548888c34dd8a774bc219e118826a35',1,'Array5D']]],
   ['_7ebispectrum_9',['~Bispectrum',['../class_bispectrum.html#acfad3c7b242f2464c4455a399d785abb',1,'Bispectrum']]],
-  ['_7edescriptorkind_10',['~DescriptorKind',['../class_descriptor_1_1_descriptor_kind.html#a65e8012e117f042ea0f41a833df48c2c',1,'Descriptor::DescriptorKind']]]
+  ['_7edescriptorkind_10',['~DescriptorKind',['../class_descriptor_1_1_descriptor_kind.html#a65e8012e117f042ea0f41a833df48c2c',1,'Descriptor::DescriptorKind::~DescriptorKind()'],['../class_descriptor_1_1_descriptor_kind.html#ade10fb0e58ae4087e6308b60dd44a694',1,'Descriptor::DescriptorKind::~DescriptorKind()']]]
 ];

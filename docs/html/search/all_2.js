@@ -5,6 +5,7 @@ var searchData=
   ['bispectrum_2ehpp_2',['Bispectrum.hpp',['../_bispectrum_8hpp.html',1,'']]],
   ['bispectrum_5floopindices_3',['BISPECTRUM_LOOPINDICES',['../struct_b_i_s_p_e_c_t_r_u_m___l_o_o_p_i_n_d_i_c_e_s.html',1,'']]],
   ['bispectrum_5ftest_2ecpp_4',['bispectrum_test.cpp',['../bispectrum__test_8cpp.html',1,'']]],
-  ['build_5findexlist_5',['build_indexlist',['../class_bispectrum.html#a9ef3c01ea2e7acf5e0dbc051142471d7',1,'Bispectrum']]],
-  ['bvec_6',['bvec',['../class_bispectrum.html#a345ebc04953cd9582932f00eaeb45fe3',1,'Bispectrum']]]
+  ['brief_20introduction_20to_20enzyme_20ad_5',['Brief Introduction to Enzyme AD',['../md__home_amit__projects__c_o_l_a_b_f_i_t_colabfit_kim_model_colabfit_descriptor_library_docs__enzyme.html',1,'']]],
+  ['build_5findexlist_6',['build_indexlist',['../class_bispectrum.html#a9ef3c01ea2e7acf5e0dbc051142471d7',1,'Bispectrum']]],
+  ['bvec_7',['bvec',['../class_bispectrum.html#a345ebc04953cd9582932f00eaeb45fe3',1,'Bispectrum']]]
 ];

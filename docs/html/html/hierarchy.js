@@ -27,6 +27,7 @@ var hierarchy =
     [ "BISPECTRUM_LOOPINDICES", "struct_b_i_s_p_e_c_t_r_u_m___l_o_o_p_i_n_d_i_c_e_s.html", null ],
     [ "Descriptor::DescriptorKind", "class_descriptor_1_1_descriptor_kind.html", [
       [ "Bispectrum", "class_bispectrum.html", null ],
+      [ "PyDescriptorKind", "class_py_descriptor_kind.html", null ],
       [ "SymmetryFunctions", "class_symmetry_functions.html", null ]
     ] ],
     [ "Array2D< DataType >::j_operator", "class_array2_d_1_1j__operator.html", null ],

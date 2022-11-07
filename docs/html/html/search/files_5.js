@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['helper_2ecpp_0',['helper.cpp',['../helper_8cpp.html',1,'']]],
-  ['helper_2ehpp_1',['helper.hpp',['../helper_8hpp.html',1,'']]]
+  ['generate_5fbispectrum_2epy_0',['generate_bispectrum.py',['../generate__bispectrum_8py.html',1,'']]],
+  ['generate_5fsymmetry_5ffunction_2epy_1',['generate_symmetry_function.py',['../generate__symmetry__function_8py.html',1,'']]]
 ];

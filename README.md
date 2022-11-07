@@ -67,7 +67,18 @@ Your build folder should now contain `libdescriptor.so` file, which you can link
 Libdescriptor also provides build target for making `descriptor.cpython-cp3.xx.so` Python module using Pybind11.
 To use it, you need to install Pybind11 on your system
 > Note: pip installation of Pybind11 can cause issues with compiling (it is a known Pybind11 limitation) 
-> so it is recommended to use either system installer like `apt` or `rpm`  or use `conda`.
+> so it is recommended to use either system installer like `apt` or `rpm`  or use `conda`. For pip, `pip install pybind11[global]` 
+> yields best results.
+
+To compile Python bindings give target `libdescriptor`, i.e.
+```shell
+cd build
+cmake .. -DENZYME_LIB=/path/to/*Enzyme.so/files
+make libdescriptor
+```
+This should provide functions to initialize and run descriptors and gradients from Python.
+
+TODO: examples of python API.
 
 ## Descriptors supported (or planned)
 - [x] Behler Symmetry Functions

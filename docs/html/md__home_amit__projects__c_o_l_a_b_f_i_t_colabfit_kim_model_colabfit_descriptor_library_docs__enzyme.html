@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>Libdescriptor: Brief Introduction to Enzyme AD</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/ipcamit/colabfit-descriptor-library" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Libdescriptor
+   </div>
+   <div id="projectbrief">A fully automatic-differentiated high-performance descriptor library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('md__home_amit__projects__c_o_l_a_b_f_i_t_colabfit_kim_model_colabfit_descriptor_library_docs__enzyme.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Brief Introduction to Enzyme AD </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="autotoc_md0"></a>
+Fundamentals of Automatic Differentiation (AD)</h1>
+<p >For a \( \mathbb{R}_n \rightarrow \mathbb{R}_m \) vector function $$ F_{\mathbb{R}_n \rightarrow \mathbb{R}_m}\mathbf{x} = \mathbf{y} $$ the derivative at \( \mathbf{x} \) of can be written in terms of Jacobian of the function and Jacobian-vector product (or vector-Jacobian product), i.e. $$ \frac{ d \mathbf{y}}{d \mathbf{x}}|_\mathbf{x} = \mathbf{y}^T\mathbf{J}^{\mathbf{F}^{-1}}_{m \times n} $$ This approach can be translated more efficiently using directional derivatives in direction of \( \mathbf{y} \). Such an approach sidesteps the complexity of computing the full Jacobian matrix.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Automatic differentiation</h1>
+<p >In Automatic differentiation one can compute the gradients using the Jacobian-vector product of forward function, or using vector-Jacobian product of the inverse function. The AD framework such as Enzyme provides means of generating functions which can take input as the resultant vector \(\mathbf{y}\) and return the vector-Jacobian product to yield gradients w.r.t \(\mathbf{x}\).</p>
+<p >The major advantage of AD is the flexibility to take derivatives against any parameters, including hyperparameters, which sometimes are not trivial to analytically estimate. This provides means to rapidly iterate and optimize descriptors for more accurate results. The major disadvantage of AD frameworks is the lost performance due to "trackers" that are used to invert the function. Enzyme generates highly optimized gradient functions, that offer same order of performance of analytical functions. See benchmarks below for evaluation of different AD frameworks, calculating a 64 atom Si configuration using Stillinger-Weber potential for energy, and AD for forces. One reason why TorchScript come of somewhat worse is that to avoid any cashing, these benchmarks contain average of 10 one-shot computations. Once several warm up runs are allowed, the TorchScript time does come down, but only by a factor of 2 in most optimized cases. So still it is nowhere viable option for large scale computations.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">High lvl frameworks   </th><th class="markdownTableHeadNone">C++ frameworks    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><img src="./E_F.png" alt="" width="400" class="inline"/>   </td><td class="markdownTableBodyNone"><img src="./E_F_C++Updated.png" alt="" width="400" class="inline"/>   </td></tr>
+</table>
+<p >It is clear that as opposed to analytical function (implemented in OpenKIM, called through ASE) popular frameworks like Pytorch suffers from 4 orders of magnitude extra computation time. While Enzyme is only about 4-6 times slower then pure analytical function. When accounted for bookkeeping in OpenKIM, it is a competitive alternative to analytical functions.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Enzyme simple examples</h1>
+<p >Although enzyme offers forward differentiation methods as well, we will focus on reverse diff, as it is currently implemented in <code>libdescriptor</code>. </p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Enzyme Components</h2>
+<p >Enzyme works at compile time by generating the gradient functions. For identifying which functions to differentiate, Enzyme searches for certain strings. Below is a bare minimal valid Enzyme code </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Enzyme arg kinds</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="_descriptors_8cpp.html#a87624c52f428b2a4ae2d098e68ffc834">enzyme_dup</a>, <a class="code hl_variable" href="_descriptors_8cpp.html#af2337452cee889cec5c16b292aa67341">enzyme_const</a>, <a class="code hl_variable" href="_descriptors_8cpp.html#ae3bacb3bcfd36ab4cb4d943f80134855">enzyme_out</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// function to diff</span></div>
+<div class="line"><span class="keywordtype">double</span> pow(<span class="keywordtype">int</span> x, <span class="keywordtype">double</span> y){</div>
+<div class="line">    <span class="keywordtype">double</span> z = 1.0;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; x; i++){</div>
+<div class="line">        z *= y;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> z;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// declaration of diff</span></div>
+<div class="line"><span class="keywordtype">double</span> __enzyme_autodiff_d_pow(<span class="keywordtype">double</span> (*)(<span class="keywordtype">int</span> , <span class="keywordtype">double</span>) <span class="comment">/* pointer to function to diff */</span> , </div>
+<div class="line">                                <span class="keywordtype">int</span> <span class="comment">/* kind of arg */</span>, <span class="keywordtype">int</span> <span class="comment">/* x */</span>, </div>
+<div class="line">                                <span class="keywordtype">int</span> <span class="comment">/* kind of arg */</span>, <span class="keywordtype">double</span> <span class="comment">/* y */</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="a_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(){</div>
+<div class="line">    <span class="keywordtype">int</span> <a class="code hl_variable" href="namespacetmp.html#ab8e4f681c0ce8f11233fe07aba1367f0">x</a> = 3; <span class="keywordtype">double</span> y = 4.0;</div>
+<div class="line">    <span class="comment">// call to gradient</span></div>
+<div class="line">    <span class="keywordtype">double</span> d_pow_y =  __enzyme_autodiff_d_pow(pow, <a class="code hl_variable" href="_descriptors_8cpp.html#af2337452cee889cec5c16b292aa67341">enzyme_const</a>, x, <a class="code hl_variable" href="_descriptors_8cpp.html#ae3bacb3bcfd36ab4cb4d943f80134855">enzyme_out</a>, y);</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Function: &quot;</span> &lt;&lt; pow(x, y) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Derivative: &quot;</span> &lt;&lt; d_pow_y &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="a_descriptors_8cpp_html_a87624c52f428b2a4ae2d098e68ffc834"><div class="ttname"><a href="_descriptors_8cpp.html#a87624c52f428b2a4ae2d098e68ffc834">enzyme_dup</a></div><div class="ttdeci">int enzyme_dup</div><div class="ttdef"><b>Definition:</b> Descriptors.cpp:8</div></div>
+<div class="ttc" id="a_descriptors_8cpp_html_ae3bacb3bcfd36ab4cb4d943f80134855"><div class="ttname"><a href="_descriptors_8cpp.html#ae3bacb3bcfd36ab4cb4d943f80134855">enzyme_out</a></div><div class="ttdeci">int enzyme_out</div><div class="ttdef"><b>Definition:</b> Descriptors.cpp:8</div></div>
+<div class="ttc" id="a_descriptors_8cpp_html_af2337452cee889cec5c16b292aa67341"><div class="ttname"><a href="_descriptors_8cpp.html#af2337452cee889cec5c16b292aa67341">enzyme_const</a></div><div class="ttdeci">int enzyme_const</div><div class="ttdef"><b>Definition:</b> Descriptors.cpp:8</div></div>
+<div class="ttc" id="aa_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="a_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> a.cpp:3</div></div>
+<div class="ttc" id="anamespacetmp_html_ab8e4f681c0ce8f11233fe07aba1367f0"><div class="ttname"><a href="namespacetmp.html#ab8e4f681c0ce8f11233fe07aba1367f0">tmp.x</a></div><div class="ttdeci">x</div><div class="ttdef"><b>Definition:</b> tmp.py:14</div></div>
+</div><!-- fragment --><p >Enzyme recognizes any function that starts with the identifier <code>__enzyme_autodiff</code>. The arguments of the function includes</p>
+<ol type="1">
+<li>Pointer to the function to be differentiated</li>
+<li>Integer indicating what king of arguments will come next</li>
+<li>Arguments to be passed on to function, and to be used for diff</li>
+</ol>
+<p >Most used integer arguments are of three kind, namely <code>enzyme_const</code>, <code>enzyme_dup</code>, <code>enzyme_out</code>. You just need to declare them in your file, and Enzyme will fill out required values. Their meaning are,</p>
+<ol type="1">
+<li><code>enzyme_const</code>: The argument that follows is to be considered as a constant, and to be differentiated against. Usually it is used for integers.</li>
+<li><code>enzyme_out</code>: The argument that follows next is to differentiated against, and results will be returned as a function value.</li>
+<li><code>enzyme_dup</code>: The following argument will accompany a second "shadow argument", which either will save the output of the derivatives, or contain the vector for vector-jacobian product.</li>
+</ol>
+<p >Now to compile the program you need to load the compiler library as </p><div class="fragment"><div class="line">$ clang++ pow.cpp -Xclang -load -Xclang /usr/local/ClangEnzyme-12.so -O2 -o pow.x</div>
+<div class="line">$ ./pow.x</div>
+<div class="line">$ Function: 64</div>
+<div class="line">Derivative: 48</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
+More Examples</h1>
+<p >Here is another example of vector functions to demonstrate vector-jacobian products,</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include&lt;vector&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="_descriptors_8cpp.html#a87624c52f428b2a4ae2d098e68ffc834">enzyme_dup</a>, <a class="code hl_variable" href="_descriptors_8cpp.html#ae3bacb3bcfd36ab4cb4d943f80134855">enzyme_out</a>, <a class="code hl_variable" href="_descriptors_8cpp.html#af2337452cee889cec5c16b292aa67341">enzyme_const</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> vxp(std::vector&lt;double&gt;&amp; vector_in, <span class="keywordtype">double</span> p, <span class="keywordtype">int</span> n, std::vector&lt;double&gt;&amp; vector_out){</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; vector_in.size(); i++){</div>
+<div class="line">            vector_out[i] = std::pow(vector_in[i], n) * p;</div>
+<div class="line">        }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="_descriptors_8cpp.html#a861a9d39635be96a7d5b2773cd10b065">__enzyme_autodiff</a>(</div>
+<div class="line">        <span class="keywordtype">void</span> (*) (std::vector&lt;double&gt;&amp;, <span class="keywordtype">double</span>, <span class="keywordtype">int</span>, std::vector&lt;double&gt;&amp; ), <span class="comment">//*tr to vec func </span></div>
+<div class="line">        <span class="keywordtype">int</span>, std::vector&lt;double&gt;&amp;, std::vector&lt;double&gt;&amp;, <span class="comment">// input vector, grad_vector</span></div>
+<div class="line">        <span class="keywordtype">int</span>, <span class="keywordtype">double</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="comment">// const arguments</span></div>
+<div class="line">        <span class="keywordtype">int</span>, std::vector&lt;double&gt;&amp;, std::vector&lt;double&gt;&amp;); <span class="comment">//resultant vector for vjp</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="a_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(){</div>
+<div class="line">    <span class="comment">// Initialize values</span></div>
+<div class="line">    <span class="keywordtype">double</span> p = 2.0; <span class="keywordtype">int</span> n = 3;</div>
+<div class="line">    std::vector&lt;double&gt; vector_in(5), d_vector_in(5), vector_out(5), d_vector_out(5);</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 5 ; i++){</div>
+<div class="line">        vector_in[i] = i; <span class="comment">// input vector</span></div>
+<div class="line">        d_vector_in[i] = 0.0; <span class="comment">// vector to save gradient w.r.t input</span></div>
+<div class="line">        vector_out[i] = 0.0; <span class="comment">// output vector</span></div>
+<div class="line">        d_vector_out[i] = 1.0; <span class="comment">// vector to left multiply to jacobian</span></div>
+<div class="line">    }</div>
+<div class="line">    <a class="code hl_function" href="_descriptors_8cpp.html#a861a9d39635be96a7d5b2773cd10b065">__enzyme_autodiff</a>(vxp, </div>
+<div class="line">            <a class="code hl_variable" href="_descriptors_8cpp.html#a87624c52f428b2a4ae2d098e68ffc834">enzyme_dup</a>, vector_in, d_vector_in, </div>
+<div class="line">            <a class="code hl_variable" href="_descriptors_8cpp.html#af2337452cee889cec5c16b292aa67341">enzyme_const</a>, p, <a class="code hl_variable" href="_descriptors_8cpp.html#af2337452cee889cec5c16b292aa67341">enzyme_const</a>, n, </div>
+<div class="line">            <a class="code hl_variable" href="_descriptors_8cpp.html#a87624c52f428b2a4ae2d098e68ffc834">enzyme_dup</a>, vector_out, d_vector_out);</div>
+<div class="line"> </div>
+<div class="line">    std::cout &lt;&lt; vector_in[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; vector_in[4] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; vector_out[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; vector_out[4] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; d_vector_in[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; d_vector_in[4] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; d_vector_out[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; d_vector_out[4] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="a_descriptors_8cpp_html_a861a9d39635be96a7d5b2773cd10b065"><div class="ttname"><a href="_descriptors_8cpp.html#a861a9d39635be96a7d5b2773cd10b065">__enzyme_autodiff</a></div><div class="ttdeci">void __enzyme_autodiff(void(*)(int, int *, int *, int *, double *, double *, DescriptorKind *), int, int, int, int *, int, int *, int, int *, int, double *, double *, int, double *, double *, int, DescriptorKind *, DescriptorKind *)</div></div>
+</div><!-- fragment --><p >The main idea to notice in above example is the initialization of <code>d_vector_out</code> for unity and passing it along for differentiation. It the the vector that will be left multiplied to the jacobian, or along which direction the directional derivative will be computed. In practical usage, it will be the derivative of energy with respect to the descriptors, which will form input to the descriptor gradient function. Both expected gradient and supplied vector are indicated by shadow argument indicator <code>enzyme_dup</code>. </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

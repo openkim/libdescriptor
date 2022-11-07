@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Doxygen Awesome" />
 <meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
 <!-- END twitter metadata -->
-<title>KIM Descriptor Library: /home/amit/Projects/COLABFIT/colabfit-kim-model/colabfit-descriptor-library/SymmetryFunctions/SymmetryFunctions.hpp Source File</title>
+<title>Libdescriptor: /home/amit/Projects/COLABFIT/colabfit-kim-model/colabfit-descriptor-library/SymmetryFunctions/SymmetryFunctions.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -64,7 +64,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">KIM Descriptor Library
+   <div id="projectname">Libdescriptor
    </div>
    <div id="projectbrief">A fully automatic-differentiated high-performance descriptor library.</div>
   </td>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('_symmetry_functions_8hpp_source.html',
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SYMMETRY_FUNCTION_HPP_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="helper_8hpp.html">helper.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="_descriptors_8hpp.html">Descriptors.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;Descriptors.hpp&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;numeric&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
@@ -160,68 +160,71 @@ $(document).ready(function(){initNavTree('_symmetry_functions_8hpp_source.html',
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="comment">// In KLIFF a utility will create in memory file for initiaization?</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="comment">// TODO create apropriate constructor</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="class_symmetry_functions.html#aa3706a6bd3d1b82b3440eaa513d6f67d">SymmetryFunctions</a>(std::string &amp;file_name);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#a4d29bd7828d488e621cf3a565e1fd5d6">initFromFile</a>(std::string &amp;file_name);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_symmetry_functions.html#aa3706a6bd3d1b82b3440eaa513d6f67d">   30</a></span>    <a class="code hl_function" href="class_symmetry_functions.html#aa3706a6bd3d1b82b3440eaa513d6f67d">SymmetryFunctions</a>(){};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#a4d29bd7828d488e621cf3a565e1fd5d6">initFromFile</a>(std::string &amp;file_name);</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#a3d26111e543d8410ca8d11d978408ca1">compute</a>(<span class="keywordtype">int</span> index,</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                 <span class="keywordtype">int</span> n_atoms,</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                 <span class="keywordtype">int</span> *species,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                 <span class="keywordtype">int</span> *neigh_list,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                 <span class="keywordtype">int</span> number_of_neigh,</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                 <span class="keywordtype">double</span> *coords,</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                 <span class="keywordtype">double</span> *zeta) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#ab3c94123591e4f56b56ab7517c1a0d5e">clone_empty</a>(<a class="code hl_class" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> * descriptorKind);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">int</span> n_species;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="class_symmetry_functions.html#aa3706a6bd3d1b82b3440eaa513d6f67d">   32</a></span>    <a class="code hl_function" href="class_symmetry_functions.html#aa3706a6bd3d1b82b3440eaa513d6f67d">SymmetryFunctions</a>() {};</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#a3d26111e543d8410ca8d11d978408ca1">compute</a>(<span class="keywordtype">int</span> index,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                 <span class="keywordtype">int</span> n_atoms,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                 <span class="keywordtype">int</span> *species,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                 <span class="keywordtype">int</span> *neigh_list,</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                 <span class="keywordtype">int</span> number_of_neigh,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                 <span class="keywordtype">double</span> *coords,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                 <span class="keywordtype">double</span> *zeta) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#ab3c94123591e4f56b56ab7517c1a0d5e">clone_empty</a>(<a class="code hl_class" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *descriptorKind);</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">bool</span> has_three_body_;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e">set_species</a>(std::vector&lt;std::string&gt; &amp;species);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> set_species(std::vector&lt;std::string&gt; &amp;species);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#a7e4bf55f2ff6ed7e1def9a1bec4aa933">get_species</a>(std::vector&lt;std::string&gt; &amp;species);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> get_species(std::vector&lt;std::string&gt; &amp;species);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code hl_function" href="class_symmetry_functions.html#a509366cc3f43bd17cbfd8cf5248aee33">get_num_species</a>();</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">inline</span> <span class="keywordtype">int</span> get_num_species();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">void</span> set_cutoff(<span class="keywordtype">char</span> <span class="keyword">const</span> *name,</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                    std::size_t Nspecies,</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                    <span class="keywordtype">double</span> <span class="keyword">const</span> *rcut_2D);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#a9181047c5489bd230d4eaf988ca365b2">set_cutoff</a>(<span class="keywordtype">char</span> <span class="keyword">const</span> *name,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                    std::size_t Nspecies,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                    <span class="keywordtype">double</span> <span class="keyword">const</span> *rcut_2D);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="class_symmetry_functions.html#a4819fe75db4cc46a707d1992fb666445">get_cutoff</a>(<span class="keywordtype">int</span> iCode, <span class="keywordtype">int</span> jCode);</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">inline</span> <span class="keywordtype">double</span> get_cutoff(<span class="keywordtype">int</span> iCode, <span class="keywordtype">int</span> jCode);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> add_descriptor(<span class="keywordtype">char</span> <span class="keyword">const</span> *name,</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> *values,</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                        <span class="keywordtype">int</span> row,</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                        <span class="keywordtype">int</span> col);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_symmetry_functions.html#aaa24d083e14f4907758455e9b0dbbcc2">add_descriptor</a>(<span class="keywordtype">char</span> <span class="keyword">const</span> *name,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> *values,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                        <span class="keywordtype">int</span> row,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                        <span class="keywordtype">int</span> col);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_symmetry_functions.html#aa9c4fa5da6ee72760ada60a2b66cca6f">get_num_descriptors</a>();</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">int</span> get_num_descriptors();</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">double</span> bhor2ang = 0.529177;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    std::vector&lt;std::string&gt; species_;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    std::vector&lt;int&gt; name_;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    std::vector&lt;int&gt; starting_index_;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_class" href="class_array2_d.html">Array2D&lt;double&gt;</a> rcut_2D_;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    std::vector&lt;Array2D&lt;double&gt; &gt; params_;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    std::vector&lt;int&gt; num_param_sets_;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    std::vector&lt;int&gt; num_params_;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#aede8f5f8bd20e9dc2091e312b2c5b3e7">cut_cos</a>(<span class="keywordtype">double</span> r, <span class="keywordtype">double</span> rcut);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="comment">// Symmetry functions: Jorg Behler, J. Chem. Phys. 134, 074106, 2011.</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">int</span> n_species;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">bool</span> has_three_body_;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">double</span> bhor2ang = 0.529177;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    std::vector&lt;std::string&gt; species_;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    std::vector&lt;int&gt; name_;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    std::vector&lt;int&gt; starting_index_;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_class" href="class_array2_d.html">Array2D&lt;double&gt;</a> rcut_2D_;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    std::vector&lt;Array2D&lt;double&gt; &gt; params_;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    std::vector&lt;int&gt; num_param_sets_;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    std::vector&lt;int&gt; num_params_;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>};</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#a0eeb58979ac3ba74f2a3576a1790ece8">sym_g1</a>(<span class="keywordtype">double</span> r, <span class="keywordtype">double</span> rcut, <span class="keywordtype">double</span> &amp;phi);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#adff4e05f47f083bc2ef73ac503ca4ea5">sym_g2</a>(<span class="keywordtype">double</span> eta, <span class="keywordtype">double</span> Rs, <span class="keywordtype">double</span> r, <span class="keywordtype">double</span> rcut, <span class="keywordtype">double</span> &amp;phi);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#a53055973961ada5bc681523a76ec17bd">sym_g3</a>(<span class="keywordtype">double</span> kappa, <span class="keywordtype">double</span> r, <span class="keywordtype">double</span> rcut, <span class="keywordtype">double</span> &amp;phi);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#ad25e2bcbb483a662c2d5af7dd173feab">sym_g4</a>(<span class="keywordtype">double</span> zeta, <span class="keywordtype">double</span> lambda, <span class="keywordtype">double</span> eta, <span class="keywordtype">double</span> <span class="keyword">const</span> *r, <span class="keywordtype">double</span> <span class="keyword">const</span> *rcut, <span class="keywordtype">double</span> &amp;phi);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#a9ebd26383a9c63cf66b633ef1c865e41">sym_g5</a>(<span class="keywordtype">double</span> zeta, <span class="keywordtype">double</span> lambda, <span class="keywordtype">double</span> eta, <span class="keywordtype">double</span> <span class="keyword">const</span> *r, <span class="keywordtype">double</span> <span class="keyword">const</span> *rcut, <span class="keywordtype">double</span> &amp;phi);</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="preprocessor">#endif  </span><span class="comment">// SYMMETRY_FUNCTION_HPP_</span></div>
-<div class="ttc" id="a_descriptors_8hpp_html"><div class="ttname"><a href="_descriptors_8hpp.html">Descriptors.hpp</a></div></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#aede8f5f8bd20e9dc2091e312b2c5b3e7">cut_cos</a>(<span class="keywordtype">double</span> r, <span class="keywordtype">double</span> rcut);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">// Symmetry functions: Jorg Behler, J. Chem. Phys. 134, 074106, 2011.</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#a0eeb58979ac3ba74f2a3576a1790ece8">sym_g1</a>(<span class="keywordtype">double</span> r, <span class="keywordtype">double</span> rcut, <span class="keywordtype">double</span> &amp;phi);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#adff4e05f47f083bc2ef73ac503ca4ea5">sym_g2</a>(<span class="keywordtype">double</span> eta, <span class="keywordtype">double</span> Rs, <span class="keywordtype">double</span> r, <span class="keywordtype">double</span> rcut, <span class="keywordtype">double</span> &amp;phi);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#a53055973961ada5bc681523a76ec17bd">sym_g3</a>(<span class="keywordtype">double</span> kappa, <span class="keywordtype">double</span> r, <span class="keywordtype">double</span> rcut, <span class="keywordtype">double</span> &amp;phi);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#ad25e2bcbb483a662c2d5af7dd173feab">sym_g4</a>(<span class="keywordtype">double</span> zeta, <span class="keywordtype">double</span> lambda, <span class="keywordtype">double</span> eta, <span class="keywordtype">double</span> <span class="keyword">const</span> *r, <span class="keywordtype">double</span> <span class="keyword">const</span> *rcut, <span class="keywordtype">double</span> &amp;phi);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="keywordtype">void</span> <a class="code hl_function" href="_symmetry_functions_8hpp.html#a9ebd26383a9c63cf66b633ef1c865e41">sym_g5</a>(<span class="keywordtype">double</span> zeta, <span class="keywordtype">double</span> lambda, <span class="keywordtype">double</span> eta, <span class="keywordtype">double</span> <span class="keyword">const</span> *r, <span class="keywordtype">double</span> <span class="keyword">const</span> *rcut, <span class="keywordtype">double</span> &amp;phi);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="preprocessor">#endif  </span><span class="comment">// SYMMETRY_FUNCTION_HPP_</span></div>
 <div class="ttc" id="a_symmetry_functions_8hpp_html_a0eeb58979ac3ba74f2a3576a1790ece8"><div class="ttname"><a href="_symmetry_functions_8hpp.html#a0eeb58979ac3ba74f2a3576a1790ece8">sym_g1</a></div><div class="ttdeci">void sym_g1(double r, double rcut, double &amp;phi)</div><div class="ttdoc">Radial symmetry function g1 suitable for describing the radial environment of atom i.</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:133</div></div>
 <div class="ttc" id="a_symmetry_functions_8hpp_html_a53055973961ada5bc681523a76ec17bd"><div class="ttname"><a href="_symmetry_functions_8hpp.html#a53055973961ada5bc681523a76ec17bd">sym_g3</a></div><div class="ttdeci">void sym_g3(double kappa, double r, double rcut, double &amp;phi)</div><div class="ttdoc">Radial symmetry function g3 suitable for describing the radial environment of atom i.</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:125</div></div>
 <div class="ttc" id="a_symmetry_functions_8hpp_html_a9ebd26383a9c63cf66b633ef1c865e41"><div class="ttname"><a href="_symmetry_functions_8hpp.html#a9ebd26383a9c63cf66b633ef1c865e41">sym_g5</a></div><div class="ttdeci">void sym_g5(double zeta, double lambda, double eta, double const *r, double const *rcut, double &amp;phi)</div><div class="ttdoc">Summations of cosine functions of the angles centered at atom i.</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:71</div></div>
@@ -231,11 +234,18 @@ $(document).ready(function(){initNavTree('_symmetry_functions_8hpp_source.html',
 <div class="ttc" id="a_symmetry_functions_8hpp_html_adff4e05f47f083bc2ef73ac503ca4ea5"><div class="ttname"><a href="_symmetry_functions_8hpp.html#adff4e05f47f083bc2ef73ac503ca4ea5">sym_g2</a></div><div class="ttdeci">void sym_g2(double eta, double Rs, double r, double rcut, double &amp;phi)</div><div class="ttdoc">Radial symmetry function g2 suitable for describing the radial environment of atom i.</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:129</div></div>
 <div class="ttc" id="a_symmetry_functions_8hpp_html_aede8f5f8bd20e9dc2091e312b2c5b3e7"><div class="ttname"><a href="_symmetry_functions_8hpp.html#aede8f5f8bd20e9dc2091e312b2c5b3e7">cut_cos</a></div><div class="ttdeci">double cut_cos(double r, double rcut)</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:63</div></div>
 <div class="ttc" id="aclass_array2_d_html"><div class="ttname"><a href="class_array2_d.html">Array2D</a></div><div class="ttdoc">A 2-dimensional STL like container that encapsulates dynamic size arrays with a 2-dimensional shape i...</div><div class="ttdef"><b>Definition:</b> helper.hpp:660</div></div>
-<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></div><div class="ttdoc">Base class for all descriptors.</div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:137</div></div>
+<div class="ttc" id="aclass_descriptor_1_1_descriptor_kind_html"><div class="ttname"><a href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></div><div class="ttdoc">Base class for all descriptors.</div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:139</div></div>
 <div class="ttc" id="aclass_symmetry_functions_html"><div class="ttname"><a href="class_symmetry_functions.html">SymmetryFunctions</a></div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.hpp:24</div></div>
 <div class="ttc" id="aclass_symmetry_functions_html_a3d26111e543d8410ca8d11d978408ca1"><div class="ttname"><a href="class_symmetry_functions.html#a3d26111e543d8410ca8d11d978408ca1">SymmetryFunctions::compute</a></div><div class="ttdeci">void compute(int index, int n_atoms, int *species, int *neigh_list, int number_of_neigh, double *coords, double *zeta) override</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:137</div></div>
+<div class="ttc" id="aclass_symmetry_functions_html_a4819fe75db4cc46a707d1992fb666445"><div class="ttname"><a href="class_symmetry_functions.html#a4819fe75db4cc46a707d1992fb666445">SymmetryFunctions::get_cutoff</a></div><div class="ttdeci">double get_cutoff(int iCode, int jCode)</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:35</div></div>
 <div class="ttc" id="aclass_symmetry_functions_html_a4d29bd7828d488e621cf3a565e1fd5d6"><div class="ttname"><a href="class_symmetry_functions.html#a4d29bd7828d488e621cf3a565e1fd5d6">SymmetryFunctions::initFromFile</a></div><div class="ttdeci">void initFromFile(std::string &amp;file_name)</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:262</div></div>
-<div class="ttc" id="aclass_symmetry_functions_html_aa3706a6bd3d1b82b3440eaa513d6f67d"><div class="ttname"><a href="class_symmetry_functions.html#aa3706a6bd3d1b82b3440eaa513d6f67d">SymmetryFunctions::SymmetryFunctions</a></div><div class="ttdeci">SymmetryFunctions()</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.hpp:30</div></div>
+<div class="ttc" id="aclass_symmetry_functions_html_a509366cc3f43bd17cbfd8cf5248aee33"><div class="ttname"><a href="class_symmetry_functions.html#a509366cc3f43bd17cbfd8cf5248aee33">SymmetryFunctions::get_num_species</a></div><div class="ttdeci">int get_num_species()</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:26</div></div>
+<div class="ttc" id="aclass_symmetry_functions_html_a7e4bf55f2ff6ed7e1def9a1bec4aa933"><div class="ttname"><a href="class_symmetry_functions.html#a7e4bf55f2ff6ed7e1def9a1bec4aa933">SymmetryFunctions::get_species</a></div><div class="ttdeci">void get_species(std::vector&lt; std::string &gt; &amp;species)</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:21</div></div>
+<div class="ttc" id="aclass_symmetry_functions_html_a9181047c5489bd230d4eaf988ca365b2"><div class="ttname"><a href="class_symmetry_functions.html#a9181047c5489bd230d4eaf988ca365b2">SymmetryFunctions::set_cutoff</a></div><div class="ttdeci">void set_cutoff(char const *name, std::size_t Nspecies, double const *rcut_2D)</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:28</div></div>
+<div class="ttc" id="aclass_symmetry_functions_html_a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e"><div class="ttname"><a href="class_symmetry_functions.html#a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e">SymmetryFunctions::set_species</a></div><div class="ttdeci">void set_species(std::vector&lt; std::string &gt; &amp;species)</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:16</div></div>
+<div class="ttc" id="aclass_symmetry_functions_html_aa3706a6bd3d1b82b3440eaa513d6f67d"><div class="ttname"><a href="class_symmetry_functions.html#aa3706a6bd3d1b82b3440eaa513d6f67d">SymmetryFunctions::SymmetryFunctions</a></div><div class="ttdeci">SymmetryFunctions()</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.hpp:32</div></div>
+<div class="ttc" id="aclass_symmetry_functions_html_aa9c4fa5da6ee72760ada60a2b66cca6f"><div class="ttname"><a href="class_symmetry_functions.html#aa9c4fa5da6ee72760ada60a2b66cca6f">SymmetryFunctions::get_num_descriptors</a></div><div class="ttdeci">int get_num_descriptors()</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:67</div></div>
+<div class="ttc" id="aclass_symmetry_functions_html_aaa24d083e14f4907758455e9b0dbbcc2"><div class="ttname"><a href="class_symmetry_functions.html#aaa24d083e14f4907758455e9b0dbbcc2">SymmetryFunctions::add_descriptor</a></div><div class="ttdeci">void add_descriptor(char const *name, double const *values, int row, int col)</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:39</div></div>
 <div class="ttc" id="aclass_symmetry_functions_html_ab3c94123591e4f56b56ab7517c1a0d5e"><div class="ttname"><a href="class_symmetry_functions.html#ab3c94123591e4f56b56ab7517c1a0d5e">SymmetryFunctions::clone_empty</a></div><div class="ttdeci">void clone_empty(DescriptorKind *descriptorKind)</div><div class="ttdef"><b>Definition:</b> SymmetryFunctions.cpp:377</div></div>
 <div class="ttc" id="ahelper_8hpp_html"><div class="ttname"><a href="helper_8hpp.html">helper.hpp</a></div></div>
 <div class="ttc" id="anamespace_descriptor_html"><div class="ttname"><a href="namespace_descriptor.html">Descriptor</a></div><div class="ttdoc">Namespace containing all required classes and methods for generating descriptors, as well as their de...</div><div class="ttdef"><b>Definition:</b> Descriptors.hpp:19</div></div>

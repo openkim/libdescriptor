@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Doxygen Awesome" />
 <meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
 <!-- END twitter metadata -->
-<title>KIM Descriptor Library: SymmetryFunctions Class Reference</title>
+<title>Libdescriptor: SymmetryFunctions Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -64,7 +64,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">KIM Descriptor Library
+   <div id="projectname">Libdescriptor
    </div>
    <div id="projectbrief">A fully automatic-differentiated high-performance descriptor library.</div>
   </td>
@@ -155,13 +155,33 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3d26111e543d8410ca8d11d978408ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3c94123591e4f56b56ab7517c1a0d5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetry_functions.html#ab3c94123591e4f56b56ab7517c1a0d5e">clone_empty</a> (<a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *descriptorKind)</td></tr>
 <tr class="separator:ab3c94123591e4f56b56ab7517c1a0d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetry_functions.html#a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e">set_species</a> (std::vector&lt; std::string &gt; &amp;species)</td></tr>
+<tr class="separator:a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e4bf55f2ff6ed7e1def9a1bec4aa933"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetry_functions.html#a7e4bf55f2ff6ed7e1def9a1bec4aa933">get_species</a> (std::vector&lt; std::string &gt; &amp;species)</td></tr>
+<tr class="separator:a7e4bf55f2ff6ed7e1def9a1bec4aa933"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a509366cc3f43bd17cbfd8cf5248aee33"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetry_functions.html#a509366cc3f43bd17cbfd8cf5248aee33">get_num_species</a> ()</td></tr>
+<tr class="separator:a509366cc3f43bd17cbfd8cf5248aee33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9181047c5489bd230d4eaf988ca365b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetry_functions.html#a9181047c5489bd230d4eaf988ca365b2">set_cutoff</a> (char const *name, std::size_t Nspecies, double const *rcut_2D)</td></tr>
+<tr class="separator:a9181047c5489bd230d4eaf988ca365b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4819fe75db4cc46a707d1992fb666445"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetry_functions.html#a4819fe75db4cc46a707d1992fb666445">get_cutoff</a> (int iCode, int jCode)</td></tr>
+<tr class="separator:a4819fe75db4cc46a707d1992fb666445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa24d083e14f4907758455e9b0dbbcc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetry_functions.html#aaa24d083e14f4907758455e9b0dbbcc2">add_descriptor</a> (char const *name, double const *values, int row, int col)</td></tr>
+<tr class="separator:aaa24d083e14f4907758455e9b0dbbcc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c4fa5da6ee72760ada60a2b66cca6f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetry_functions.html#aa9c4fa5da6ee72760ada60a2b66cca6f">get_num_descriptors</a> ()</td></tr>
+<tr class="separator:aa9c4fa5da6ee72760ada60a2b66cca6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_descriptor_1_1_descriptor_kind"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_descriptor_1_1_descriptor_kind')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td></tr>
 <tr class="memitem:ab8724562546a63951f935a43402199e8 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#ab8724562546a63951f935a43402199e8">DescriptorKind</a> ()=default</td></tr>
 <tr class="separator:ab8724562546a63951f935a43402199e8 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3573ccdd4199210eb2f1f77268ad6594 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a3573ccdd4199210eb2f1f77268ad6594">compute</a> (int index, int n_atoms, int *species, int *neighbor_lists, int number_of_neighbors, double *coordinates, double *desc)=0</td></tr>
 <tr class="separator:a3573ccdd4199210eb2f1f77268ad6594 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65e8012e117f042ea0f41a833df48c2c inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a65e8012e117f042ea0f41a833df48c2c">~DescriptorKind</a> ()</td></tr>
+<tr class="memitem:a65e8012e117f042ea0f41a833df48c2c inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a65e8012e117f042ea0f41a833df48c2c">~DescriptorKind</a> ()</td></tr>
 <tr class="separator:a65e8012e117f042ea0f41a833df48c2c inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8724562546a63951f935a43402199e8 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#ab8724562546a63951f935a43402199e8">DescriptorKind</a> ()=default</td></tr>
+<tr class="separator:ab8724562546a63951f935a43402199e8 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3573ccdd4199210eb2f1f77268ad6594 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a3573ccdd4199210eb2f1f77268ad6594">compute</a> (int index, int n_atoms, int *species, int *neighbor_lists, int number_of_neighbors, double *coordinates, double *desc)=0</td></tr>
+<tr class="separator:a3573ccdd4199210eb2f1f77268ad6594 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade10fb0e58ae4087e6308b60dd44a694 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#ade10fb0e58ae4087e6308b60dd44a694">~DescriptorKind</a> ()</td></tr>
+<tr class="separator:ade10fb0e58ae4087e6308b60dd44a694 inherit pub_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -171,6 +191,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aec4683819520a8207a9b2730dd913821 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6a21c270cebdf33b5f82e3acba3b8c inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a0b6a21c270cebdf33b5f82e3acba3b8c">initDescriptor</a> (std::string &amp;file_name, <a class="el" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a> availableDescriptorKind)</td></tr>
 <tr class="separator:a0b6a21c270cebdf33b5f82e3acba3b8c inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e0acd8ed07e73f601d0449872b4bbc3 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a1e0acd8ed07e73f601d0449872b4bbc3">initDescriptor</a> (<a class="el" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a> availableDescriptorKind)</td></tr>
+<tr class="memdesc:a1e0acd8ed07e73f601d0449872b4bbc3 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize an empty descriptor of a kind.  <a href="class_descriptor_1_1_descriptor_kind.html#a1e0acd8ed07e73f601d0449872b4bbc3">More...</a><br /></td></tr>
+<tr class="separator:a1e0acd8ed07e73f601d0449872b4bbc3 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a522dce3a111f783a43de7ff171033415 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_descriptor_1_1_descriptor_kind.html">DescriptorKind</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#a522dce3a111f783a43de7ff171033415">initDescriptor</a> (std::string &amp;file_name, <a class="el" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a> availableDescriptorKind)</td></tr>
+<tr class="separator:a522dce3a111f783a43de7ff171033415 inherit pub_static_methods_class_descriptor_1_1_descriptor_kind"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_descriptor_1_1_descriptor_kind"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_descriptor_1_1_descriptor_kind')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_descriptor_1_1_descriptor_kind.html">Descriptor::DescriptorKind</a></td></tr>
 <tr class="memitem:afa467126385a5c9fe79c8683f2b1e8e4 inherit pub_attribs_class_descriptor_1_1_descriptor_kind"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_descriptor.html#a2415ec0ae21efc317acf3d49abe6ed9a">AvailableDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_descriptor_1_1_descriptor_kind.html#afa467126385a5c9fe79c8683f2b1e8e4">descriptor_kind</a></td></tr>
 <tr class="memdesc:afa467126385a5c9fe79c8683f2b1e8e4 inherit pub_attribs_class_descriptor_1_1_descriptor_kind"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kind of instantiated descriptor, will be used in creating clone for AD.  <a href="class_descriptor_1_1_descriptor_kind.html#afa467126385a5c9fe79c8683f2b1e8e4">More...</a><br /></td></tr>
@@ -235,6 +260,46 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaa24d083e14f4907758455e9b0dbbcc2" name="aaa24d083e14f4907758455e9b0dbbcc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa24d083e14f4907758455e9b0dbbcc2">&#9670;&#160;</a></span>add_descriptor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SymmetryFunctions::add_descriptor </td>
+          <td>(</td>
+          <td class="paramtype">char const *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const *&#160;</td>
+          <td class="paramname"><em>values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>col</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab3c94123591e4f56b56ab7517c1a0d5e" name="ab3c94123591e4f56b56ab7517c1a0d5e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3c94123591e4f56b56ab7517c1a0d5e">&#9670;&#160;</a></span>clone_empty()</h2>
 
@@ -334,6 +399,110 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a4819fe75db4cc46a707d1992fb666445" name="a4819fe75db4cc46a707d1992fb666445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4819fe75db4cc46a707d1992fb666445">&#9670;&#160;</a></span>get_cutoff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double SymmetryFunctions::get_cutoff </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iCode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>jCode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9c4fa5da6ee72760ada60a2b66cca6f" name="aa9c4fa5da6ee72760ada60a2b66cca6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c4fa5da6ee72760ada60a2b66cca6f">&#9670;&#160;</a></span>get_num_descriptors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SymmetryFunctions::get_num_descriptors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a509366cc3f43bd17cbfd8cf5248aee33" name="a509366cc3f43bd17cbfd8cf5248aee33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a509366cc3f43bd17cbfd8cf5248aee33">&#9670;&#160;</a></span>get_num_species()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SymmetryFunctions::get_num_species </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7e4bf55f2ff6ed7e1def9a1bec4aa933" name="a7e4bf55f2ff6ed7e1def9a1bec4aa933"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e4bf55f2ff6ed7e1def9a1bec4aa933">&#9670;&#160;</a></span>get_species()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SymmetryFunctions::get_species </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>species</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4d29bd7828d488e621cf3a565e1fd5d6" name="a4d29bd7828d488e621cf3a565e1fd5d6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d29bd7828d488e621cf3a565e1fd5d6">&#9670;&#160;</a></span>initFromFile()</h2>
 
@@ -348,6 +517,66 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9181047c5489bd230d4eaf988ca365b2" name="a9181047c5489bd230d4eaf988ca365b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9181047c5489bd230d4eaf988ca365b2">&#9670;&#160;</a></span>set_cutoff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SymmetryFunctions::set_cutoff </td>
+          <td>(</td>
+          <td class="paramtype">char const *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>Nspecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const *&#160;</td>
+          <td class="paramname"><em>rcut_2D</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e" name="a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ac9545b7ef4aaeaa4b0be8f9ecbdf3e">&#9670;&#160;</a></span>set_species()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SymmetryFunctions::set_species </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>species</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
