@@ -41,11 +41,6 @@ public:
 
     void clone_empty(DescriptorKind *descriptorKind);
 
-private:
-    int n_species;
-
-    bool has_three_body_;
-
     inline void set_species(std::vector<std::string> &species);
 
     inline void get_species(std::vector<std::string> &species);
@@ -64,6 +59,12 @@ private:
                         int col);
 
     int get_num_descriptors();
+
+
+private:
+    int n_species;
+
+    bool has_three_body_;
 
     double bhor2ang = 0.529177;
     std::vector<std::string> species_;

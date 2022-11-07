@@ -1,133 +1,112 @@
-#include <iostream>
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
-#include <fstream>
 #include <vector>
+#include <string>
 #include "Descriptors.hpp"
 
 namespace py = pybind11;
+using namespace Descriptor;
 
-PYBIND11_MODULE(descriptors, m) {
-    m.doc() = "Symmetry function descriptor for ANN potential.";
+class PyDescriptorKind : public DescriptorKind {
+public:
+    using DescriptorKind::DescriptorKind;
 
-    py::class_<SymmetryFunctionParams>(m, "SymmetryFunctionParams")
+    void compute(int index,
+                 int n_atoms,
+                 int *species,
+                 int *neighbor_lists,
+                 int number_of_neighbors,
+                 double *coordinates,
+                 double *desc) override {
+        PYBIND11_OVERRIDE_PURE(void, DescriptorKind, compute,
+                               index, n_atoms, species, neighbor_lists, number_of_neighbors, coordinates, desc
+        );
+    };
+};
+
+PYBIND11_MODULE(libdescriptor, m) {
+    m.doc() = "Python interface to libdescriptor";
+
+    py::enum_<AvailableDescriptor>(m, "AvailableDescriptors")
+            .value("Bispectrum", AvailableDescriptor::KindBispectrum)
+            .value("SymmetryFunctions", AvailableDescriptor::KindSymmetryFunctions);
+
+    py::class_<DescriptorKind, PyDescriptorKind>(m, "DescriptorKind")
             .def(py::init<>())
-//      .def(py::init<SymmetryFunctionParams const &>())
+            .def("init_descriptor", py::overload_cast<AvailableDescriptor>(&DescriptorKind::initDescriptor))
+            .def("init_descriptor",
+                 py::overload_cast<std::string &, AvailableDescriptor>(&DescriptorKind::initDescriptor))
+            .def("compute",
+                 [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
+                    py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
+                    py::array_t<double, py::array::c_style | py::array::forcecast> &coords) {
+                     int n_atoms = static_cast<int>(coords.shape(0));
+                     int n_neigh = static_cast<int>(neighbors.shape(0));
+                     auto desc = new double[ds.width];
+                     for (int i = 0; i < ds.width; i++) desc[i] = 0.0;
+                     ds.compute(index,
+                                n_atoms,
+                                const_cast<int *>(species.data(0)),
+                                const_cast<int *>(neighbors.data(0)),
+                                n_neigh,
+                                const_cast<double *>(coords.data(0)),
+                                desc);
 
-            .def("get_num_descriptors", &SymmetryFunctionParams::get_num_descriptors)
+                     py::array_t<double> desc_array(ds.width, desc);
+                     return desc_array;
+                 }, py::return_value_policy::take_ownership)
+            .def_readwrite("param_file", &DescriptorKind::descriptor_param_file)
+            .def_readwrite("kind", &DescriptorKind::descriptor_kind)
+            .def_readwrite("width", &DescriptorKind::width);
 
-            .def(
-                    "set_cutoff",
-                    [](SymmetryFunctionParams &d, char *name, py::array_t<double> rcuts) {
-                        d.set_cutoff(name, rcuts.shape(0), rcuts.data(0));
-                        return;
-                    },
-                    py::arg("name"),
-                    py::arg("rcuts").noconvert())
+    //#TODO add individual descriptors
 
-            .def(
-                    "add_descriptor",
-                    [](SymmetryFunctionParams &d, char *name, py::array_t<double> values) {
-                        auto rows = values.shape(0);
-                        auto cols = values.shape(1);
-                        d.add_descriptor(name, values.data(0), rows, cols);
-                        return;
-                    },
-                    py::arg("name"),
-                    py::arg("values").noconvert())
-            .def(
-                    "num_params",
-                    [](SymmetryFunctionParams &d) {
-                        return py::array(py::buffer_info(
-                                d.num_params_.data(),
-                                sizeof(int),
-                                py::format_descriptor<int>::format(),
-                                1,
-                                {d.num_params_.size()},
-                                {sizeof(int)}
-                        ));
-                    }
-            );
+    // m.def("compute", &compute, "Compute descriptor for complete configuration.");
+    m.def("compute_single_atom",
+          [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
+             py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
+             py::array_t<double, py::array::c_style | py::array::forcecast> &coordinates) {
+              int n_atoms = static_cast<int>(coordinates.shape(0));
+              int n_neigh = static_cast<int>(neighbors.shape(0));
+              auto desc = new double[ds.width];
+              for (int i = 0; i < ds.width; i++) desc[i] = 0.0;
+              compute_single_atom(index,
+                                  n_atoms,
+                                  const_cast<int *>(species.data(0)),
+                                  const_cast<int *>(neighbors.data(0)),
+                                  n_neigh,
+                                  const_cast<double *>(coordinates.data(0)),
+                                  desc,
+                                  &ds);
 
-    m.def(
-            "symmetry_function_atomic",
-            [](
-                    int i,
-                    py::array_t<double> coords,
-                    py::array_t<int> particleSpecies,
-                    py::array_t<int> neighlist,
-                    int width,
-                    SymmetryFunctionParams &symparm
-            ) {
-                int numnei = neighlist.shape(0);
-                std::vector<double> zeta(width, 0.0);
-                symmetry_function_atomic(
-                        i,
-                        coords.data(0),
-                        particleSpecies.data(0),
-                        neighlist.data(0),
-                        numnei,
-                        zeta.data(),
-                        &symparm);
-                auto zeta_py = py::array(py::buffer_info(
-                        zeta.data(),
-                        sizeof(double),
-                        py::format_descriptor<double>::format(),
-                        1,
-                        {width},
-                        {sizeof(double)}
-                ));
-                return zeta_py;
-            },
-            py::arg("i"),
-            py::arg("coords").noconvert(),
-            py::arg("particleSpecies").noconvert(),
-            py::arg("neighlist").noconvert(),
-            py::arg("width"),
-            py::arg("symparm"),
-            "Return zeta");
-    m.def(
-            "grad_symmetry_function_atomic",
-            [](
-                    int i,
-                    py::array_t<double> coords,
-                    py::array_t<int> particleSpecies,
-                    py::array_t<int> neighlist,
-                    int width,
-                    SymmetryFunctionParams &symparm,
-                    py::array_t<double> dE_dzeta
-            ) {
-                int numnei = neighlist.shape(0);
-                std::vector<double> d_coords(coords.size(), 0.0);
-                std::vector<double> zeta(width, 0.0);
-                grad_symmetry_function_atomic(i,
-                                              coords.data(0),
-                                              d_coords.data(),
-                                              particleSpecies.data(0),
-                                              neighlist.data(0),
-                                              numnei,
-                                              zeta.data(),
-                                              dE_dzeta.data(0),
-                                              &symparm);
-                auto dr_dzeta = py::array(py::buffer_info(
-                        d_coords.data(),
-                        sizeof(double),
-                        py::format_descriptor<double>::format(),
-                        1,
-                        {static_cast<int>(coords.size())},
-                        {sizeof(double)}
-                ));
-                return dr_dzeta;
-            },
-            py::arg("i"),
-            py::arg("coords").noconvert(),
-            py::arg("particleSpecies").noconvert(),
-            py::arg("neighlist").noconvert(),
-            py::arg("width"),
-            py::arg("symparm"),
-            py::arg("dE_dzeta").noconvert(),
-            "Return derivative"
-    );
+              py::array_t<double> desc_array(ds.width, desc);
+              return desc_array;
+          }, py::return_value_policy::take_ownership,
+          "Compute descriptor for single atom of configuration.");
+    // m.def("gradient", &gradient, "Compute gradient of descriptor for complete configuration.");
+    m.def("gradient_single_atom",
+          [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
+             py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
+             py::array_t<double, py::array::c_style | py::array::forcecast> &coordinates,
+             py::array_t<double, py::array::c_style | py::array::forcecast> &desc,
+             py::array_t<double, py::array::c_style | py::array::forcecast> &dE_ddesc) {
+              int n_atoms = static_cast<int>(coordinates.shape(0));
+              int n_neigh = static_cast<int>(neighbors.shape(0));
+              auto d_coordinates = new double[coordinates.size()];
+              for (int i = 0; i < coordinates.size(); i++) d_coordinates[i] = 0.0;
+              gradient_single_atom(index,
+                                   n_atoms,
+                                   const_cast<int *>(species.data(0)),
+                                   const_cast<int *>(neighbors.data(0)),
+                                   n_neigh,
+                                   const_cast<double *>(coordinates.data(0)),
+                                   d_coordinates,
+                                   const_cast<double *>(desc.data(0)),
+                                   const_cast<double *>(dE_ddesc.data(0)),
+                                   &ds);
+              py::array_t<double> d_coord_array({coordinates.shape(0), coordinates.shape(1)}, d_coordinates);
+              return d_coord_array;
+          }, py::return_value_policy::take_ownership,
+          "Compute gradient of descriptor for single atom configuration.");
+    // TODO generate_one_atom, which is compatible with current kliff
 }
-
-

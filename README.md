@@ -1,11 +1,14 @@
-Libdescriptor (KIM Descriptor Library)
-======================================
+Libdescriptor
+==============
 
-Libdescriptor is a high performance descriptor library for providing access to fully differentiable descriptor functions which are API compatible with KIM models and associated projects.
+Libdescriptor is a high performance descriptor library for providing access to fully differentiable descriptor functions.
+While `libdescriptor` is a general purpose descriptor library, it's API compatible with KIM models and associated projects.
 This will also provide uniform access to various selected descriptors for KLIFF using Pybind11 ports.
 For gradient calculations, Libdescriptor relies on [Enzyme AD](https://github.com/EnzymeAD/Enzyme), which provides it with capability to trivially generate near analytical performance gradient functions.
 Use of Enzyme AD enables Libdescriptor to not only provide gradients against coordinates, but against hyperparameters as well, thus opening way for better optimized descriptors.
 This should enable rapid development, extension and deployment of various descriptors.
+
+<img src="libdescriptor.svg" width="800">
 
 ## Compiling 
 At present, it needs functioning Enzyme compiler environment, in future it will be provided as binary package or a conda environment.
@@ -16,7 +19,7 @@ For Installing Enzyme, simply follow the instructions given on enzyme page. At t
 Although Enzyme recommends compiling LLVM/Clang from scratch, in our experience precompiled stock binaries also work fine.
 Though depending on your platform, your mileage may wary.
 
-Steps to compile:
+Steps to compile **Enzyme**:
 ```shell
 # Get the Clang/LLVM binaries
 wget https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
@@ -45,7 +48,17 @@ Now your enzyme is ready to use. For compiling your code, you would need to know
 In the build folder you should see 3 shared objects: `ClangEnzyme-12.so`, `LLDEnzyme-12.so`, and `LLVMEnzyme-12.so`.
 As a rule of thumb, you need `ClangEnzyme` for compiling single file programs, whereas more complicated build schemes (such as used in this program),
 needs creating derivatives at link time, using `LLDEnzyme` file. 
+
 You need to provide the location of `LLDEnzyme` to the `Cmake` file for successful build.
+This can be done simply by defining Cmake variable. To build `libdescritpor`
+```shell
+git clone https://github.com/ipcamit/colabfit-descriptor-library
+cd colabfit-descriptor-library
+mkdir build; cd build
+cmake .. -DENZYME_LIB=/path/to/*Enzyme.so/files
+make
+```
+Your build folder should now contain `libdescriptor.so` file, which you can link against your own projects.
 
 
 ## Python bindings
@@ -71,3 +84,9 @@ all fields of class properly.
 > When in doubt, make your code more "C" like for higher success rate.
 
 TODO: More documentation for extending.
+
+## Docker Image
+The repository now contains a Dockerfile, which can be used to install the descriptor library in an isolated environment.
+It is based on Kim Developer Platform Docker image, so that you have infrastructure to use it out-of-the-box. However, 
+it is  independent of KIM, and can be used for your personal projects. In doing so, you can edit the dockerfile and base
+it on your own project image as per need.
