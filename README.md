@@ -90,3 +90,12 @@ The repository now contains a Dockerfile, which can be used to install the descr
 It is based on Kim Developer Platform Docker image, so that you have infrastructure to use it out-of-the-box. However, 
 it is  independent of KIM, and can be used for your personal projects. In doing so, you can edit the dockerfile and base
 it on your own project image as per need.
+
+# Clad Support
+[Clad](https://clad.readthedocs.io/en/latest/index.html) is another alternative to Enzyme that looks promising, and 
+more mature. It is tightly integrated to C++ and hence can easily work with most OOP patterns without any issues.
+For higher performance Clad can even interface with Enzyme, for best-of-both-worlds. Major difference between Clad and 
+Enzyme is the compiler level they interject themselves at. At present I am freezing the `libdescriptor` with Enzyme, but
+given the design of the library, it is rather trivial to have a working port for Clad. 
+In future I should include Clad support if it turns out to be as performant as using Enzyme out of the box.
+Major positive of Clad would be nicer API.
