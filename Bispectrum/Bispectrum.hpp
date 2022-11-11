@@ -93,7 +93,9 @@ struct BISPECTRUM_LOOPINDICES {
  * "Quantum Theory of Angular Momentum," World Scientific (1988)
  *
  */
-class Bispectrum : public DescriptorKind {
+class Bispectrum final: public DescriptorKind {
+    // final because otherwise I would need "virtual" destructor on DescriptorKind, and that makes enzyme spit out
+    // warnings
 public:
     Bispectrum(std::string &file_name);
 

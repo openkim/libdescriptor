@@ -77,9 +77,9 @@ namespace Descriptor {
                               double *coordinates, double *d_coordinates, double *desc,
                               double *dE_dzeta, DescriptorKind *descriptor_to_diff);
 
-//    void num_gradient_single_atom(int index, int n_atoms, int *species, int *neighbor_list, int number_of_neighs,
-//                              double *coordinates, double *d_coordinates, double *dE_dzeta,
-//                              DescriptorKind *descriptor_to_diff);
+    void num_gradient_single_atom(int index, int n_atoms, int *species, int *neighbor_list, int number_of_neighs,
+                              double *coordinates, double *d_coordinates, double *dE_dzeta,
+                              DescriptorKind *descriptor_to_diff);
 
     /*!
      *  <b> "TO BE IMPLEMENTED"</b>
@@ -200,8 +200,10 @@ public:
     // virtual void clone_empty(DescriptorKind * descriptorKind){};
     // TODO: Cant make it virtual, enzyme segfaults. But every class must have
     // empty constructor to differentiate against
-    // ~DescriptorKind();
-    virtual ~DescriptorKind();
+    // Due to enzyme issue I cannot yet make destructor as virtual. Therefore to prevent memory leak, the model driver
+    // needs to reinterpret the pointer before destroying. It will be bit ugly hack but necessary at this moment
+     ~DescriptorKind();
+//    virtual ~DescriptorKind();
     /*!
      */
 };

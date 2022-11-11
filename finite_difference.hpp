@@ -56,78 +56,78 @@ namespace numdiff {
         return h;
     }
 
-//    template<class F>
-//    double vec_finite_difference_derivative(F& f, double *x, int pos, int input_size, int output_size, double *y) {
-//        using std::sqrt;
-//        using std::pow;
-//        using std::abs;
-//        using std::numeric_limits;
-//
-//        const double eps = (numeric_limits<double>::epsilon)();
-//        double h = pow(551.25 * eps, (double) 1 / (double) 9);
-//        h = numdiff::make_xph_representable(x[pos], h);
-//
-//        auto x_h = new double[input_size];
-//        auto yh = new double[output_size];
-//        auto ymh = new double[output_size];
-//        auto y1 = new double[output_size];
-//        auto y2 = new double[output_size];
-//        auto y3 = new double[output_size];
-//        auto y4 = new double[output_size];
-//        auto tmp_y2 = new double[output_size];
-//        auto tmp_y3 = new double[output_size];
-//        auto tmp_y4 = new double[output_size];
-//        auto tmp1 = new double[output_size];
-//        auto tmp2 = new double[output_size];
-//
-//
-//        for (int i = 0; i < input_size; i++) x_h[i] = x[i];
-//
-//        x_h[pos] = x[pos] + h;
-//        f(x_h, yh);
-//
-//        x_h[pos] = x[pos] - h;
-//        f(x_h, ymh);
-//
-//        x_h[pos] = x[pos] - 2 * h;
-//        f(x_h, y2);
-//        x_h[pos] = x[pos] + 2 * h;
-//        f(x_h, tmp_y2);
-//
-//        x_h[pos] = x[pos] + 3 * h;
-//        f(x_h, y3);
-//        x_h[pos] = x[pos] - 3 * h;
-//        f(x_h, tmp_y3);
-//
-//        x_h[pos] = x[pos] - 4 * h;
-//        f(x_h, y4);
-//        x_h[pos] = x[pos] + 4 * h;
-//        f(x_h, tmp_y4);
-//
-//        for (int i = 0; i < output_size; i++) {
-//            y1[i] = yh[i] - ymh[i];
-//            y2[i] -= tmp_y2[i];
-//            y3[i] -= tmp_y3[i];
-//            y4[i] -= tmp_y4[i];
-//            tmp1[i] = 3 * y4[i] / 8 + 4 * y3[i];
-//            tmp2[i] = 21 * y2[i] + 84 * y1[i];
-//            y[i] = (tmp1[i] + tmp2[i]) / (105 * h);
-//        }
-//
-//        delete[] x_h;
-//        delete[] yh;
-//        delete[] ymh;
-//        delete[] y1;
-//        delete[] y2;
-//        delete[] y3;
-//        delete[] y4;
-//        delete[] tmp_y2;
-//        delete[] tmp_y3;
-//        delete[] tmp_y4;
-//        delete[] tmp1;
-//        delete[] tmp2;
-//
-//    }
+    template<class F>
+    void vec_finite_difference_derivative(F& f, double *x, int pos, int input_size, int output_size, double *y) {
+        using std::sqrt;
+        using std::pow;
+        using std::abs;
+        using std::numeric_limits;
+
+        const double eps = (numeric_limits<double>::epsilon)();
+        double h = pow(551.25 * eps, (double) 1 / (double) 9);
+        h = numdiff::make_xph_representable(x[pos], h);
+
+        auto x_h = new double[input_size];
+        auto yh = new double[output_size];
+        auto ymh = new double[output_size];
+        auto y1 = new double[output_size];
+        auto y2 = new double[output_size];
+        auto y3 = new double[output_size];
+        auto y4 = new double[output_size];
+        auto tmp_y2 = new double[output_size];
+        auto tmp_y3 = new double[output_size];
+        auto tmp_y4 = new double[output_size];
+        auto tmp1 = new double[output_size];
+        auto tmp2 = new double[output_size];
+
+
+        for (int i = 0; i < input_size; i++) x_h[i] = x[i];
+
+        x_h[pos] = x[pos] + h;
+        f(x_h, yh);
+
+        x_h[pos] = x[pos] - h;
+        f(x_h, ymh);
+
+        x_h[pos] = x[pos] - 2 * h;
+        f(x_h, y2);
+        x_h[pos] = x[pos] + 2 * h;
+        f(x_h, tmp_y2);
+
+        x_h[pos] = x[pos] + 3 * h;
+        f(x_h, y3);
+        x_h[pos] = x[pos] - 3 * h;
+        f(x_h, tmp_y3);
+
+        x_h[pos] = x[pos] - 4 * h;
+        f(x_h, y4);
+        x_h[pos] = x[pos] + 4 * h;
+        f(x_h, tmp_y4);
+
+        for (int i = 0; i < output_size; i++) {
+            y1[i] = yh[i] - ymh[i];
+            y2[i] -= tmp_y2[i];
+            y3[i] -= tmp_y3[i];
+            y4[i] -= tmp_y4[i];
+            tmp1[i] = 3 * y4[i] / 8 + 4 * y3[i];
+            tmp2[i] = 21 * y2[i] + 84 * y1[i];
+            y[i] = (tmp1[i] + tmp2[i]) / (105 * h);
+        }
+
+        delete[] x_h;
+        delete[] yh;
+        delete[] ymh;
+        delete[] y1;
+        delete[] y2;
+        delete[] y3;
+        delete[] y4;
+        delete[] tmp_y2;
+        delete[] tmp_y3;
+        delete[] tmp_y4;
+        delete[] tmp1;
+        delete[] tmp2;
+
+    }
 
 }  // namespaces
 #endif
