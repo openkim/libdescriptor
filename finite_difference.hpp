@@ -82,6 +82,19 @@ namespace numdiff {
 
 
         for (int i = 0; i < input_size; i++) x_h[i] = x[i];
+        for (int i = 0; i < output_size; i++){
+            yh[i] = 0.0;
+            ymh[i] = 0.0;
+            y1[i] = 0.0;
+            y2[i] = 0.0;
+            y3[i] = 0.0;
+            y4[i] = 0.0;
+            tmp_y2[i] = 0.0;
+            tmp_y3[i] = 0.0;
+            tmp_y4[i] = 0.0;
+            tmp1[i] = 0.0;
+            tmp2[i] = 0.0;
+        }
 
         x_h[pos] = x[pos] + h;
         f(x_h, yh);

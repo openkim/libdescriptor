@@ -71,7 +71,10 @@ target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
 target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=${ENZYME_LIB}/LLDEnzyme-12.so")
 
 # TODO REMOVE EXTRA HEADER FILES ONCE ENZYME PROVIDES SOLUTION
-set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp;SymmetryFunctions/SymmetryFunctions.hpp;Bispectrum/Bispectrum.hpp;helper.hpp")
+#set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp;SymmetryFunctions/SymmetryFunctions.hpp;Bispectrum/Bispectrum.hpp;helper.hpp")
+# Further testing indicates that library might be working fine with virtual desctructors. So everting the
+# changes for now. But leaving above as reminder
+set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp")
 
 install(TARGETS descriptor
         LIBRARY DESTINATION lib

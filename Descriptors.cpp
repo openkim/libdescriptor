@@ -223,6 +223,7 @@ void Descriptor::num_gradient_single_atom(int index,
     };
 
     auto dx_ddesc = new double[desc_kind->width];
+    for(int i = 0; i < desc_kind->width; i++){dx_ddesc[i] = 0;}
 
     numdiff::vec_finite_difference_derivative(f, coordinates, index * 3 + 0, n_atoms * 3, desc_kind->width, dx_ddesc);
     for (int i = 0; i < desc_kind->width; i++){

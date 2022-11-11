@@ -202,8 +202,8 @@ public:
     // empty constructor to differentiate against
     // Due to enzyme issue I cannot yet make destructor as virtual. Therefore to prevent memory leak, the model driver
     // needs to reinterpret the pointer before destroying. It will be bit ugly hack but necessary at this moment
-     ~DescriptorKind();
-//    virtual ~DescriptorKind();
+//     ~DescriptorKind();
+    virtual ~DescriptorKind();
     /*!
      */
 };

@@ -2,6 +2,7 @@
 #include <pybind11/pybind11.h>
 #include <vector>
 #include <string>
+#include <iostream>
 #include "Descriptors.hpp"
 
 namespace py = pybind11;
@@ -117,7 +118,7 @@ PYBIND11_MODULE(libdescriptor, m) {
               int n_atoms = static_cast<int>(coordinates.shape(0));
               int n_neigh = static_cast<int>(neighbors.shape(0));
               auto d_coordinates = new double[3];
-              for (int i = 0; i < coordinates.size(); i++) d_coordinates[i] = 0.0;
+              for (int i = 0; i < 3; i++) d_coordinates[i] = 0.0;
               num_gradient_single_atom(index,
                                    n_atoms,
                                    const_cast<int *>(species.data(0)),
@@ -127,7 +128,7 @@ PYBIND11_MODULE(libdescriptor, m) {
                                    d_coordinates,
                                    const_cast<double *>(dE_ddesc.data(0)),
                                    &ds);
-              py::array_t<double> d_coord_array({3, 0}, d_coordinates);
+              py::array_t<double> d_coord_array(3, d_coordinates);
               return d_coord_array;
           }, py::return_value_policy::take_ownership,
           "Compute gradient of descriptor for single atom configuration.");
