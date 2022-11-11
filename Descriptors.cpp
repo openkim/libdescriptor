@@ -1,9 +1,11 @@
 #include "Descriptors.hpp"
 #include "SymmetryFunctions/SymmetryFunctions.hpp"
 #include "Bispectrum/Bispectrum.hpp"
+#include "finite_difference.hpp"
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <memory>
 
 int enzyme_dup, enzyme_out, enzyme_const;
 
@@ -118,6 +120,7 @@ void Descriptor::gradient(int n_atoms /* contributing */,
                               enzyme_dup, coordinates, d_coordinates,
                               enzyme_dup, desc, d_desc,
                               enzyme_dup, desc_kind, d_desc_kind);
+            delete d_desc_kind;
             return;
         }
         case KindBispectrum: {
@@ -132,6 +135,7 @@ void Descriptor::gradient(int n_atoms /* contributing */,
                               enzyme_dup, coordinates, d_coordinates,
                               enzyme_dup, desc, d_desc,
                               enzyme_dup, desc_kind, d_desc_kind);
+            delete d_desc_kind;
             return;
         }
         default:
@@ -178,6 +182,7 @@ void Descriptor::gradient_single_atom(int index,
                                        enzyme_dup, coordinates, d_coordinates,
                                        enzyme_dup, desc, d_desc,
                                        enzyme_dup, desc_kind, d_desc_kind);
+            delete d_desc_kind;
             return;
         }
         case KindBispectrum: {
@@ -195,12 +200,44 @@ void Descriptor::gradient_single_atom(int index,
                                        enzyme_dup, coordinates, d_coordinates,
                                        enzyme_dup, desc, d_desc,
                                        enzyme_dup, desc_kind, d_desc_kind);
+            delete d_desc_kind;
             return;
         }
         default:
             std::cerr << "Descriptor kind not supported\n";
             throw std::invalid_argument("Descriptor kind not supported");
     }
+}
+
+void Descriptor::num_gradient_single_atom(int index,
+                                          int n_atoms /* contributing */,
+                                          int *species,
+                                          int *neighbor_list,
+                                          int number_of_neighbors,
+                                          double *coordinates,
+                                          double *d_coordinates,
+                                          double *dE_ddesc, /* vector for vjp*/
+                                          DescriptorKind *desc_kind) {
+    auto f = [&](double *x, double *y) {
+        desc_kind->compute(index, n_atoms, species, neighbor_list, number_of_neighbors, x, y);
+    };
+
+    auto dx_ddesc = new double[desc_kind->width];
+
+    numdiff::vec_finite_difference_derivative(f, coordinates, index * 3 + 0, n_atoms * 3, desc_kind->width, dx_ddesc);
+    for (int i = 0; i < desc_kind->width; i++){
+        d_coordinates[0] += dE_ddesc[i] * dx_ddesc[i];
+    }
+    numdiff::vec_finite_difference_derivative(f, coordinates, index * 3 + 1, n_atoms * 3, desc_kind->width, dx_ddesc);
+    for (int i = 0; i < desc_kind->width; i++){
+        d_coordinates[1] += dE_ddesc[i] * dx_ddesc[i];
+    }
+    numdiff::vec_finite_difference_derivative(f, coordinates, index * 3 + 2, n_atoms * 3, desc_kind->width, dx_ddesc);
+    for (int i = 0; i < desc_kind->width; i++){
+        d_coordinates[2] += dE_ddesc[i] * dx_ddesc[i];
+    }
+
+    delete[] dx_ddesc;
 }
 
 

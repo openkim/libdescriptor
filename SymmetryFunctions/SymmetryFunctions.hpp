@@ -21,8 +21,10 @@ typedef double VectorOfSizeDIM[DIM];
 
 using namespace Descriptor;
 
-class SymmetryFunctions : public DescriptorKind {
+class SymmetryFunctions final: public DescriptorKind {
 public:
+    // final because otherwise I would need "virtual" destructor on DescriptorKind, and that makes enzyme spit out
+    // warnings
     // In KLIFF a utility will create in memory file for initiaization?
     // TODO create apropriate constructor
     explicit SymmetryFunctions(std::string &file_name);
