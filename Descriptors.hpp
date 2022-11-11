@@ -77,6 +77,10 @@ namespace Descriptor {
                               double *coordinates, double *d_coordinates, double *desc,
                               double *dE_dzeta, DescriptorKind *descriptor_to_diff);
 
+//    void num_gradient_single_atom(int index, int n_atoms, int *species, int *neighbor_list, int number_of_neighs,
+//                              double *coordinates, double *d_coordinates, double *dE_dzeta,
+//                              DescriptorKind *descriptor_to_diff);
+
     /*!
      *  <b> "TO BE IMPLEMENTED"</b>
      *  Compute full Jacobian using reverse diff. Might be useful in some cases
