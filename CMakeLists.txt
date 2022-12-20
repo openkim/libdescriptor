@@ -82,7 +82,7 @@ install(TARGETS descriptor
 
 # ---------------- Python module -------------------------
 # Workaroud from my laptop
-if (${MODULEYES} STREQUAL yes)
+if (DEFINED MODULEYES)
     find_package(EnvModules)
     env_module(load python39)
 endif()

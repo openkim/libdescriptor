@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
-#include <memory>
 
 int enzyme_dup, enzyme_out, enzyme_const;
 

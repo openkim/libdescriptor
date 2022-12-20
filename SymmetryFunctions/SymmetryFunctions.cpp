@@ -2,6 +2,10 @@
 #include <vector>
 #include <cmath>
 #include <fstream>
+#include "file_io_utils.hpp"
+#include <set>
+#include <map>
+#include <memory>
 
 #ifdef DIM
 #undef DIM
@@ -260,117 +264,142 @@ SymmetryFunctions::SymmetryFunctions(std::string &file_name) {
 }
 
 void SymmetryFunctions::initFromFile(std::string &file_name) {
-    std::fstream file_ptr(file_name);
-    std::string placeholder_string;
 
-    // Ignore comments
-    do {
-        std::getline(file_ptr, placeholder_string);
-    } while (placeholder_string[0] == '#');
-    n_species = std::stoi(placeholder_string);
-    // blank line
-    std::getline(file_ptr, placeholder_string);
-    // Ignore comments
-    do {
-        std::getline(file_ptr, placeholder_string);
-    } while (placeholder_string[0] == '#');
+    // Open the descriptor file
+    std::ifstream file = FileIOUtils::open_file(file_name);
 
-    auto cutoff_matrix = new double[n_species * n_species];
-    for (int i = 0; i < n_species; i++) {
-        for (int j = 0; j < n_species; j++) {
-            auto pos = placeholder_string.find(' ');
-            *(cutoff_matrix + n_species * i + j) = std::stod(placeholder_string.substr(0, pos));
-            if (pos != std::string::npos) placeholder_string.erase(0, pos + 1);
+    // String containing data line and list of parameters
+    std::vector<std::string> string_params;
+    std::vector<double> double_params;
+    std::vector<int> int_params;
+    std::vector<bool> bool_params;
+    std::string line;
+
+    // Params
+    std::string cutoff_type;
+    int num_species;
+    std::vector<std::string> species;
+    std::map<std::pair<std::string, std::string>, double> species_pair_cutoffs;
+    bool normalize = false;
+    int descriptor_size;
+    std::vector<std::string> symmetry_function_types;
+    std::map<std::string, std::vector<double>> symmetry_function_params;
+
+    // read Cutoff type name
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_string_params(line, string_params, 1);
+    cutoff_type = string_params[0];
+    string_params.clear();
+    line.clear();
+
+    // read number of species
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_int_params(line, int_params, 1);
+    num_species = int_params[0];
+    int_params.clear();
+    line.clear();
+
+    // read species names and cutoffs
+    std::set<std::string> species_set;
+    std::pair<std::string, std::string> species_species_pair;
+    for (int i = 0; i < (num_species * (num_species - 1)); i++) {
+        FileIOUtils::get_next_data_line(file, line);
+        FileIOUtils::parse_string_params(line, string_params, 2);
+        FileIOUtils::parse_double_params(line, double_params, 1);
+
+        species_set.insert(string_params[0]);
+        species_set.insert(string_params[1]);
+
+        species_species_pair = std::make_pair(string_params[0], string_params[1]);
+        species_pair_cutoffs[species_species_pair] = double_params[0];
+
+        species_species_pair = std::make_pair(string_params[1], string_params[0]);
+        species_pair_cutoffs[species_species_pair] = double_params[0];
+
+        double_params.clear();
+        string_params.clear();
+        line.clear();
+    }
+    species = std::vector<std::string>(species_set.begin(), species_set.end());
+
+    // number of symmetry function types
+    int num_symmetry_function_types;
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_int_params(line, int_params, 1);
+    num_symmetry_function_types = int_params[0];
+    int_params.clear();
+    line.clear();
+
+    // Read symmetry function types and their parameters
+    std::vector<double> symmetry_function_params_vector;
+    std::map<std::string, std::pair<int, int>> symmetry_function_type_param_sizes;
+
+    for (int i = 0; i < num_symmetry_function_types; i++) {
+        FileIOUtils::get_next_data_line(file, line);
+        FileIOUtils::parse_string_params(line, string_params, 1);
+        symmetry_function_types.push_back(string_params[0]);
+        string_params.clear();
+
+        FileIOUtils::parse_int_params(line, int_params, 2);
+        symmetry_function_type_param_sizes[symmetry_function_types[i]] = std::make_pair(int_params[0], int_params[1]);
+        int_params.clear();
+        line.clear();
+
+        for (int j = 0; j < symmetry_function_type_param_sizes[symmetry_function_types[i]].first; j++) {
+            FileIOUtils::get_next_data_line(file, line);
+            FileIOUtils::parse_double_params(line, double_params,
+                                             symmetry_function_type_param_sizes[symmetry_function_types[i]].second);
+            for (int k = 0; k < symmetry_function_type_param_sizes[symmetry_function_types[i]].second; k++) {
+                symmetry_function_params_vector.push_back(double_params[k]);
+            }
+            symmetry_function_params[symmetry_function_types[i]] = symmetry_function_params_vector;
+
+            double_params.clear();
+            line.clear();
         }
-        std::getline(file_ptr, placeholder_string);
     }
 
-    // blank line
-    std::getline(file_ptr, placeholder_string);
-    // Ignore comments
-    do {
-        std::getline(file_ptr, placeholder_string);
-    } while (placeholder_string[0] == '#');
-    std::string cutoff_function = placeholder_string;
+    int_params.clear();
+    double_params.clear();
+    string_params.clear();
+    line.clear();
 
-    // blank line
-    std::getline(file_ptr, placeholder_string);
-    // Ignore comments
-    do {
-        std::getline(file_ptr, placeholder_string);
-    } while (placeholder_string[0] == '#');
-    width = std::stoi(placeholder_string);
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_bool_params(line, bool_params, 1);
+    normalize = bool_params[0];
+    bool_params.clear();
+    line.clear();
 
-    // blank line
-    std::getline(file_ptr, placeholder_string);
-    // Ignore comments
-    do {
-        std::getline(file_ptr, placeholder_string);
-    } while (placeholder_string[0] == '#');
-    has_three_body_ = placeholder_string == "True";
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_int_params(line, int_params, 1);
+    descriptor_size = int_params[0];
+    int_params.clear();
+    line.clear();
 
-    // blank line
-    std::getline(file_ptr, placeholder_string);
-    // Ignore comments
-    do {
-        std::getline(file_ptr, placeholder_string);
-    } while (placeholder_string[0] == '#');
-    int n_func = std::stoi(placeholder_string);
+    file.close();
 
-    std::vector<std::string> sym_func_list;
-    for (int i = 0; i < n_func; i++) {
-        std::getline(file_ptr, placeholder_string);
-        sym_func_list.push_back(placeholder_string);
-    }
-
-    std::vector<int> sym_func_lengths;
-    for (int i = 0; i < n_func; i++) {
-        std::getline(file_ptr, placeholder_string);
-        sym_func_lengths.push_back(std::stoi(placeholder_string));
-    }
-
-    std::vector<std::vector<double>> sym_func_elements;
-    for (int i = 0; i < n_func; i++) {
-        //blank line
-        std::getline(file_ptr, placeholder_string);
-        std::vector<double> tmp_desc_list;
-        for (int j = 0; j < sym_func_lengths[i]; j++) {
-            std::getline(file_ptr, placeholder_string);
-            tmp_desc_list.push_back(std::stod(placeholder_string));
-        }
-        sym_func_elements.push_back(std::move(tmp_desc_list));
-    }
-
-    for (int i = 0; i < n_func; i++) {
-        if (sym_func_list[i] == "g2") {
-            for (int j = 0; j < sym_func_elements[i].size(); j = j + 2)
-                sym_func_elements[i][j] /= (bhor2ang * bhor2ang);
-        } else if (sym_func_list[i] == "g4") {
-            for (int j = 2; j < sym_func_elements[i].size(); j = j + 3)
-                sym_func_elements[i][j] /= (bhor2ang * bhor2ang);
+    // Initialize the descriptor
+    auto cutoff_matrix = std::make_unique<double[]>(num_species * num_species);
+    for (int i = 0; i < num_species; i++) {
+        for (int j = 0; j < num_species; j++) {
+            species_species_pair = std::make_pair(species[i], species[j]);
+            cutoff_matrix[i * num_species + j] = species_pair_cutoffs[species_species_pair];
         }
     }
 
-    // blank line
-    std::getline(file_ptr, placeholder_string);
-    // Ignore comments
-    do {
-        std::getline(file_ptr, placeholder_string);
-    } while (placeholder_string[0] == '#');
+    // set cut offs
+    n_species = num_species;
+    species_ = species;
 
-    std::vector<int> dims;
-    for (int i = 0; i < n_func * 2; i++) {
-        dims.push_back(std::stoi(placeholder_string));
-        std::getline(file_ptr, placeholder_string);
+    set_cutoff(cutoff_type.c_str(), num_species, cutoff_matrix.get());
+
+    // set symmetry functions and their parameters
+    for (int i = 0; i < num_symmetry_function_types; i++) {
+        add_descriptor(symmetry_function_types[i].c_str(),
+                       symmetry_function_params[symmetry_function_types[i]].data(),
+                       symmetry_function_type_param_sizes[symmetry_function_types[i]].first,
+                       symmetry_function_type_param_sizes[symmetry_function_types[i]].second);
     }
-
-    set_cutoff(cutoff_function.c_str(), n_species, cutoff_matrix);
-
-    for (int i = 0; i < n_func; i++) {
-        add_descriptor(sym_func_list[i].c_str(), sym_func_elements[i].data(), dims[2 * i], dims[2 * i + 1]);
-    }
-
-    delete[] cutoff_matrix;
 }
 
 

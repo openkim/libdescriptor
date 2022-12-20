@@ -9,7 +9,7 @@ RUN apt-get -q update \
     && apt-get install -y --no-install-recommends ca-certificates software-properties-common curl gnupg2 git\
     && curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add - \
     && apt-add-repository "deb http://apt.llvm.org/`lsb_release -cs`/ llvm-toolchain-`lsb_release -cs`-12 main" || true \
-    && apt-get -q update \ 
+    && apt-get -q update \
     && apt-get install -y --no-install-recommends zlib1g-dev lldb ninja-build llvm-12-dev clang-format clang-12 libclang-12-dev libomp-12-dev lld-12\
     && python -m pip install --upgrade pip setuptools \
     && python -m pip install lit==12.0.1 pathlib2 \
