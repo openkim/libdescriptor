@@ -165,6 +165,8 @@ public:
     static DescriptorKind *initDescriptor(std::string &file_name,
                                           AvailableDescriptor availableDescriptorKind);
 
+    static DescriptorKind *initDescriptor(AvailableDescriptor availableDescriptorKind, ...);
+
     /*!
      * compute() method contains the logic for calculating the descriptor for a single molecular environment.
      * Expected inputs include superset of all required parameters. In case some other information is needed in future,

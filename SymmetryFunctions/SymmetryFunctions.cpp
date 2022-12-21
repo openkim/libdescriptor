@@ -389,7 +389,7 @@ void SymmetryFunctions::initFromFile(std::string &file_name) {
 
     // set cut offs
     n_species = num_species;
-    species_ = species;
+    set_species(species);
 
     set_cutoff(cutoff_type.c_str(), num_species, cutoff_matrix.get());
 
@@ -420,4 +420,25 @@ void SymmetryFunctions::clone_empty(DescriptorKind *descriptorKind) {
             }
         }
     }
+}
+
+SymmetryFunctions::SymmetryFunctions(std::vector<std::string> *species, std::string *cutoff_function,
+                                     double *cutoff_matrix, std::vector<std::string> *symmetry_function_types,
+                                     std::vector<int> *symmetry_function_sizes,
+                                     std::vector<double> *symmetry_function_parameters) {
+    // set cut offs
+    n_species = species->size();
+    set_species(*species);
+
+    set_cutoff(cutoff_function->c_str(), n_species, cutoff_matrix);
+
+    // set symmetry functions and their parameters
+    int offset = 0;
+    for (int i = 0; i < symmetry_function_types->size(); i++) {
+        add_descriptor(symmetry_function_types->at(i).c_str(),
+                       symmetry_function_parameters->data() + offset,
+                       symmetry_function_sizes->at(2 * i), symmetry_function_sizes->at(2 * i + 1));
+        offset += symmetry_function_sizes->at(2 * i) * symmetry_function_sizes->at(2 * i + 1);
+    }
+
 }

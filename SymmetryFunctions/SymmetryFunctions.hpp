@@ -10,6 +10,7 @@
 #include <cstring>
 #include <map>
 #include <string>
+#include <vector>
 
 #ifdef DIM
 #undef DIM
@@ -30,9 +31,14 @@ public:
     explicit SymmetryFunctions(std::string &file_name);
 
     void initFromFile(std::string &file_name);
-    void saveToFile(std::string &file_name);
 
     SymmetryFunctions() {};
+    SymmetryFunctions(std::vector<std::string>* species,
+                      std::string* cutoff_function,
+                      double * cutoff_matrix,
+                      std::vector<std::string>* symmetry_function_types,
+                      std::vector<int>* symmetry_function_sizes,
+                      std::vector<double>* symmetry_function_parameters);
 
     void compute(int index,
                  int n_atoms,
