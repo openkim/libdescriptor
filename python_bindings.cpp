@@ -41,6 +41,7 @@ PYBIND11_MODULE(libdescriptor, m) {
             .def("init_descriptor", py::overload_cast<AvailableDescriptor>(&DescriptorKind::initDescriptor))
             .def("init_descriptor",
                  py::overload_cast<std::string &, AvailableDescriptor>(&DescriptorKind::initDescriptor))
+//            .def("init_descriptor", py::overload_cast<AvailableDescriptor, int>(&DescriptorKind::initDescriptor))
             .def("compute",
                  [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
                     py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
@@ -145,5 +146,6 @@ PYBIND11_MODULE(libdescriptor, m) {
 //            .def("get_num_descriptors", &SymmetryFunctions::get_num_descriptors)
 //            .def("set_species", &SymmetryFunctions::set_species)
 //            .def("get_species", &SymmetryFunctions::get_species);
+
 
 }
