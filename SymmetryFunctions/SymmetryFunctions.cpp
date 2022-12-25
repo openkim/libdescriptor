@@ -393,13 +393,16 @@ void SymmetryFunctions::initFromFile(std::string &file_name) {
 
     set_cutoff(cutoff_type.c_str(), num_species, cutoff_matrix.get());
 
-    // set symmetry functions and their parameters
+    // set symmetry functions and their parameters and width
+    int _width = 0;
     for (int i = 0; i < num_symmetry_function_types; i++) {
         add_descriptor(symmetry_function_types[i].c_str(),
                        symmetry_function_params[symmetry_function_types[i]].data(),
                        symmetry_function_type_param_sizes[symmetry_function_types[i]].first,
                        symmetry_function_type_param_sizes[symmetry_function_types[i]].second);
+        _width += symmetry_function_type_param_sizes[symmetry_function_types[i]].first;
     }
+    width = _width;
 }
 
 
@@ -434,11 +437,13 @@ SymmetryFunctions::SymmetryFunctions(std::vector<std::string> *species, std::str
 
     // set symmetry functions and their parameters
     int offset = 0;
+    int _width = 0;
     for (int i = 0; i < symmetry_function_types->size(); i++) {
         add_descriptor(symmetry_function_types->at(i).c_str(),
                        symmetry_function_parameters->data() + offset,
                        symmetry_function_sizes->at(2 * i), symmetry_function_sizes->at(2 * i + 1));
         offset += symmetry_function_sizes->at(2 * i) * symmetry_function_sizes->at(2 * i + 1);
+        _width += symmetry_function_sizes->at(2 * i);
     }
-
+    width = _width;
 }

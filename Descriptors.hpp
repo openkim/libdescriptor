@@ -145,7 +145,7 @@ class Descriptor::DescriptorKind {
 public:
     AvailableDescriptor descriptor_kind; //!< Kind of instantiated descriptor, will be used in creating clone for AD
     std::string descriptor_param_file; //!< Full path to descriptor parameter file.
-    int width; //!< Dimension of the descriptor
+    int width=-1; //!< Dimension of the descriptor
 
     DescriptorKind() = default;
 
@@ -164,8 +164,6 @@ public:
      */
     static DescriptorKind *initDescriptor(std::string &file_name,
                                           AvailableDescriptor availableDescriptorKind);
-
-    static DescriptorKind *initDescriptor(AvailableDescriptor availableDescriptorKind, ...);
 
     /*!
      * compute() method contains the logic for calculating the descriptor for a single molecular environment.
@@ -208,6 +206,22 @@ public:
     virtual ~DescriptorKind();
     /*!
      */
+     // ***************************************************************************************************************
+     // Specialized descriptor initializing overloads
+     // **************************************************************************************************************
+
+    // ********Symmetry Functions********
+    static DescriptorKind *
+    initDescriptor(AvailableDescriptor availableDescriptorKind, std::vector<std::string> *species,
+                   std::string *cutoff_function, double *cutoff_matrix,
+                   std::vector<std::string> *symmetry_function_types, std::vector<int> *symmetry_function_sizes,
+                   std::vector<double> *symmetry_function_parameters);
+
+    // ********Bispectrum********
+    static DescriptorKind *
+    initDescriptor(AvailableDescriptor availableDescriptorKind, double rfac0_in, int twojmax_in, int diagonalstyle_in,
+                   int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in);
+
 };
 
 

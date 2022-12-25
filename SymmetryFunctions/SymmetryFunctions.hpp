@@ -71,7 +71,7 @@ public:
 
 
 private:
-    int n_species;
+    int n_species = -1;
 
     bool has_three_body_;
 

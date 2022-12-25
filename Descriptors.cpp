@@ -240,54 +240,82 @@ void Descriptor::num_gradient_single_atom(int index,
     delete[] dx_ddesc;
 }
 
+DescriptorKind::~DescriptorKind() = default;
+
+// *********************************************************************************************************************
+// Functions for individual descriptor kinds initialization, so that Pybind11 file can remain light and clean
+// Revisit this design later with variadic templates if it is more feasible
+// *********************************************************************************************************************
+
 // TODO: URGENT: C++ compliant variadic ags:
-//  https://wiki.sei.cmu.edu/confluence/display/cplusplus/DCL50-CPP.+Do+not+define+a+C-style+variadic+function
-DescriptorKind *DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, ...) {
-    va_list args;
-    va_start(args, availableDescriptorKind);
+//  https://wiki.sei.cmu.edu/confluence/display/cplusplus/DCL50-C++PP.+Do+not+define+a+C-style+variadic+function
+// This needs to be done manually for now it seems. Pybind11 does not support variadic args.
+// Therefore for Python bindings, every descriptor needs individual init function. This will be
+// placed in a seperate file.
+// TODO: Revisit in future with variadic template. Pybind11 might support it.
+//DescriptorKind *DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, ...) {
+//    va_list args;
+//    va_start(args, availableDescriptorKind);
+//
+//    DescriptorKind * return_pointer = nullptr;
+//
+//    switch (availableDescriptorKind) {
+//        case KindSymmetryFunctions: {
+//            std::vector<std::string> *species;
+//            std::string *cutoff_function;
+//            double *cutoff_matrix;
+//            std::vector<std::string> *symmetry_function_types;
+//            std::vector<int> *symmetry_function_sizes;
+//            std::vector<double> *symmetry_function_parameters;
+//            species = va_arg(args, std::vector<std::string> *);
+//            cutoff_function = va_arg(args, std::string *);
+//            cutoff_matrix = va_arg(args, double *);
+//            symmetry_function_types = va_arg(args, std::vector<std::string> *);
+//            symmetry_function_sizes = va_arg(args, std::vector<int> *);
+//            symmetry_function_parameters = va_arg(args, std::vector<double> *);
+//
+//            return_pointer = new SymmetryFunctions(species, cutoff_function, cutoff_matrix,
+//                                                   symmetry_function_types, symmetry_function_sizes,
+//                                                   symmetry_function_parameters);
+//        }
+//        case KindBispectrum: {
+//            double rfac0_in = va_arg(args, double);
+//            int twojmax_in = va_arg(args, int);
+//            int diagonalstyle_in = va_arg(args, int);
+//            int use_shared_arrays_in = va_arg(args, int);
+//            double rmin0_in = va_arg(args, double);
+//            int switch_flag_in = va_arg(args, int);
+//            int bzero_flag_in = va_arg(args, int);
+//
+//            return_pointer = new Bispectrum(rfac0_in, twojmax_in, diagonalstyle_in,
+//                                            use_shared_arrays_in, rmin0_in, switch_flag_in, bzero_flag_in);
+//        }
+//        default:
+//            std::cerr << "Descriptor kind not supported\n";
+//            throw std::invalid_argument("Descriptor kind not supported");
+//    }
+//
+//    va_end(args);
+//    return return_pointer;
+//}
 
-    DescriptorKind * return_pointer = nullptr;
-
-    switch (availableDescriptorKind) {
-        case KindSymmetryFunctions: {
-            std::vector<std::string> *species;
-            std::string *cutoff_function;
-            double *cutoff_matrix;
-            std::vector<std::string> *symmetry_function_types;
-            std::vector<int> *symmetry_function_sizes;
-            std::vector<double> *symmetry_function_parameters;
-
-            species = va_arg(args, std::vector<std::string> *);
-            cutoff_function = va_arg(args, std::string *);
-            cutoff_matrix = va_arg(args, double *);
-            symmetry_function_types = va_arg(args, std::vector<std::string> *);
-            symmetry_function_sizes = va_arg(args, std::vector<int> *);
-            symmetry_function_parameters = va_arg(args, std::vector<double> *);
-
-            return_pointer = new SymmetryFunctions(species, cutoff_function, cutoff_matrix,
+DescriptorKind *
+DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, std::vector<std::string> *species,
+                               std::string *cutoff_function, double *cutoff_matrix,
+                               std::vector<std::string> *symmetry_function_types,
+                               std::vector<int> *symmetry_function_sizes,
+                               std::vector<double> *symmetry_function_parameters){
+    auto return_pointer = new SymmetryFunctions(species, cutoff_function, cutoff_matrix,
                                                    symmetry_function_types, symmetry_function_sizes,
                                                    symmetry_function_parameters);
-        }
-        case KindBispectrum: {
-            double rfac0_in = va_arg(args, double);
-            int twojmax_in = va_arg(args, int);
-            int diagonalstyle_in = va_arg(args, int);
-            int use_shared_arrays_in = va_arg(args, int);
-            double rmin0_in = va_arg(args, double);
-            int switch_flag_in = va_arg(args, int);
-            int bzero_flag_in = va_arg(args, int);
-
-            return_pointer = new Bispectrum(rfac0_in, twojmax_in, diagonalstyle_in,
-                                            use_shared_arrays_in, rmin0_in, switch_flag_in, bzero_flag_in);
-        }
-        default:
-            std::cerr << "Descriptor kind not supported\n";
-            throw std::invalid_argument("Descriptor kind not supported");
-    }
-
-    va_end(args);
     return return_pointer;
 }
 
-
-DescriptorKind::~DescriptorKind() = default;
+DescriptorKind *
+DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, double rfac0_in, int twojmax_in,
+                               int diagonalstyle_in, int use_shared_arrays_in, double rmin0_in, int switch_flag_in,
+                               int bzero_flag_in){
+    auto return_pointer = new Bispectrum(rfac0_in, twojmax_in, diagonalstyle_in,
+                                            use_shared_arrays_in, rmin0_in, switch_flag_in, bzero_flag_in);
+    return return_pointer;
+}

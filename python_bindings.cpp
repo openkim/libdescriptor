@@ -11,6 +11,7 @@
 namespace py = pybind11;
 using namespace Descriptor;
 
+// Trampoline class for DescriptorKind pure virtual compute function
 class PyDescriptorKind : public DescriptorKind {
 public:
     using DescriptorKind::DescriptorKind;
@@ -32,16 +33,33 @@ public:
 PYBIND11_MODULE(libdescriptor, m) {
     m.doc() = "Python interface to libdescriptor";
 
+    // Python bindings for AvailableDescriptor kinds.
     py::enum_<AvailableDescriptor>(m, "AvailableDescriptors")
             .value("Bispectrum", AvailableDescriptor::KindBispectrum)
             .value("SymmetryFunctions", AvailableDescriptor::KindSymmetryFunctions);
 
+    // Python bindings for DescriptorKind
     py::class_<DescriptorKind, PyDescriptorKind>(m, "DescriptorKind")
-            .def(py::init<>())
+            .def(py::init<>()) // Default constructor
+
+            // Return default constructor, mostly needed for creating empty objects, may need in future for
+            // hyperparameter optimization
             .def("init_descriptor", py::overload_cast<AvailableDescriptor>(&DescriptorKind::initDescriptor))
+
+            // Return descriptor object created from reading the input file
             .def("init_descriptor",
                  py::overload_cast<std::string &, AvailableDescriptor>(&DescriptorKind::initDescriptor))
-//            .def("init_descriptor", py::overload_cast<AvailableDescriptor, int>(&DescriptorKind::initDescriptor))
+
+            // Return descriptor object created from Symmetry Functions, using direct parameters
+            .def("init_descriptor", py::overload_cast<AvailableDescriptor,
+                    std::vector<std::string> *, std::string *, double *, std::vector<std::string> *, std::vector<int> *,
+                    std::vector<double> *>(&DescriptorKind::initDescriptor))
+
+            // Return descriptor object created from Bispectrum, using direct parameters
+            .def("init_descriptor", py::overload_cast<AvailableDescriptor, double, int, int, int, double, int,
+                 int>(&DescriptorKind::initDescriptor))
+
+            // Compute function for calculating the descriptor
             .def("compute",
                  [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
                     py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
@@ -67,6 +85,7 @@ PYBIND11_MODULE(libdescriptor, m) {
 
 
     // m.def("compute", &compute, "Compute descriptor for complete configuration.");
+    // Calculate descriptor for a single atom using the descriptor supplied in DescriptorKind argument
     m.def("compute_single_atom",
           [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
              py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
@@ -89,6 +108,8 @@ PYBIND11_MODULE(libdescriptor, m) {
           }, py::return_value_policy::take_ownership,
           "Compute descriptor for single atom of configuration.");
     // m.def("gradient", &gradient, "Compute gradient of descriptor for complete configuration.");
+
+    // Calculate gradient of descriptor for a single atom using the descriptor supplied in DescriptorKind argument
     m.def("gradient_single_atom",
           [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
              py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
@@ -114,6 +135,8 @@ PYBIND11_MODULE(libdescriptor, m) {
           }, py::return_value_policy::take_ownership,
           "Compute gradient of descriptor for single atom configuration.");
     // TODO generate_one_atom, which is compatible with current kliff
+
+    // Calculate gradient for a single atom using the numerical differentiation
     m.def("num_gradient_single_atom",
           [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
              py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
@@ -124,14 +147,14 @@ PYBIND11_MODULE(libdescriptor, m) {
               auto d_coordinates = new double[3];
               for (int i = 0; i < 3; i++) d_coordinates[i] = 0.0;
               num_gradient_single_atom(index,
-                                   n_atoms,
-                                   const_cast<int *>(species.data(0)),
-                                   const_cast<int *>(neighbors.data(0)),
-                                   n_neigh,
-                                   const_cast<double *>(coordinates.data(0)),
-                                   d_coordinates,
-                                   const_cast<double *>(dE_ddesc.data(0)),
-                                   &ds);
+                                       n_atoms,
+                                       const_cast<int *>(species.data(0)),
+                                       const_cast<int *>(neighbors.data(0)),
+                                       n_neigh,
+                                       const_cast<double *>(coordinates.data(0)),
+                                       d_coordinates,
+                                       const_cast<double *>(dE_ddesc.data(0)),
+                                       &ds);
               py::array_t<double> d_coord_array(3, d_coordinates);
               return d_coord_array;
           }, py::return_value_policy::take_ownership,
