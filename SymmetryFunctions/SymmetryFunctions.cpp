@@ -302,7 +302,8 @@ void SymmetryFunctions::initFromFile(std::string &file_name) {
     // read species names and cutoffs
     std::set<std::string> species_set;
     std::pair<std::string, std::string> species_species_pair;
-    for (int i = 0; i < (num_species * (num_species - 1)); i++) {
+    int species_index = num_species;
+    do {
         FileIOUtils::get_next_data_line(file, line);
         FileIOUtils::parse_string_params(line, string_params, 2);
         FileIOUtils::parse_double_params(line, double_params, 1);
@@ -319,7 +320,7 @@ void SymmetryFunctions::initFromFile(std::string &file_name) {
         double_params.clear();
         string_params.clear();
         line.clear();
-    }
+    } while (--species_index > 0);
     species = std::vector<std::string>(species_set.begin(), species_set.end());
 
     // number of symmetry function types

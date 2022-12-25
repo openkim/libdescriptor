@@ -4,9 +4,6 @@
 #include <string>
 #include <iostream>
 #include "Descriptors.hpp"
-//#include "SymmetryFunctions.hpp"
-//#include "Bispectrum.hpp"
-
 
 namespace py = pybind11;
 using namespace Descriptor;
@@ -42,24 +39,24 @@ PYBIND11_MODULE(libdescriptor, m) {
     py::class_<DescriptorKind, PyDescriptorKind>(m, "DescriptorKind")
             .def(py::init<>()) // Default constructor
 
-            // Return default constructor, mostly needed for creating empty objects, may need in future for
-            // hyperparameter optimization
+                    // Return default constructor, mostly needed for creating empty objects, may need in future for
+                    // hyperparameter optimization
             .def("init_descriptor", py::overload_cast<AvailableDescriptor>(&DescriptorKind::initDescriptor))
 
-            // Return descriptor object created from reading the input file
+                    // Return descriptor object created from reading the input file
             .def("init_descriptor",
                  py::overload_cast<std::string &, AvailableDescriptor>(&DescriptorKind::initDescriptor))
 
-            // Return descriptor object created from Symmetry Functions, using direct parameters
+                    // Return descriptor object created from Symmetry Functions, using direct parameters
             .def("init_descriptor", py::overload_cast<AvailableDescriptor,
                     std::vector<std::string> *, std::string *, double *, std::vector<std::string> *, std::vector<int> *,
                     std::vector<double> *>(&DescriptorKind::initDescriptor))
 
-            // Return descriptor object created from Bispectrum, using direct parameters
+                    // Return descriptor object created from Bispectrum, using direct parameters
             .def("init_descriptor", py::overload_cast<AvailableDescriptor, double, int, int, int, double, int,
-                 int>(&DescriptorKind::initDescriptor))
+                    int>(&DescriptorKind::initDescriptor))
 
-            // Compute function for calculating the descriptor
+                    // Compute function for calculating the descriptor
             .def("compute",
                  [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
                     py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
@@ -159,16 +156,5 @@ PYBIND11_MODULE(libdescriptor, m) {
               return d_coord_array;
           }, py::return_value_policy::take_ownership,
           "Compute gradient of descriptor for single atom configuration.");
-
-//    py::class_<SymmetryFunctions>(m, "SymmetryFunctions")
-//            .def(py::init<>())
-//            .def("add_descriptor", &SymmetryFunctions::add_descriptor)
-//            .def("compute", &SymmetryFunctions::compute)
-//            .def("set_cutoff", &SymmetryFunctions::set_cutoff)
-//            .def("get_cutoff", &SymmetryFunctions::get_cutoff)
-//            .def("get_num_descriptors", &SymmetryFunctions::get_num_descriptors)
-//            .def("set_species", &SymmetryFunctions::set_species)
-//            .def("get_species", &SymmetryFunctions::get_species);
-
 
 }
