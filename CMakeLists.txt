@@ -82,10 +82,10 @@ install(TARGETS descriptor
 
 # ---------------- Python module -------------------------
 # Workaroud from my laptop
-if (DEFINED MODULEYES)
-    find_package(EnvModules)
-    env_module(load python39)
-endif()
+#if (DEFINED MODULEYES)
+#    find_package(EnvModules)
+#    env_module(load python39)
+#endif()
 
 # Python Interp
 find_package(PythonInterp REQUIRED)
