@@ -62,9 +62,7 @@ endif()
 # Compile files, but use lld for linking. lld is patched with enzyme to generate AD code
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struct-path-tbaa")
 
-#pybind11_add_module(descriptors  descriptors.cpp descriptors.hpp python_bindings.cpp)
 add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.cpp)
-#add_library(descriptor_static STATIC descriptors.cpp descriptors.hpp)
 
 # pass linking to lld, with enzyme plugin
 target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
@@ -81,12 +79,6 @@ install(TARGETS descriptor
         PUBLIC_HEADER DESTINATION include)
 
 # ---------------- Python module -------------------------
-# Workaroud from my laptop
-#if (DEFINED MODULEYES)
-#    find_package(EnvModules)
-#    env_module(load python39)
-#endif()
-
 # Python Interp
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibs REQUIRED)

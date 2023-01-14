@@ -35,7 +35,7 @@ namespace FileIOUtils
  * \param file_name Name of the file to open.
  * \return std::ifstream object for the file.
  */
-std::ifstream FileIOUtils::open_file(const std::string &file_name)
+inline std::ifstream FileIOUtils::open_file(const std::string &file_name)
 {
     std::ifstream file(file_name);
     if (!file.is_open())
@@ -51,7 +51,7 @@ std::ifstream FileIOUtils::open_file(const std::string &file_name)
  * \param file File to read from.
  * \param line String to store the line in.
  */
-void FileIOUtils::get_next_data_line(std::ifstream &file, std::string &line)
+inline void FileIOUtils::get_next_data_line(std::ifstream &file, std::string &line)
 {
     while (line[0] == '#' || line.empty())
     {
@@ -68,7 +68,7 @@ void FileIOUtils::get_next_data_line(std::ifstream &file, std::string &line)
  * \param params Vector to store the parsed data in.
  * \param num_params Number of integers to parse.
  */
-void FileIOUtils::parse_int_params(std::string &line, std::vector<int>& params, int num_params)
+inline void FileIOUtils::parse_int_params(std::string &line, std::vector<int>& params, int num_params)
 {
     std::string param;
     std::stringstream ss(line);
@@ -101,7 +101,7 @@ void FileIOUtils::parse_int_params(std::string &line, std::vector<int>& params, 
  * \param params Vector to store the parsed data in.
  * \param num_params Number of doubles to parse.
  */
-void FileIOUtils::parse_double_params(std::string &line, std::vector<double>& params, int num_params)
+inline void FileIOUtils::parse_double_params(std::string &line, std::vector<double>& params, int num_params)
 {
     std::string param;
     std::stringstream ss(line);
@@ -134,7 +134,7 @@ void FileIOUtils::parse_double_params(std::string &line, std::vector<double>& pa
  * \param params Vector to store the parsed data in.
  * \param num_params Number of strings to parse.
  */
-void FileIOUtils::parse_string_params(std::string &line, std::vector<std::string>& params, int num_params)
+inline void FileIOUtils::parse_string_params(std::string &line, std::vector<std::string>& params, int num_params)
 {
     std::string param;
     std::stringstream ss(line);
@@ -160,7 +160,7 @@ void FileIOUtils::parse_string_params(std::string &line, std::vector<std::string
  * \param params Vector to store the parsed data in.
  * \param num_params Number of bools to parse.
  */
-void FileIOUtils::parse_bool_params(std::string &line, std::vector<bool>& params, int num_params)
+inline void FileIOUtils::parse_bool_params(std::string &line, std::vector<bool>& params, int num_params)
 {
     std::string param;
     std::stringstream ss(line);
