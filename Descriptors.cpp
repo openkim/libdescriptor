@@ -312,10 +312,16 @@ DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, std:
 }
 
 DescriptorKind *
-DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, double rfac0_in, int twojmax_in,
-                               int diagonalstyle_in, int use_shared_arrays_in, double rmin0_in, int switch_flag_in,
-                               int bzero_flag_in){
+DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, double rfac0_in, int twojmax_in, int diagonalstyle_in,
+                   int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in,
+                   double * cutoff_array, std::vector<std::string> * species, std::vector<double> * weights){
     auto return_pointer = new Bispectrum(rfac0_in, twojmax_in, diagonalstyle_in,
                                             use_shared_arrays_in, rmin0_in, switch_flag_in, bzero_flag_in);
+    return_pointer->width = return_pointer->get_width();
+    return_pointer->set_species(species->size());
+    std::string cutoff_function = "cos";
+    return_pointer->set_cutoff(cutoff_function.c_str(), species->size(), cutoff_array);
+    return_pointer->set_weight(species->size(), weights->data());
+    return_pointer->descriptor_kind = availableDescriptorKind;
     return return_pointer;
 }

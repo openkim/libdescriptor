@@ -43,7 +43,7 @@ Bispectrum::Bispectrum(double const rfac0_in,
                        double const rmin0_in,
                        int const switch_flag_in,
                        int const bzero_flag_in) :
-        nmax(15),// TODO Fixed nmax, modify it after enzyme bugfix
+        nmax(0),// TODO Fixed nmax, modify it after enzyme bugfix
         twojmax(twojmax_in),
         diagonalstyle(diagonalstyle_in),
         rmin0(rmin0_in),
@@ -71,10 +71,10 @@ Bispectrum::Bispectrum(double const rfac0_in,
 
     init();
 
-    grow_rij(nmax);
-}
+    grow_rij(25); // TODO Fixed nmax, modify it after enzyme bugfix
 
-Bispectrum::~Bispectrum() {}
+    width = get_width();
+}
 
 void Bispectrum::build_indexlist() {
     switch (diagonalstyle) {
@@ -1148,6 +1148,35 @@ void Bispectrum::clone_empty(DescriptorKind *descriptorKind) {
 
     delete[] cutoff_matrix;
     delete[] weights;
+}
+
+
+int Bispectrum::get_width() {
+    int N = 0;
+    for (int j1 = 0; j1 <= twojmax; j1++) {
+        if (diagonalstyle == 2) {
+            N += 1;
+        } else if (diagonalstyle == 1) {
+            for (int j = 0; j <= std::min(twojmax, 2 * j1); j += 2) {
+                N += 1;
+            }
+        } else if (diagonalstyle == 0) {
+            for (int j2 = 0; j2 <= j1; j2++) {
+                for (int j = j1 - j2; j <= std::min(twojmax, j1 + j2); j += 2) {
+                    N += 1;
+                }
+            }
+        } else if (diagonalstyle == 3) {
+            for (int j2 = 0; j2 <= j1; j2++) {
+                for (int j = j1 - j2; j <= std::min(twojmax, j1 + j2); j += 2) {
+                    if (j >= j1) {
+                        N += 1;
+                    }
+                }
+            }
+        }
+    }
+    return N;
 }
 
 #undef MY_PI

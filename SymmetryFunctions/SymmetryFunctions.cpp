@@ -448,3 +448,4 @@ SymmetryFunctions::SymmetryFunctions(std::vector<std::string> *species, std::str
     }
     width = _width;
 }
+

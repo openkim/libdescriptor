@@ -122,7 +122,6 @@ public:
                int switch_flag_in,
                int bzero_flag_in);
 
-    ~Bispectrum();
 
     void build_indexlist();
 
@@ -180,6 +179,8 @@ public:
     void clone_empty(DescriptorKind *descriptorKind);
 
     void set_species(int n_species_) { n_species = n_species_; }
+
+    int get_width();
 
 private:
     inline double factorial(int n);
