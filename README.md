@@ -55,7 +55,7 @@ This can be done simply by defining Cmake variable. To build `libdescritpor`
 git clone https://github.com/ipcamit/colabfit-descriptor-library
 cd colabfit-descriptor-library
 mkdir build; cd build
-cmake .. -DENZYME_LIB=/path/to/*Enzyme.so/files
+cmake .. -DENZYME_LIB=/path/to/*Enzyme.so/files -DCMAKE_BUILD_TYPE=Release
 make
 ```
 Your build folder should now contain `libdescriptor.so` file, which you can link against your own projects.
