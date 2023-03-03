@@ -74,7 +74,7 @@ Bispectrum::Bispectrum(double const rfac0_in,
 
     init();
 
-    grow_rij(25); // TODO Fixed nmax, modify it after enzyme bugfix
+    grow_rij(250); // TODO Fixed nmax, modify it after enzyme bugfix
 
     width = get_width();
 }
@@ -1018,7 +1018,7 @@ void Bispectrum::clone_empty(DescriptorKind *descriptorKind) {
     rmin0 = 0.0;
     rfac0 = 0.0;
     nmax = 0;
-    int max_nmax = 25;
+    int max_nmax = 250;
     grow_rij(max_nmax);
 
     auto weights = new double[n_species];
