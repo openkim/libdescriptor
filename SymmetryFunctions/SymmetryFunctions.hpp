@@ -45,10 +45,10 @@ public:
                  int *species,
                  int *neigh_list,
                  int number_of_neigh,
-                 double *coords,
-                 double *zeta) override;
+                 double_vector &coords,
+                 double_vector &zeta) override;
 
-    void clone_empty(DescriptorKind *descriptorKind);
+//    void clone_empty(DescriptorKind *descriptorKind);
 
     inline void set_species(std::vector<std::string> &species);
 
@@ -100,7 +100,7 @@ inline double cut_cos(double r, double rcut);
  * \param rcut The cutoff radius
  * \param phi Radial symmetry function \c g1 value
  */
-void sym_g1(double r, double rcut, double &phi);
+void sym_g1(double_scalar r, double_scalar rcut, double_scalar &phi);
 
 /*!
  * \brief Radial symmetry function \c g2 suitable for describing the
@@ -115,7 +115,7 @@ void sym_g1(double r, double rcut, double &phi);
  * \param rcut The cutoff radius
  * \param phi Radial symmetry function \c g2 value
  */
-void sym_g2(double eta, double Rs, double r, double rcut, double &phi);
+void sym_g2(double_scalar eta, double_scalar Rs, double_scalar r, double_scalar rcut, double_scalar &phi);
 
 /*!
  * \brief Radial symmetry function \c g3 suitable for describing the
@@ -135,7 +135,7 @@ void sym_g2(double eta, double Rs, double r, double rcut, double &phi);
  * values. It is recommended to use \c g3 in combination with other symmetry
  * functions.
  */
-void sym_g3(double kappa, double r, double rcut, double &phi);
+void sym_g3(double_scalar kappa, double_scalar r, double_scalar rcut, double_scalar &phi);
 
 /*!
  * \brief Summations of cosine functions of the angles centered at atom \c i.
@@ -149,7 +149,7 @@ void sym_g3(double kappa, double r, double rcut, double &phi);
  * distance between atoms \c i and \c j \param rcut The cutoff radius \param
  * phi Function \c g4 value
  */
-void sym_g4(double zeta, double lambda, double eta, double const *r, double const *rcut, double &phi);
+void sym_g4(double_scalar zeta, double_scalar lambda, double_scalar eta, double_scalar const *r, double_scalar const *rcut, double_scalar &phi);
 
 /*!
  * \brief Summations of cosine functions of the angles centered at atom \c i.
@@ -165,6 +165,6 @@ void sym_g4(double zeta, double lambda, double eta, double const *r, double cons
  * distance between atoms \c i and \c j \param rcut The cutoff radius \param
  * phi Function \c g4 value
  */
-void sym_g5(double zeta, double lambda, double eta, double const *r, double const *rcut, double &phi);
+void sym_g5(double_scalar zeta, double_scalar lambda, double_scalar eta, double_scalar const *r, double_scalar const *rcut, double_scalar &phi);
 
 #endif  // SYMMETRY_FUNCTION_HPP_

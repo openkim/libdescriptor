@@ -64,77 +64,77 @@ void SymmetryFunctions::add_descriptor(char const *name,
     }
 }
 
-inline double cut_cos(double const r, double const rcut) {
-    return (r < rcut) ? 0.5 * (std::cos(MY_PI * r / rcut) + 1.0) : 0.0;
+inline double_scalar cut_cos(double_scalar const r, double_scalar const rcut) {
+    return (r < rcut) ? 0.5 * (cos(MY_PI * r / rcut) + 1.0) : 0.0;
 }
 
 int SymmetryFunctions::get_num_descriptors() {
     return std::accumulate(num_param_sets_.begin(), num_param_sets_.end(), 0);
 }
 
-void sym_g5(double const zeta, double const lambda, double const eta, double const *r,
-            double const *rcut, double &phi) {
-    double const rij = r[0];
-    double const rik = r[1];
-    double const rcutij = rcut[0];
-    double const rcutik = rcut[1];
+void sym_g5(double_scalar const zeta, double_scalar const lambda, double_scalar const eta, double_scalar const *r,
+            double_scalar const *rcut, double_scalar &phi) {
+    double_scalar const rij = r[0];
+    double_scalar const rik = r[1];
+    double_scalar const rcutij = rcut[0];
+    double_scalar const rcutik = rcut[1];
 
     if (rij > rcutij || rik > rcutik) { phi = 0.0; }
     else {
-        double const rjk = r[2];
-        double const rijsq = rij * rij;
-        double const riksq = rik * rik;
-        double const rjksq = rjk * rjk;
+        double_scalar const rjk = r[2];
+        double_scalar const rijsq = rij * rij;
+        double_scalar const riksq = rik * rik;
+        double_scalar const rjksq = rjk * rjk;
 
         // index is the apex atom
-        double const cos_ijk = (rijsq + riksq - rjksq) / (2 * rij * rik);
-        double const base = 1.0 + lambda * cos_ijk;
+        double_scalar const cos_ijk = (rijsq + riksq - rjksq) / (2 * rij * rik);
+        double_scalar const base = 1.0 + lambda * cos_ijk;
 
         // prevent numerical instability (when lambda=-1 and cos_ijk=1)
-        double const costerm = (base <= 0) ? 0.0 : std::pow(base, zeta);
-        double const eterm = std::exp(-eta * (rijsq + riksq));
-        phi = std::pow(2, 1 - zeta) * costerm * eterm * cut_cos(rij, rcutij)
+        double_scalar const costerm = (base <= 0) ? 0.0 : pow(base, zeta);
+        double_scalar const eterm = exp(-eta * (rijsq + riksq));
+        phi = pow(2, 1 - zeta) * costerm * eterm * cut_cos(rij, rcutij)
               * cut_cos(rik, rcutik);
     }
 }
 
-void sym_g4(double const zeta, double const lambda, double const eta, double const *r,
-            double const *rcut, double &phi) {
-    double const rij = r[0];
-    double const rik = r[1];
-    double const rjk = r[2];
-    double const rcutij = rcut[0];
-    double const rcutik = rcut[1];
-    double const rcutjk = rcut[2];
+void sym_g4(double_scalar const zeta, double_scalar const lambda, double_scalar const eta, double_scalar const *r,
+            double_scalar const *rcut, double_scalar &phi) {
+    double_scalar const rij = r[0];
+    double_scalar const rik = r[1];
+    double_scalar const rjk = r[2];
+    double_scalar const rcutij = rcut[0];
+    double_scalar const rcutik = rcut[1];
+    double_scalar const rcutjk = rcut[2];
 
     if (rij > rcutij || rik > rcutik || rjk > rcutjk) { phi = 0.0; }
     else {
-        double const rijsq = rij * rij;
-        double const riksq = rik * rik;
-        double const rjksq = rjk * rjk;
+        double_scalar const rijsq = rij * rij;
+        double_scalar const riksq = rik * rik;
+        double_scalar const rjksq = rjk * rjk;
 
         // index is the apex atom
-        double const cos_ijk = (rijsq + riksq - rjksq) / (2 * rij * rik);
-        double const base = 1 + lambda * cos_ijk;
+        double_scalar const cos_ijk = (rijsq + riksq - rjksq) / (2 * rij * rik);
+        double_scalar const base = 1 + lambda * cos_ijk;
 
         // prevent numerical instability (when lambda=-1 and cos_ijk=1)
-        double const costerm = (base <= 0) ? 0.0 : std::pow(base, zeta);
-        double const eterm = std::exp(-eta * (rijsq + riksq + rjksq));
+        double_scalar const costerm = (base <= 0) ? 0.0 : pow(base, zeta);
+        double_scalar const eterm = exp(-eta * (rijsq + riksq + rjksq));
 
-        phi = std::pow(2, 1 - zeta) * costerm * eterm * cut_cos(rij, rcutij)
+        phi = pow(2, 1 - zeta) * costerm * eterm * cut_cos(rij, rcutij)
               * cut_cos(rik, rcutik) * cut_cos(rjk, rcutjk);
     }
 }
 
-void sym_g3(double const kappa, double const r, double const rcut, double &phi) {
-    phi = std::cos(kappa * r) * cut_cos(r, rcut);
+void sym_g3(double_scalar const kappa, double_scalar const r, double_scalar const rcut, double_scalar &phi) {
+    phi = cos(kappa * r) * cut_cos(r, rcut);
 }
 
-void sym_g2(double const eta, double const Rs, double const r, double const rcut, double &phi) {
-    phi = std::exp(-eta * (r - Rs) * (r - Rs)) * cut_cos(r, rcut);
+void sym_g2(double_scalar const eta, double_scalar const Rs, double_scalar const r, double_scalar const rcut, double_scalar &phi) {
+    phi = exp(-eta * (r - Rs) * (r - Rs)) * cut_cos(r, rcut);
 }
 
-void sym_g1(double const r, double const rcut, double &phi) {
+void sym_g1(double_scalar const r, double_scalar const rcut, double_scalar &phi) {
     phi = cut_cos(r, rcut);
 }
 
@@ -143,10 +143,10 @@ void SymmetryFunctions::compute(int const index,
                                 int *const species,
                                 int *const neigh_list,
                                 int const number_of_neigh,
-                                double *const coords,
-                                double *const desc) {
+                                double_vector& coords,
+                                double_vector& desc) {
     // prepare data
-    auto *coordinates = (VectorOfSizeDIM *) coords;
+//    auto *coordinates = (VectorOfSizeDIM *) coords;
     int const iSpecies = species[index];
     // Setup loop over neighbors of current particle
     for (int jj = 0; jj < number_of_neigh; ++jj) {
@@ -154,15 +154,15 @@ void SymmetryFunctions::compute(int const index,
         int const j = neigh_list[jj];
         int const jSpecies = species[j];
         // cutoff between ij
-        double rcutij = rcut_2D_(iSpecies, jSpecies);
+        double_scalar rcutij = rcut_2D_(iSpecies, jSpecies);
         // Compute rij
-        double rij[DIM];
+        double_scalar rij[DIM];
         for (int dim = 0; dim < DIM; ++dim) {
-            rij[dim] = coordinates[j][dim] - coordinates[index][dim];
+            rij[dim] = coords(j * 3 + dim) - coords(index * 3 + dim);
         }
 
-        double const rijsq = rij[0] * rij[0] + rij[1] * rij[1] + rij[2] * rij[2];
-        double const rijmag = std::sqrt(rijsq);
+        double_scalar const rijsq = rij[0] * rij[0] + rij[1] * rij[1] + rij[2] * rij[2];
+        double_scalar const rijmag = sqrt(rijsq);
 
         // if particles index and j not interact
         if (rijmag > rcutij) { continue; }
@@ -177,19 +177,19 @@ void SymmetryFunctions::compute(int const index,
             int idx = starting_index_[p];
             // Loop over same descriptor but different parameter set
             for (int q = 0; q < num_param_sets_[p]; ++q) {
-                double gc = 0.0;
+                double_scalar gc = 0.0;
 
                 if (name_[p] == 1) {
                     sym_g1(rijmag, rcutij, gc);
                 } else if (name_[p] == 2) {
-                    double eta = params_[p](q, 0);
+                    double_scalar eta = params_[p](q, 0);
                     auto Rs = params_[p](q, 1);
                     sym_g2(eta, Rs, rijmag, rcutij, gc);
                 } else if (name_[p] == 3) {
-                    double kappa = params_[p](q, 0);
+                    double_scalar kappa = params_[p](q, 0);
                     sym_g3(kappa, rijmag, rcutij, gc);
                 }
-                desc[idx] += gc;
+                desc(idx) += gc;
                 ++idx;
             }
         }
@@ -203,28 +203,28 @@ void SymmetryFunctions::compute(int const index,
             int const kSpecies = species[k];
 
             // cutoff between ik and jk
-            double const rcutik = rcut_2D_[iSpecies][kSpecies];
-            double const rcutjk = rcut_2D_[jSpecies][kSpecies];
+            double_scalar const rcutik = rcut_2D_[iSpecies][kSpecies];
+            double_scalar const rcutjk = rcut_2D_[jSpecies][kSpecies];
 
             // Compute rik, rjk and their squares
-            double rik[DIM];
-            double rjk[DIM];
+            double_scalar rik[DIM];
+            double_scalar rjk[DIM];
 
             for (int dim = 0; dim < DIM; ++dim) {
-                rik[dim] = coordinates[k][dim] - coordinates[index][dim];
-                rjk[dim] = coordinates[k][dim] - coordinates[j][dim];
+                rik[dim] = coords(k * 3 + dim) - coords(index * 3 + dim);
+                rjk[dim] = coords(k * 3 + dim) - coords(j * 3 + dim);
             }
 
-            double const riksq = rik[0] * rik[0] + rik[1] * rik[1] + rik[2] * rik[2];
-            double const rjksq = rjk[0] * rjk[0] + rjk[1] * rjk[1] + rjk[2] * rjk[2];
-            double const rikmag = std::sqrt(riksq);
-            double const rjkmag = std::sqrt(rjksq);
+            double_scalar const riksq = rik[0] * rik[0] + rik[1] * rik[1] + rik[2] * rik[2];
+            double_scalar const rjksq = rjk[0] * rjk[0] + rjk[1] * rjk[1] + rjk[2] * rjk[2];
+            double_scalar const rikmag = sqrt(riksq);
+            double_scalar const rjkmag = sqrt(rjksq);
 
             // Check whether three-dody not interacting
             if (rikmag > rcutik) { continue; }
 
-            double const rvec[3] = {rijmag, rikmag, rjkmag};
-            double const rcutvec[3] = {rcutij, rcutik, rcutjk};
+            double_scalar const rvec[3] = {rijmag, rikmag, rjkmag};
+            double_scalar const rcutvec[3] = {rcutij, rcutik, rcutjk};
 
             // Loop over descriptors
             // three-body descriptors
@@ -234,23 +234,23 @@ void SymmetryFunctions::compute(int const index,
 
                 // Loop over same descriptor but different parameter set
                 for (int q = 0; q < num_param_sets_[p]; ++q) {
-                    double gc = 0.0;
+                    double_scalar gc = 0.0;
 
                     if (name_[p] == 4) {
-                        double zeta = params_[p](q, 0);
-                        double lambda = params_[p](q, 1);
-                        double eta = params_[p](q, 2);
+                        double_scalar zeta = params_[p](q, 0);
+                        double_scalar lambda = params_[p](q, 1);
+                        double_scalar eta = params_[p](q, 2);
 
                         sym_g4(zeta, lambda, eta, rvec, rcutvec, gc);
                     } else if (name_[p] == 5) {
-                        double zeta = params_[p](q, 0);
-                        double lambda = params_[p](q, 1);
-                        double eta = params_[p](q, 2);
+                        double_scalar zeta = params_[p](q, 0);
+                        double_scalar lambda = params_[p](q, 1);
+                        double_scalar eta = params_[p](q, 2);
 
                         sym_g5(zeta, lambda, eta, rvec, rcutvec, gc);
                     }
 
-                    desc[idx] += gc;
+                    desc(idx) += gc;
                     ++idx;
                 }
             }
@@ -406,25 +406,25 @@ void SymmetryFunctions::initFromFile(std::string &file_name) {
     width = _width;
 }
 
-
-void SymmetryFunctions::clone_empty(DescriptorKind *descriptorKind) {
-    auto d_sf = dynamic_cast<SymmetryFunctions *>(descriptorKind);
-    name_ = d_sf->name_;
-    params_ = d_sf->params_;
-    rcut_2D_ = d_sf->rcut_2D_;
-    has_three_body_ = d_sf->has_three_body_;
-    width = d_sf->width;
-    num_param_sets_ = d_sf->num_param_sets_;
-    num_params_ = d_sf->num_params_;
-    // set params to zero, to differentiate against
-    for (int i = 0; i < name_.size(); i++) {
-        for (int j = 0; j < num_param_sets_[i]; j++) {
-            for (int k = 0; k < num_params_[i]; k++) {
-                params_[i](j, k) = 0.0;
-            }
-        }
-    }
-}
+//
+//void SymmetryFunctions::clone_empty(DescriptorKind *descriptorKind) {
+//    auto d_sf = dynamic_cast<SymmetryFunctions *>(descriptorKind);
+//    name_ = d_sf->name_;
+//    params_ = d_sf->params_;
+//    rcut_2D_ = d_sf->rcut_2D_;
+//    has_three_body_ = d_sf->has_three_body_;
+//    width = d_sf->width;
+//    num_param_sets_ = d_sf->num_param_sets_;
+//    num_params_ = d_sf->num_params_;
+//    // set params to zero, to differentiate against
+//    for (int i = 0; i < name_.size(); i++) {
+//        for (int j = 0; j < num_param_sets_[i]; j++) {
+//            for (int k = 0; k < num_params_[i]; k++) {
+//                params_[i](j, k) = 0.0;
+//            }
+//        }
+//    }
+//}
 
 SymmetryFunctions::SymmetryFunctions(std::vector<std::string> *species, std::string *cutoff_function,
                                      double *cutoff_matrix, std::vector<std::string> *symmetry_function_types,
