@@ -78,7 +78,6 @@ void sym_g5(double_scalar const zeta, double_scalar const lambda, double_scalar 
     double_scalar const rik = r[1];
     double_scalar const rcutij = rcut[0];
     double_scalar const rcutik = rcut[1];
-
     if (rij > rcutij || rik > rcutik) { phi = 0.0; }
     else {
         double_scalar const rjk = r[2];
@@ -107,7 +106,7 @@ void sym_g4(double_scalar const zeta, double_scalar const lambda, double_scalar 
     double_scalar const rcutik = rcut[1];
     double_scalar const rcutjk = rcut[2];
 
-    if (rij > rcutij || rik > rcutik || rjk > rcutjk) { phi = 0.0; }
+    if (rij > rcutij || rik > rcutik || rjk > rcutjk) { phi = 0.0;}
     else {
         double_scalar const rijsq = rij * rij;
         double_scalar const riksq = rik * rik;
@@ -145,8 +144,7 @@ void SymmetryFunctions::compute(int const index,
                                 int const number_of_neigh,
                                 double_vector& coords,
                                 double_vector& desc) {
-    // prepare data
-//    auto *coordinates = (VectorOfSizeDIM *) coords;
+    // auto *coordinates = (VectorOfSizeDIM *) coords;
     int const iSpecies = species[index];
     // Setup loop over neighbors of current particle
     for (int jj = 0; jj < number_of_neigh; ++jj) {
@@ -189,13 +187,13 @@ void SymmetryFunctions::compute(int const index,
                     double_scalar kappa = params_[p](q, 0);
                     sym_g3(kappa, rijmag, rcutij, gc);
                 }
+
                 desc(idx) += gc;
                 ++idx;
             }
         }
         // three-body descriptors
-        if (has_three_body_ == 0) { continue; }
-
+        if (!has_three_body_) { continue; }
         // Loop over kk
         for (int kk = jj + 1; kk < number_of_neigh; ++kk) {
             // Adjust index of particle neighbor
@@ -235,7 +233,6 @@ void SymmetryFunctions::compute(int const index,
                 // Loop over same descriptor but different parameter set
                 for (int q = 0; q < num_param_sets_[p]; ++q) {
                     double_scalar gc = 0.0;
-
                     if (name_[p] == 4) {
                         double_scalar zeta = params_[p](q, 0);
                         double_scalar lambda = params_[p](q, 1);

@@ -148,8 +148,8 @@ public:
                  int *species,
                  int *neigh_list,
                  int number_of_neigh,
-                 double *coords,
-                 double *desc) override;
+                 double_vector &coords,
+                 double_vector &desc) override;
 
     void set_cutoff(const char *name, std::size_t Nspecies, double const *rcuts_in);
 
@@ -170,9 +170,9 @@ public:
 //  void compute_dbidrj();
 //  void compute_dbidrj_nonsymm();
 //  void copy_dbi2dbvec();
-    double compute_sfac(double r, double rcut_in);
+    double_scalar compute_sfac(double_scalar r, double_scalar rcut_in);
 
-    double compute_dsfac(double r, double rcut_in);
+    double_scalar compute_dsfac(double_scalar r, double_scalar rcut_in);
 
     void grow_rij(int newnmax);
 
@@ -183,7 +183,7 @@ public:
     int get_width();
 
 private:
-    inline double factorial(int n);
+    inline double_scalar factorial(int n);
 
     void create_twojmax_arrays();
 
@@ -199,62 +199,62 @@ private:
 
     void zero_uarraytot();
 
-    void addself_uarraytot(double wself_in);
+    void addself_uarraytot(double_scalar wself_in);
 
-    void add_uarraytot(double r, double wj_in, double rcut_in);
+    void add_uarraytot(double_scalar r, double_scalar wj_in, double_scalar rcut_in);
 
-    void compute_uarray(double x, double y, double z, double z0, double r);
+    void compute_uarray(double_scalar x, double_scalar y, double_scalar z, double_scalar z0, double_scalar r);
 
-    inline double deltacg(int j1, int j2, int j);
+    inline double_scalar deltacg(int j1, int j2, int j);
 
     int compute_ncoeff();
 
 public:
     int ncoeff;
-    std::vector<double> bvec;
-    Array2D<double> dbvec;
-    Array2D<double> rij;
+    std::vector<double_scalar> bvec;
+    Array2D<double_scalar> dbvec;
+    Array2D<double_scalar> rij;
     std::vector<int> inside;
-    std::vector<double> wj;
-    std::vector<double> rcutij;
+    std::vector<double_scalar> wj;
+    std::vector<double_scalar> rcutij;
     int nmax;
     int twojmax;
     int diagonalstyle;
-    Array3D<double> uarraytot_r;
-    Array3D<double> uarraytot_i;
-    Array5D<double> zarray_r;
-    Array5D<double> zarray_i;
+    Array3D<double_scalar> uarraytot_r;
+    Array3D<double_scalar> uarraytot_i;
+    Array5D<double_scalar> zarray_r;
+    Array5D<double_scalar> zarray_i;
 
-//  Array3D<double> uarraytot_r_b;
-//  Array3D<double> uarraytot_i_b;
+//  Array3D<double_scalar> uarraytot_r_b;
+//  Array3D<double_scalar> uarraytot_i_b;
 
-//  Array5D<double> zarray_r_b;
-//  Array5D<double> zarray_i_b;
+//  Array5D<double_scalar> zarray_r_b;
+//  Array5D<double_scalar> zarray_i_b;
 
-    Array3D<double> uarray_r;
-    Array3D<double> uarray_i;
+    Array3D<double_scalar> uarray_r;
+    Array3D<double_scalar> uarray_i;
 
 private:
     int n_species;
-    Array2D<double> rcuts;
-    std::vector<double> wjelem;
-    double rmin0;
-    double rfac0;
+    Array2D<double_scalar> rcuts;
+    std::vector<double_scalar> wjelem;
+    double_scalar rmin0;
+    double_scalar rfac0;
     std::vector<BISPECTRUM_LOOPINDICES> idxj;
     int idxj_max;
-    Array5D<double> cgarray;
-    std::vector<double> rootpqarray;
-    Array3D<double> barray;
-    Array4D<double> duarray_r;
-    Array4D<double> duarray_i;
-    Array4D<double> dbarray;
+    Array5D<double_scalar> cgarray;
+    std::vector<double_scalar> rootpqarray;
+    Array3D<double_scalar> barray;
+    Array4D<double_scalar> duarray_r;
+    Array4D<double_scalar> duarray_i;
+    Array4D<double_scalar> dbarray;
     static const int nmaxfactorial = 167;
-    static double const nfac_table[];
+    static double_scalar const nfac_table[];
     int use_shared_arrays;
     int switch_flag;
-    double wself;
+    double_scalar wself;
     int bzero_flag;
-    std::vector<double> bzero;
+    std::vector<double_scalar> bzero;
 };
 
 #endif  // BISPECTRUM_HPP_

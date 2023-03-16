@@ -85,10 +85,10 @@ public:
                    std::vector<double> *symmetry_function_parameters);
 
     // ********Bispectrum********
-//    static DescriptorKind *
-//    initDescriptor(AvailableDescriptor availableDescriptorKind, double rfac0_in, int twojmax_in, int diagonalstyle_in,
-//                   int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in,
-//                   double * cutoff_array, std::vector<std::string> * species, std::vector<double> * weights);
+    static DescriptorKind *
+    initDescriptor(AvailableDescriptor availableDescriptorKind, double rfac0_in, int twojmax_in, int diagonalstyle_in,
+                   int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in,
+                   double * cutoff_array, std::vector<std::string> * species, std::vector<double> * weights);
 
 };
 

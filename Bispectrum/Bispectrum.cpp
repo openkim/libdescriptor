@@ -60,7 +60,7 @@ Bispectrum::Bispectrum(double const rfac0_in,
     create_twojmax_arrays();
 
     if (bzero_flag) {
-        double const www = wself * wself * wself;
+        double_scalar const www = wself * wself * wself;
         for (int j = 1; j <= twojmax + 1; ++j) { bzero[j] = www * j; }
     }
 
@@ -229,10 +229,10 @@ void Bispectrum::compute(int const index,
                          int *const species,
                          int *const neigh_list,
                          int const number_of_neigh,
-                         double *const coords,
-                         double *const desc) {
+                         double_vector &coords,
+                         double_vector &desc) {
     // prepare data
-    Array2DView<double> coordinates(n_atoms, DIM, coords);
+//    Array2DView<double> coordinates(n_atoms, DIM, coords);
 
     int const *const ilist = neigh_list;
     int const iSpecies = species[index];
@@ -255,20 +255,20 @@ void Bispectrum::compute(int const index,
         int const jSpecies = species[j];
 
         // rij vec and
-        double rvec[DIM];
+        double_scalar rvec[DIM];
         for (int dim = 0; dim < DIM; ++dim) {
-            rvec[dim] = coordinates(j, dim) - coordinates(index, dim);
+            rvec[dim] = coords(j*3 + dim) - coords(index*3 + dim);
         }
 
-        double const rsq
+        double_scalar const rsq
                 = rvec[0] * rvec[0] + rvec[1] * rvec[1] + rvec[2] * rvec[2];
-        double const rmag = std::sqrt(rsq);
+        double_scalar const rmag = sqrt(rsq);
 
         // if (rmag < rcuts[iSpecies * n_species + jSpecies] && rmag > 1e-10) {
         if (rmag < rcuts(iSpecies, jSpecies) && rmag > 1e-10) {
-            // rij[ninside * 3 + 0] = rvec[0];
-            // rij[ninside * 3 + 1] = rvec[1];
-            // rij[ninside * 3 + 2] = rvec[2];
+//             rij[ninside * 3 + 0] = rvec[0];
+//             rij[ninside * 3 + 1] = rvec[1];
+//             rij[ninside * 3 + 2] = rvec[2];
             rij(ninside, 0) = rvec[0];
             rij(ninside, 1) = rvec[1];
             rij(ninside, 2) = rvec[2];
@@ -312,10 +312,10 @@ void Bispectrum::compute_ui(int const jnum) {
     zero_uarraytot();
     addself_uarraytot(wself);
 
-    double x, y, z;
-    double r, rsq;
-    double z0;
-    double theta0;
+    double_scalar x, y, z;
+    double_scalar r, rsq;
+    double_scalar z0;
+    double_scalar theta0;
 
     for (int j = 0; j < jnum; ++j) {
         // x = rij[j * 3 + 0];
@@ -327,13 +327,13 @@ void Bispectrum::compute_ui(int const jnum) {
         z = rij(j, 2);
 
         rsq = x * x + y * y + z * z;
-        r = std::sqrt(rsq);
+        r = sqrt(rsq);
 
         // TODO this is not in agreement with the paper, maybe change it
         theta0 = (r - rmin0) * rfac0 * MY_PI / (rcutij[j] - rmin0);
         // theta0 = (r - rmin0) * rscale0;
 
-        z0 = r / std::tan(theta0);
+        z0 = r / tan(theta0);
         compute_uarray(x, y, z, z0, r);
         add_uarraytot(r, wj[j], rcutij[j]);
     }
@@ -351,8 +351,8 @@ void Bispectrum::compute_zi() {
                         for (int ma1 = std::max(0, (2 * ma - j - j2 + j1) / 2);
                              ma1 <= std::min(j1, (2 * ma - j + j2 + j1) / 2);
                              ma1++) {
-                            double sumb1_r = 0.0;
-                            double sumb1_i = 0.0;
+                            double_scalar sumb1_r = 0.0;
+                            double_scalar sumb1_i = 0.0;
 
                             int const ma2 = (2 * ma - j - (2 * ma1 - j1) + j2) / 2;
 
@@ -475,7 +475,7 @@ void Bispectrum::zero_uarraytot() {
     }
 }
 
-void Bispectrum::addself_uarraytot(double const wself_in) {
+void Bispectrum::addself_uarraytot(double_scalar const wself_in) {
     for (int j = 0; j <= twojmax; ++j) {
         for (int ma = 0; ma <= j; ++ma) {
             uarraytot_r(j, ma, ma) = wself_in;
@@ -484,20 +484,20 @@ void Bispectrum::addself_uarraytot(double const wself_in) {
     }
 }
 
-void Bispectrum::compute_uarray(double const x,
-                                double const y,
-                                double const z,
-                                double const z0,
-                                double const r) {
+void Bispectrum::compute_uarray(double_scalar const x,
+                                double_scalar const y,
+                                double_scalar const z,
+                                double_scalar const z0,
+                                double_scalar const r) {
     // compute Cayley-Klein parameters for unit quaternion
-    double const r0inv = 1.0 / std::sqrt(r * r + z0 * z0);
+    double_scalar const r0inv = 1.0 / sqrt(r * r + z0 * z0);
 
-    double const a_r = r0inv * z0;
-    double const a_i = -r0inv * z;
-    double const b_r = r0inv * y;
-    double const b_i = -r0inv * x;
+    double_scalar const a_r = r0inv * z0;
+    double_scalar const a_i = -r0inv * z;
+    double_scalar const b_r = r0inv * y;
+    double_scalar const b_i = -r0inv * x;
 
-    double rootpq;
+    double_scalar rootpq;
 
     // VMK Section 4.8.2
     uarray_r(0, 0, 0) = 1.0;
@@ -550,10 +550,10 @@ void Bispectrum::compute_uarray(double const x,
     }
 }
 
-void Bispectrum::add_uarraytot(double const r,
-                               double const wj_in,
-                               double const rcut_in) {
-    double sfac = compute_sfac(r, rcut_in);
+void Bispectrum::add_uarraytot(double_scalar const r,
+                               double_scalar const wj_in,
+                               double_scalar const rcut_in) {
+    double_scalar sfac = compute_sfac(r, rcut_in);
     sfac *= wj_in;
 
     for (int j = 0; j <= twojmax; ++j) {
@@ -566,7 +566,7 @@ void Bispectrum::add_uarraytot(double const r,
     }
 }
 
-double Bispectrum::compute_sfac(double const r, double const rcut_in) {
+double_scalar Bispectrum::compute_sfac(double_scalar const r, double_scalar const rcut_in) {
     switch (switch_flag) {
         case (0):
             return 1.0;
@@ -575,20 +575,20 @@ double Bispectrum::compute_sfac(double const r, double const rcut_in) {
                                 : (r > rcut_in)
                                   ? 0.0
                                   : 0.5
-                                    * (std::cos((r - rmin0) * MY_PI / (rcut_in - rmin0))
+                                    * (cos((r - rmin0) * MY_PI / (rcut_in - rmin0))
                                        + 1.0);
         default:
             return 0.0;
     }
 }
 
-double Bispectrum::compute_dsfac(double const r, double const rcut_in) {
+double_scalar Bispectrum::compute_dsfac(double_scalar const r, double_scalar const rcut_in) {
     switch (switch_flag) {
         case (1):
             if (r <= rmin0 || r > rcut_in) { return 0.0; }
             else {
-                double const rcutfac = MY_PI / (rcut_in - rmin0);
-                return -0.5 * std::sin((r - rmin0) * rcutfac) * rcutfac;
+                double_scalar const rcutfac = MY_PI / (rcut_in - rmin0);
+                return -0.5 * sin((r - rmin0) * rcutfac) * rcutfac;
             }
         default:
             return 0.0;
@@ -618,7 +618,7 @@ void Bispectrum::create_twojmax_arrays() {
     }
 }
 
-inline double Bispectrum::factorial(int const n) {
+inline double_scalar Bispectrum::factorial(int const n) {
     if (n < 0 || n > nmaxfactorial) {
         std::cerr << "The input n = " + std::to_string(n)
                      + " is not valid for a factorial!";
@@ -627,7 +627,7 @@ inline double Bispectrum::factorial(int const n) {
     return nfac_table[n];
 }
 
-double const Bispectrum::nfac_table[] = {
+double_scalar const Bispectrum::nfac_table[] = {
         1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880,
         3628800, 39916800, 479001600, 6227020800, 87178291200, 1307674368000,
         20922789888000, 355687428096000, 6.402373705728e+15, 1.21645100408832e+17,
@@ -671,9 +671,9 @@ double const Bispectrum::nfac_table[] = {
         5.42391066613159e+295, 9.00369170577843e+297, 1.503616514865e+300,  // nmaxfactorial = 167
 };
 
-inline double Bispectrum::deltacg(int const j1, int const j2, int const j) {
-    double const sfaccg = factorial((j1 + j2 + j) / 2 + 1);
-    return std::sqrt(factorial((j1 + j2 - j) / 2) * factorial((j1 - j2 + j) / 2)
+inline double_scalar Bispectrum::deltacg(int const j1, int const j2, int const j) {
+    double_scalar const sfaccg = factorial((j1 + j2 + j) / 2 + 1);
+    return sqrt(factorial((j1 + j2 - j) / 2) * factorial((j1 - j2 + j) / 2)
                      * factorial((-j1 + j2 + j) / 2) / sfaccg);
 }
 
@@ -690,7 +690,7 @@ void Bispectrum::init_clebsch_gordan() {
                         int const m = (aa2 + bb2 + j) / 2;
                         if (m < 0 || m > j) { continue; }
 
-                        double sum(0.0);
+                        double_scalar sum(0.0);
                         for (int z = std::max(
                                 0, std::max(-(j - j2 + aa2) / 2, -(j - j1 - bb2) / 2));
                              z <= std::min((j1 + j2 - j) / 2,
@@ -707,9 +707,9 @@ void Bispectrum::init_clebsch_gordan() {
 
                         int const cc2 = 2 * m - j;
 
-                        double dcg = deltacg(j1, j2, j);
+                        double_scalar dcg = deltacg(j1, j2, j);
 
-                        double sfaccg = std::sqrt(
+                        double_scalar sfaccg = sqrt(
                                 factorial((j1 + aa2) / 2) * factorial((j1 - aa2) / 2)
                                 * factorial((j2 + bb2) / 2) * factorial((j2 - bb2) / 2)
                                 * factorial((j + cc2) / 2) * factorial((j - cc2) / 2)
@@ -789,7 +789,7 @@ void Bispectrum::print_clebsch_gordan(FILE *file) {
                                 strbb,
                                 strc,
                                 strcc,
-                                cgarray(j1, j2, j, m1, m2));
+                                static_cast<double>(cgarray(j1, j2, j, m1, m2)));
                     }
                 }
             }
@@ -984,7 +984,7 @@ void Bispectrum::initFromFile(std::string &file_name) {
     create_twojmax_arrays();
 
     if (bzero_flag) {
-        double const www = wself * wself * wself;
+        double_scalar const www = wself * wself * wself;
         for (int j = 1; j <= twojmax + 1; ++j) { bzero[j] = www * j; }
     }
 
@@ -1038,7 +1038,7 @@ void Bispectrum::clone_empty(DescriptorKind *descriptorKind) {
     ncoeff = compute_ncoeff();
     create_twojmax_arrays();
     if (bzero_flag) {
-        double const www = wself * wself * wself;
+        double_scalar const www = wself * wself * wself;
         for (int j = 1; j <= twojmax + 1; ++j) { bzero[j] = www * j; }
     }
     bvec.resize(ncoeff, static_cast<double>(0));

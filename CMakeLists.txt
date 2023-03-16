@@ -26,15 +26,15 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(./)
 include_directories(SymmetryFunctions)
 file(GLOB SYMFUNFILES SymmetryFunctions/*)
-#include_directories(Bispectrum)
-#file(GLOB BISFILES Bispectrum/*)
+include_directories(Bispectrum)
+file(GLOB BISFILES Bispectrum/*)
 
 #--------------
 
 include_directories(autodiff)
 
-#add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.cpp)
-add_library(descriptor SHARED ${SYMFUNFILES} Descriptors.cpp helper.cpp)
+add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.cpp)
+#add_library(descriptor SHARED ${SYMFUNFILES} Descriptors.cpp helper.cpp)
 
 set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp")
 
@@ -44,14 +44,22 @@ install(TARGETS descriptor
 
 # ---------------- Python module -------------------------
 ## Python Interp
-#find_package(PythonInterp REQUIRED)
-#find_package(PythonLibs REQUIRED)
-#include_directories(${PYTHON_INCLUDE_DIRS})
-#
-## PYBIND11
-#find_package(pybind11 REQUIRED)
-#
-#pybind11_add_module(libdescriptor python_bindings.cpp)
-#target_link_libraries(libdescriptor PUBLIC descriptor)
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs REQUIRED)
+include_directories(${PYTHON_INCLUDE_DIRS})
+
+# PYBIND11
+find_package(pybind11 REQUIRED)
+
+pybind11_add_module(libdescriptor python_bindings.cpp)
+target_link_libraries(libdescriptor PUBLIC descriptor)
 
 #TODO add install location
+
+
+# ----------------- Tests ---------------------
+enable_testing()
+add_test(NAME SymmetryFunctions COMMAND ${PYTHON_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/symmetry_functions_test.py)
+add_test(NAME Bispectrum COMMAND ${PYTHON_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/bispectrum_test.py)
