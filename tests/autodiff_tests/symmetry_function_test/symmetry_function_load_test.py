@@ -21,7 +21,6 @@ def test(tol=1e-6):
         err += np.sum(np.abs(fwd_new - fwd[i]))
 
     rev = np.loadtxt("data/rev.dat")
-    print(fwd_new) 
     err_grad = 0
     rev_new = np.zeros((np.max(image)+1 ,3))
     
