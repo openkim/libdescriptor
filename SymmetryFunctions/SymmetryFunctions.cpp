@@ -329,10 +329,10 @@ void SymmetryFunctions::initFromFile(std::string &file_name) {
     line.clear();
 
     // Read symmetry function types and their parameters
-    std::vector<double> symmetry_function_params_vector;
     std::map<std::string, std::pair<int, int>> symmetry_function_type_param_sizes;
 
     for (int i = 0; i < num_symmetry_function_types; i++) {
+        std::vector<double> symmetry_function_params_vector;
         FileIOUtils::get_next_data_line(file, line);
         FileIOUtils::parse_string_params(line, string_params, 1);
         symmetry_function_types.push_back(string_params[0]);
@@ -350,11 +350,11 @@ void SymmetryFunctions::initFromFile(std::string &file_name) {
             for (int k = 0; k < symmetry_function_type_param_sizes[symmetry_function_types[i]].second; k++) {
                 symmetry_function_params_vector.push_back(double_params[k]);
             }
-            symmetry_function_params[symmetry_function_types[i]] = symmetry_function_params_vector;
 
             double_params.clear();
             line.clear();
         }
+        symmetry_function_params[symmetry_function_types[i]] = symmetry_function_params_vector;
     }
 
     int_params.clear();

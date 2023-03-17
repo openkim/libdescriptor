@@ -1,0 +1,31 @@
+# Descriptor parameters SymFun
+# n_species
+1
+
+# Full cutoff matrix n_species × n_species
+3.77
+
+# Cutoff function
+cos
+
+# descriptor width
+55
+
+# jmax
+4
+
+# rfac0
+0.99363
+
+# diagonalstyle
+3
+
+# rmin0
+0
+
+# switch_flag
+1
+
+# bzero_flag
+0
+
