@@ -4,13 +4,33 @@ Libdescriptor
 Libdescriptor is a high performance descriptor library for providing access to fully differentiable descriptor functions.
 While `libdescriptor` is a general purpose descriptor library, it's API compatible with KIM models and associated projects.
 This will also provide uniform access to various selected descriptors for KLIFF using Pybind11 ports.
-For gradient calculations, Libdescriptor relies on [Enzyme AD](https://github.com/EnzymeAD/Enzyme), which provides it with capability to trivially generate near analytical performance gradient functions.
+For gradient calculations, Libdescriptor relies on [Enzyme AD](https://github.com/EnzymeAD/Enzyme) and [Autodiff](https://github.com/autodiff/autodiff), which provides it with capability to trivially generate near analytical performance gradient functions.
 Use of Enzyme AD enables Libdescriptor to not only provide gradients against coordinates, but against hyperparameters as well, thus opening way for better optimized descriptors.
 This should enable rapid development, extension and deployment of various descriptors.
-
 <img src="libdescriptor.svg" width="800">
 
+While the EnzymeAD is provided to high-performance, near-analytical throughput gradient calculations, it is not the most
+trivial piece of software to compile and use. Hence, the default version uses lightweight, header only Autodiff library,
+which was 2nd most performant in our tests. For using the Enzyme version of the library, you can use the `enzyme` branch.
+
+<img src="./docs/E_F_C++Updated.png" width="400">
+
 ## Compiling 
+### Autodiff version
+To compile the library, you need to have a C++17 compatible compiler, and CMake 3.10 or higher. Compiling is straightforward,
+```shell
+git clone https://github.com/ipcamit/libdescriptor
+cd libdescriptor && mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make && make install
+```
+This will compile and install the `libdescriptor.so` file in your system and `libdescriptor.cpython-xxxx.so` Python module. 
+You can link against this file in your own projects. If you want to use only the Python module, you can simply do
+```shell
+pip install .
+```
+
+### Enzyme version
 At present, it needs functioning Enzyme compiler environment, in future it will be provided as binary package or a conda environment.
 For Installing Enzyme, simply follow the instructions given on enzyme page. At the time of writing these instructions, we are using
 - LLVM 12.0.1
@@ -62,7 +82,6 @@ Your build folder should now contain `libdescriptor.so` file, which you can link
 
 
 ## Python bindings
-**WIP**
 
 Libdescriptor also provides build target for making `descriptor.cpython-cp3.xx.so` Python module using Pybind11.
 To use it, you need to install Pybind11 on your system
