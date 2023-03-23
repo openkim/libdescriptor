@@ -8,6 +8,7 @@ ext_modules = [
         sorted(glob("*.cpp") + glob("**/*.cpp")),  # Sort source files for reproducibility
         cxx_std=17,
         include_dirs=[".","./autodiff"],
+        extra_compile_args=["-O3", "-march=native", "-fopenmp", "-fPIC"],
     ),
 ]
 
