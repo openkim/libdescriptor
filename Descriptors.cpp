@@ -180,7 +180,7 @@ void Descriptor::gradient_single_atom(int index,
 
     double_vector d_coord_tmp = d_desc_vec.transpose() * J;
     for (int i = 0; i < n_total_atoms * 3; i++) {
-        d_coordinates[i] = static_cast<double>(d_coord_tmp(i));
+        d_coordinates[i] += static_cast<double>(d_coord_tmp(i));
     }
 
 }

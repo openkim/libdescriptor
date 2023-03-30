@@ -123,20 +123,24 @@ def test(tol = 1e-10):
                         symmetry_function_types, symmetry_function_sizes, symmetry_function_param)
     
     err = 0
-    for i in range(n_atoms):
-        fwd_new = lds.compute_single_atom(desc ,i, species_arr, np.array(neigh[i], dtype=np.intc), coords)
-        err += np.sum(np.abs(fwd_new - fwd[i]))
-    
+    #for i in range(n_atoms):
+    #    fwd_new = lds.compute_single_atom(desc ,i, species_arr, np.array(neigh[i], dtype=np.intc), coords)
+    #    err += np.sum(np.abs(fwd_new - fwd[i]))
+    fwd_new = lds.compute(desc, n_atoms, species_arr, np.array(neigh, dtype=np.intc), np.array(n_neigh, dtype=np.intc) ,coords)
+    err = np.sum(np.abs(fwd_new - fwd))
     rev = np.loadtxt("data/rev.dat")
     
     err_grad = 0
     rev_new = np.zeros((np.max(image)+1 ,3))
     
-    for i in range(n_atoms):
-        d_coords = lds.gradient_single_atom(desc ,i, species_arr, np.array(neigh[i], dtype=np.intc), coords, fwd_new, np.ones_like(fwd_new))
-        for j,k in enumerate(image):
-            rev_new[k,:] += d_coords[j,:]
-    
+    #for i in range(n_atoms):
+    #    d_coords = lds.gradient_single_atom(desc ,i, species_arr, np.array(neigh[i], dtype=np.intc), coords, fwd_new, np.ones_like(fwd_new))
+    #    for j,k in enumerate(image):
+    #        rev_new[k,:] += d_coords[j,:]
+    d_coords = lds.gradient(desc, n_atoms, species_arr, np.array(neigh, dtype=np.intc), np.array(n_neigh, dtype=np.intc) ,coords, fwd_new, np.ones_like(fwd_new))
+
+    for j,k in enumerate(image):
+        rev_new[k,:] += d_coords[j,:]
     err_grad = np.sum(np.abs((rev_new - rev)))
 
     print("Error in descriptor: ", err)
