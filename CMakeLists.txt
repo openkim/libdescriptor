@@ -35,11 +35,16 @@ include_directories(autodiff)
 
 add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.cpp)
 
-set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp")
+# ----------------- Install ---------------------
+# Install headers
+
+set_target_properties(descriptor PROPERTIES PUBLIC_HEADER Descriptors.hpp)
 
 install(TARGETS descriptor
         LIBRARY DESTINATION lib
         PUBLIC_HEADER DESTINATION include)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Eigen DESTINATION include)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/autodiff/autodiff DESTINATION include)
 
 # ---------------- Python module -------------------------
 ## Python Interp
