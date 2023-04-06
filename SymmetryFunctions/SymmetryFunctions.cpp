@@ -193,7 +193,7 @@ void SymmetryFunctions::compute(int const index,
             }
         }
         // three-body descriptors
-//        if (!has_three_body_) { continue; }
+        if (!has_three_body_) { continue; }
         // Loop over kk
         for (int kk = jj + 1; kk < number_of_neigh; ++kk) {
             // Adjust index of particle neighbor
