@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(libdescriptor)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 find_package(Doxygen OPTIONAL_COMPONENTS dot)
 if (DOXYGEN_FOUND)
     # set input and output files
@@ -27,17 +27,17 @@ if(NOT DEFINED ENZYME_LIB)
     set(ENZYME_LIB "/usr/local/lib")
 endif()
 message("Searching for ENZYME at ${ENZYME_LIB}")
-if(EXISTS "${ENZYME_LIB}/LLDEnzyme-12.so")
+if(EXISTS "${ENZYME_LIB}/LLDEnzyme-13.so")
     message("Found LLDEnzyme plugin.")
 else()
     message(FATAL_ERROR "LLDEnzyme plugin not found, please check your Enzyme installation.")
 endif()
-if(EXISTS "${ENZYME_LIB}/ClangEnzyme-12.so")
+if(EXISTS "${ENZYME_LIB}/ClangEnzyme-13.so")
     message("Found ClangEnzyme plugin.")
 else()
     message(WARNING "ClangEnzyme plugin not found, it is NOT needed for libdescriptor, but usually indicates improper installation of Enzyme.")
 endif()
-if(EXISTS "${ENZYME_LIB}/LLVMEnzyme-12.so")
+if(EXISTS "${ENZYME_LIB}/LLVMEnzyme-13.so")
     message("Found LLVMEnzyme plugin.")
 else()
     message(WARNING "LLVMEnzyme plugin not found, it is NOT needed for libdescriptor, but usually indicates improper installation of Enzyme.")
@@ -51,7 +51,8 @@ include_directories(SymmetryFunctions)
 file(GLOB SYMFUNFILES SymmetryFunctions/*)
 include_directories(Bispectrum)
 file(GLOB BISFILES Bispectrum/*)
-
+include_directories(SOAP)
+file(GLOB SOAPFILES SOAP/*)
 #--------------
 
 # Set LLD, just in case... sometimes default LLD the name of LLD file is lld-12
@@ -62,11 +63,11 @@ endif()
 # Compile files, but use lld for linking. lld is patched with enzyme to generate AD code
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struct-path-tbaa")
 
-add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.cpp)
+add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} Descriptors.cpp helper.cpp)
 
 # pass linking to lld, with enzyme plugin
 target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
-target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=${ENZYME_LIB}/LLDEnzyme-12.so")
+target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=${ENZYME_LIB}/LLDEnzyme-13.so")
 
 # TODO REMOVE EXTRA HEADER FILES ONCE ENZYME PROVIDES SOLUTION
 #set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp;SymmetryFunctions/SymmetryFunctions.hpp;Bispectrum/Bispectrum.hpp;helper.hpp")
@@ -80,14 +81,14 @@ install(TARGETS descriptor
 
 # ---------------- Python module -------------------------
 # Python Interp
-find_package(PythonInterp REQUIRED)
-find_package(PythonLibs REQUIRED)
-include_directories(${PYTHON_INCLUDE_DIRS})
-
-# PYBIND11
-find_package(pybind11 REQUIRED)
-
-pybind11_add_module(libdescriptor python_bindings.cpp)
-target_link_libraries(libdescriptor PUBLIC descriptor)
+#find_package(PythonInterp REQUIRED)
+#find_package(PythonLibs REQUIRED)
+#include_directories(${PYTHON_INCLUDE_DIRS})
+#
+## PYBIND11
+#find_package(pybind11 REQUIRED)
+#
+#pybind11_add_module(libdescriptor python_bindings.cpp)
+#target_link_libraries(libdescriptor PUBLIC descriptor)
 
 #TODO add install location

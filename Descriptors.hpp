@@ -128,6 +128,7 @@ namespace Descriptor {
     void compute_single_atom(int index, int n_atoms, int *species, int *number_of_neighs, int number_of_neigh_list,
                              double *coordinates, double *desc,
                              DescriptorKind *descriptor_kind);
+
 }
 
 
