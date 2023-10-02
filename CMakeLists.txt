@@ -81,14 +81,14 @@ install(TARGETS descriptor
 
 # ---------------- Python module -------------------------
 # Python Interp
-#find_package(PythonInterp REQUIRED)
-#find_package(PythonLibs REQUIRED)
-#include_directories(${PYTHON_INCLUDE_DIRS})
-#
-## PYBIND11
-#find_package(pybind11 REQUIRED)
-#
-#pybind11_add_module(libdescriptor python_bindings.cpp)
-#target_link_libraries(libdescriptor PUBLIC descriptor)
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs REQUIRED)
+include_directories(${PYTHON_INCLUDE_DIRS})
+
+# PYBIND11
+find_package(pybind11 REQUIRED)
+
+pybind11_add_module(libdescriptor python_bindings.cpp)
+target_link_libraries(libdescriptor PUBLIC descriptor)
 
 #TODO add install location

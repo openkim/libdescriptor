@@ -185,8 +185,8 @@ SOAP::compute(int index, int n_atoms, int *species, int *neighbor_lists, int num
         std::array<double, 3> r_j = {coordinates_[neighbor_index][0], coordinates_[neighbor_index][1],
                                      coordinates_[neighbor_index][2]};
         i_coordinates[i][0] = r_j[0] - r_i[0];
-        i_coordinates[i][1] = r_j[0] - r_i[1];
-        i_coordinates[i][2] = r_j[0] - r_i[2];
+        i_coordinates[i][1] = r_j[1] - r_i[1];
+        i_coordinates[i][2] = r_j[2] - r_i[2];
     }
     //2. get all the neighbor coordinates of a given species
     int zi = species[index];
@@ -222,18 +222,14 @@ SOAP::compute(int index, int n_atoms, int *species, int *neighbor_lists, int num
 
             Ylmi_all_l_from_r(l_max, r_j.data(),
                               Ylmi_real.data() + j * (l_max + 1) * (l_max + 1),
-                              Ylmi_imag.data() + j * (l_max + 1) * (l_max +
-                                                                    1)); // 2 for imag and real, org: real_1,imag_1,real_2,imag_2,real_3,imag_3 ..
+                              Ylmi_imag.data() + j * (l_max + 1) * (l_max + 1));
 
             double r_ij = std::sqrt(r_j[0] * r_j[0] + r_j[1] * r_j[1] + r_j[2] * r_j[2]);
             // bessel_i_zy
             for (int l = 0; l < l_max + 1; l++) {
                 for (int i = 0; i < n_gl_quad_points; i++) {
-                    double r_sq = gl_quad_radial_grid_points[i] * gl_quad_radial_grid_points[i];
-                    bessel_i_zj[j * (l_max + 1) * n_gl_quad_points + l * n_gl_quad_points + i] = spherical_in(l,
-                                                                                                              2 * eta *
-                                                                                                              r_sq *
-                                                                                                              r_ij);
+                    bessel_i_zj[j * (l_max + 1) * n_gl_quad_points + l * n_gl_quad_points + i] =
+                            spherical_in(l,2 * eta * gl_quad_radial_grid_points[i] * r_ij);
                 }
             }
         }
