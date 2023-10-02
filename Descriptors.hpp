@@ -20,7 +20,8 @@ namespace Descriptor {
     /// This enumerator lists all the kind of descriptors that are available at run time.
     enum AvailableDescriptor {
         KindSymmetryFunctions, //!< For selecting Behler Symmetry Functions (SymmetryFunctions)
-        KindBispectrum //!< For selecting Bispectrum descriptor
+        KindBispectrum, //!< For selecting Bispectrum descriptor
+        KindSOAP //!< For selecting Smooth Overlap of Atomic Position (SOAP) descriptor
     };
 
     class DescriptorKind;
@@ -224,6 +225,10 @@ public:
                    int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in,
                    double * cutoff_array, std::vector<std::string> * species, std::vector<double> * weights);
 
+    // ********SOAP********
+    DescriptorKind *
+    initDescriptor(AvailableDescriptor availableDescriptorKind, int n_max, int l_max, double cutoff,
+                               std::vector<std::string> &species, std::string radial_basis, double eta);
 };
 
 

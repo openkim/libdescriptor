@@ -345,3 +345,7 @@ void SOAP::allocate_memory() {
     //    I_ij_real = std::vector<double>((l_max + 1) * (l_max + 1) * n_gl_quad_points); // preallocated
     //    I_ij_imag = std::vector<double>((l_max + 1) * (l_max + 1) * n_gl_quad_points); // preallocated
 }
+
+void SOAP::clone_empty(DescriptorKind *descriptorKind) {
+    descriptorKind = new SOAP();
+}
