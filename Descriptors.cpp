@@ -1,9 +1,8 @@
 #include "Descriptors.hpp"
 #include "SymmetryFunctions/SymmetryFunctions.hpp"
 #include "Bispectrum/Bispectrum.hpp"
-#include "SOAP/soap.hpp"
+#include "SOAP/SOAP.hpp"
 #include "finite_difference.hpp"
-#include "soap.hpp"
 #include <vector>
 #include <string>
 #include <stdexcept>
@@ -64,7 +63,7 @@ DescriptorKind *DescriptorKind::initDescriptor(std::string &descriptor_file_name
         bs->descriptor_param_file = descriptor_file_name;
         return bs;
     } else if (descriptor_kind == KindSOAP) {
-        auto global = new SOAP();
+        auto global = new SOAP(descriptor_file_name);
         global->descriptor_kind = descriptor_kind;
         global->descriptor_param_file = descriptor_file_name;
         return global;
@@ -367,6 +366,7 @@ DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, doub
     return_pointer->descriptor_kind = availableDescriptorKind;
     return return_pointer;
 }
+
 DescriptorKind *
 DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, int n_max, int l_max, double cutoff,
                                std::vector<std::string> &species, std::string radial_basis, double eta){

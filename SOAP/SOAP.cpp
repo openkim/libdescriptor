@@ -1,5 +1,6 @@
-#include "soap.hpp"
+#include "SOAP.hpp"
 #include "maths/maths.hpp"
+#include "file_io_utils.hpp"
 #include <memory>
 
 using namespace Descriptor;
@@ -343,5 +344,122 @@ void SOAP::allocate_memory() {
 }
 
 void SOAP::clone_empty(DescriptorKind *descriptorKind) {
-    descriptorKind = new SOAP();
+    auto d_soap = dynamic_cast<SOAP *>(descriptorKind);
+    n_max = d_soap->n_max;
+    l_max = d_soap->l_max;
+    cutoff = d_soap->cutoff;
+    n_species = d_soap->n_species;
+    eta = d_soap->eta;
+    init_radial_basis_array();
+    allocate_memory();
+
+    // zero out the memory
+    if (radial_basis == "polynomial") {
+        for (int i = 0; i < d_soap->radial_basis_array.size(); i++) {
+            radial_basis_array[i] = 0.0;
+            gl_quad_radial_sq_grid_points[i] = 0.0;
+            gl_quad_weights[i] = 0.0;
+            gl_quad_radial_grid_points[i] = 0.0;
+        }
+    } else {
+        throw std::invalid_argument("radial_basis must be one of: polynomial");
+    }
 }
+
+SOAP::SOAP(std::string &filename) {
+
+    // Open the descriptor file
+    std::ifstream file = FileIOUtils::open_file(filename);
+
+    // String containing data line and list of parameters
+    std::vector<std::string> string_params;
+    std::vector<double> double_params;
+    std::vector<int> int_params;
+    std::vector<bool> bool_params;
+    std::string line;
+
+    // params
+    int n_max_, l_max_, n_species_;
+    double cutoff_, eta_;
+    std::vector<std::string> species;
+    std::string radial_basis_;
+
+    // File format:
+    /*
+     * # n_max
+     * 2
+     * # l_max
+     * 2
+     * # cutoff
+     * 5.0
+     * # eta
+     * 1.0
+     * # radial_basis
+     * polynomial
+     * # species
+     * 4
+     * H C N O
+     */
+    // n_max
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_int_params(line, int_params,1);
+    n_max_ = int_params[0];
+    int_params.clear();
+    line.clear();
+
+    // l_max
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_int_params(line, int_params,1);
+    l_max_ = int_params[0];
+    int_params.clear();
+    line.clear();
+
+    // cutoff
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_double_params(line, double_params,1);
+    cutoff_ = double_params[0];
+    double_params.clear();
+    line.clear();
+
+    // eta
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_double_params(line, double_params,1);
+    eta_ = double_params[0];
+    double_params.clear();
+    line.clear();
+
+    // radial_basis
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_string_params(line, string_params,1);
+    radial_basis_ = string_params[0];
+    string_params.clear();
+    line.clear();
+
+    // species
+    FileIOUtils::get_next_data_line(file, line);
+    FileIOUtils::parse_int_params(line, int_params,1);
+    n_species_ = int_params[0];
+    int_params.clear();
+    line.clear();
+
+    FileIOUtils::parse_string_params(line, string_params,n_species_);
+    for (auto& species_name : string_params) {
+        species.push_back(species_name);
+    }
+    string_params.clear();
+    line.clear();
+
+    file.close();
+
+    // Initialize the descriptor
+    this->n_max = n_max_;
+    this->l_max = l_max_;
+    this->cutoff = cutoff_;
+    this->species_ = species;
+    this->n_species = species.size();
+    this->radial_basis = std::move(radial_basis);
+    this->eta = eta_;
+    init_radial_basis_array();
+    allocate_memory();
+}
+

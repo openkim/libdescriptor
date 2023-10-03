@@ -64,6 +64,8 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struct-path-tbaa")
 
 add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} Descriptors.cpp helper.cpp)
+add_library(descriptor_static STATIC ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} Descriptors.cpp helper.cpp)
+
 
 # pass linking to lld, with enzyme plugin
 target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
@@ -74,6 +76,7 @@ target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=${ENZYME_LIB}/LLDEnz
 # Further testing indicates that library might be working fine with virtual desctructors. So everting the
 # changes for now. But leaving above as reminder
 set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp")
+set_target_properties(descriptor_static PROPERTIES OUTPUT_NAME descriptor)
 
 install(TARGETS descriptor
         LIBRARY DESTINATION lib

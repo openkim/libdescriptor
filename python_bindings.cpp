@@ -34,7 +34,8 @@ PYBIND11_MODULE(libdescriptor, m) {
     // Python bindings for AvailableDescriptor kinds.
     py::enum_<AvailableDescriptor>(m, "AvailableDescriptors")
             .value("Bispectrum", AvailableDescriptor::KindBispectrum)
-            .value("SymmetryFunctions", AvailableDescriptor::KindSymmetryFunctions);
+            .value("SymmetryFunctions", AvailableDescriptor::KindSymmetryFunctions)
+            .value("SOAP", AvailableDescriptor::KindSOAP);
 
     // Python bindings for DescriptorKind
     py::class_<DescriptorKind, PyDescriptorKind>(m, "DescriptorKind")
@@ -56,6 +57,10 @@ PYBIND11_MODULE(libdescriptor, m) {
                     // Return descriptor object created from Bispectrum, using direct parameters
             .def("init_descriptor", py::overload_cast<AvailableDescriptor, double, int, int, int, double, int,
                  int, double *, std::vector<std::string> *, std::vector<double> *>(&DescriptorKind::initDescriptor))
+
+                    // Return descriptor object created from SOAP, using direct parameters
+            .def("init_descriptor", py::overload_cast<AvailableDescriptor, int, int, double,
+                               std::vector<std::string> &, std::string, double>(&DescriptorKind::initDescriptor))
 
                     // Compute function for calculating the descriptor
             .def("compute",

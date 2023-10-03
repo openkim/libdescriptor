@@ -25,7 +25,8 @@ using namespace Descriptor;
 
 class SOAP final: public DescriptorKind {
 public:
-    SOAP() {};
+    SOAP() {}; //TODO delete the default constructor
+    SOAP(std::string& filename);
     SOAP(int n_max, int l_max, double cutoff, std::vector<std::string> &species, std::string radial_basis, double eta);
     void compute(int index,
                  int n_atoms,

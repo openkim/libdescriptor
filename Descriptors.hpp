@@ -226,7 +226,7 @@ public:
                    double * cutoff_array, std::vector<std::string> * species, std::vector<double> * weights);
 
     // ********SOAP********
-    DescriptorKind *
+    static DescriptorKind *
     initDescriptor(AvailableDescriptor availableDescriptorKind, int n_max, int l_max, double cutoff,
                                std::vector<std::string> &species, std::string radial_basis, double eta);
 };
