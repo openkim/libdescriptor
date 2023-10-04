@@ -45,7 +45,6 @@ public:
     double eta;
     int n_species;
     std::vector<std::string> species_;
-    int width=-1;
     std::string radial_basis = "polynomial";
     std::vector<double> radial_basis_array;
     std::vector<double> gl_quad_weights;

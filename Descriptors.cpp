@@ -230,7 +230,6 @@ void Descriptor::gradient_single_atom(int index,
 
             *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
             d_desc_kind->clone_empty(desc_kind);
-
             __enzyme_autodiff_one_atom(compute_single_atom, /* fn to be differentiated */
                                        enzyme_const, index,
                                        enzyme_const, n_atoms, /* Do not diff. against integer params */

@@ -55,8 +55,4 @@ void polynomial_basis(int n_max, double cutoff, int r_size, double *r, double *r
             r_basis[i * r_size + j] = temp(j, i);
         }
     }
-    // for (int i = 0; i < r_size; i++){
-    //     std::cout << r_basis[i]  << " " << r_basis[r_size + i]<< std::endl;
-    // }
-    std::cout << "polynomial basis correct\n" << std::flush;
 }

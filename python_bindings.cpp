@@ -61,7 +61,6 @@ PYBIND11_MODULE(libdescriptor, m) {
                     // Return descriptor object created from SOAP, using direct parameters
             .def("init_descriptor", py::overload_cast<AvailableDescriptor, int, int, double,
                                std::vector<std::string> &, std::string, double>(&DescriptorKind::initDescriptor))
-
                     // Compute function for calculating the descriptor
             .def("compute",
                  [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
@@ -71,6 +70,7 @@ PYBIND11_MODULE(libdescriptor, m) {
                      int n_neigh = static_cast<int>(neighbors.shape(0));
                      auto desc = new double[ds.width];
                      for (int i = 0; i < ds.width; i++) desc[i] = 0.0;
+                     std::cout << "Computing descriptor for " << n_atoms << " atoms." << std::endl;
                      ds.compute(index,
                                 n_atoms,
                                 const_cast<int *>(species.data(0)),

@@ -16,7 +16,7 @@ SOAP::SOAP(int n_max, int l_max, double cutoff, std::vector<std::string> &specie
     this->eta = eta;
     init_radial_basis_array();
     allocate_memory();
-
+    this->width = get_width();
 }
 
 int SOAP::get_width() {
@@ -265,7 +265,7 @@ SOAP::compute(int index, int n_atoms, int *species, int *neighbor_lists, int num
         }
 
         //6. numerically integrate over the radial grid points
-        // Cij_real = \int r^2 R(r) * I_zj_real, Cij_conj = \int r^2 R(r) * I_zj_imag = \sum_i r[i]^2 R(r[i]) * I_zj_imag[i] w_i
+        //Cij_real = \int r^2 R(r) * I_zj_real, Cij_conj = \int r^2 R(r) * I_zj_imag = \sum_i r[i]^2 R(r[i]) * I_zj_imag[i] w_i
         std::vector<double> Cij_real(n_max * (l_max + 1) * (l_max + 1));
         std::vector<double> Cij_conj(n_max * (l_max + 1) * (l_max + 1));
         std::fill(Cij_real.begin(), Cij_real.end(), 0.0);
@@ -352,18 +352,18 @@ void SOAP::clone_empty(DescriptorKind *descriptorKind) {
     eta = d_soap->eta;
     init_radial_basis_array();
     allocate_memory();
-
+    width = d_soap->width;
     // zero out the memory
-    if (radial_basis == "polynomial") {
-        for (int i = 0; i < d_soap->radial_basis_array.size(); i++) {
-            radial_basis_array[i] = 0.0;
-            gl_quad_radial_sq_grid_points[i] = 0.0;
-            gl_quad_weights[i] = 0.0;
-            gl_quad_radial_grid_points[i] = 0.0;
-        }
-    } else {
-        throw std::invalid_argument("radial_basis must be one of: polynomial");
-    }
+//    if (radial_basis == "polynomial") {
+//        for (int i = 0; i < d_soap->radial_basis_array.size(); i++) {
+//            radial_basis_array[i] = 0.0;
+//            gl_quad_radial_sq_grid_points[i] = 0.0;
+//            gl_quad_weights[i] = 0.0;
+//            gl_quad_radial_grid_points[i] = 0.0;
+//        }
+//    } else {
+//        throw std::invalid_argument("radial_basis must be one of: polynomial");
+//    }
 }
 
 SOAP::SOAP(std::string &filename) {
@@ -461,5 +461,6 @@ SOAP::SOAP(std::string &filename) {
     this->eta = eta_;
     init_radial_basis_array();
     allocate_memory();
+    this->width = this->get_width();
 }
 
