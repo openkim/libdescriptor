@@ -7,3 +7,9 @@ build
 build_*
 cmake-*
 install
+*.log
+junk.tar.gz
+tmp
+python_package/dist
+python_package/*.egg-info
+python_package/wheelhouse

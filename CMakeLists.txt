@@ -20,6 +20,29 @@ else (DOXYGEN_FOUND)
   message("Doxygen need to be installed to generate the doxygen documentation")
 endif (DOXYGEN_FOUND)
 
+#----------------
+# Find enzyme at location ENZYME_LIB
+if(NOT DEFINED ENZYME_LIB)
+    message(WARNING "ENZYME_LIB variable not defined, switching to default: /usr/local/lib" )
+    set(ENZYME_LIB "/usr/local/lib")
+endif()
+message("Searching for ENZYME at ${ENZYME_LIB}")
+if(EXISTS "${ENZYME_LIB}/LLDEnzyme-13.so")
+    message("Found LLDEnzyme plugin.")
+else()
+    message(FATAL_ERROR "LLDEnzyme plugin not found, please check your Enzyme installation.")
+endif()
+if(EXISTS "${ENZYME_LIB}/ClangEnzyme-13.so")
+    message("Found ClangEnzyme plugin.")
+else()
+    message(WARNING "ClangEnzyme plugin not found, it is NOT needed for libdescriptor, but usually indicates improper installation of Enzyme.")
+endif()
+if(EXISTS "${ENZYME_LIB}/LLVMEnzyme-13.so")
+    message("Found LLVMEnzyme plugin.")
+else()
+    message(WARNING "LLVMEnzyme plugin not found, it is NOT needed for libdescriptor, but usually indicates improper installation of Enzyme.")
+endif()
+
 
 #----module dir --------------------
 # Define all source files here
@@ -28,26 +51,39 @@ include_directories(SymmetryFunctions)
 file(GLOB SYMFUNFILES SymmetryFunctions/*)
 include_directories(Bispectrum)
 file(GLOB BISFILES Bispectrum/*)
-
+include_directories(SOAP)
+file(GLOB SOAPFILES SOAP/*)
 #--------------
 
-include_directories(autodiff)
+# Set LLD, just in case... sometimes default LLD the name of LLD file is lld-12
+if (NOT DEFINED LLD)
+    set(LLD "lld")
+endif()
 
-add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} Descriptors.cpp helper.cpp)
+# Compile files, but use lld for linking. lld is patched with enzyme to generate AD code
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struct-path-tbaa")
 
-# ----------------- Install ---------------------
-# Install headers
+add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} Descriptors.cpp helper.cpp)
+#add_library(descriptor_static STATIC ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} Descriptors.cpp helper.cpp)
 
-set_target_properties(descriptor PROPERTIES PUBLIC_HEADER Descriptors.hpp)
+
+# pass linking to lld, with enzyme plugin
+target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
+target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=${ENZYME_LIB}/LLDEnzyme-13.so")
+
+# TODO REMOVE EXTRA HEADER FILES ONCE ENZYME PROVIDES SOLUTION
+#set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp;SymmetryFunctions/SymmetryFunctions.hpp;Bispectrum/Bispectrum.hpp;helper.hpp")
+# Further testing indicates that library might be working fine with virtual desctructors. So everting the
+# changes for now. But leaving above as reminder
+set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp")
+#set_target_properties(descriptor_static PROPERTIES OUTPUT_NAME descriptor)
 
 install(TARGETS descriptor
         LIBRARY DESTINATION lib
         PUBLIC_HEADER DESTINATION include)
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Eigen DESTINATION include)
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/autodiff/autodiff DESTINATION include)
 
 # ---------------- Python module -------------------------
-## Python Interp
+# Python Interp
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibs REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
@@ -59,30 +95,3 @@ pybind11_add_module(libdescriptor python_bindings.cpp)
 target_link_libraries(libdescriptor PUBLIC descriptor)
 
 #TODO add install location
-
-
-# ----------------- Tests ---------------------
-enable_testing()
-# Symmetry functions calc test
-add_test(NAME SymmetryFunctionsCalc COMMAND ${PYTHON_EXECUTABLE}  symmetry_function_calc_test.py
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests/autodiff_tests/symmetry_function_test)
-set_tests_properties(SymmetryFunctionsCalc PROPERTIES
-    ENVIRONMENT "LD_LIBRARY_PATH=${CMAKE_BINARY_DIR}:$ENV{LD_LIBRARY_PATH};PYTHONPATH=${CMAKE_BINARY_DIR}:$ENV{PYTHONPATH}")
-
-# Symmetry functions load test
-add_test(NAME SymmetryFunctionsLoad COMMAND ${PYTHON_EXECUTABLE}  symmetry_function_load_test.py
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests/autodiff_tests/symmetry_function_test)
-set_tests_properties(SymmetryFunctionsCalc PROPERTIES
-    ENVIRONMENT "LD_LIBRARY_PATH=${CMAKE_BINARY_DIR}:$ENV{LD_LIBRARY_PATH};PYTHONPATH=${CMAKE_BINARY_DIR}:$ENV{PYTHONPATH}")
-
-# Bispectrum calc test
-add_test(NAME BispectrumCalc COMMAND ${PYTHON_EXECUTABLE}  bispectrum_calc_test.py
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests/autodiff_tests/bispectrum_test)
-set_tests_properties(BispectrumCalc PROPERTIES
-    ENVIRONMENT "LD_LIBRARY_PATH=${CMAKE_BINARY_DIR}:$ENV{LD_LIBRARY_PATH};PYTHONPATH=${CMAKE_BINARY_DIR}:$ENV{PYTHONPATH}")
-
-# Descriptor load test
-add_test(NAME BispectrumLoad COMMAND ${PYTHON_EXECUTABLE}  bispectrum_load_test.py
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests/autodiff_tests/bispectrum_test)
-set_tests_properties(BispectrumLoad PROPERTIES
-    ENVIRONMENT "LD_LIBRARY_PATH=${CMAKE_BINARY_DIR}:$ENV{LD_LIBRARY_PATH};PYTHONPATH=${CMAKE_BINARY_DIR}:$ENV{PYTHONPATH}")

@@ -17,7 +17,8 @@ typedef autodiff::real double_scalar;
 namespace Descriptor {
     enum AvailableDescriptor {
         KindSymmetryFunctions, //!< For selecting Behler Symmetry Functions (SymmetryFunctions)
-        KindBispectrum //!< For selecting Bispectrum descriptor
+        KindBispectrum, //!< For selecting Bispectrum descriptor
+        KindSOAP //!< For selecting Smooth Overlap of Atomic Position (SOAP) descriptor
     };
 
     class DescriptorKind;
@@ -48,6 +49,7 @@ namespace Descriptor {
     void compute_single_atom(int index, int n_total_atoms, int *species, int *number_of_neighs, int number_of_neigh_list,
                              double *coordinates, double *desc,
                              DescriptorKind *descriptor_kind);
+
 }
 
 class Descriptor::DescriptorKind {
@@ -90,6 +92,10 @@ public:
                    int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in,
                    double * cutoff_array, std::vector<std::string> * species, std::vector<double> * weights);
 
+    // ********SOAP********
+    static DescriptorKind *
+    initDescriptor(AvailableDescriptor availableDescriptorKind, int n_max, int l_max, double cutoff,
+                               std::vector<std::string> &species, std::string radial_basis, double eta);
 };
 
 

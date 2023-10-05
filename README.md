@@ -1,6 +1,8 @@
 Libdescriptor
 ==============
-
+<center>
+<img src="libdescriptor_logo.png" width=200>
+</center>
 Libdescriptor is a high performance descriptor library for providing access to fully differentiable descriptor functions.
 While `libdescriptor` is a general purpose descriptor library, it's API compatible with KIM models and associated projects.
 This will also provide uniform access to various selected descriptors for KLIFF using Pybind11 ports.
@@ -14,6 +16,12 @@ trivial piece of software to compile and use. Hence, the default version uses li
 which was 2nd most performant in our tests. For using the Enzyme version of the library, you can use the `enzyme` branch.
 
 <img src="./docs/E_F_C++Updated.png" width="400">
+
+## Installation
+For AMD/Intel based Linux systems, we provide a precompiled binary package for libdescriptor. It can be installed using
+```shell
+pip install libdescriptor
+```
 
 ## Compiling 
 ### Autodiff version
@@ -33,8 +41,8 @@ pip install .
 ### Enzyme version
 At present, it needs functioning Enzyme compiler environment, in future it will be provided as binary package or a conda environment.
 For Installing Enzyme, simply follow the instructions given on enzyme page. At the time of writing these instructions, we are using
-- LLVM 12.0.1
-- Enzyme v0.0.41
+- LLVM 13.0.1
+- Enzyme v0.0.86
 
 Although Enzyme recommends compiling LLVM/Clang from scratch, in our experience precompiled stock binaries also work fine.
 Though depending on your platform, your mileage may wary.
@@ -42,25 +50,19 @@ Though depending on your platform, your mileage may wary.
 Steps to compile **Enzyme**:
 ```shell
 # Get the Clang/LLVM binaries
-wget https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-13.0.1/clang+llvm-13.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
 # Untar and export environment variables
-tar -xvf clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+tar -xvf clang+llvm-13.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
 export PATH="/path/to/clang/extract/bin:"$PATH
 export INCLUDE="/path/to/clang/extract/include:"$INCLUDE
 export LD_LIBRARY_PATH="/path/to/clang/extract/lib:"$LD_LIBRARY_PATH
 
-# Get lit (Enzyme needs it for running tests)
-wget https://files.pythonhosted.org/packages/7c/0c/2d58790cb0fa24812382289a584e05dd1df4b30ccf5e2218ee5a556a0529/lit-12.0.1.tar.gz
-tar -xvf lit-12.0.1.tar.gz
-cd lit-12.0.1
-pip install . --user
-
 # Clone and compile Enzyme
 git clone https://github.com/EnzymeAD/Enzyme
 cd Enzyme/enzyme
-git checkout v0.0.41
+git checkout v0.0.86
 mkdir build; cd build
-CC=clang CXX=clang++ cmake .. -DLLVM_DIR=/path/to/clang/lib/cmake/llvm -DLLVM_EXTERNAL_LIT=/path/to/lit-12.0.1/lit.py
+CC=clang CXX=clang++ cmake .. -DLLVM_DIR=/path/to/clang/lib/cmake/llvm
 make 
 # optional make install if you want
 ```
@@ -91,8 +93,8 @@ To use it, you need to install Pybind11 on your system
 ## Descriptors supported (or planned)
 - [x] Behler Symmetry Functions
 - [x] Bispectrum 
-- [ ] SOAP (WIP)
-- [ ] ACE
+- [x] SOAP
+- [ ] ACE (WIP)
 
 ## Extending Libdescriptor
 New descriptors can be added by extending the `DescriptorKind` class, and implementing its `compute` function.

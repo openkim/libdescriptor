@@ -1,8 +1,6 @@
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
-#include <pybind11/eigen.h>
 #include <pybind11/stl.h>
-
 #include <vector>
 #include <string>
 #include <iostream>
@@ -21,8 +19,8 @@ public:
                  int *species,
                  int *neighbor_lists,
                  int number_of_neighbors,
-                 double_vector &coordinates,
-                 double_vector &desc) override {
+                 double *coordinates,
+                 double *desc) override {
         PYBIND11_OVERRIDE_PURE(void, DescriptorKind, compute,
                                index, n_atoms, species, neighbor_lists, number_of_neighbors, coordinates, desc
         );
@@ -36,7 +34,8 @@ PYBIND11_MODULE(libdescriptor, m) {
     // Python bindings for AvailableDescriptor kinds.
     py::enum_<AvailableDescriptor>(m, "AvailableDescriptors")
             .value("Bispectrum", AvailableDescriptor::KindBispectrum)
-            .value("SymmetryFunctions", AvailableDescriptor::KindSymmetryFunctions);
+            .value("SymmetryFunctions", AvailableDescriptor::KindSymmetryFunctions)
+            .value("SOAP", AvailableDescriptor::KindSOAP);
 
     // Python bindings for DescriptorKind
     py::class_<DescriptorKind, PyDescriptorKind>(m, "DescriptorKind")
@@ -55,13 +54,13 @@ PYBIND11_MODULE(libdescriptor, m) {
                     std::vector<std::string> *, std::string *, double *, std::vector<std::string> *, std::vector<int> *,
                     std::vector<double> *>(&DescriptorKind::initDescriptor))
 
-//            .def("dummy", [](AvailableDescriptor a,std::vector<std::string> *b, std::string *c, double *d, std::vector<std::string> *e, std::vector<int> *f,
-//                    std::vector<double> *g){return DescriptorKind::initDescriptor(a,b,c,d,e,f,g);})
-
                     // Return descriptor object created from Bispectrum, using direct parameters
             .def("init_descriptor", py::overload_cast<AvailableDescriptor, double, int, int, int, double, int,
                  int, double *, std::vector<std::string> *, std::vector<double> *>(&DescriptorKind::initDescriptor))
 
+                    // Return descriptor object created from SOAP, using direct parameters
+            .def("init_descriptor", py::overload_cast<AvailableDescriptor, int, int, double,
+                               std::vector<std::string> &, std::string, double>(&DescriptorKind::initDescriptor))
                     // Compute function for calculating the descriptor
             .def("compute",
                  [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
@@ -69,27 +68,18 @@ PYBIND11_MODULE(libdescriptor, m) {
                     py::array_t<double, py::array::c_style | py::array::forcecast> &coords) {
                      int n_atoms = static_cast<int>(coords.shape(0));
                      int n_neigh = static_cast<int>(neighbors.shape(0));
-                     double_vector desc(ds.width);
+                     auto desc = new double[ds.width];
                      for (int i = 0; i < ds.width; i++) desc[i] = 0.0;
-                     double_vector coords_vec(n_atoms * 3);
-                        for (int i = 0; i < n_atoms; i++) {
-                            coords_vec[i * 3] = coords.at(i, 0);
-                            coords_vec[i * 3 + 1] = coords.at(i, 1);
-                            coords_vec[i * 3 + 2] = coords.at(i, 2);
-                        }
+                     std::cout << "Computing descriptor for " << n_atoms << " atoms." << std::endl;
                      ds.compute(index,
                                 n_atoms,
                                 const_cast<int *>(species.data(0)),
                                 const_cast<int *>(neighbors.data(0)),
                                 n_neigh,
-                                coords_vec,
+                                const_cast<double *>(coords.data(0)),
                                 desc);
 
-                     // copy descriptor to numpy array
-                     py::array_t<double> desc_array(ds.width);
-                     for (int i = 0; i < ds.width; i++) {
-                            desc_array.mutable_at(i) = static_cast<double>(desc[i]);
-                     }
+                     py::array_t<double> desc_array(ds.width, desc);
                      return desc_array;
                  }, py::return_value_policy::take_ownership)
             .def_readwrite("param_file", &DescriptorKind::descriptor_param_file)
@@ -132,7 +122,6 @@ PYBIND11_MODULE(libdescriptor, m) {
               int n_atoms = static_cast<int>(coordinates.shape(0));
               int n_neigh = static_cast<int>(neighbors.shape(0));
               auto d_coordinates = new double[coordinates.size()];
-
               for (int i = 0; i < coordinates.size(); i++) d_coordinates[i] = 0.0;
               gradient_single_atom(index,
                                    n_atoms,
@@ -152,17 +141,16 @@ PYBIND11_MODULE(libdescriptor, m) {
 
     // Calculate gradient for a single atom using the numerical differentiation
     m.def("num_gradient_single_atom",
-          [](DescriptorKind &ds, int index, int n_contributing_atoms, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
+          [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
              py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
              py::array_t<double, py::array::c_style | py::array::forcecast> &coordinates,
              py::array_t<double, py::array::c_style | py::array::forcecast> &dE_ddesc) {
-              int n_total_atoms = static_cast<int>(coordinates.shape(0));
+              int n_atoms = static_cast<int>(coordinates.shape(0));
               int n_neigh = static_cast<int>(neighbors.shape(0));
               auto d_coordinates = new double[3];
               for (int i = 0; i < 3; i++) d_coordinates[i] = 0.0;
               num_gradient_single_atom(index,
-                                       n_contributing_atoms,
-                                       n_total_atoms,
+                                       n_atoms,
                                        const_cast<int *>(species.data(0)),
                                        const_cast<int *>(neighbors.data(0)),
                                        n_neigh,
