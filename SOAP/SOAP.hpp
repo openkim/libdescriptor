@@ -53,11 +53,12 @@ public:
     int n_species;
     std::vector<std::string> species_;
     std::string radial_basis = "polynomial";
+private:
     std::vector<double> radial_basis_array;
+    int n_gl_quad_points = 100;
     std::vector<double> gl_quad_weights;
     std::vector<double> gl_quad_radial_grid_points;
     std::vector<double> gl_quad_radial_sq_grid_points;
-    int n_gl_quad_points = 100;
     std::vector<double> Cznlm_real;
     std::vector<double> Cznlm_imag;
     std::vector<double> Cij_real;
