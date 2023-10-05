@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="libdescriptor_dev",
-    version="0.0.4",
+    name="libdescriptor",
+    version="0.0.5",
     packages=find_packages(),
     package_data={
         'libdescriptor': [
