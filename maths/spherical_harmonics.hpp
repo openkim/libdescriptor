@@ -1,3 +1,5 @@
+#ifndef SPHERICAL_HARMONICS_HPP
+#define SPHERICAL_HARMONICS_HPP
 //From Spherical Harmonic Lighting: The Gritty Details
 // No longer the case: -and google's spherical harmonic library: https://github.com/google/spherical-harmonics-
 // Based on http://phys.uri.edu/nigh/NumRec/bookfpdf/f6-8.pdf Numerical Recipes in F77
@@ -7,9 +9,6 @@
 // theta is the polar angle, phi is the azimuthal angle
 // theta is in [0, pi], phi is in [0, 2pi], m is in [-l, l]
 // Condon-Shortley phase: (-1)^m
-
-#ifndef SH_HPP
-#define SH_HPP
 
 #include <iostream>
 #define _USE_MATH_DEFINES

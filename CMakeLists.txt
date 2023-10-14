@@ -94,4 +94,21 @@ find_package(pybind11 REQUIRED)
 pybind11_add_module(libdescriptor python_bindings.cpp)
 target_link_libraries(libdescriptor PUBLIC descriptor)
 
+# Assuming your .so target is named 'project_target'
+add_custom_command(TARGET libdescriptor POST_BUILD
+    # Copy the .so file to the build directory
+    COMMAND ${CMAKE_COMMAND} -E copy
+            ${CMAKE_BINARY_DIR}/libdescriptor.so
+            ${CMAKE_SOURCE_DIR}/python_package/libdescriptor
+    # Copy pybind11 so to the python_package directory
+    COMMAND ${CMAKE_COMMAND} -E copy
+            $<TARGET_FILE:libdescriptor>
+            ${CMAKE_SOURCE_DIR}/python_package/libdescriptor
+)
+
+add_custom_target(make_python_package ALL
+        COMMAND python setup.py bdist_wheel
+        COMMAND auditwheel --plat linux_x86_64 dist/*.whl
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python_package
+        DEPENDS libdescriptor descriptor)
 #TODO add install location
