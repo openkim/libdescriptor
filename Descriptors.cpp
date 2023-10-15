@@ -248,6 +248,43 @@ void Descriptor::gradient_single_atom(int index,
     }
 }
 
+void Descriptor::jacobian(int n_atoms, /* contributing */
+                          int n_total_atoms,
+                          int *species,
+                          int *neighbor_list,
+                          int *number_of_neighs,
+                          double *coordinates,
+                          double *J_coordinates,
+                          DescriptorKind *descriptor_to_diff) {
+    auto desc = new double[descriptor_to_diff->width];
+    auto d_desc = new double[descriptor_to_diff->width];
+    for(int i = 0; i < descriptor_to_diff->width; i++){
+        desc[i] = 0;
+        d_desc[i] = 0;
+    }
+
+    for(int i = 0; i < n_atoms; i++){
+        if (i == 0){
+            d_desc[i] = 1;
+        } else {
+            d_desc[i - 1] = 0;
+            d_desc[i] = 1;
+        }
+        gradient(n_atoms,
+                 species,
+                 neighbor_list,
+                 number_of_neighs,
+                 coordinates,
+                 J_coordinates + i * 3 * n_total_atoms,
+                 desc,
+                 d_desc,
+                 descriptor_to_diff);
+    }
+
+    delete[] desc;
+    delete[] d_desc;
+}
+
 void Descriptor::num_gradient_single_atom(int index,
                                           int n_atoms /* contributing */,
                                           int *species,

@@ -83,7 +83,6 @@ namespace Descriptor {
                               DescriptorKind *descriptor_to_diff);
 
     /*!
-     *  <b> "TO BE IMPLEMENTED"</b>
      *  Compute full Jacobian using reverse diff. Might be useful in some cases
      * @param n_atoms
      * @param species
@@ -95,11 +94,8 @@ namespace Descriptor {
      * @param dzeta_dr
      * @param descriptor_to_diff
      */
-    inline void jacobian(int n_atoms, int *species, int *neighbor_list, int *number_of_neighs,
-                         double *coordinates, double *d_coordinates, double *desc,
-                         double *dzeta_dr, DescriptorKind *descriptor_to_diff) {
-        throw std::logic_error("Function not implemented yet");
-    }
+    void jacobian(int n_atoms, int n_total_atoms, int *species, int *neighbor_list, int *number_of_neighs,
+                         double *coordinates, double *J_coordinates, DescriptorKind *descriptor_to_diff);
 
     /*!
      * Computes the descriptor for all contributing atoms, and stores them in pointer desc
