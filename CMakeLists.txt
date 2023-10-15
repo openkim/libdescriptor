@@ -91,7 +91,9 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 # PYBIND11
 find_package(pybind11 REQUIRED)
 
-pybind11_add_module(libdescriptor python_bindings.cpp)
+file(GLOB nl neighbor/*.cpp)
+
+pybind11_add_module(libdescriptor python_bindings.cpp ${nl})
 target_link_libraries(libdescriptor PUBLIC descriptor)
 
 #TODO add install location

@@ -50,6 +50,12 @@ setup(
     name="libdescriptor",
     version="0.0.6",
     packages=find_packages(),
+    ext_modules=[neighlist],
+    install_requires=[
+        "numpy",
+        "ase",
+        "pybind11",
+    ],
     package_data={
         'libdescriptor': [
                         "__init__.py",
@@ -61,5 +67,6 @@ setup(
                         "libstdc++.so.6"
                         ],
     },
+    author="Amit Gupta",
     include_package_data=True,
 )
