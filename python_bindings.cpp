@@ -89,7 +89,6 @@ PYBIND11_MODULE(libdescriptor, m) {
                      int n_neigh = static_cast<int>(neighbors.shape(0));
                      auto desc = new double[ds.width];
                      for (int i = 0; i < ds.width; i++) desc[i] = 0.0;
-                     std::cout << "Computing descriptor for " << n_atoms << " atoms." << std::endl;
                      ds.compute(index,
                                 n_atoms,
                                 const_cast<int *>(species.data(0)),
@@ -136,8 +135,8 @@ PYBIND11_MODULE(libdescriptor, m) {
              py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
              py::array_t<int, py::array::c_style | py::array::forcecast> &number_of_neighbors,
              py::array_t<double, py::array::c_style | py::array::forcecast> &coordinates) {
-              auto desc = new double[ds.width];
-              for (int i = 0; i < ds.width; i++) desc[i] = 0.0;
+              auto desc = new double[ds.width * n_atoms];
+              for (int i = 0; i < ds.width * n_atoms; i++) desc[i] = 0.0;
               compute(n_atoms,
                       const_cast<int *>(species.data(0)),
                       const_cast<int *>(neighbors.data(0)),

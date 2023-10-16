@@ -3,7 +3,7 @@ from typing import Dict, List, Tuple
 import ase.data
 import numpy as np
 
-from . import neighlist as nl  # C extension
+from libdescriptor import create, create_paddings
 import ase
 
 class NeighborList:
@@ -25,7 +25,7 @@ class NeighborList:
         self.padding_image = None
 
         # neigh
-        self.neigh = nl.create()
+        self.neigh = create()
         self.create_neigh()
 
     def create_neigh(self):
@@ -37,13 +37,15 @@ class NeighborList:
         # create padding atoms
         species_code_cb = self.conf.get_atomic_numbers().astype(np.intc)
         try:
-            coords_pd, species_code_pd, image_pd = nl.create_paddings(
+            coords_pd, species_code_pd, image_pd = create_paddings(
                 self.infl_dist, cell, PBC, coords_cb, species_code_cb
             )
         except RuntimeError:
             raise NeighborListError("Calling `neighlist.create_paddings` failed.")
 
-        species_pd = [ase.data.atomic_numbers[i] for i in species_code_pd]
+        species_pd = []
+        for code in species_code_pd:
+            species_pd.extend([key for key, val in ase.data.atomic_numbers.items() if val == code])
 
         self.padding_coords = np.asarray(coords_pd, dtype=np.double)
         self.padding_species = species_pd

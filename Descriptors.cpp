@@ -134,6 +134,7 @@ void Descriptor::gradient(int n_atoms /* contributing */,
             auto d_desc_kind = new Bispectrum();
             *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
 
+            d_desc_kind->clone_empty(desc_kind);
             __enzyme_autodiff(compute, /* fn to be differentiated */
                               enzyme_const, n_atoms, /* Do not diff. against integer params */
                               enzyme_const, species,
@@ -149,6 +150,7 @@ void Descriptor::gradient(int n_atoms /* contributing */,
             auto d_desc_kind = new SOAP();
             *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
 
+            d_desc_kind->clone_empty(desc_kind);
             __enzyme_autodiff(compute, /* fn to be differentiated */
                               enzyme_const, n_atoms, /* Do not diff. against integer params */
                               enzyme_const, species,
@@ -157,6 +159,23 @@ void Descriptor::gradient(int n_atoms /* contributing */,
                               enzyme_dup, coordinates, d_coordinates,
                               enzyme_dup, desc, d_desc,
                               enzyme_dup, desc_kind, d_desc_kind);
+            // int *neighbor_ptr = neighbor_list;
+            // double *desc_ptr = desc;
+            // double *d_desc_ptr = d_desc;
+            // for (int i = 0; i < n_atoms; i++) {
+            //     __enzyme_autodiff_one_atom(compute_single_atom, /* fn to be differentiated */
+            //                enzyme_const, i,
+            //                enzyme_const, n_atoms, /* Do not diff. against integer params */
+            //                enzyme_const, species,
+            //                enzyme_const, neighbor_ptr,
+            //                enzyme_const, number_of_neighbors[i],
+            //                enzyme_dup, coordinates, d_coordinates,
+            //                enzyme_dup, desc_ptr, d_desc_ptr,
+            //                enzyme_dup, desc_kind, d_desc_kind);
+            //     neighbor_ptr += number_of_neighbors[i];
+            //     desc_ptr += desc_kind->width;
+            //     d_desc_ptr += d_desc_kind->width;
+            // }
             delete d_desc_kind;
             return;
         }
