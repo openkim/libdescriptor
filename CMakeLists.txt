@@ -60,11 +60,16 @@ if (NOT DEFINED LLD)
     set(LLD "lld")
 endif()
 
+find_package(OpenMP)
+
 # Compile files, but use lld for linking. lld is patched with enzyme to generate AD code
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struct-path-tbaa")
 
 add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} Descriptors.cpp helper.cpp)
 #add_library(descriptor_static STATIC ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} Descriptors.cpp helper.cpp)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(descriptor PUBLIC OpenMP::OpenMP_CXX)
+endif()
 
 
 # pass linking to lld, with enzyme plugin
@@ -91,7 +96,9 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 # PYBIND11
 find_package(pybind11 REQUIRED)
 
-pybind11_add_module(libdescriptor python_bindings.cpp)
+file(GLOB nl neighbor/*.cpp)
+
+pybind11_add_module(libdescriptor python_bindings.cpp ${nl})
 target_link_libraries(libdescriptor PUBLIC descriptor)
 
 #TODO add install location

@@ -35,6 +35,8 @@
 /*! Problem dimensionality */
 #define DIM 3
 
+typedef double VectorOfSize3[3];
+
 #ifdef LOG_ERROR
 #undef LOG_ERROR
 #endif
@@ -232,8 +234,7 @@ void Bispectrum::compute(int const index,
                          double_vector &coords,
                          double_vector &desc) {
     // prepare data
-//    Array2DView<double> coordinates(n_atoms, DIM, coords);
-
+    auto coordinates = (VectorOfSize3 *) coords;
     int const *const ilist = neigh_list;
     int const iSpecies = species[index];
 
@@ -257,7 +258,7 @@ void Bispectrum::compute(int const index,
         // rij vec and
         double_scalar rvec[DIM];
         for (int dim = 0; dim < DIM; ++dim) {
-            rvec[dim] = coords(j*3 + dim) - coords(index*3 + dim);
+            rvec[dim] = coordinates[j][dim] - coordinates[index][dim];
         }
 
         double_scalar const rsq

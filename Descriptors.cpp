@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <omp.h>
 
 int enzyme_dup, enzyme_out, enzyme_const;
 
@@ -39,14 +40,25 @@ void __enzyme_autodiff_one_atom(void (*)(int, int, int *, int *, int, double *, 
  * FWD mode might be used. So adding it now only as a simple to-be-used in future.
  */
 //TODO
-//void __enzyme_fwddiff(void (*) (int, int *, int *, int *, double *, double *, DescriptorKind *),
-//                       int, int /* n_atoms */,
-//                       int, int * /* Z */,
-//                       int, int * /* neighbor list */,
-//                       int, int * /* number_of_neigh_list */,
-//                       int, double * /* coordinates */, double * /* derivative w.r.t coordinates */,
-//                       int, double * /* zeta */, double * /* dzeta_dE */,
-//                       int, DescriptorKind * /* DescriptorKind to diff */);
+void __enzyme_fwddiff(void (*)(int, int *, int *, int *, double *, double *, DescriptorKind *),
+                      int, int /* n_atoms */,
+                      int, int * /* Z */,
+                      int, int * /* neighbor list */,
+                      int, int * /* number_of_neigh_list */,
+                      int, double * /* coordinates */, double * /* derivative w.r.t coordinates */,
+                      int, double * /* zeta */, double * /* dzeta_dE */,
+                      int, DescriptorKind * /* DescriptorKind to diff */, DescriptorKind * /* d_DescriptorKind */);
+
+void __enzyme_fwddiff_one_atom(void (*)(int, int, int *, int *, int, double *, double *, DescriptorKind *),
+                               int, int,
+                               int, int /* n_atoms */,
+                               int, int * /* Z */,
+                               int, int * /* neighbor list */,
+                               int, int  /* number_of_neigh_list */,
+                               int, double * /* coordinates */, double * /* derivative w.r.t coordinates */,
+                               int, double * /* zeta */, double * /* dzeta_dE */,
+                               int, DescriptorKind * /* DescriptorKind to diff */,
+                               DescriptorKind * /* d_DescriptorKind */);
 
 using namespace Descriptor;
 
@@ -134,6 +146,7 @@ void Descriptor::gradient(int n_atoms /* contributing */,
             auto d_desc_kind = new Bispectrum();
             *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
 
+            d_desc_kind->clone_empty(desc_kind);
             __enzyme_autodiff(compute, /* fn to be differentiated */
                               enzyme_const, n_atoms, /* Do not diff. against integer params */
                               enzyme_const, species,
@@ -149,6 +162,7 @@ void Descriptor::gradient(int n_atoms /* contributing */,
             auto d_desc_kind = new SOAP();
             *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
 
+            d_desc_kind->clone_empty(desc_kind);
             __enzyme_autodiff(compute, /* fn to be differentiated */
                               enzyme_const, n_atoms, /* Do not diff. against integer params */
                               enzyme_const, species,
@@ -157,6 +171,23 @@ void Descriptor::gradient(int n_atoms /* contributing */,
                               enzyme_dup, coordinates, d_coordinates,
                               enzyme_dup, desc, d_desc,
                               enzyme_dup, desc_kind, d_desc_kind);
+            // int *neighbor_ptr = neighbor_list;
+            // double *desc_ptr = desc;
+            // double *d_desc_ptr = d_desc;
+            // for (int i = 0; i < n_atoms; i++) {
+            //     __enzyme_autodiff_one_atom(compute_single_atom, /* fn to be differentiated */
+            //                enzyme_const, i,
+            //                enzyme_const, n_atoms, /* Do not diff. against integer params */
+            //                enzyme_const, species,
+            //                enzyme_const, neighbor_ptr,
+            //                enzyme_const, number_of_neighbors[i],
+            //                enzyme_dup, coordinates, d_coordinates,
+            //                enzyme_dup, desc_ptr, d_desc_ptr,
+            //                enzyme_dup, desc_kind, d_desc_kind);
+            //     neighbor_ptr += number_of_neighbors[i];
+            //     desc_ptr += desc_kind->width;
+            //     d_desc_ptr += d_desc_kind->width;
+            // }
             delete d_desc_kind;
             return;
         }
@@ -225,7 +256,7 @@ void Descriptor::gradient_single_atom(int index,
             delete d_desc_kind;
             return;
         }
-        case KindSOAP:{
+        case KindSOAP: {
             auto d_desc_kind = new SOAP();
 
             *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
@@ -248,6 +279,40 @@ void Descriptor::gradient_single_atom(int index,
     }
 }
 
+void Descriptor::jacobian(int n_atoms, /* contributing */
+                          int n_total_atoms,
+                          int *species,
+                          int *neighbor_list,
+                          int *number_of_neighs,
+                          double *coordinates,
+                          double *J_coordinates,
+                          DescriptorKind *descriptor_to_diff) {
+    auto desc = new double[descriptor_to_diff->width * n_atoms];
+    std::vector<double> d_desc;
+    d_desc = std::vector<double>(descriptor_to_diff->width * n_atoms);
+    std::fill(desc, desc + descriptor_to_diff->width * n_atoms, 0.0);
+    // TODO: #pragma omp parallel for private(d_desc, desc)
+    for (int j = 0; j < descriptor_to_diff->width * n_atoms; j++) {
+        if ( j == 0 ) {
+            d_desc[j] = 1.0;
+        } else {
+            d_desc[j - 1] = 0.0;
+            d_desc[j] = 1.0;
+        }
+        gradient(n_atoms,
+                 species,
+                 neighbor_list,
+                 number_of_neighs,
+                 coordinates,
+                 J_coordinates + j * 3 * n_total_atoms,
+                 desc,
+                 d_desc.data(),
+                 descriptor_to_diff);
+    }
+
+    delete[] desc;
+}
+
 void Descriptor::num_gradient_single_atom(int index,
                                           int n_atoms /* contributing */,
                                           int *species,
@@ -262,18 +327,18 @@ void Descriptor::num_gradient_single_atom(int index,
     };
 
     auto dx_ddesc = new double[desc_kind->width];
-    for(int i = 0; i < desc_kind->width; i++){dx_ddesc[i] = 0;}
+    for (int i = 0; i < desc_kind->width; i++) { dx_ddesc[i] = 0; }
 
     numdiff::vec_finite_difference_derivative(f, coordinates, index * 3 + 0, n_atoms * 3, desc_kind->width, dx_ddesc);
-    for (int i = 0; i < desc_kind->width; i++){
+    for (int i = 0; i < desc_kind->width; i++) {
         d_coordinates[0] += dE_ddesc[i] * dx_ddesc[i];
     }
     numdiff::vec_finite_difference_derivative(f, coordinates, index * 3 + 1, n_atoms * 3, desc_kind->width, dx_ddesc);
-    for (int i = 0; i < desc_kind->width; i++){
+    for (int i = 0; i < desc_kind->width; i++) {
         d_coordinates[1] += dE_ddesc[i] * dx_ddesc[i];
     }
     numdiff::vec_finite_difference_derivative(f, coordinates, index * 3 + 2, n_atoms * 3, desc_kind->width, dx_ddesc);
-    for (int i = 0; i < desc_kind->width; i++){
+    for (int i = 0; i < desc_kind->width; i++) {
         d_coordinates[2] += dE_ddesc[i] * dx_ddesc[i];
     }
 
@@ -344,19 +409,20 @@ DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, std:
                                std::string *cutoff_function, double *cutoff_matrix,
                                std::vector<std::string> *symmetry_function_types,
                                std::vector<int> *symmetry_function_sizes,
-                               std::vector<double> *symmetry_function_parameters){
+                               std::vector<double> *symmetry_function_parameters) {
     auto return_pointer = new SymmetryFunctions(species, cutoff_function, cutoff_matrix,
-                                                   symmetry_function_types, symmetry_function_sizes,
-                                                   symmetry_function_parameters);
+                                                symmetry_function_types, symmetry_function_sizes,
+                                                symmetry_function_parameters);
     return return_pointer;
 }
 
 DescriptorKind *
-DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, double rfac0_in, int twojmax_in, int diagonalstyle_in,
-                   int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in,
-                   double * cutoff_array, std::vector<std::string> * species, std::vector<double> * weights){
+DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, double rfac0_in, int twojmax_in,
+                               int diagonalstyle_in,
+                               int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in,
+                               double *cutoff_array, std::vector<std::string> *species, std::vector<double> *weights) {
     auto return_pointer = new Bispectrum(rfac0_in, twojmax_in, diagonalstyle_in,
-                                            use_shared_arrays_in, rmin0_in, switch_flag_in, bzero_flag_in);
+                                         use_shared_arrays_in, rmin0_in, switch_flag_in, bzero_flag_in);
     return_pointer->width = return_pointer->get_width();
     return_pointer->set_species(species->size());
     std::string cutoff_function = "cos";
@@ -368,7 +434,7 @@ DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, doub
 
 DescriptorKind *
 DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, int n_max, int l_max, double cutoff,
-                               std::vector<std::string> &species, std::string radial_basis, double eta){
+                               std::vector<std::string> &species, std::string radial_basis, double eta) {
     auto return_pointer = new SOAP(n_max, l_max, cutoff, species, radial_basis, eta);
     return_pointer->width = return_pointer->get_width();
     return_pointer->descriptor_kind = availableDescriptorKind;
