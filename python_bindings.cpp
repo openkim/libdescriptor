@@ -208,13 +208,10 @@ PYBIND11_MODULE(libdescriptor, m) {
              py::array_t<int, py::array::c_style | py::array::forcecast> &species,
              py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
              py::array_t<int, py::array::c_style | py::array::forcecast> &number_of_neighbors,
-             py::array_t<double, py::array::c_style | py::array::forcecast> &coordinates,
-             const std::string &mode = "minimal", /* or "expanded" */
-             const py::array_t<int, py::array::c_style | py::array::forcecast> &images =
-             py::array_t<int, py::array::c_style | py::array::forcecast>(1, 0)
-          ) {
+             py::array_t<double, py::array::c_style | py::array::forcecast> &coordinates) {
               int n_total_atoms = static_cast<int>(coordinates.shape(0));
-              auto J_coordinates = new double[coordinates.size() * n_total_atoms * 3];
+              auto J_coordinates = new double[coordinates.size() * ds.width * n_atoms];
+              std::fill(J_coordinates, J_coordinates + coordinates.size() * ds.width * n_atoms, 0);
               jacobian(n_atoms,
                        n_total_atoms,
                        const_cast<int *>(species.data(0)),
@@ -223,7 +220,8 @@ PYBIND11_MODULE(libdescriptor, m) {
                        const_cast<double *>(coordinates.data(0)),
                        J_coordinates,
                        &ds);
-              py::array_t<double> J_coord_array({n_total_atoms * 3, ds.width}, J_coordinates);
+              py::array_t<double> J_coord_array({ds.width * n_atoms, static_cast<int>(coordinates.size())},
+                                                J_coordinates);
               return J_coord_array;
           }, py::return_value_policy::take_ownership,
           "Compute Jacobian of descriptor for complete configuration");
