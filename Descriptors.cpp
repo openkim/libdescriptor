@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
-#include <omp.h>
+//#include <omp.h>
 
 int enzyme_dup, enzyme_out, enzyme_const;
 
