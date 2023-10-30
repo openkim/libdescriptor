@@ -60,7 +60,7 @@ if (NOT DEFINED LLD)
     set(LLD "lld")
 endif()
 
-find_package(OpenMP)
+# find_package(OpenMP)
 
 # Compile files, but use lld for linking. lld is patched with enzyme to generate AD code
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struct-path-tbaa")
