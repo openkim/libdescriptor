@@ -106,7 +106,7 @@ std::array<double,3> cart2sph(const std::array<double,3> &r) {
 // *********************************************************************************
 
 // Condon-Shortley phase: (-1)^m
-double condon_shortley(int m) {
+inline double condon_shortley(int m) {
     return (m % 2 == 0) ? 1.0 : -1.0;
 }
 

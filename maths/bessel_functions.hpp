@@ -376,25 +376,7 @@ double halleys_root(int l, double lwr_bnd, double upr_bnd){
     return halleys_root(static_cast<double>(l), lwr_bnd, upr_bnd);
 }
 
-//def spherical_jn_zeros(n_max):
-//    """
-//    Roots of the spherical Bessel SB) functions of the first kind. Returns a
-//    matrix of the first (l+1) nonzero roots of orders 0 <= l <= n_max.
-//    Args:
-//      n_max - integer specifies max order of spherical bessel function for which a root a root roots will be returned
-//    Return:
-//      u_all - (n+2, n+1) size matrix of roots the [n,l]
-//    """
-//
-//    u_all = np.zeros((n_max+2, n_max+1))
-//    u_all[:,0] = np.pi * np.arange(1,n_max +3)
-//
-//    # call Halley's Method
-//    for l  in range(1, n_max+1):
-//        for n in range(0, n_max-l+2):
-//            u_all[n,l] = halley(l, u_all[n,l-1], u_all[n+1,l-1])
-//
-//    return u_all
+
 void spherical_jn_zeros(int n_max, double * u_all ){
     // Expected u_all to be a (n_max+2, n_max+1)
     for (int l = 0; l < n_max + 2; ++l) {
