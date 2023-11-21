@@ -1,4 +1,4 @@
-#include "gl_quad.hpp"
+#include "maths/gl_quad.hpp"
 #include <vector>
 
 // gauss-Lebedev quadrature for size 100, same as taken by dscribe

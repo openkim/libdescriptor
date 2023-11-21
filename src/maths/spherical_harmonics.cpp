@@ -1,4 +1,4 @@
-#include "spherical_harmonics.hpp"
+#include "maths/spherical_harmonics.hpp"
 
 // factorials and double facotrials ************************************************
 

@@ -2,7 +2,7 @@
 
 #include <cmath>
 #include <stdexcept>
-#include "gamma.hpp"
+#include "maths/gamma.hpp"
 
 //Allan Macleod, Algorithm AS 245,
 double lgamma ( double xvalue){

@@ -1,6 +1,6 @@
 #include <cmath>
-#include "gamma.hpp"
-#include "clebsh_gordon.hpp"
+#include "maths/gamma.hpp"
+#include "maths/clebsh_gordon.hpp"
 
 #define SIGN_POWER(m) ((m) % 2 == 0 ? 1 : -1)
 

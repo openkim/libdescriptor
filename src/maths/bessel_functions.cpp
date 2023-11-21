@@ -1,7 +1,7 @@
 #include <limits>
 #include <cmath>
 #include <stdexcept>
-#include "bessel_functions.hpp"
+#include "maths/bessel_functions.hpp"
 
 #define SIGN(a, b) ((b) >= 0.0 ? fabs(a) : -fabs(a))
 

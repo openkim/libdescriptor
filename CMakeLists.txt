@@ -45,7 +45,6 @@ endif()
 
 
 include_directories(include)
-include_directories(include/maths)
 file(GLOB SRC_FILES src/*.cpp src/maths/*.cpp)
 
 # Set LLD, just in case... sometimes default LLD the name of LLD file is lld-12
@@ -53,17 +52,10 @@ if (NOT DEFINED LLD)
     set(LLD "lld")
 endif()
 
-# find_package(OpenMP)
-
 # Compile files, but use lld for linking. lld is patched with enzyme to generate AD code
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struct-path-tbaa")
 
 add_library(descriptor SHARED ${SRC_FILES})
-#add_library(descriptor_static STATIC ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} Descriptors.cpp helper.cpp)
-#if(OpenMP_CXX_FOUND)
-#    target_link_libraries(descriptor PUBLIC OpenMP::OpenMP_CXX)
-#endif()
-
 
 # pass linking to lld, with enzyme plugin
 target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")

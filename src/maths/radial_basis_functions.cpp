@@ -1,12 +1,9 @@
 #include <cmath>
 #include <Eigen/Core>
 #include "Eigen/src/Core/Map.h"
-#include <Eigen/Dense>
 #include "Eigen/Eigenvalues"
-#include <memory>
-#include "bessel_functions.hpp"
-#include <iostream>
-#include "radial_basis_functions.hpp"
+#include "maths/bessel_functions.hpp"
+#include "maths/radial_basis_functions.hpp"
 
 Eigen::MatrixXd matrixSqrt(const Eigen::MatrixXd& A) {
     // Ensure the matrix is square
