@@ -1,26 +1,4 @@
-#ifndef SPHERICAL_HARMONICS_HPP
-#define SPHERICAL_HARMONICS_HPP
-//From Spherical Harmonic Lighting: The Gritty Details
-// No longer the case: -and google's spherical harmonic library: https://github.com/google/spherical-harmonics-
-// Based on http://phys.uri.edu/nigh/NumRec/bookfpdf/f6-8.pdf Numerical Recipes in F77
-
-//Convention, largely follows the chemist's notation, simply putting larger numbers first
-// first l, then m, then theta, then phi
-// theta is the polar angle, phi is the azimuthal angle
-// theta is in [0, pi], phi is in [0, 2pi], m is in [-l, l]
-// Condon-Shortley phase: (-1)^m
-
-#include <iostream>
-#define _USE_MATH_DEFINES
-
-#include <cmath>
-#include <stdexcept>
-#include <array>
-#include <vector>
-
-#define HARD_CODED_SH_COEFF 4
-#define FACT_CACHE_SIZE 16
-
+#include "spherical_harmonics.hpp"
 
 // factorials and double facotrials ************************************************
 
@@ -41,6 +19,7 @@ double factorial(int x) {
         return s;
     }
 }
+
 double factorial(double x) {
     return factorial(static_cast<int>(x));
 }
@@ -106,7 +85,7 @@ std::array<double,3> cart2sph(const std::array<double,3> &r) {
 // *********************************************************************************
 
 // Condon-Shortley phase: (-1)^m
-inline double condon_shortley(int m) {
+double condon_shortley(int m) {
     return (m % 2 == 0) ? 1.0 : -1.0;
 }
 
@@ -157,7 +136,6 @@ double Plm(int l, int m, double theta) {
     return pmm1;
 }
 
-
 double kron(int i, int j) {
     if (i == j) {
         return 1.0;
@@ -174,7 +152,6 @@ double K(int l, int m) {
 }
 
 // Evaluate SH Function at (theta,phi) **********************************************
-
 std::array<double,2> Ylmi(int l, int m, double phi, double theta) {
     if (l < 0) {
         throw std::runtime_error("l must be >= 0");
@@ -316,4 +293,3 @@ void Ylm_all_l_from_r(int l_max, double * r, double * sh){
         }
     }
 }
-#endif

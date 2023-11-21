@@ -1,7 +1,7 @@
 #include "Descriptors.hpp"
-#include "SymmetryFunctions/SymmetryFunctions.hpp"
-#include "Bispectrum/Bispectrum.hpp"
-#include "SOAP/SOAP.hpp"
+#include "SymmetryFunctions.hpp"
+#include "Bispectrum.hpp"
+#include "SOAP.hpp"
 #include "finite_difference.hpp"
 #include <vector>
 #include <string>

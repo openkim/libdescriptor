@@ -1,10 +1,8 @@
 //from https://people.math.sc.edu/Burkardt/c_src/c_src.html
-#ifndef GAMMA_HPP
-#define GAMMA_HPP
 
 #include <cmath>
 #include <stdexcept>
-
+#include "gamma.hpp"
 
 //Allan Macleod, Algorithm AS 245,
 double lgamma ( double xvalue){
@@ -222,8 +220,6 @@ double gamma_inc (double p,  double x){
 
   return value;
 }
-
-#endif //GAMMA_HPP
 
 
 // void gamma_log_values ( int *n_data, double *x, double *fx ){

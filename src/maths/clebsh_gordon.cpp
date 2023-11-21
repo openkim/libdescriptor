@@ -1,11 +1,8 @@
-
-#ifndef CLEBSH_GORDON_HPP
-#define CLEBSH_GORDON_HPP
-
-#define _USE_MATH_DEFINES
-
 #include <cmath>
 #include "gamma.hpp"
+#include "clebsh_gordon.hpp"
+
+#define SIGN_POWER(m) ((m) % 2 == 0 ? 1 : -1)
 
 // Clebsh-Gordan coefficients *******************************************************
 // Weigner 3j symbols
@@ -32,12 +29,12 @@ double weigner_3j(double j1, double j2, double j3, double m1, double m2, double 
         long double s = 0; // keeping long double is needed for high precision
         // explore using doule to ensure smooth AD (and maybe faster?)
         for (int t = tmin; t <= tmax; t++) {
-            s += condon_shortley(t) /
+            s += SIGN_POWER(t) /
                  (std::exp(lgamma(1 + t) + lgamma(1 + t - t1) + lgamma(1 + t - t2) + lgamma(1 + t3 - t) +
                       lgamma(1 + t4 - t) +
                       lgamma(1 + t5 - t)));
         }
-        s *= condon_shortley(static_cast<int>(j1 - j2 - m3)) *
+        s *= SIGN_POWER(static_cast<int>(j1 - j2 - m3)) *
              sqrt(std::exp(lgamma(1 + j1 + j2 - j3) + lgamma(1 + j1 - j2 + j3) +
                       lgamma(1 + -j1 + j2 + j3) - lgamma(1 + j1 + j2 + j3 + 1) + lgamma(1 + j1 + m1) +
                       lgamma(1 + j1 - m1) + lgamma(1 + j2 + m2) +
@@ -49,7 +46,5 @@ double weigner_3j(double j1, double j2, double j3, double m1, double m2, double 
 
 // Clebsh-Gordan coefficients, usage <j1m1,j2m2|j3m3>
 double clebsh_gordon(double j1, double j2, double j3, double m1, double m2, double m3){
-    return condon_shortley(j1-j2-m3) * std::sqrt(2*j3+1) * weigner_3j(j1, j2, j3, m1, m2, -m3);
+    return SIGN_POWER(static_cast<int>(j1-j2-m3)) * std::sqrt(2*j3+1) * weigner_3j(j1, j2, j3, m1, m2, -m3);
 }
-
-#endif //CLEBSH_GORDON_HPP

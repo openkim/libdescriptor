@@ -1,10 +1,7 @@
-#ifndef BESSEL_FUNCTIONS_HPP
-#define BESSEL_FUNCTIONS_HPP
-#define _USE_MATH_DEFINES
-
 #include <limits>
 #include <cmath>
 #include <stdexcept>
+#include "bessel_functions.hpp"
 
 #define SIGN(a, b) ((b) >= 0.0 ? fabs(a) : -fabs(a))
 
@@ -381,19 +378,17 @@ void spherical_jn_zeros(int n_max, double * u_all ){
     // Expected u_all to be a (n_max+2, n_max+1)
     for (int l = 0; l < n_max + 2; ++l) {
         u_all[l * (n_max + 1)] = M_PI * (l+1);
-    } 
+    }
 
     // call Halley's Method
     for (int l = 1; l < n_max + 1; l++) {
         for (int n = 0; n < n_max - l + 2; n++) {
-            u_all[n * (n_max + 1) + l] = halleys_root(static_cast<double>(l), 
-            u_all[n * (n_max + 1) + (l  - 1)], 
+            u_all[n * (n_max + 1) + l] = halleys_root(static_cast<double>(l),
+            u_all[n * (n_max + 1) + (l  - 1)],
             u_all[(n + 1) * (n_max + 1) + (l - 1)]);
         }
     }
 }
-
-#endif
 
 //double spherical_in_cpp(int n, double x) {
 //    //Modified spherical Bessel function of the first kind

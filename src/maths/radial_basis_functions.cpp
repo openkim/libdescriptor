@@ -1,6 +1,3 @@
-#ifndef RADIAL_BASIS_FUNCTIONS_HPP
-#define RADIAL_BASIS_FUNCTIONS_HPP
-// #include <Eigen/src/Core/Matrix.h>
 #include <cmath>
 #include <Eigen/Core>
 #include "Eigen/src/Core/Map.h"
@@ -9,6 +6,7 @@
 #include <memory>
 #include "bessel_functions.hpp"
 #include <iostream>
+#include "radial_basis_functions.hpp"
 
 Eigen::MatrixXd matrixSqrt(const Eigen::MatrixXd& A) {
     // Ensure the matrix is square
@@ -116,5 +114,3 @@ void bessel_basis(int n_max, double rc, int r_size, double *r, double *r_basis) 
     }
 }
 
-
-#endif // MATHS_HPP

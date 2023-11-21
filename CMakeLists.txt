@@ -44,18 +44,9 @@ else()
 endif()
 
 
-#----module dir --------------------
-# Define all source files here
-include_directories(./)
-include_directories(SymmetryFunctions)
-file(GLOB SYMFUNFILES SymmetryFunctions/*)
-include_directories(Bispectrum)
-file(GLOB BISFILES Bispectrum/*)
-include_directories(SOAP)
-file(GLOB SOAPFILES SOAP/*)
-include_directories(Xi)
-file(GLOB XiFILES Xi/*)
-#--------------
+include_directories(include)
+include_directories(include/maths)
+file(GLOB SRC_FILES src/*.cpp src/maths/*.cpp)
 
 # Set LLD, just in case... sometimes default LLD the name of LLD file is lld-12
 if (NOT DEFINED LLD)
@@ -67,7 +58,7 @@ endif()
 # Compile files, but use lld for linking. lld is patched with enzyme to generate AD code
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struct-path-tbaa")
 
-add_library(descriptor SHARED ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} ${XiFILES} Descriptors.cpp helper.cpp)
+add_library(descriptor SHARED ${SRC_FILES})
 #add_library(descriptor_static STATIC ${BISFILES} ${SYMFUNFILES} ${SOAPFILES} Descriptors.cpp helper.cpp)
 #if(OpenMP_CXX_FOUND)
 #    target_link_libraries(descriptor PUBLIC OpenMP::OpenMP_CXX)
@@ -90,34 +81,34 @@ install(TARGETS descriptor
         PUBLIC_HEADER DESTINATION include)
 
 # ---------------- Python module -------------------------
-# Python Interp
-find_package(PythonInterp REQUIRED)
-find_package(PythonLibs REQUIRED)
-include_directories(${PYTHON_INCLUDE_DIRS})
-
-# PYBIND11
-find_package(pybind11 REQUIRED)
-
-file(GLOB nl neighbor/*.cpp)
-
-pybind11_add_module(libdescriptor python_bindings.cpp ${nl})
-target_link_libraries(libdescriptor PUBLIC descriptor)
-
-# Assuming your .so target is named 'project_target'
-add_custom_command(TARGET libdescriptor POST_BUILD
-    # Copy the .so file to the build directory
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_BINARY_DIR}/libdescriptor.so
-            ${CMAKE_SOURCE_DIR}/python_package/libdescriptor
-    # Copy pybind11 so to the python_package directory
-    COMMAND ${CMAKE_COMMAND} -E copy
-            $<TARGET_FILE:libdescriptor>
-            ${CMAKE_SOURCE_DIR}/python_package/libdescriptor
-)
-
-add_custom_target(make_python_package ALL
-        COMMAND python setup.py bdist_wheel
-        COMMAND auditwheel --plat linux_x86_64 dist/*.whl
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python_package
-        DEPENDS libdescriptor descriptor)
-#TODO add install location
+## Python Interp
+#find_package(PythonInterp REQUIRED)
+#find_package(PythonLibs REQUIRED)
+#include_directories(${PYTHON_INCLUDE_DIRS})
+#
+## PYBIND11
+#find_package(pybind11 REQUIRED)
+#
+#file(GLOB nl neighbor/*.cpp)
+#
+#pybind11_add_module(libdescriptor python_bindings.cpp ${nl})
+#target_link_libraries(libdescriptor PUBLIC descriptor)
+#
+## Assuming your .so target is named 'project_target'
+#add_custom_command(TARGET libdescriptor POST_BUILD
+#    # Copy the .so file to the build directory
+#    COMMAND ${CMAKE_COMMAND} -E copy
+#            ${CMAKE_BINARY_DIR}/libdescriptor.so
+#            ${CMAKE_SOURCE_DIR}/python_package/libdescriptor
+#    # Copy pybind11 so to the python_package directory
+#    COMMAND ${CMAKE_COMMAND} -E copy
+#            $<TARGET_FILE:libdescriptor>
+#            ${CMAKE_SOURCE_DIR}/python_package/libdescriptor
+#)
+#
+#add_custom_target(make_python_package ALL
+#        COMMAND python setup.py bdist_wheel
+#        COMMAND auditwheel --plat linux_x86_64 dist/*.whl
+#        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python_package
+#        DEPENDS libdescriptor descriptor)
+##TODO add install location

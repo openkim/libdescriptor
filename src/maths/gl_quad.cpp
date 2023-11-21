@@ -1,5 +1,4 @@
-#ifndef GL_QUAD_HPP
-#define GL_QUAD_HPP
+#include "gl_quad.hpp"
 #include <vector>
 
 // gauss-Lebedev quadrature for size 100, same as taken by dscribe
@@ -70,4 +69,3 @@ std::vector<double> get_gl_grid(double cutoff){
     }
     return grid;
 }
-#endif //GL_QUAD_HPP
