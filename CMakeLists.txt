@@ -90,19 +90,18 @@ install(TARGETS descriptor
 
 # ---------------- Python module -------------------------
 ## Python Interp
-#find_package(PythonInterp REQUIRED)
-#find_package(PythonLibs REQUIRED)
-#include_directories(${PYTHON_INCLUDE_DIRS})
-#
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs REQUIRED)
+include_directories(${PYTHON_INCLUDE_DIRS})
+
 ## PYBIND11
-#find_package(pybind11 REQUIRED)
-#
-#file(GLOB nl neighbor/*.cpp)
-#
-#pybind11_add_module(libdescriptor python_bindings.cpp ${nl})
-#target_link_libraries(libdescriptor PUBLIC descriptor)
-#
-## Assuming your .so target is named 'project_target'
+find_package(pybind11 REQUIRED)
+
+file(GLOB PYSOURCES python_bindings/*.cpp python_bindings/**/*.cpp)
+
+pybind11_add_module(libdescriptor ${PYSOURCES})
+target_link_libraries(libdescriptor PUBLIC descriptor)
+
 #add_custom_command(TARGET libdescriptor POST_BUILD
 #    # Copy the .so file to the build directory
 #    COMMAND ${CMAKE_COMMAND} -E copy
