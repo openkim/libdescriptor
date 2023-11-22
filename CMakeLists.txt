@@ -1,5 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
+
+#find_package(Enzyme REQUIRED CONFIG)
+#if (Enzyme_FOUND)
+#    message("Enzyme found at ${Enzyme_DIR}")
+#else()
+#    message(FATAL_ERROR "Enzyme not found, please check your Enzyme installation.")
+#endif()
+
 project(libdescriptor)
+
+set(CMAKE_BUILD_TYPE Release)
 
 set(CMAKE_CXX_STANDARD 17)
 find_package(Doxygen OPTIONAL_COMPONENTS dot)
@@ -22,27 +32,29 @@ endif (DOXYGEN_FOUND)
 
 #----------------
 # Find enzyme at location ENZYME_LIB
+string(REGEX MATCH "^[0-9]+" LLVM_MAJOR_VERSION ${CMAKE_CXX_COMPILER_VERSION})
+message("LLVM major version used: ${LLVM_MAJOR_VERSION}")
+
 if(NOT DEFINED ENZYME_LIB)
     message(WARNING "ENZYME_LIB variable not defined, switching to default: /usr/local/lib" )
     set(ENZYME_LIB "/usr/local/lib")
 endif()
 message("Searching for ENZYME at ${ENZYME_LIB}")
-if(EXISTS "${ENZYME_LIB}/LLDEnzyme-13.so")
+if(EXISTS "${ENZYME_LIB}/LLDEnzyme-${LLVM_MAJOR_VERSION}.so")
     message("Found LLDEnzyme plugin.")
 else()
     message(FATAL_ERROR "LLDEnzyme plugin not found, please check your Enzyme installation.")
 endif()
-if(EXISTS "${ENZYME_LIB}/ClangEnzyme-13.so")
+if(EXISTS "${ENZYME_LIB}/ClangEnzyme-${LLVM_MAJOR_VERSION}.so")
     message("Found ClangEnzyme plugin.")
 else()
     message(WARNING "ClangEnzyme plugin not found, it is NOT needed for libdescriptor, but usually indicates improper installation of Enzyme.")
 endif()
-if(EXISTS "${ENZYME_LIB}/LLVMEnzyme-13.so")
+if(EXISTS "${ENZYME_LIB}/LLVMEnzyme-${LLVM_MAJOR_VERSION}.so")
     message("Found LLVMEnzyme plugin.")
 else()
     message(WARNING "LLVMEnzyme plugin not found, it is NOT needed for libdescriptor, but usually indicates improper installation of Enzyme.")
 endif()
-
 
 include_directories(include)
 file(GLOB SRC_FILES src/*.cpp src/maths/*.cpp)
@@ -58,8 +70,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=${LLD} -flto -Xclang -new-struc
 add_library(descriptor SHARED ${SRC_FILES})
 
 # pass linking to lld, with enzyme plugin
-target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
-target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=${ENZYME_LIB}/LLDEnzyme-13.so")
+if (${LLVM_MAJOR_VERSION} LESS_EQUAL 13)
+    target_link_options(descriptor PRIVATE "LINKER:--lto-legacy-pass-manager")
+    target_link_options(descriptor PRIVATE "LINKER:-mllvm=-load=${ENZYME_LIB}/LLDEnzyme-${LLVM_MAJOR_VERSION}.so")
+else()
+    target_link_options(descriptor PRIVATE "LINKER:--load-pass-plugin=${ENZYME_LIB}/LLDEnzyme-${LLVM_MAJOR_VERSION}.so")
+endif()
 
 # TODO REMOVE EXTRA HEADER FILES ONCE ENZYME PROVIDES SOLUTION
 #set_target_properties(descriptor PROPERTIES PUBLIC_HEADER "Descriptors.hpp;SymmetryFunctions/SymmetryFunctions.hpp;Bispectrum/Bispectrum.hpp;helper.hpp")
