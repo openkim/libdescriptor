@@ -21,7 +21,8 @@ namespace Descriptor {
     enum AvailableDescriptor {
         KindSymmetryFunctions, //!< For selecting Behler Symmetry Functions (SymmetryFunctions)
         KindBispectrum, //!< For selecting Bispectrum descriptor
-        KindSOAP //!< For selecting Smooth Overlap of Atomic Position (SOAP) descriptor
+        KindSOAP, //!< For selecting Smooth Overlap of Atomic Position (SOAP) descriptor
+        KindXi //!< For selecting Xi descriptor
     };
 
     class DescriptorKind;
@@ -225,6 +226,11 @@ public:
     static DescriptorKind *
     initDescriptor(AvailableDescriptor availableDescriptorKind, int n_max, int l_max, double cutoff,
                                std::vector<std::string> &species, std::string radial_basis, double eta);
+
+    // ********Xi********
+    DescriptorKind *
+    initDescriptor(AvailableDescriptor availableDescriptorKind, int q, double cutoff, std::vector<std::string> &species,
+                   std::string& radial_basis);
 };
 
 

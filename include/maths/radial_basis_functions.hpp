@@ -7,6 +7,6 @@ Eigen::MatrixXd matrixSqrt(const Eigen::MatrixXd& A);
 // polynomial basis
 void polynomial_basis(int n_max, double cutoff, int r_size, double *r, double *r_basis);
 
-void bessel_basis(int n_max, double rc, int r_size, double *r, double *r_basis);
+void bessel_basis(int n_max, double rc, int r_size, double *r, int r_basis_size, double *r_basis);
 
 #endif // MATHS_HPP

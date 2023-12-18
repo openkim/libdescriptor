@@ -56,58 +56,112 @@ void polynomial_basis(int n_max, double cutoff, int r_size, double *r, double *r
     }
 }
 
-void bessel_basis(int n_max, double rc, int r_size, double *r, double *r_basis) {
-    Eigen::VectorXd r_vec(r_size);
-    for (int i = 0; i < r_size; i++) {
-        r_vec(i) = r[i];
-    }
+//void bessel_basis(int n_max, double rc, int r_size, double *r, double *r_basis) {
+//    Eigen::VectorXd r_vec(r_size);
+//    for (int i = 0; i < r_size; i++) {
+//        r_vec(i) = r[i];
+//    }
+//
+//    Eigen::MatrixXd u_all = Eigen::MatrixXd::Zero(n_max + 1, n_max + 2);
+//    spherical_jn_zeros(n_max, u_all.data());
+//
+//    Eigen::MatrixXd coeff_a = Eigen::MatrixXd::Zero(n_max+1, n_max+1);
+//    Eigen::MatrixXd coeff_b = Eigen::MatrixXd::Zero(n_max+1, n_max+1);
+//
+//
+//    for (int l = 0; l < n_max + 1; l++) {
+//        Eigen::VectorXd u = u_all.row(l);
+//        for (int n = 0; n < n_max - l + 1; n++) {
+//            double c = std::sqrt(2 / (rc * rc * rc * (u(n) * u(n) + u(n+1) * u(n+1))));
+//            coeff_a(n, l) = u(n+1) / spherical_jn(l+1, u(n)) * c;
+//            coeff_b(n, l) = -u(n) / spherical_jn(l+1, u(n+1)) * c;
+//        }
+//    }
+//
+//    Eigen::VectorXd e = Eigen::VectorXd::Zero(n_max+1);
+//    Eigen::VectorXd d = Eigen::VectorXd::Ones(n_max+1);
+//    Eigen::MatrixXd gnl_mat = Eigen::MatrixXd::Zero(r_size, (n_max+1) * (n_max+1));
+//    Eigen::VectorXd arg = r_vec / rc;
+//
+//    for (int l = 0; l < n_max + 1; l++) {
+//        Eigen::VectorXd u = u_all.row(l);
+//        for (int n = 1; n < n_max-l+1; n++) {
+//            e(n) = (u(n-1) * u(n-1) * u(n+1) * u(n+1)) / ((u(n-1) * u(n-1) + u(n) * u(n)) * (u(n) * u(n) + u(n+1) * u(n+1)));
+//            d(n) = 1. - e(n) / d(n-1);
+//        }
+//
+//        for (int n = 0; n <= n_max-l; n++) {
+//            for (int a = 0; a < r_size; a++) {
+//                gnl_mat(a, n*(n_max + 1) + l) = coeff_a(n, l) * spherical_jn(l, u(n) * arg(a)) + coeff_b(n, l) * spherical_jn(l, u(n+1) * arg(a));
+//            }
+//        }
+//
+//        for (int n = 1; n <= n_max-l; n++) {
+//            for (int a = 0; a < r_size; a++) {
+//                gnl_mat(a, n*(n_max + 1) + l) = (gnl_mat(a, n*(n_max + 1) + l) + std::sqrt(1. - d(n)) * gnl_mat(a, (n-1)*(n_max + 1) + l)) / std::sqrt(d(n));
+//            }
+//        }
+//    }
+//
+//    // Copy to the output pointer
+//    for (int i = 0; i < r_size; i++) {
+//        for (int j = 0; j < (n_max+1) * (n_max+1); j++) {
+//            r_basis[i * (n_max+1) * (n_max+1) + j] = gnl_mat(i, j);
+//        }
+//    }
+//}
+//
 
-    Eigen::MatrixXd u_all = Eigen::MatrixXd::Zero(n_max + 1, n_max + 2);
-    spherical_jn_zeros(n_max, u_all.data());
+void bessel_basis(int n_max, double rc, int r_size, double *r, int r_basis_size, double *r_basis) {
+    std::vector<double> r_vec(r, r + r_size);
 
-    Eigen::MatrixXd coeff_a = Eigen::MatrixXd::Zero(n_max+1, n_max+1);
-    Eigen::MatrixXd coeff_b = Eigen::MatrixXd::Zero(n_max+1, n_max+1);
+    int u_all_size = (n_max + 2) * (n_max + 1);
+    std::vector<double> u_all(u_all_size, 0.0);
+//    spherical_jn_zeros(n_max, u_all.data());
 
+    int coeff_size = (n_max + 1) * (n_max + 1);
+    std::vector<double> coeff_a(coeff_size, 0.0);
+    std::vector<double> coeff_b(coeff_size, 0.0);
 
     for (int l = 0; l < n_max + 1; l++) {
-        Eigen::VectorXd u = u_all.row(l);
         for (int n = 0; n < n_max - l + 1; n++) {
-            double c = std::sqrt(2 / (rc * rc * rc * (u(n) * u(n) + u(n+1) * u(n+1))));
-            coeff_a(n, l) = u(n+1) / spherical_jn(l+1, u(n)) * c;
-            coeff_b(n, l) = -u(n) / spherical_jn(l+1, u(n+1)) * c;
+            double u_n  = u_all[l + (n_max + 1) * (n)];
+            double u_n1 = u_all[l + (n_max + 1) * (n  + 1)];
+            double c = std::sqrt(2 / (rc * rc * rc * (u_n * u_n + u_n1 * u_n1)));
+            coeff_a[n * (n_max + 1) + l] = u_n1 / spherical_jn(l + 1, u_n) * c;
+            coeff_b[n * (n_max + 1) + l] = -u_n / spherical_jn(l + 1, u_n1) * c;
         }
     }
 
-    Eigen::VectorXd e = Eigen::VectorXd::Zero(n_max+1);
-    Eigen::VectorXd d = Eigen::VectorXd::Ones(n_max+1);
-    Eigen::MatrixXd gnl_mat = Eigen::MatrixXd::Zero(r_size, (n_max+1) * (n_max+1));
-    Eigen::VectorXd arg = r_vec / rc;
+    std::vector<double> e(n_max + 1, 0.0);
+    std::vector<double> d(n_max + 1, 1.0);
+    std::vector<double> gnl_mat(r_size * (n_max + 1) * (n_max + 1), 0.0);
 
-    for (int l = 0; l < n_max + 1; l++) {
-        Eigen::VectorXd u = u_all.row(l);
-        for (int n = 1; n < n_max-l+1; n++) {
-            e(n) = (u(n-1) * u(n-1) * u(n+1) * u(n+1)) / ((u(n-1) * u(n-1) + u(n) * u(n)) * (u(n) * u(n) + u(n+1) * u(n+1)));
-            d(n) = 1. - e(n) / d(n-1);
+    for (int l = 0; l < n_max+1; l++) {
+        for (int n = 1; n < n_max - l+1; n++) {
+            double u_n   = u_all[l + (n_max + 1) * (n)];
+            double u_n1  = u_all[l + (n_max + 1) * (n + 1)];
+            double u_n_1 = u_all[l + (n_max + 1) * (n - 1)];
+            e[n] = (u_n_1 * u_n_1 * u_n1 * u_n1) / ((u_n_1 * u_n_1 + u_n * u_n) * (u_n * u_n + u_n1 * u_n1));
+            d[n] = 1.0 - e[n] / d[n - 1];
         }
 
-        for (int n = 0; n <= n_max-l; n++) {
+        for (int n = 0; n < n_max - l + 1; n++) {
             for (int a = 0; a < r_size; a++) {
-                gnl_mat(a, n*(n_max + 1) + l) = coeff_a(n, l) * spherical_jn(l, u(n) * arg(a)) + coeff_b(n, l) * spherical_jn(l, u(n+1) * arg(a));
+                double u_n   = u_all[l + (n_max + 1) * (n)];
+                double u_n1  = u_all[l + (n_max + 1) * (n + 1)];
+                gnl_mat[a * (n_max + 1) * (n_max + 1) + n * (n_max + 1) + l] = coeff_a[n * (n_max + 1) + l] * spherical_jn(l, u_n * r_vec[a] / rc) + coeff_b[n * (n_max + 1) + l] * spherical_jn(l, u_n1 * r_vec[a] / rc);
             }
         }
 
-        for (int n = 1; n <= n_max-l; n++) {
+        for (int n = 1; n < n_max - l + 1; n++) {
             for (int a = 0; a < r_size; a++) {
-                gnl_mat(a, n*(n_max + 1) + l) = (gnl_mat(a, n*(n_max + 1) + l) + std::sqrt(1. - d(n)) * gnl_mat(a, (n-1)*(n_max + 1) + l)) / std::sqrt(d(n));
+                gnl_mat[a * (n_max + 1) * (n_max + 1) + n * (n_max + 1) + l] = (gnl_mat[a * (n_max + 1) * (n_max + 1) + n * (n_max + 1) + l] + std::sqrt(1.0 - d[n]) * gnl_mat[a * (n_max + 1) * (n_max + 1) + (n - 1) * (n_max + 1) + l]) / std::sqrt(d[n]);
             }
         }
     }
 
-    // Copy to the output pointer
-    for (int i = 0; i < r_size; i++) {
-        for (int j = 0; j < (n_max+1) * (n_max+1); j++) {
-            r_basis[i * (n_max+1) * (n_max+1) + j] = gnl_mat(i, j);
-        }
+    for (int i = 0; i < r_basis_size; i++) {
+        r_basis[i] = gnl_mat[i];
     }
 }
-
