@@ -2,6 +2,7 @@
 #define XI_HPP_
 
 #include "Descriptors.hpp"
+#include <iostream>
 
 typedef double VectorOfSize3[3];
 
@@ -11,7 +12,7 @@ class Xi final : public DescriptorKind{
 public:
     Xi() {}; //TODO delete the default constructor
     Xi(std::string &filename){};//TODO complete this constructor
-    Xi(int q, double cutoff, std::vector<std::string> &species, std::string &radial_basis);
+    Xi(int q, double cutoff, std::vector<std::string> &species, std::string& radial_basis);
 
     void compute(int index,
                  int n_atoms,
@@ -32,7 +33,9 @@ public:
     double cutoff;
     std::vector<std::string> species_;
     std::string radial_basis = "bessel";
-    int width;
+    ~Xi() override {
+        std::cout << "Xi destructor called" << std::endl;
+    }
 
 private:
     std::vector<int> ln_params;

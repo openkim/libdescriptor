@@ -4,6 +4,7 @@
 #include "Eigen/Eigenvalues"
 #include "maths/bessel_functions.hpp"
 #include "maths/radial_basis_functions.hpp"
+#include <iostream>
 
 Eigen::MatrixXd matrixSqrt(const Eigen::MatrixXd& A) {
     // Ensure the matrix is square
@@ -117,7 +118,14 @@ void bessel_basis(int n_max, double rc, int r_size, double *r, int r_basis_size,
 
     int u_all_size = (n_max + 2) * (n_max + 1);
     std::vector<double> u_all(u_all_size, 0.0);
-//    spherical_jn_zeros(n_max, u_all.data());
+    spherical_jn_zeros(n_max, u_all.data());
+
+    for(int i = 0; i < n_max + 2; i++){
+        for(int j = 0; j < n_max + 1; j++){
+            std::cout << u_all[i * (n_max + 1) + j] << " ";
+        }
+        std::cout << std::endl;
+    }
 
     int coeff_size = (n_max + 1) * (n_max + 1);
     std::vector<double> coeff_a(coeff_size, 0.0);

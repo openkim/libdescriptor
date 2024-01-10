@@ -5,14 +5,14 @@
 
 #define MAX_NEIGHBORS 100
 
-Xi::Xi(int q, double cutoff, std::vector<std::string> &species, std::string &radial_basis) {
+Xi::Xi(int q, double cutoff, std::vector<std::string> &species, std::string & radial_basis) {
     this->cutoff = cutoff;
     this->radial_basis = radial_basis;
     this->q = q;
     this->species_ = species;
     this->width = get_width();
     this->ln_params.resize(this->width * 6);
-    copy_params(this->width, this->ln_params.data()); // get the parameters from the file
+    copy_params(this->q, this->ln_params.data()); // get the parameters from the file }
     this->l_max_sq = (q + 1) * (q + 1);
     if (radial_basis != "bessel") {
         throw std::runtime_error("Radial basis " + radial_basis + " not implemented");
@@ -24,7 +24,7 @@ void Xi::create_clebsh_gordon_array() {
 }
 
 int Xi::get_width() {
-    return this->width;
+    return get_param_length(q);
 }
 
 void Xi::compute(int index,
@@ -36,7 +36,7 @@ void Xi::compute(int index,
                  double *desc) {
     auto *coordinates_  = (VectorOfSize3 *) coordinates;
     std::array<double, 3> r_i = {coordinates_[index][0], coordinates_[index][1], coordinates_[index][2]};
-
+    std::cout << "r_i: " << r_i[0] << " " << r_i[1] << " " << r_i[2] << std::endl;
 //    if(number_of_neighbors > MAX_NEIGHBORS){
 //        std::cerr << "Number of neighbors exceeds MAX_NEIGHBORS. Truncating to MAX_NEIGHBORS" << std::endl;
 //        number_of_neighbors = MAX_NEIGHBORS;

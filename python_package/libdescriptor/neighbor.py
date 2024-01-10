@@ -6,6 +6,7 @@ import numpy as np
 from libdescriptor import create, create_paddings
 import ase
 
+
 class NeighborList:
     def __init__(
         self, conf: ase.Atoms, infl_dist: float, padding_need_neigh: bool = False

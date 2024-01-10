@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include "maths/bessel_functions.hpp"
+#include <iostream>
 
 #define SIGN(a, b) ((b) >= 0.0 ? fabs(a) : -fabs(a))
 
@@ -321,6 +322,7 @@ double spherical_in(int n, double x){
 
 double spherical_jn(double n, double x) {
     //Spherical Bessel function of the first kind
+    std::cout << n << " " << x << std::endl;
     return bessel_J(n + 0.5, x) * sqrt(M_PI / (2 * x));
 }
 double spherical_jn(int n, double x){
@@ -355,9 +357,9 @@ double halleys_root(double l, double lwr_bnd, double upr_bnd){
             upr_bnd = x;
         }
 
-        if ((upr_bnd-x) < dx || dx < (lwr_bnd-x)) {
-            dx = (upr_bnd - lwr_bnd) / 2. - x;
-        }
+//        if ((upr_bnd-x) < dx || dx < (lwr_bnd-x)) {
+//            dx = (upr_bnd - lwr_bnd) / 2. - x;
+//        }
 
         x=x+dx;
         i++;
@@ -376,18 +378,18 @@ double halleys_root(int l, double lwr_bnd, double upr_bnd){
 
 void spherical_jn_zeros(int n_max, double * u_all ){
     // Expected u_all to be a (n_max+2, n_max+1)
-//    for (int l = 0; l < n_max + 2; ++l) {
-//        u_all[l * (n_max + 1)] = M_PI * (l+1);
-//    }
-//
-//    // call Halley's Method
-//    for (int l = 1; l < n_max + 1; l++) {
-//        for (int n = 0; n < n_max - l + 2; n++) {
-//            u_all[n * (n_max + 1) + l] = halleys_root(static_cast<double>(l),
-//                                                      u_all[n * (n_max + 1) + (l  - 1)],
-//                                                      u_all[(n + 1) * (n_max + 1) + (l - 1)]);
-//        }
-//    }
+    for (int l = 0; l < n_max + 2; ++l) {
+        u_all[l * (n_max + 1)] = M_PI * (l+1);
+    }
+
+    // call Halley's Method
+    for (int l = 1; l < n_max + 1; l++) {
+        for (int n = 0; n < n_max - l + 2; n++) {
+            u_all[n * (n_max + 1) + l] = halleys_root(static_cast<double>(l),
+                                                      u_all[n * (n_max + 1) + (l  - 1)],
+                                                      u_all[(n + 1) * (n_max + 1) + (l - 1)]);
+        }
+    }
 }
 
 //double spherical_in_cpp(int n, double x) {

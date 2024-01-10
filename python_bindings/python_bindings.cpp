@@ -78,17 +78,19 @@ PYBIND11_MODULE(libdescriptor, m) {
             .def("init_descriptor", py::overload_cast<AvailableDescriptor, double, int, int, int, double, int,
                     int, double *, std::vector<std::string> *, std::vector<double> *>(&DescriptorKind::initDescriptor))
 
-                    // Return descriptor object created from SOAP, using direct parameters
-            .def("init_descriptor", py::overload_cast<AvailableDescriptor, int, int, double,
-                    std::vector<std::string> &, std::string, double>(&DescriptorKind::initDescriptor))
-
                     // Return descriptor object created from Xi, using direct parameters
             .def("init_descriptor", py::overload_cast<AvailableDescriptor, int, double,
                                std::vector<std::string> &, std::string &>(&DescriptorKind::initDescriptor))
 
+                    // Return descriptor object created from SOAP, using direct parameters
+            .def("init_descriptor", py::overload_cast<AvailableDescriptor, int, int, double,
+                    std::vector<std::string> &, std::string, double>(&DescriptorKind::initDescriptor))
+
                     // Compute function for calculating the descriptor
             .def("compute",
-                 [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
+                 [](DescriptorKind &ds,
+                    int index,
+                    py::array_t<int, py::array::c_style | py::array::forcecast> &species,
                     py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
                     py::array_t<double, py::array::c_style | py::array::forcecast> &coords) {
                      int n_atoms = static_cast<int>(coords.shape(0));

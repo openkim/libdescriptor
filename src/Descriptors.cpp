@@ -479,6 +479,7 @@ DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, int 
     auto return_pointer = new SOAP(n_max, l_max, cutoff, species, radial_basis, eta);
     return_pointer->width = return_pointer->get_width();
     return_pointer->descriptor_kind = availableDescriptorKind;
+
     return return_pointer;
 }
 

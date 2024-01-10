@@ -228,7 +228,7 @@ public:
                                std::vector<std::string> &species, std::string radial_basis, double eta);
 
     // ********Xi********
-    DescriptorKind *
+    static DescriptorKind *
     initDescriptor(AvailableDescriptor availableDescriptorKind, int q, double cutoff, std::vector<std::string> &species,
                    std::string& radial_basis);
 };
