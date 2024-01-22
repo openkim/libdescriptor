@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include "maths/bessel_functions.hpp"
 #include <iostream>
+#include "maths/precomputed_values.hpp"
 
 #define SIGN(a, b) ((b) >= 0.0 ? fabs(a) : -fabs(a))
 
@@ -337,33 +338,34 @@ double halleys_root(double l, double lwr_bnd, double upr_bnd){
     double l1 = l+1;
 
     int i = 0;
-    while (i < MAXIT){
-        double a = spherical_jn(l, x);
-        double b = spherical_jn(l1, x);
-
-        if (std::abs(a) < TOL2) {
-            break;
-        }
-
-        double x2 = x*x;
-        double dx = -2*x*a*(l*a-x*b) / ((l*l1+x2)*a*a - 2*x*(2*l+1)*a*b + 2*x2*b*b);
-        if (std::abs(dx) < TOL1) {
-            break;
-        }
-
-        if (dx > 0) {
-            lwr_bnd = x;
-        } else {
-            upr_bnd = x;
-        }
-
+    throw std::runtime_error("halleys_root() not implemented.");
+//    while (i < MAXIT){
+//        double a = spherical_jn(l, x);
+//        double b = spherical_jn(l1, x);
+//
+//        if (std::abs(a) < TOL2) {
+//            break;
+//        }
+//
+//        double x2 = x*x;
+//        double dx = -2*x*a*(l*a-x*b) / ((l*l1+x2)*a*a - 2*x*(2*l+1)*a*b + 2*x2*b*b);
+//        if (std::abs(dx) < TOL1) {
+//            break;
+//        }
+//
+//        if (dx > 0) {
+//            lwr_bnd = x;
+//        } else {
+//            upr_bnd = x;
+//        }
+//
 //        if ((upr_bnd-x) < dx || dx < (lwr_bnd-x)) {
 //            dx = (upr_bnd - lwr_bnd) / 2. - x;
 //        }
-
-        x=x+dx;
-        i++;
-    }
+//
+//        x=x+dx;
+//        i++;
+//    }
 
     if (i>MAXIT-1) {
         throw std::runtime_error("halleys_root() failed to converge.");
@@ -376,18 +378,31 @@ double halleys_root(int l, double lwr_bnd, double upr_bnd){
 }
 
 
+//void spherical_jn_zeros(int n_max, double * u_all ){
+//    // Expected u_all to be a (n_max+2, n_max+1)
+//    for (int l = 0; l < n_max + 2; ++l) {
+//        u_all[l * (n_max + 1)] = M_PI * (l+1);
+//    }
+//
+//    // call Halley's Method
+//    for (int l = 1; l < n_max + 1; l++) {
+//        for (int n = 0; n < n_max - l + 2; n++) {
+//            u_all[n * (n_max + 1) + l] = halleys_root(static_cast<double>(l),
+//                                                      u_all[n * (n_max + 1) + (l  - 1)],
+//                                                      u_all[(n + 1) * (n_max + 1) + (l - 1)]);
+//        }
+//    }
+//}
+
+// spherical jn zeros precomputed
 void spherical_jn_zeros(int n_max, double * u_all ){
     // Expected u_all to be a (n_max+2, n_max+1)
-    for (int l = 0; l < n_max + 2; ++l) {
-        u_all[l * (n_max + 1)] = M_PI * (l+1);
+    if (n_max > precomputed_values::bessel_zeros_max_j) {
+        throw std::runtime_error("n_max is too large for precomputed values.");
     }
-
-    // call Halley's Method
-    for (int l = 1; l < n_max + 1; l++) {
-        for (int n = 0; n < n_max - l + 2; n++) {
-            u_all[n * (n_max + 1) + l] = halleys_root(static_cast<double>(l),
-                                                      u_all[n * (n_max + 1) + (l  - 1)],
-                                                      u_all[(n + 1) * (n_max + 1) + (l - 1)]);
+    for (int l = 0; l < n_max + 2; ++l) {
+        for (int n = 0; n < n_max + 1; ++n) {
+            u_all[l * (n_max + 1) + n] = precomputed_values::bessel_zeros[l][n];
         }
     }
 }
