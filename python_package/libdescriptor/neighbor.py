@@ -8,6 +8,9 @@ import ase
 
 
 class NeighborList:
+    """
+    This is simple neigbor list class for ase.Atoms object. Heavily borrowed from KLIFF.
+    """
     def __init__(
         self, conf: ase.Atoms, infl_dist: float, padding_need_neigh: bool = False
     ):
