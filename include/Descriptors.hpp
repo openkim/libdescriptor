@@ -117,13 +117,13 @@ namespace Descriptor {
      * @param index
      * @param n_atoms
      * @param species
+     * @param neighbor_list
      * @param number_of_neighs
-     * @param number_of_neigh_list
      * @param coordinates
      * @param desc
      * @param descriptor_kind
      */
-    void compute_single_atom(int index, int n_atoms, int *species, int *number_of_neighs, int number_of_neigh_list,
+    void compute_single_atom(int index, int n_atoms, int *species, int *neighbor_list, int number_of_neighs,
                              double *coordinates, double *desc,
                              DescriptorKind *descriptor_kind);
 

@@ -3,7 +3,8 @@ from setuptools import find_packages, setup
 
 setup(
     name="libdescriptor",
-    version="0.0.9",
+    version="0.2.0",
+    description="Fully differentiable descriptors for atomistic systems",
     packages=find_packages(),
     install_requires=[
         "numpy",
@@ -19,7 +20,8 @@ setup(
                         "libdescriptor.so",
                         "libgcc_s.so.1",
                         "libm.so.6",
-                        "libstdc++.so.6"
+                        "libstdc++.so.6",
+                        "*.pyi",
                         ],
     },
     author="Amit Gupta",
