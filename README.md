@@ -75,7 +75,7 @@ To use it, you need to install Pybind11 on your system
 - [x] Behler Symmetry Functions
 - [x] Bispectrum 
 - [x] SOAP
-- [ ] Xi (WIP)
+- [x] Xi
 - [ ] ACE (WIP)
 
 ## Extending Libdescriptor
