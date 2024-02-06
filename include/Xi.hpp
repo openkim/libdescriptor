@@ -33,9 +33,7 @@ public:
     double cutoff;
     std::vector<std::string> species_;
     std::string radial_basis = "bessel";
-    ~Xi() override {
-        std::cout << "Xi destructor called" << std::endl;
-    }
+    ~Xi() override {}
 
 private:
     std::vector<int> ln_params;

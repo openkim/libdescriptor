@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="libdescriptor",
-    version="0.0.7",
+    version="0.0.9",
     packages=find_packages(),
     install_requires=[
         "numpy",
@@ -23,5 +23,11 @@ setup(
                         ],
     },
     author="Amit Gupta",
+    author_email="gupta839@umn.edu",
     include_package_data=True,
+    project_urls={
+        "Documentation": "https://libdescriptor.readthedocs.io/",
+    },
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
 )

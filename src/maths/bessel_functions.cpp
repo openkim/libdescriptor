@@ -323,7 +323,6 @@ double spherical_in(int n, double x){
 
 double spherical_jn(double n, double x) {
     //Spherical Bessel function of the first kind
-    std::cout << n << " " << x << std::endl;
     return bessel_J(n + 0.5, x) * sqrt(M_PI / (2 * x));
 }
 double spherical_jn(int n, double x){
@@ -394,15 +393,15 @@ double halleys_root(int l, double lwr_bnd, double upr_bnd){
 //    }
 //}
 
-// spherical jn zeros precomputed
+// spherical jn zeros precomputed, column major j
 void spherical_jn_zeros(int n_max, double * u_all ){
     // Expected u_all to be a (n_max+2, n_max+1)
     if (n_max > precomputed_values::bessel_zeros_max_j) {
         throw std::runtime_error("n_max is too large for precomputed values.");
     }
-    for (int l = 0; l < n_max + 2; ++l) {
-        for (int n = 0; n < n_max + 1; ++n) {
-            u_all[l * (n_max + 1) + n] = precomputed_values::bessel_zeros[l][n];
+    for (int n = 0; n < n_max + 2; n++) {
+        for (int j = 0 ; j < n_max + 1; j++) {
+            u_all[n * (n_max + 1) + j] = precomputed_values::bessel_zeros[j][n];
         }
     }
 }
