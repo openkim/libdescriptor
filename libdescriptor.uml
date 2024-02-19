@@ -1,0 +1,58 @@
+@startuml
+!theme vibrant
+left to right direction
+namespace Namespace::Descriptor {
+    class Functions{
+        +void compute_single_atom()
+        +void compute()
+        +void jacobian()
+        +void gradient_single_atom()
+        +void num_gradient_single_atom()
+        +void gradient()
+    }
+
+    enum AvailableDescriptor{
+        KindSymmetryFunctions
+        KindBispectrum
+        KindSOAP
+        KindXi
+    }
+
+    class DescriptorKind{
+        int width
+        AvailableDescriptor descriptor_kind
+
+        +void compute(int idx,int n_atoms, int *species, int *n_list, int n_neigh, double *coords,double *desc)
+        +DescriptorKind* initDescriptor(...)
+    }
+
+ }
+DescriptorKind <|.. SymmetryFunctions
+DescriptorKind <|.. SOAP
+DescriptorKind <|.. Bispectrum
+DescriptorKind <|.. Xi
+
+   interface SymmetryFunctions{
+        +<params>
+        +descriptor_kind = KindSymmetryFunctions
+        +void clone_empty(DescriptorKind* d_desc)
+    }
+
+   interface SOAP{
+        +<params>
+        +descriptor_kind = KindSOAP
+        +void clone_empty(DescriptorKind* d_desc)
+    }
+
+   interface Xi{
+        +<params>
+        +descriptor_kind = KindXi
+        +void clone_empty(DescriptorKind* d_desc)
+    }
+
+   interface Bispectrum{
+        +<params>
+        +descriptor_kind = KindBispectrum
+        +void clone_empty(DescriptorKind* d_desc)
+    }
+@enduml

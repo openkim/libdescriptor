@@ -4,6 +4,8 @@ Libdescriptor
 
 [![Documentation Status](https://readthedocs.org/projects/libdescriptor/badge/?version=latest)](https://libdescriptor.readthedocs.io/en/latest/?badge=latest)
 
+Supported Python versions: 3.8, 3.9, 3.10
+
 Libdescriptor is a high performance descriptor library for providing access to fully differentiable descriptor functions.
 While `libdescriptor` is a general purpose descriptor library, it's API compatible with KIM models and associated projects.
 This will also provide uniform access to various selected descriptors for KLIFF using Pybind11 ports.

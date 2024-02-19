@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="libdescriptor",
-    version="0.2.0",
+    version="0.2.1",
     description="Fully differentiable descriptors for atomistic systems",
     packages=find_packages(),
     install_requires=[
@@ -16,7 +16,9 @@ setup(
                         "__init__.py",
                         "neighbor.py",
                         "libc.so.6",
+                        "libdescriptor.cpython-38-x86_64-linux-gnu.so",
                         "libdescriptor.cpython-39-x86_64-linux-gnu.so",
+                        "libdescriptor.cpython-310-x86_64-linux-gnu.so",
                         "libdescriptor.so",
                         "libgcc_s.so.1",
                         "libm.so.6",
