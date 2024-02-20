@@ -447,11 +447,12 @@ DescriptorKind::~DescriptorKind() = default;
 
 DescriptorKind *
 DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, std::vector<std::string> *species,
-                               std::string *cutoff_function, double *cutoff_matrix,
+                               std::string *cutoff_function, double *cutoff,
                                std::vector<std::string> *symmetry_function_types,
                                std::vector<int> *symmetry_function_sizes,
                                std::vector<double> *symmetry_function_parameters) {
-    auto return_pointer = new SymmetryFunctions(species, cutoff_function, cutoff_matrix,
+    std::vector<double> cutoff_array(species->size() * species->size(), cutoff[0]);
+    auto return_pointer = new SymmetryFunctions(species, cutoff_function, cutoff_array.data(),
                                                 symmetry_function_types, symmetry_function_sizes,
                                                 symmetry_function_parameters);
     return return_pointer;
@@ -461,15 +462,16 @@ DescriptorKind *
 DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, double rfac0_in, int twojmax_in,
                                int diagonalstyle_in,
                                int use_shared_arrays_in, double rmin0_in, int switch_flag_in, int bzero_flag_in,
-                               double *cutoff_array, std::vector<std::string> *species, std::vector<double> *weights) {
+                               double *cutoff, std::vector<std::string> *species, std::vector<double> *weights) {
+    std::vector<double> cutoff_array(species->size() * species->size(), cutoff[0]);
     auto return_pointer = new Bispectrum(rfac0_in, twojmax_in, diagonalstyle_in,
                                          use_shared_arrays_in, rmin0_in, switch_flag_in, bzero_flag_in);
     return_pointer->width = return_pointer->get_width();
     return_pointer->set_species(species->size());
     std::string cutoff_function = "cos";
-    return_pointer->set_cutoff(cutoff_function.c_str(), species->size(), cutoff_array);
+    return_pointer->set_cutoff(cutoff_function.c_str(), species->size(), cutoff_array.data());
     return_pointer->set_weight(species->size(), weights->data());
-    return_pointer->descriptor_kind = availableDescriptorKind;
+    return_pointer ->descriptor_kind = availableDescriptorKind;
     return return_pointer;
 }
 

@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="libdescriptor",
-    version="0.2.1",
+    version="0.2.2",
     description="Fully differentiable descriptors for atomistic systems",
     packages=find_packages(),
     install_requires=[
