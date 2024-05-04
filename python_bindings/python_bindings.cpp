@@ -80,7 +80,7 @@ PYBIND11_MODULE(libdescriptor, m) {
 
                     // Return descriptor object created from Xi, using direct parameters
             .def("init_descriptor", py::overload_cast<AvailableDescriptor, int, double,
-                               std::vector<std::string> &, std::string &>(&DescriptorKind::initDescriptor))
+                    std::vector<std::string> &, std::string &>(&DescriptorKind::initDescriptor))
 
                     // Return descriptor object created from SOAP, using direct parameters
             .def("init_descriptor", py::overload_cast<AvailableDescriptor, int, int, double,
@@ -158,6 +158,39 @@ PYBIND11_MODULE(libdescriptor, m) {
           }, py::return_value_policy::take_ownership,
           "Compute descriptor for single atom of configuration.");
 
+    m.def("compute_batch",
+          [](DescriptorKind &ds,
+             py::array_t<int, py::array::c_style | py::array::forcecast> &n_atoms,
+             py::array_t<int, py::array::c_style | py::array::forcecast> &config_ptr,
+             py::array_t<int, py::array::c_style | py::array::forcecast> &species,
+             py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
+             py::array_t<int, py::array::c_style | py::array::forcecast> &number_of_neighbors,
+             py::array_t<double, py::array::c_style | py::array::forcecast> &coordinates
+          ) {
+              int n_configurations = static_cast<int>(n_atoms.size());
+              int n_total_atoms = 0;
+              for (int i = 0; i < n_configurations; i++) {
+                  n_total_atoms += n_atoms.at(i);
+              }
+              auto desc = new double[ds.width * n_total_atoms];
+              std::fill(desc, desc + ds.width * n_total_atoms, 0.0);
+
+              compute_batch(
+                      n_configurations,
+                      const_cast<int *>(n_atoms.data(0)),
+                      const_cast<int *>(config_ptr.data(0)),
+                      const_cast<int *>(species.data(0)),
+                      const_cast<int *>(neighbors.data(0)),
+                      const_cast<int *>(number_of_neighbors.data(0)),
+                      const_cast<double *>(coordinates.data(0)),
+                      desc,
+                      &ds);
+
+              py::array_t<double> desc_array({n_total_atoms, ds.width}, desc);
+              return desc_array;
+          }, py::return_value_policy::take_ownership,
+          "Compute descriptor for multiple configurations.");
+
     // Calculate gradient of descriptor for a single atom using the descriptor supplied in DescriptorKind argument
     m.def("gradient_single_atom",
           [](DescriptorKind &ds, int index, py::array_t<int, py::array::c_style | py::array::forcecast> &species,
@@ -168,7 +201,11 @@ PYBIND11_MODULE(libdescriptor, m) {
               int n_atoms = static_cast<int>(coordinates.shape(0));
               int n_neigh = static_cast<int>(neighbors.shape(0));
               auto d_coordinates = new double[coordinates.size()];
+              auto desc_throwaway = new double[ds.width]; // TODO: use smart pointer
               for (int i = 0; i < coordinates.size(); i++) d_coordinates[i] = 0.0;
+
+              std::copy(desc.data(0), desc.data(0) + ds.width, desc_throwaway);
+
               gradient_single_atom(index,
                                    n_atoms,
                                    const_cast<int *>(species.data(0)),
@@ -176,9 +213,10 @@ PYBIND11_MODULE(libdescriptor, m) {
                                    n_neigh,
                                    const_cast<double *>(coordinates.data(0)),
                                    d_coordinates,
-                                   const_cast<double *>(desc.data(0)),
+                                   desc_throwaway,
                                    const_cast<double *>(dE_ddesc.data(0)),
                                    &ds);
+              delete[] desc_throwaway;
               py::array_t<double> d_coord_array({coordinates.shape(0), coordinates.shape(1)}, d_coordinates);
               return d_coord_array;
           }, py::return_value_policy::take_ownership,
@@ -195,6 +233,11 @@ PYBIND11_MODULE(libdescriptor, m) {
              py::array_t<double, py::array::c_style | py::array::forcecast> &desc,
              py::array_t<double, py::array::c_style | py::array::forcecast> &dE_ddesc) {
               auto d_coordinates = new double[coordinates.size()];
+              auto desc_throwaway = new double[ds.width * n_atoms]; // TODO: use smart pointer
+              // copy desc to desc_throwaway, enzyme will mutate desc
+              std::copy(desc.data(0), desc.data(0) + ds.width * n_atoms, desc_throwaway);
+
+
               for (int i = 0; i < coordinates.size(); i++) d_coordinates[i] = 0.0;
               gradient(n_atoms,
                        const_cast<int *>(species.data(0)),
@@ -202,13 +245,52 @@ PYBIND11_MODULE(libdescriptor, m) {
                        const_cast<int *>(number_of_neighbors.data(0)),
                        const_cast<double *>(coordinates.data(0)),
                        d_coordinates,
-                       const_cast<double *>(desc.data(0)),
+                       desc_throwaway,
                        const_cast<double *>(dE_ddesc.data(0)),
                        &ds);
+              delete[] desc_throwaway;
               py::array_t<double> d_coord_array({coordinates.shape(0), coordinates.shape(1)}, d_coordinates);
               return d_coord_array;
           }, py::return_value_policy::take_ownership,
           "Compute gradient of descriptor for complete configuration.");
+
+    m.def("gradient_batch", [](DescriptorKind &ds,
+                               py::array_t<int, py::array::c_style | py::array::forcecast> &n_atoms,
+                               py::array_t<int, py::array::c_style | py::array::forcecast> &config_ptr,
+                               py::array_t<int, py::array::c_style | py::array::forcecast> &species,
+                               py::array_t<int, py::array::c_style | py::array::forcecast> &neighbors,
+                               py::array_t<int, py::array::c_style | py::array::forcecast> &number_of_neighbors,
+                               py::array_t<double, py::array::c_style | py::array::forcecast> &coordinates,
+                               py::array_t<double, py::array::c_style | py::array::forcecast> &desc,
+                               py::array_t<double, py::array::c_style | py::array::forcecast> &dE_ddesc
+    ) {
+        int n_configurations = static_cast<int>(n_atoms.size());
+        int n_total_atoms = 0;
+        for (int i = 0; i < n_configurations; i++) {
+            n_total_atoms += n_atoms.at(i);
+        }
+        auto d_coordinates = new double[coordinates.size()];
+        auto desc_throwaway = new double[ds.width * n_total_atoms]; // TODO: use smart pointer
+        // copy desc to desc_throwaway, enzyme will mutate desc
+        std::copy(desc.data(0), desc.data(0) + ds.width * n_total_atoms, desc_throwaway);
+        std::fill(d_coordinates, d_coordinates + coordinates.size(), 0.0);
+        gradient_batch(
+                n_configurations,
+                const_cast<int *>(n_atoms.data(0)),
+                const_cast<int *>(config_ptr.data(0)),
+                const_cast<int *>(species.data(0)),
+                const_cast<int *>(neighbors.data(0)),
+                const_cast<int *>(number_of_neighbors.data(0)),
+                const_cast<double *>(coordinates.data(0)),
+                d_coordinates,
+                desc_throwaway,
+                const_cast<double *>(dE_ddesc.data(0)),
+                &ds);
+
+        delete[] desc_throwaway;
+        py::array_t<double> d_coord_array({coordinates.shape(0), coordinates.shape(1)}, d_coordinates);
+        return d_coord_array;
+    }, "Compute gradient of descriptor for multiple configurations.");
 
     m.def("jacobian",
           [](DescriptorKind &ds,

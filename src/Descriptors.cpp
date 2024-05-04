@@ -24,6 +24,17 @@ void __enzyme_autodiff(void (*)(int, int *, int *, int *, double *, double *, De
                        int, double * /* zeta */, double * /* dzeta_dE */,
                        int, DescriptorKind * /* DescriptorKind to diff */, DescriptorKind * /* d_DescriptorKind */);
 
+void __enzyme_autodiff_batch(void (*)(int, int *, int *, int *, int *, int *, double *, double *, DescriptorKind *),
+                       int, int, /* n_configs */
+                       int, int *, /* n_atoms */
+                       int, int *, /* ptr */
+                       int, int *, /* Z */
+                       int, int *, /* neighbor list */
+                       int, int *, /* number_of_neigh_list */
+                       int, double * /* coordinates */, double * /* derivative w.r.t coordinates */,
+                       int, double * /* zeta */, double * /* dzeta_dE */,
+                       int, DescriptorKind * /* DescriptorKind to diff */, DescriptorKind * /* d_DescriptorKind */);
+
 void __enzyme_autodiff_one_atom(void (*)(int, int, int *, int *, int, double *, double *, DescriptorKind *),
                                 int, int,
                                 int, int /* n_atoms */,
@@ -124,6 +135,33 @@ void Descriptor::compute(int const n_atoms /* contributing */,
     }
 }
 
+void Descriptor::compute_batch(int n_configurations, int *n_atoms, int *ptr, int *species, int *neighbor_list,
+                               int *number_of_neighs, double *coordinates, double *desc,
+                               Descriptor::DescriptorKind *descriptor_kind) {
+    int *neighbor_ptr = neighbor_list;
+    double *desc_ptr = desc;
+    int idx = 0;
+    int total_atoms = 0;
+    for (int i = 0; i < n_configurations; i++) {
+        total_atoms += n_atoms[i];
+    }
+
+    int total_neighs = 0;
+    for (int i = 0; i < total_atoms; i++) {
+        total_neighs += number_of_neighs[i];
+    }
+
+    for (int i = 0; i < n_configurations; i++) {
+        for (int j = 0; j < n_atoms[i]; j++) {
+            descriptor_kind->compute(j + ptr[i], total_atoms, species, neighbor_ptr, number_of_neighs[idx],
+                                     coordinates, desc_ptr);
+            neighbor_ptr += number_of_neighs[idx];
+            desc_ptr += descriptor_kind->width;
+            idx++;
+        }
+    }
+}
+
 void Descriptor::gradient(int n_atoms /* contributing */,
                           int *species,
                           int *neighbor_list,
@@ -220,6 +258,99 @@ void Descriptor::gradient(int n_atoms /* contributing */,
             throw std::invalid_argument("Descriptor kind not supported");
     }
 }
+
+
+void Descriptor::gradient_batch(int n_configurations,
+                                int *n_atoms,
+                                int *ptr,
+                                int *species,
+                                int *neighbor_list,
+                                int *number_of_neighs,
+                                double *coordinates,
+                                double *d_coordinates,
+                                double *desc,
+                                double *d_desc,
+                                Descriptor::DescriptorKind *descriptor_to_diff) {
+    switch (descriptor_to_diff->descriptor_kind) {
+        case KindSymmetryFunctions: {
+            auto d_desc_kind = new SymmetryFunctions();
+            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
+
+            d_desc_kind->clone_empty(descriptor_to_diff);
+            __enzyme_autodiff_batch(compute_batch, /* fn to be differentiated */
+                              enzyme_const, n_configurations, /* Do not diff. against integer params */
+                              enzyme_const, n_atoms,
+                              enzyme_const, ptr,
+                              enzyme_const, species,
+                              enzyme_const, neighbor_list,
+                              enzyme_const, number_of_neighs,
+                              enzyme_dup, coordinates, d_coordinates,
+                              enzyme_dup, desc, d_desc,
+                              enzyme_dup, descriptor_to_diff, d_desc_kind);
+            delete d_desc_kind;
+            return;
+        }
+        case KindBispectrum: {
+            auto d_desc_kind = new Bispectrum();
+            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
+
+            d_desc_kind->clone_empty(descriptor_to_diff);
+            __enzyme_autodiff_batch(compute_batch, /* fn to be differentiated */
+                              enzyme_const, n_configurations, /* Do not diff. against integer params */
+                              enzyme_const, n_atoms,
+                              enzyme_const, ptr,
+                              enzyme_const, species,
+                              enzyme_const, neighbor_list,
+                              enzyme_const, number_of_neighs,
+                              enzyme_dup, coordinates, d_coordinates,
+                              enzyme_dup, desc, d_desc,
+                              enzyme_dup, descriptor_to_diff, d_desc_kind);
+            delete d_desc_kind;
+            return;
+            return;
+        }
+        case KindSOAP: {
+            auto d_desc_kind = new SOAP();
+            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
+
+            d_desc_kind->clone_empty(descriptor_to_diff);
+            __enzyme_autodiff_batch(compute_batch, /* fn to be differentiated */
+                              enzyme_const, n_configurations, /* Do not diff. against integer params */
+                              enzyme_const, n_atoms,
+                              enzyme_const, ptr,
+                              enzyme_const, species,
+                              enzyme_const, neighbor_list,
+                              enzyme_const, number_of_neighs,
+                              enzyme_dup, coordinates, d_coordinates,
+                              enzyme_dup, desc, d_desc,
+                              enzyme_dup, descriptor_to_diff, d_desc_kind);
+            delete d_desc_kind;
+            return;
+        }
+        case KindXi: {
+            auto d_desc_kind = new Xi();
+            *((void **) d_desc_kind) = __enzyme_virtualreverse(*((void **) d_desc_kind));
+
+            d_desc_kind->clone_empty(descriptor_to_diff);
+            __enzyme_autodiff_batch(compute_batch, /* fn to be differentiated */
+                              enzyme_const, n_configurations, /* Do not diff. against integer params */
+                              enzyme_const, n_atoms,
+                              enzyme_const, ptr,
+                              enzyme_const, species,
+                              enzyme_const, neighbor_list,
+                              enzyme_const, number_of_neighs,
+                              enzyme_dup, coordinates, d_coordinates,
+                              enzyme_dup, desc, d_desc,
+                              enzyme_dup, descriptor_to_diff, d_desc_kind);
+            delete d_desc_kind;
+            return;
+        }
+        default:
+            std::cerr << "Descriptor kind not supported\n";
+            throw std::invalid_argument("Descriptor kind not supported");
+    }
+}
+
 
 void Descriptor::compute_single_atom(int index,
                                      int const n_atoms /* contributing */,

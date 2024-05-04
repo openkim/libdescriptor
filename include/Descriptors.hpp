@@ -44,7 +44,6 @@ namespace Descriptor {
                          DescriptorKind *descriptor_kind) { throw std::logic_error("Function not implemented yet."); }
 
     /*!
-     *  <b> "TO BE IMPLEMENTED"</b>
      *  This method will compute gradient for all contributing atoms using reverse diff (vector-Jacobian product)
      * @param n_atoms
      * @param species
@@ -59,6 +58,26 @@ namespace Descriptor {
     void gradient(int n_atoms, int *species, int *neighbor_list, int *number_of_neighs,
                   double *coordinates, double *d_coordinates, double *desc,
                   double *dE_dzeta, DescriptorKind *descriptor_to_diff);
+
+    /*!
+     * This method computes the gradient for a batch of configurations. It is somewhat inefficient as it needs to create Enzyme
+     * virtual object for every atom. In future it will be used for more selective problems, and gradient() would
+     * be the main workhorse.
+     * @param n_configurations
+     * @param n_atoms
+     * @param config_ptr
+     * @param species
+     * @param neighbor_list
+     * @param number_of_neighs
+     * @param coordinates
+     * @param d_coordinates
+     * @param desc
+     * @param dE_dzeta
+     * @param descriptor_to_diff
+     */
+    void gradient_batch(int n_configurations, int *n_atoms, int *config_ptr, int *species, int *neighbor_list, int *number_of_neighs,
+                        double *coordinates, double *d_coordinates, double *desc,
+                        double *dE_dzeta, DescriptorKind *descriptor_to_diff);
 
     /*!
      * This method computes the gradient of single atoms. It is somewhat inefficient as it needs to create Enzyme
@@ -111,6 +130,24 @@ namespace Descriptor {
     void compute(int n_atoms, int *species, int *neighbor_list, int *number_of_neighs,
                  double *coordinates, double *desc,
                  DescriptorKind *descriptor_kind);
+
+    /*!
+     * Computes the descriptor for all contributing atoms, in a batch
+     * @param n_configurations number of configurations in the batch
+     * @param n_atoms number of atoms in each configuration
+     * @param config_ptr pointer to the start of each configuration
+     * @param species species code of all atoms
+     * @param neighbor_list list of neighbor lists
+     * @param number_of_neighs list of number of neighbors
+     * @param coordinates array containing coordinated of all atoms
+     * @param desc pointer for storing computed descriptor
+     * @param descriptor_kind Initialized descriptor kind class
+     */
+
+    void compute_batch(int n_configurations, int *n_atoms, int *config_ptr,
+                       int *species, int *neighbor_list, int *number_of_neighs, double *coordinates, double *desc,
+                 DescriptorKind *descriptor_kind);
+
 
     /*!
      * Computes the descriptors for single atom (at position @param index) and stores its descriptor in @param desc
