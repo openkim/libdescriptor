@@ -74,11 +74,13 @@ SOAP::compute(int index, int n_atoms, int *species, int *neighbor_lists, int num
     //2. get all the neighbor coordinates of a given species
     for (int zj = 0; zj < n_species; zj++) {
         int n_neighbors_zj = 0;
-        std::vector<int> species_j_indices;
+        std::vector<int> species_j_indices(MAX_NEIGHBORS, -1);
+        int i_neigh_j = 0;
         for (int i = 0; i < number_of_neighbors; i++) {
             if (species[neighbor_lists[i]] == zj) {
-                species_j_indices.push_back(i);
+                species_j_indices[i_neigh_j] = i;
                 n_neighbors_zj++;
+                i_neigh_j++;
             }
         }
         auto j_coordinates = (VectorOfSizeDIM *) center_shifted_neighbor_coordinates_zj.data();
