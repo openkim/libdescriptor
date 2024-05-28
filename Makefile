@@ -38,3 +38,7 @@ clean:
 	rm -rf $(OBJDIR) $(BINDIR)
 
 .PHONY: all clean
+#
+#/opt/homebrew/Cellar/llvm@14/14.0.6/bin/clang++ -O3 -fuse-ld=lld -std=c++14 -dynamiclib  `python3.12 -m pybind11 --includes` python_bindings.cpp `python3.12-config --ldflags` -L/opt/homebrew/Cellar/python@3.12/3.12.3/lib  -lpython3.12  -I./include -L/Users/ec2-user/libdescriptor/bin -ldescriptor -o libdescriptor`python3.12-config --extension-suffix`
+#
+#/opt/homebrew/Cellar/llvm@14/14.0.6/bin/clang++ -O3 -std=c++14 -dynamiclib  `python3.12 -m pybind11 --includes` python_bindings.cpp `python3.12-config --ldflags` -L/opt/homebrew/Cellar/python@3.12/3.12.3/lib  -lpython3.12  -I./include -L/Users/ec2-user/libdescriptor/bin -ldescriptor -o libdescriptor`python3.12-config --extension-suffix`
