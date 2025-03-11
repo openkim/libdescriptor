@@ -28,14 +28,14 @@ requirements:
     - python
     - pybind11
     - eigen
-
-  host:
-    - pybind11
     - zlib
     - llvmdev {{ llvm_major_version }}
     - clangdev {{ llvm_major_version }}
     - gxx_linux-64 # [linux]
     - clang_osx-64 # [osx]
+
+host:
+    - pybind11
     - python
 
   run_constrained:

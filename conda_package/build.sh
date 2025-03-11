@@ -48,7 +48,8 @@ cd $SRC_DIR
 cd libdescriptor
 clang++ -shared -fPIC Descriptors.cpp -Xclang -load -Xclang $ENZYME_PATH  -I$BUILD_PREFIX/include/eigen3 -I$BUILD_PREFIX/include -O3 -o libdescriptor.so
 cp libdescriptor.so $PREFIX/lib
-cp Descriptors.hpp $PREFIX/include
+# copy the light header for ease of use
+cp Descriptors-lite.hpp $PREFIX/include/Descriptors.hpp 
 
 # STEP 3: Build python package
 cd python_package
