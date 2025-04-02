@@ -12,9 +12,9 @@ cd Enzyme-$enzyme_version/enzyme
 mkdir build
 cd build
 
-cmake -GNinja .. -DLLVM_DIR=$LLVM_DIR -DCMAKE_FIND_ROOT_PATH=$PREFIX -DCMAKE_INSTALL_PREFIX=$PREFIX
-ninja
-ninja install
+cmake  .. -DLLVM_DIR=$LLVM_DIR -DCMAKE_FIND_ROOT_PATH=$PREFIX -DCMAKE_INSTALL_PREFIX=$PREFIX
+make
+make install
 
 # test example
 cat > test.cpp <<EOF

@@ -24,8 +24,6 @@ requirements:
     - {{ compiler('cxx') }}
     - make
     - python
-    - ninja
-    - python
     - pybind11
     - eigen
     - zlib
@@ -34,7 +32,9 @@ requirements:
     - gxx_linux-64 # [linux]
     - clang_osx-64 # [osx]
 
-host:
+  host:
+    - llvmdev {{ llvm_major_version }}
+    - clangdev {{ llvm_major_version }}
     - pybind11
     - python
 

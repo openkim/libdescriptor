@@ -490,6 +490,9 @@ DescriptorKind::initDescriptor(AvailableDescriptor availableDescriptorKind, std:
     auto return_pointer = new SymmetryFunctions(species, cutoff_function, cutoff_array.data(),
                                                 symmetry_function_types, symmetry_function_sizes,
                                                 symmetry_function_parameters);
+    return_pointer->width = return_pointer->get_width();
+    return_pointer->descriptor_kind = availableDescriptorKind;
+
     return return_pointer;
 }
 
