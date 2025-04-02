@@ -14,7 +14,7 @@ source:
 
 
 build:
-  number: 0
+  number: 2
   script_env:
     - llvm_major_version
     - enzyme_version

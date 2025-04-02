@@ -13,7 +13,7 @@ mkdir build
 cd build
 
 cmake  .. -DLLVM_DIR=$LLVM_DIR -DCMAKE_FIND_ROOT_PATH=$PREFIX -DCMAKE_INSTALL_PREFIX=$PREFIX
-make
+make -j4
 make install
 
 # test example
